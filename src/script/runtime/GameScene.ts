@@ -90,6 +90,45 @@ export default class GameScene extends ui.game.GameSceneUI {
 
     /** initialize game stage */
     private initGameStage() {
+
+        Laya.Sprite3D.load("res/3.lh", Laya.Handler.create(this, (res) => {
+            let stage: Laya.Sprite3D = this.scene3D.addChild(res) as Laya.Sprite3D;
+            let child: Laya.MeshSprite3D;
+
+            for (let i: number = 0; i < stage.numChildren; i++) {
+                child = stage.getChildAt(i) as Laya.MeshSprite3D;
+                /** platform and stand */
+                if (child.name.search("Cube") >= 0) {
+                    child.name = "platform";
+                    // 获取台子boundbox，添加脚本，需要兼容多个平台时胜利判断 todo <=======================
+                    child.addComponent(Platform);
+                    // child.transform.localPosition = Const.PlatformInitPos.clone();
+                    // child.transform.localRotationEuler = Const.PlatformInitRot.clone();
+
+                    let rigid: Laya.Rigidbody3D = child.addComponent(Laya.PhysicsCollider);
+                    let colliderShape: Laya.MeshColliderShape = new Laya.MeshColliderShape();
+                    colliderShape.mesh = child.meshFilter.sharedMesh;
+                    cubeRigid.colliderShape = colliderShape;
+                }
+                else if (child.name.search("Cylinder") >= 0) {
+                    child.name = "platform";
+                    let rigid: Laya.Rigidbody3D = child.addComponent(Laya.PhysicsCollider);
+                    let colliderShape: Laya.MeshColliderShape = new Laya.MeshColliderShape();
+                    colliderShape.mesh = child.meshFilter.sharedMesh;
+                    cubeRigid.colliderShape = colliderShape;
+                }
+                /** object to be shooted */
+                else {
+                    child.name = "cube";
+                    let rigid: Laya.Rigidbody3D = child.addComponent(Laya.Rigidbody3D);
+                    let colliderShape: Laya.MeshColliderShape = new Laya.MeshColliderShape();
+                    colliderShape.mesh = child.meshFilter.sharedMesh;
+                    cubeRigid.colliderShape = colliderShape;
+                    cubeRigid.mass = 1;
+                }
+            }
+        }));
+
         /** init platform */
         this.initPlatfrom();
 
