@@ -58,6 +58,9 @@ export default class GameScene extends ui.game.GameSceneUI {
     private ray: Laya.Ray = new Laya.Ray(new Laya.Vector3(0, 0, 0), new Laya.Vector3(0, 0, 0));
     private hitResult: Laya.HitResult = new Laya.HitResult();
 
+    /** game state */
+    public state: number = 0;
+
     constructor() {
         super();
 
@@ -91,85 +94,95 @@ export default class GameScene extends ui.game.GameSceneUI {
     /** initialize game stage */
     private initGameStage() {
 
-        Laya.Sprite3D.load("res/3.lh", Laya.Handler.create(this, (res) => {
+        Laya.Sprite3D.load("res/stage/3/3.lh", Laya.Handler.create(this, (res) => {
             let stage: Laya.Sprite3D = this.scene3D.addChild(res) as Laya.Sprite3D;
-            let child: Laya.MeshSprite3D;
 
+            // set pos
+            stage.transform.localPosition = Const.StageInitPos.clone();
+            // stage.transform.localRotationEuler = Const.StageInitRot.clone();
+            stage.transform.localScale = Const.StageInitScale.clone();
+
+            // destroy animator component: 不然会约束物理碰撞效果
+            (stage.getComponent(Laya.Animator) as Laya.Animator).destroy();
+
+            let child: Laya.MeshSprite3D;
             for (let i: number = 0; i < stage.numChildren; i++) {
                 child = stage.getChildAt(i) as Laya.MeshSprite3D;
-                /** platform and stand */
-                if (child.name.search("Cube") >= 0) {
+                /** obstacles */
+                if (child.name.search("Obstacles") >= 0) {
+                    console.log(child.name + " to obstacle")
+                    let cubeScript: Cube = child.addComponent(Cube);
+                    cubeScript.setType(Const.CubeType.GLASS);
+                }
+                /** platform */
+                else if (child.name.search("Cube") >= 0) {
+                    console.log(child.name + " to platform")
                     child.name = "platform";
-                    // 获取台子boundbox，添加脚本，需要兼容多个平台时胜利判断 todo <=======================
+                    // 获取台子boundbox，添加脚本，需要兼容多个平台时胜利判断, & mesh collider shape碰撞抖动问题 todo <=======================
                     child.addComponent(Platform);
-                    // child.transform.localPosition = Const.PlatformInitPos.clone();
-                    // child.transform.localRotationEuler = Const.PlatformInitRot.clone();
 
-                    let rigid: Laya.Rigidbody3D = child.addComponent(Laya.PhysicsCollider);
-                    let colliderShape: Laya.MeshColliderShape = new Laya.MeshColliderShape();
-                    colliderShape.mesh = child.meshFilter.sharedMesh;
-                    cubeRigid.colliderShape = colliderShape;
+                    let rigid: Laya.PhysicsCollider = child.addComponent(Laya.PhysicsCollider);
+                    let boundindBox: Laya.BoundBox = child.meshFilter.sharedMesh.boundingBox.clone();
+                    let sizeX: number = boundindBox.max.x - boundindBox.min.x;
+                    let sizeY: number = boundindBox.max.y - boundindBox.min.y;
+                    let sizeZ: number = boundindBox.max.z - boundindBox.min.z;
+                    rigid.colliderShape = new Laya.BoxColliderShape(sizeX, sizeY, sizeZ);
+
                 }
+                /** platform stand */
                 else if (child.name.search("Cylinder") >= 0) {
+                    console.log(child.name + " to platform")
                     child.name = "platform";
-                    let rigid: Laya.Rigidbody3D = child.addComponent(Laya.PhysicsCollider);
+
+                    let rigid: Laya.PhysicsCollider = child.addComponent(Laya.PhysicsCollider);
                     let colliderShape: Laya.MeshColliderShape = new Laya.MeshColliderShape();
                     colliderShape.mesh = child.meshFilter.sharedMesh;
-                    cubeRigid.colliderShape = colliderShape;
-                }
-                /** object to be shooted */
-                else {
-                    child.name = "cube";
-                    let rigid: Laya.Rigidbody3D = child.addComponent(Laya.Rigidbody3D);
-                    let colliderShape: Laya.MeshColliderShape = new Laya.MeshColliderShape();
-                    colliderShape.mesh = child.meshFilter.sharedMesh;
-                    cubeRigid.colliderShape = colliderShape;
-                    cubeRigid.mass = 1;
+                    rigid.colliderShape = colliderShape;
                 }
             }
         }));
 
-        /** init platform */
-        this.initPlatfrom();
+        // /** init platform */
+        // this.initPlatfrom();
 
-        /** init cube */
-        this._cube = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createBox(1, 1, 1));
-        this._cube.name = "cube";
-        let cubeRigid: Laya.Rigidbody3D = this._cube.addComponent(Laya.Rigidbody3D);
-        cubeRigid.colliderShape = new Laya.BoxColliderShape(1, 1, 1);
-        cubeRigid.mass = 1;
-        // cubeRigid.restitution = 0.2;
-        // cubeRigid.friction = 10;
-        // cubeRigid.rollingFriction = 0;
-        // // block physics sim
-        // cubeRigid.angularFactor = new Laya.Vector3(0, 0, 0);
-        // cubeRigid.linearFactor = new Laya.Vector3(0, 0, 0);
+        // /** init cube */
+        // this._cube = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createBox(1, 1, 1));
+        // this._cube.name = "cube";
+        // let cubeRigid: Laya.Rigidbody3D = this._cube.addComponent(Laya.Rigidbody3D);
+        // cubeRigid.colliderShape = new Laya.BoxColliderShape(1, 1, 1);
+        // cubeRigid.mass = 1;
+        // // cubeRigid.restitution = 0.2;
+        // // cubeRigid.friction = 10;
+        // // cubeRigid.rollingFriction = 0;
+        // // // block physics sim
+        // // cubeRigid.angularFactor = new Laya.Vector3(0, 0, 0);
+        // // cubeRigid.linearFactor = new Laya.Vector3(0, 0, 0);
 
-        /** game stage */
-        let cubeNum: number = this.cubeNumX * this.cubeNumY * this.cubeNumZ;
+        // /** game stage */
+        // let cubeNum: number = this.cubeNumX * this.cubeNumY * this.cubeNumZ;
 
-        let tmp: number = this.cubeNumX > this.cubeNumY ? this.cubeNumX : this.cubeNumY;
-        tmp = this.cubeNumZ > this.cubeNumY ? this.cubeNumZ : this.cubeNumY;
-        let padding: number = 1;
-        this.cubeWidth = (Const.PlatformWidth - padding * 2) / tmp;
-        let initX: number = (this.cubeNumX % 2 == 1) ? (-Math.floor(this.cubeNumX / 2) * this.cubeWidth) : (this.cubeWidth / 2 - this.cubeNumX / 2 * this.cubeWidth);
-        let initY: number = (Const.PlatformHeight + this.cubeWidth) / 2;
-        let initZ: number = (this.cubeNumZ % 2 == 1) ? (-Math.floor(this.cubeNumZ / 2) * this.cubeWidth) : (this.cubeWidth / 2 - this.cubeNumZ / 2 * this.cubeWidth);
-        for (let x: number = 0; x < this.cubeNumX; x++) {
-            for (let y: number = 0; y < this.cubeNumY; y++) {
-                for (let z: number = 0; z < this.cubeNumZ; z++) {
-                    let cube: Laya.MeshSprite3D = this._cube.clone();
-                    cube.transform.localScale = new Laya.Vector3(this.cubeWidth, this.cubeWidth, this.cubeWidth);
-                    cube.transform.localPosition = new Laya.Vector3(initX + this.cubeWidth * x, initY + this.cubeWidth * y, initZ + this.cubeWidth * z);
-                    this.platform.addChild(cube);
+        // let tmp: number = this.cubeNumX > this.cubeNumY ? this.cubeNumX : this.cubeNumY;
+        // tmp = this.cubeNumZ > this.cubeNumY ? this.cubeNumZ : this.cubeNumY;
+        // let padding: number = 1;
+        // this.cubeWidth = (Const.PlatformWidth - padding * 2) / tmp;
+        // let initX: number = (this.cubeNumX % 2 == 1) ? (-Math.floor(this.cubeNumX / 2) * this.cubeWidth) : (this.cubeWidth / 2 - this.cubeNumX / 2 * this.cubeWidth);
+        // let initY: number = (Const.PlatformHeight + this.cubeWidth) / 2;
+        // let initZ: number = (this.cubeNumZ % 2 == 1) ? (-Math.floor(this.cubeNumZ / 2) * this.cubeWidth) : (this.cubeWidth / 2 - this.cubeNumZ / 2 * this.cubeWidth);
+        // for (let x: number = 0; x < this.cubeNumX; x++) {
+        //     for (let y: number = 0; y < this.cubeNumY; y++) {
+        //         for (let z: number = 0; z < this.cubeNumZ; z++) {
+        //             let cube: Laya.MeshSprite3D = this._cube.clone();
+        //             cube.transform.localScale = new Laya.Vector3(this.cubeWidth, this.cubeWidth, this.cubeWidth);
+        //             cube.transform.localPosition = new Laya.Vector3(initX + this.cubeWidth * x, initY + this.cubeWidth * y, initZ + this.cubeWidth * z);
+        //             this.platform.addChild(cube);
 
-                    let cubeScript: Cube = cube.addComponent(Cube);
-                    cubeScript.type = Const.CubeType.GLASS;
-                    cubeScript.width = this.cubeWidth;
-                    this.cubeList.push(cubeScript);
-                }
-            }
-        }
+        //             let cubeScript: Cube = cube.addComponent(Cube);
+        //             cubeScript.type = Const.CubeType.GLASS;
+        //             cubeScript.width = this.cubeWidth;
+        //             this.cubeList.push(cubeScript);
+        //         }
+        //     }
+        // }
     }
 
     /** initialize platfrom */
@@ -225,7 +238,7 @@ export default class GameScene extends ui.game.GameSceneUI {
     private initBullet() {
         this._bullet = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(Const.BulletRadius));
 
-        /** set physic */
+        /** set physics */
         let bulletRigid: Laya.Rigidbody3D = this._bullet.addComponent(Laya.Rigidbody3D);
         // set collieder shape
         bulletRigid.colliderShape = new Laya.SphereColliderShape(Const.BulletRadius);
@@ -233,7 +246,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         bulletRigid.ccdMotionThreshold = 0.0001;
         bulletRigid.ccdSweptSphereRadius = Const.BulletRadius;
         // mass
-        bulletRigid.mass = 1;
+        bulletRigid.mass = 10;
 
         /** trasform */
         this._bullet.transform.localPosition = Const.BulletInitPos.clone();
@@ -280,7 +293,7 @@ export default class GameScene extends ui.game.GameSceneUI {
             var aV3: Laya.Vector3 = new Laya.Vector3();
             // ray direction scale: to depth scaleZ
             let scaleV: number = this.camera.farPlane;
-            scaleV = 12;
+            scaleV = 10;
             Laya.Vector3.scale(this.ray.direction, scaleV, aV3);
             // direction vector: [bullet init point] to [camera point]
             var bV3: Laya.Vector3 = new Laya.Vector3();

@@ -12,8 +12,13 @@ export const CameraInitPos: Laya.Vector3 = new Laya.Vector3(0, 0, 0);
 export const CameraInitRotEuler: Laya.Vector3 = new Laya.Vector3(0, 0, 0);
 
 /** directional light */
-export const LightInitPos: Laya.Vector3 = new Laya.Vector3(0, 5, 0);
-export const LightInitRotEuler: Laya.Vector3 = new Laya.Vector3(-45, 0, 0);
+export const LightInitPos: Laya.Vector3 = new Laya.Vector3(-3, 5, 0);
+export const LightInitRotEuler: Laya.Vector3 = new Laya.Vector3(-45, -30, 0);
+
+/** game stage */
+export const StageInitPos: Laya.Vector3 = new Laya.Vector3(0, -1.5, -17);
+export const StageInitRot: Laya.Vector3 = new Laya.Vector3(0, 37, 0);
+export const StageInitScale: Laya.Vector3 = new Laya.Vector3(40, 40, 40);
 
 /** platform */
 export const PlatformInitPos: Laya.Vector3 = new Laya.Vector3(0, -3, -15);
@@ -23,7 +28,7 @@ export const PlatformHeight: number = 0.3;
 export const PlatformStandRadius: number = 0.3;
 export const PlatformStandHeight: number = 10;
 // winning check frame
-export const WinCheckTime: number = 180;
+export const WinCheckTime: number = 120;
 
 /** cube */
 export const enum CubeType {
@@ -32,10 +37,13 @@ export const enum CubeType {
     TNT = 3
 }
 
-/** cube piece */
-export const CubePieceResUrl: string = "res/cube_piece.lm";
-export const CubePiecesNum: number = 3;
-export const CubeBrokenTime: number = 120;
+/** glass */
+export const GlassBrokenVelocity: number = 3;
+
+/** obstacle piece */
+export const PieceResUrl: string = "res/cube_piece.lm";
+export const PiecesNum: number = 3;
+export const PiecesBrokenTime: number = 120;
 
 /** bullet */
 export const BulletResUrl: string = "res/bullet.lh";

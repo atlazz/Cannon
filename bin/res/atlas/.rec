@@ -1,5 +1,4 @@
 D .
-D backup
 D comp
 P 9401CC40 blank.png
 P B03390E5 btn_close.png
@@ -43,15 +42,59 @@ P 7E990267 vscroll.png
 P E466EB1C vslider$bar.png
 P 2BFF7046 vslider.png
 D res
-R 8A4998B2 bullet.lh
+R FD38B217 bullet.lh
 R C33056AD cube_piece.lm
-R 25BDD880 human.lh
+R 76E133EC human.lh
 D res/Assets
 R 9A6759DA character_shadow.png
 R 9F8ED4D0 Everyman.png
 R A8B3322D human-Avatar_Suit_0.lm
-R 922DCCA2 human-human-humanAvatar.lav
+R 8532E864 human-human-humanAvatar.lav
 R 83654F0F human-shadow_0.lm
 R C8148F7C human-Take 001.lani
-R 75AE4237 human.lmat
-R 62ADF3AA zombie_police_shadow.lmat
+R 7C6E4F6D human.lmat
+R 8E1E4132 zombie_police_shadow.lmat
+D res/stage
+D res/stage/3
+R 1271C143 3.lh
+D res/stage/3/Assets
+R 96F4C93B 3-3-3Avatar.lav
+R BA7CC685 3-Cube_0.lm
+R 0CE04D27 3-Cylinder_0.lm
+R 1D05CADD 3-Obstacles-Cube (1)_0.lm
+R 60E1D890 3-Obstacles-Cube (10)_0.lm
+R 8EDDAB8F 3-Obstacles-Cube (12)_0.lm
+R 147B1120 3-Obstacles-Cube (13)_0.lm
+R 67E838EF 3-Obstacles-Cube (14)_0.lm
+R 89D44BF0 3-Obstacles-Cube (16)_0.lm
+R 1372F15F 3-Obstacles-Cube (17)_0.lm
+R 6EF2186E 3-Obstacles-Cube (18)_0.lm
+R 699F036D 3-Obstacles-Cube (2)_0.lm
+R ABF4F1D5 3-Obstacles-Cube (20)_0.lm
+R 31524B7A 3-Obstacles-Cube (21)_0.lm
+R 45C882CA 3-Obstacles-Cube (22)_0.lm
+R ACFD11AA 3-Obstacles-Cube (24)_0.lm
+R 365BAB05 3-Obstacles-Cube (25)_0.lm
+R 42C162B5 3-Obstacles-Cube (26)_0.lm
+R A5E7312B 3-Obstacles-Cube (28)_0.lm
+R 3F418B84 3-Obstacles-Cube (29)_0.lm
+R ED07E916 3-Obstacles-Cube (30)_0.lm
+R 033B9A09 3-Obstacles-Cube (32)_0.lm
+R 999D20A6 3-Obstacles-Cube (33)_0.lm
+R EA0E0969 3-Obstacles-Cube (34)_0.lm
+R 04327A76 3-Obstacles-Cube (36)_0.lm
+R 9E94C0D9 3-Obstacles-Cube (37)_0.lm
+R E31429E8 3-Obstacles-Cube (38)_0.lm
+R 80AA900D 3-Obstacles-Cube (4)_0.lm
+R E6AFA51E 3-Obstacles-Cube (40)_0.lm
+R 7C091FB1 3-Obstacles-Cube (41)_0.lm
+R 0893D601 3-Obstacles-Cube (42)_0.lm
+R E1A64561 3-Obstacles-Cube (44)_0.lm
+R 7B00FFCE 3-Obstacles-Cube (45)_0.lm
+R 0F9A367E 3-Obstacles-Cube (46)_0.lm
+R 1A0C2AA2 3-Obstacles-Cube (5)_0.lm
+R 6E96E312 3-Obstacles-Cube (6)_0.lm
+R 89B0B08C 3-Obstacles-Cube (8)_0.lm
+R 13160A23 3-Obstacles-Cube (9)_0.lm
+R 500C161E 3-Obstacles-Cube_0.lm
+R 24FA0CB8 3.lmat
