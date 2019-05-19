@@ -41,7 +41,7 @@ export const PiecesBrokenTime: number = 120;
 
 /** bullet */
 export const BulletResUrl: string = "res/bullet.lh";
-export const BulletInitPos: Laya.Vector3 = new Laya.Vector3(0, -0.5, -5);
+export const BulletInitPos: Laya.Vector3 = new Laya.Vector3(0, 0, -5);
 export const BulletInitRot: Laya.Vector3 = new Laya.Vector3(180, 0, 0);
 export const BulletRadius: number = 0.15;
 

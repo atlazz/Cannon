@@ -67,7 +67,7 @@ export default class GameScene extends ui.game.GameSceneUI {
 
         this.initBullet();
 
-        this.stageIdx = 9;
+        this.stageIdx = 1;
         this.loadGameStage();
 
         // mouse click event listen: shoot a bullet
@@ -188,7 +188,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                     // add scipt
                     let targetScript: Target = child.addComponent(Target);
                     // set type
-                    if (child.name.search("CubeGlass") >= 0) {
+                    if (child.name.search("Glass") >= 0) {
                         targetScript.setType(Const.TargetType.GLASS);
                     }
                     else {
