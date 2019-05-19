@@ -18,4 +18,10 @@
    <item name="res/Assets/fbx/Ammo_Packet/Large_money.jpg" type="Sprite" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
    <item name="res/Assets/fbx格式文件/Scenes_02/color_01.jpg" type="Sprite" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
    <item name="res/Assets/bullet.jpg" type="Sprite" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="res/stage/Assets/1/mutou_06.jpg" type="Sprite" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="res/stage/Assets/10/mutou_06.jpg" type="Sprite" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="res/stage/Assets/2/mutou_06.jpg" type="Sprite" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="res/stage/Assets/3/mutou_06.jpg" type="Sprite" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="res/stage/Assets/4/mutou_06.jpg" type="Sprite" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="res/stage/Assets/9/mutou_06.jpg" type="Sprite" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
 </res>

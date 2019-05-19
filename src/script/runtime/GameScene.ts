@@ -1,8 +1,9 @@
 import { ui } from "./../../ui/layaMaxUI";
 import * as Const from "../Const";
 import Bullet from "../component/Bullet";
-import Platform from "../component/Platform";
-import Cube from "../component/Cube";
+import Stand from "../component/Stand";
+import Target from "../component/Target";
+import Rotator from "../component/Rotator";
 
 export default class GameScene extends ui.game.GameSceneUI {
     static instance: GameScene;
@@ -29,17 +30,11 @@ export default class GameScene extends ui.game.GameSceneUI {
     private camera: Laya.Camera;
     private directionLight: Laya.DirectionLight;
 
-    /** platform */
-    private platform: Laya.MeshSprite3D;
-    private platform_stand: Laya.MeshSprite3D;
-
-    /** cube */
-    private _cube: Laya.MeshSprite3D;
-    private cubeList: Cube[] = [];
-    private cubeNumX: number = 4;
-    private cubeNumY: number = 4;
-    private cubeNumZ: number = 3;
-    private cubeWidth: number;
+    /** stage */
+    private gameStage: Laya.Sprite3D;
+    public stageIdx: number;
+    public MaxBulletNum: number = 5;
+    public currBulletNum: number = 0;
 
     /** bullet */
     private _bullet: Laya.MeshSprite3D;
@@ -68,11 +63,15 @@ export default class GameScene extends ui.game.GameSceneUI {
 
         this.initScene3D();
 
-        this.initGameStage();
-
         this.initPlayer();
 
         this.initBullet();
+
+        this.stageIdx = 9;
+        this.loadGameStage();
+
+        // mouse click event listen: shoot a bullet
+        Laya.stage.on(Laya.Event.CLICK, this, this.onClick);
     }
 
     /** initialize scene */
@@ -91,125 +90,6 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.directionLight.transform.localRotationEuler = Const.LightInitRotEuler.clone();
     }
 
-    /** initialize game stage */
-    private initGameStage() {
-
-        Laya.Sprite3D.load("res/stage/3/3.lh", Laya.Handler.create(this, (res) => {
-            let stage: Laya.Sprite3D = this.scene3D.addChild(res) as Laya.Sprite3D;
-
-            // set pos
-            stage.transform.localPosition = Const.StageInitPos.clone();
-            // stage.transform.localRotationEuler = Const.StageInitRot.clone();
-            stage.transform.localScale = Const.StageInitScale.clone();
-
-            // destroy animator component: 不然会约束物理碰撞效果
-            (stage.getComponent(Laya.Animator) as Laya.Animator).destroy();
-
-            let child: Laya.MeshSprite3D;
-            for (let i: number = 0; i < stage.numChildren; i++) {
-                child = stage.getChildAt(i) as Laya.MeshSprite3D;
-                /** obstacles */
-                if (child.name.search("Obstacles") >= 0) {
-                    console.log(child.name + " to obstacle")
-                    let cubeScript: Cube = child.addComponent(Cube);
-                    cubeScript.setType(Const.CubeType.GLASS);
-                }
-                /** platform */
-                else if (child.name.search("Cube") >= 0) {
-                    console.log(child.name + " to platform")
-                    child.name = "platform";
-                    // 获取台子boundbox，添加脚本，需要兼容多个平台时胜利判断, & mesh collider shape碰撞抖动问题 todo <=======================
-                    child.addComponent(Platform);
-
-                    let rigid: Laya.PhysicsCollider = child.addComponent(Laya.PhysicsCollider);
-                    let boundindBox: Laya.BoundBox = child.meshFilter.sharedMesh.boundingBox.clone();
-                    let sizeX: number = boundindBox.max.x - boundindBox.min.x;
-                    let sizeY: number = boundindBox.max.y - boundindBox.min.y;
-                    let sizeZ: number = boundindBox.max.z - boundindBox.min.z;
-                    rigid.colliderShape = new Laya.BoxColliderShape(sizeX, sizeY, sizeZ);
-
-                }
-                /** platform stand */
-                else if (child.name.search("Cylinder") >= 0) {
-                    console.log(child.name + " to platform")
-                    child.name = "platform";
-
-                    let rigid: Laya.PhysicsCollider = child.addComponent(Laya.PhysicsCollider);
-                    let colliderShape: Laya.MeshColliderShape = new Laya.MeshColliderShape();
-                    colliderShape.mesh = child.meshFilter.sharedMesh;
-                    rigid.colliderShape = colliderShape;
-                }
-            }
-        }));
-
-        // /** init platform */
-        // this.initPlatfrom();
-
-        // /** init cube */
-        // this._cube = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createBox(1, 1, 1));
-        // this._cube.name = "cube";
-        // let cubeRigid: Laya.Rigidbody3D = this._cube.addComponent(Laya.Rigidbody3D);
-        // cubeRigid.colliderShape = new Laya.BoxColliderShape(1, 1, 1);
-        // cubeRigid.mass = 1;
-        // // cubeRigid.restitution = 0.2;
-        // // cubeRigid.friction = 10;
-        // // cubeRigid.rollingFriction = 0;
-        // // // block physics sim
-        // // cubeRigid.angularFactor = new Laya.Vector3(0, 0, 0);
-        // // cubeRigid.linearFactor = new Laya.Vector3(0, 0, 0);
-
-        // /** game stage */
-        // let cubeNum: number = this.cubeNumX * this.cubeNumY * this.cubeNumZ;
-
-        // let tmp: number = this.cubeNumX > this.cubeNumY ? this.cubeNumX : this.cubeNumY;
-        // tmp = this.cubeNumZ > this.cubeNumY ? this.cubeNumZ : this.cubeNumY;
-        // let padding: number = 1;
-        // this.cubeWidth = (Const.PlatformWidth - padding * 2) / tmp;
-        // let initX: number = (this.cubeNumX % 2 == 1) ? (-Math.floor(this.cubeNumX / 2) * this.cubeWidth) : (this.cubeWidth / 2 - this.cubeNumX / 2 * this.cubeWidth);
-        // let initY: number = (Const.PlatformHeight + this.cubeWidth) / 2;
-        // let initZ: number = (this.cubeNumZ % 2 == 1) ? (-Math.floor(this.cubeNumZ / 2) * this.cubeWidth) : (this.cubeWidth / 2 - this.cubeNumZ / 2 * this.cubeWidth);
-        // for (let x: number = 0; x < this.cubeNumX; x++) {
-        //     for (let y: number = 0; y < this.cubeNumY; y++) {
-        //         for (let z: number = 0; z < this.cubeNumZ; z++) {
-        //             let cube: Laya.MeshSprite3D = this._cube.clone();
-        //             cube.transform.localScale = new Laya.Vector3(this.cubeWidth, this.cubeWidth, this.cubeWidth);
-        //             cube.transform.localPosition = new Laya.Vector3(initX + this.cubeWidth * x, initY + this.cubeWidth * y, initZ + this.cubeWidth * z);
-        //             this.platform.addChild(cube);
-
-        //             let cubeScript: Cube = cube.addComponent(Cube);
-        //             cubeScript.type = Const.CubeType.GLASS;
-        //             cubeScript.width = this.cubeWidth;
-        //             this.cubeList.push(cubeScript);
-        //         }
-        //     }
-        // }
-    }
-
-    /** initialize platfrom */
-    private initPlatfrom() {
-        /** platform */
-        // create mesh
-        this.platform = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createBox(Const.PlatformWidth, Const.PlatformHeight, Const.PlatformWidth));
-        this.scene3D.addChild(this.platform);
-        this.platform.addComponent(Platform);
-        this.platform.transform.localPosition = Const.PlatformInitPos.clone();
-        this.platform.transform.localRotationEuler = Const.PlatformInitRot.clone();
-
-        // set physics
-        let collider: Laya.PhysicsCollider = this.platform.addComponent(Laya.PhysicsCollider);
-        collider.colliderShape = new Laya.BoxColliderShape(Const.PlatformWidth, Const.PlatformHeight, Const.PlatformWidth);
-
-        /** stand */
-        // create mesh
-        this.platform_stand = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createCylinder(Const.PlatformStandRadius, Const.PlatformStandHeight));
-        this.platform.addChild(this.platform_stand);
-        this.platform_stand.transform.localPosition = new Laya.Vector3(0, -Const.PlatformStandHeight / 2, 0);
-
-        // set physics
-        let collider_stand: Laya.PhysicsCollider = this.platform_stand.addComponent(Laya.PhysicsCollider);
-        collider_stand.colliderShape = new Laya.CylinderColliderShape(Const.PlatformStandRadius, Const.PlatformStandHeight);
-    }
-
     /** initialize player */
     private initPlayer() {
         Laya.Sprite3D.load(Const.PlayerResUrl, Laya.Handler.create(this, (res) => {
@@ -226,11 +106,17 @@ export default class GameScene extends ui.game.GameSceneUI {
             shadowMat.renderMode = Laya.BlinnPhongMaterial.RENDERMODE_TRANSPARENT;
             shadowMat.albedoColorA = 0.2;
 
-            // mouse click event listen: shoot a bullet
-            Laya.stage.on(Laya.Event.CLICK, this, this.onClick);
-
-            // onUpdate
-            this.gameStart();
+            // set shooting animation
+            this.playerAni.getDefaultState().clip.islooping = true;
+            this.playerAni.play();
+            Laya.timer.frameLoop(1, this, () => {
+                // play shooting animation
+                this.shootTime--;
+                if (this.shootTime < 0) {
+                    // stop playing
+                    this.playerAni.speed = 0;
+                }
+            });
         }));
     }
 
@@ -238,15 +124,17 @@ export default class GameScene extends ui.game.GameSceneUI {
     private initBullet() {
         this._bullet = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(Const.BulletRadius));
 
-        /** set physics */
+        /** add rigidbody */
         let bulletRigid: Laya.Rigidbody3D = this._bullet.addComponent(Laya.Rigidbody3D);
-        // set collieder shape
         bulletRigid.colliderShape = new Laya.SphereColliderShape(Const.BulletRadius);
+
+        /** set physics */
+        bulletRigid.mass = 10;
+        bulletRigid.overrideGravity = true;
+        bulletRigid.gravity = new Laya.Vector3(0, -5, 0);
         // quick moving detecion
         bulletRigid.ccdMotionThreshold = 0.0001;
         bulletRigid.ccdSweptSphereRadius = Const.BulletRadius;
-        // mass
-        bulletRigid.mass = 10;
 
         /** trasform */
         this._bullet.transform.localPosition = Const.BulletInitPos.clone();
@@ -255,25 +143,114 @@ export default class GameScene extends ui.game.GameSceneUI {
         this._bullet.name = "_bullet";
     }
 
-    /** game start */
-    private gameStart() {
-        // shooting animation
-        this.playerAni.getDefaultState().clip.islooping = true;
-        this.playerAni.play();
-        Laya.timer.frameLoop(1, this, () => {
-            // game state check
+    /** restart current stage */
+    restart() {
+        this.loadGameStage();
+    }
 
-            // play shooting animation
-            this.shootTime--;
-            if (this.shootTime < 0) {
-                // stop playing
-                this.playerAni.speed = 0;
+    /** start next stage */
+    nextStage() {
+        this.stageIdx++;
+        if (this.stageIdx <= Const.StageNum) {
+            this.loadGameStage();
+        }
+        else {
+            console.log("通关");
+        }
+    }
+
+    /** load game stage by index */
+    private loadGameStage() {
+        // reset
+        this.gameStage && this.gameStage.destroyChildren();
+        this.gameStage && this.gameStage.destroy();
+        this.currBulletNum = 0;
+
+        // load stage
+        let satgeResUrl: string = Const.StageResUrl + this.stageIdx + ".lh";
+        Laya.Sprite3D.load(satgeResUrl, Laya.Handler.create(this, (res) => {
+            this.gameStage = this.scene3D.addChild(res) as Laya.Sprite3D;
+
+            // set pos
+            this.gameStage.transform.localPosition = Const.StageInitPos.clone();
+            this.gameStage.transform.localRotationEuler = Const.StageInitRot.clone();
+            this.gameStage.transform.localScale = Const.StageInitScale.clone();
+
+            // destroy animator component: 不然会约束物理碰撞效果
+            (this.gameStage.getComponent(Laya.Animator) as Laya.Animator).destroy();
+
+            let child: Laya.MeshSprite3D;
+            for (let i: number = 0; i < this.gameStage.numChildren; i++) {
+                child = this.gameStage.getChildAt(i) as Laya.MeshSprite3D;
+                /** target object */
+                if (child.name.search("Obstacle") >= 0) {
+                    console.log(child.name + " to target")
+                    // add scipt
+                    let targetScript: Target = child.addComponent(Target);
+                    // set type
+                    if (child.name.search("CubeGlass") >= 0) {
+                        targetScript.setType(Const.TargetType.GLASS);
+                    }
+                    else {
+                        targetScript.setType(Const.TargetType.DEFAULT);
+                    }
+                }
+                /** stand_box */
+                else if (child.name.search("Cube") >= 0) {
+                    console.log(child.name + " to stand")
+                    child.name = "stand";
+                    // add collider
+                    let rigid: Laya.PhysicsCollider = child.addComponent(Laya.PhysicsCollider);
+                    let boundingBox: Laya.BoundBox = child.meshFilter.sharedMesh.boundingBox.clone();
+                    let sizeX: number = boundingBox.max.x - boundingBox.min.x;
+                    let sizeY: number = boundingBox.max.y - boundingBox.min.y;
+                    let sizeZ: number = boundingBox.max.z - boundingBox.min.z;
+                    rigid.colliderShape = new Laya.BoxColliderShape(sizeX, sizeY, sizeZ);
+                    // add script
+                    // 获取台子boundbox，添加脚本，需要兼容多个平台时胜利判断, & mesh collider shape碰撞抖动问题 todo <=======================
+                    child.addComponent(Stand);
+
+                }
+                /** stand_cylinder */
+                else if (child.name.search("Cylinder") >= 0) {
+                    console.log(child.name + " to stand")
+                    child.name = "stand";
+                    // add collider
+                    let rigid: Laya.PhysicsCollider = child.addComponent(Laya.PhysicsCollider);
+                    let colliderShape: Laya.MeshColliderShape = new Laya.MeshColliderShape();
+                    colliderShape.mesh = child.meshFilter.sharedMesh;
+                    rigid.colliderShape = colliderShape;
+                }
+                /** Rotator */
+                else if (child.name.search("Rotator") >= 0) {
+                    console.log(child.name + " to rotator")
+                    // add script
+                    let rotator: Rotator = child.addComponent(Rotator);
+                    let moveType: string = "move_left";
+                    if (child.name.search("Rotator.\\\(1\\\)_0") >= 0) {
+                        moveType = "move_right";
+                    }
+                    else if (child.name.search("Rotator.\\\(2\\\)_0") >= 0) {
+                        moveType = "move_up";
+                    }
+                    else if (child.name.search("Rotator.\\\(3\\\)_0") >= 0) {
+                        moveType = "move_down";
+                    }
+                    rotator.setMoveType(moveType);
+                    child.name = "rotator";
+                }
+                else {
+                    child.destroy();
+                }
             }
-        });
+        }));
     }
 
     /** mouse click event: shoot a bullet */
     private onClick() {
+        // update
+        this.currBulletNum++;
+
         // play shoot animation
         this.shootTime = Const.PlayerShootLifeTime;
         this.playerAni.speed = 1;
@@ -293,7 +270,7 @@ export default class GameScene extends ui.game.GameSceneUI {
             var aV3: Laya.Vector3 = new Laya.Vector3();
             // ray direction scale: to depth scaleZ
             let scaleV: number = this.camera.farPlane;
-            scaleV = 10;
+            scaleV = 20;
             Laya.Vector3.scale(this.ray.direction, scaleV, aV3);
             // direction vector: [bullet init point] to [camera point]
             var bV3: Laya.Vector3 = new Laya.Vector3();
@@ -311,5 +288,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.scene3D.addChild(bullet);
         let bulletRigid: Laya.Rigidbody3D = bullet.getComponent(Laya.Rigidbody3D);
         bulletRigid.linearVelocity = this.bulletDirection.clone();
+
+        bullet.addComponent(Bullet);
     }
 }
