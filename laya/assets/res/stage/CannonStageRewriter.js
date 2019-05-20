@@ -3,6 +3,7 @@ var fs = require('fs');
 var arguments = process.argv.splice(2);
 var fromIdx = arguments[0];
 var toIdx = arguments[1];
+var prefix = arguments[2];
 
 if (!fromIdx || !toIdx) {
     console.log("Failed: 输入参数缺省");
@@ -12,6 +13,10 @@ if (!fromIdx || !toIdx) {
 
 for (var i = fromIdx; i <= toIdx; i++) {
     let fileName = i + ".lh";
+	if (prefix) {
+		fileName = prefix + fileName;
+	}
+
     // read
     fs.readFile(fileName, (err, stage) => {
         if (err) throw err;

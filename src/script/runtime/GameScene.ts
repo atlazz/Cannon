@@ -71,7 +71,7 @@ export default class GameScene extends ui.game.GameSceneUI {
 
         this.initBullet();
 
-        this.stageIdx = 24;
+        this.stageIdx = 1;
         this.loadGameStage();
     }
 

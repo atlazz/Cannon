@@ -88,7 +88,8 @@ R 4D4E5398 6.lh
 R 58377A8E 7.lh
 R 73701C9E 8.lh
 R EAD1AA92 9.lh
-R 865ADFFA CannonStageRewriter.js
+R FA6C36D5 Boss1.lh
+R 65E0C69C CannonStageRewriter.js
 D res/stage/out
 R 094BC994 1.lh
 R 08D321D4 10.lh
@@ -121,6 +122,7 @@ R 7384B2D0 6.lh
 R 2F787CCA 7.lh
 R 13EF388A 8.lh
 R B04BB748 9.lh
+R 70973805 Boss1.lh
 D res/stage/out/models
 R BA7CC685 Cube.lm
 R 0CE04D27 Cylinder.lm

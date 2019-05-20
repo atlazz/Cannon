@@ -16,7 +16,7 @@ export const LightInitPos: Laya.Vector3 = new Laya.Vector3(-3, 5, 0);
 export const LightInitRotEuler: Laya.Vector3 = new Laya.Vector3(-45, -30, 0);
 
 /** game stage */
-export const StageResUrl: string = "res/stage/out/";
+export const StageResUrl: string = "res/stage/out/Boss";
 export const StageInitPos: Laya.Vector3 = new Laya.Vector3(0, 0, 0);
 export const StageInitRot: Laya.Vector3 = new Laya.Vector3(0, 180, 0);
 export const StageInitScale: Laya.Vector3 = new Laya.Vector3(40, 40, 40);
