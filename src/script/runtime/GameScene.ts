@@ -67,7 +67,7 @@ export default class GameScene extends ui.game.GameSceneUI {
 
         this.initBullet();
 
-        this.stageIdx = 1;
+        this.stageIdx = 9;
         this.loadGameStage();
 
         // mouse click event listen: shoot a bullet

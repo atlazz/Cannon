@@ -17,6 +17,12 @@ export default class Stand extends Laya.Script3D {
     }
 
     onUpdate() {
+        // check spirte alive
+        if (this.stand.destroyed) {
+            this.destroy();
+            return;
+        }
+
         /** win check */
         this.winCount++;
         if (this.winCount > Const.WinCheckTime) {

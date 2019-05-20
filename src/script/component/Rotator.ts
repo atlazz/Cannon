@@ -2,8 +2,6 @@ import * as Const from "../Const";
 import GameScene from "../runtime/GameScene";
 
 export default class Rotator extends Laya.Script3D {
-    private stageIdx: number;
-
     private rotator: Laya.MeshSprite3D;
 
     private sizeX: number;
@@ -19,23 +17,16 @@ export default class Rotator extends Laya.Script3D {
     }
 
     onAwake() {
-        // record game stage index
-        this.stageIdx = GameScene.instance.stageIdx;
         // get sprite
         this.rotator = this.owner as Laya.MeshSprite3D;
-        // add collider
-        let collider: Laya.PhysicsCollider = this.rotator.addComponent(Laya.PhysicsCollider);
-        let colliderShape: Laya.MeshColliderShape = new Laya.MeshColliderShape();
-        colliderShape.mesh = this.rotator.meshFilter.sharedMesh;
-        collider.colliderShape = colliderShape;
         // get size
         let boundingBox: Laya.BoundBox = this.rotator.meshFilter.sharedMesh.boundingBox.clone();
         this.sizeX = boundingBox.max.x - boundingBox.min.x;
         this.sizeY = boundingBox.max.y - boundingBox.min.y;
         this.sizeZ = boundingBox.max.z - boundingBox.min.z;
-
-        this.sizeX *= 3;
-        this.sizeY *= 3;
+        // add collider
+        let collider: Laya.PhysicsCollider = this.rotator.addComponent(Laya.PhysicsCollider);
+        collider.colliderShape = new Laya.BoxColliderShape(this.sizeX, this.sizeY, this.sizeZ);
     }
 
     setMoveType(moveType: string) {
@@ -43,31 +34,42 @@ export default class Rotator extends Laya.Script3D {
     }
 
     onUpdate() {
-        // check stage
-        if (this.stageIdx !== GameScene.instance.stageIdx) {
-            console.log("rotator destroyed.")
+        // check spirte alive
+        if (this.rotator.destroyed) {
             this.destroy();
             return;
         }
 
+        /** 平移 */
         this.moveTimes = (this.moveTimes + 1) % (this.MaxMoveTimes * 2);
+        // 位移方向标志
         var flag = Math.floor((this.moveTimes / this.MaxMoveTimes) % 2);
+        // X和Y方向平移步进
+        var moveStepX: number = this.sizeX * this.rotator.transform.localScaleX / 2 / this.MaxMoveTimes;
+        var moveStepY: number = this.sizeY * this.rotator.transform.localScaleY / 2 / this.MaxMoveTimes;
+        // Z轴旋转90，X和Y互换
+        if (Math.floor((Math.abs(this.rotator.transform.localRotationEulerZ) + 90.5) % 180) === 0) {
+            let tmp = moveStepX;
+            moveStepX = moveStepY;
+            moveStepY = tmp;
+        }
         if (this.moveType === "move_left") {
-            if (flag) { this.rotator.transform.localPositionX -= this.sizeX / this.MaxMoveTimes; }
-            else { this.rotator.transform.localPositionX += this.sizeX / this.MaxMoveTimes; }
+            if (flag) { this.rotator.transform.localPositionX -= moveStepX; }
+            else { this.rotator.transform.localPositionX += moveStepX; }
         }
         else if (this.moveType === "move_right") {
-            if (flag) { this.rotator.transform.localPositionX += this.sizeX / this.MaxMoveTimes; }
-            else { this.rotator.transform.localPositionX -= this.sizeX / this.MaxMoveTimes; }
+            if (flag) { this.rotator.transform.localPositionX += moveStepX; }
+            else { this.rotator.transform.localPositionX -= moveStepX; }
         }
         else if (this.moveType === "move_up") {
-            if (flag) { this.rotator.transform.localPositionY += this.sizeY / this.MaxMoveTimes; }
-            else { this.rotator.transform.localPositionY -= this.sizeY / this.MaxMoveTimes; }
+            if (flag) { this.rotator.transform.localPositionY += moveStepY; }
+            else { this.rotator.transform.localPositionY -= moveStepY; }
         }
         else if (this.moveType === "move_down") {
-            if (flag) { this.rotator.transform.localPositionY -= this.sizeY / this.MaxMoveTimes; }
-            else { this.rotator.transform.localPositionY += this.sizeY / this.MaxMoveTimes; }
+            if (flag) { this.rotator.transform.localPositionY -= moveStepY; }
+            else { this.rotator.transform.localPositionY += moveStepY; }
         }
+        /** 旋转 */
         // else if (this.moveType === "rotate_left") {
         //     this.rotator.transform.localRotationEulerY = (this.rotator.transform.localRotationEulerY + 1) % 360;
         // }

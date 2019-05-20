@@ -15,6 +15,12 @@ export default class BulletScript extends Laya.Script3D {
     }
 
     onUpdate() {
+        // check spirte alive
+        if (this.bullet.destroyed) {
+            this.destroy();
+            return;
+        }
+
         // update lifetime
         this.lifetime--;
         if (this.lifetime < 0) {

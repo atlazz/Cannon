@@ -2,8 +2,6 @@ import * as Const from "../Const";
 import GameScene from "../runtime/GameScene";
 
 export default class Target extends Laya.Script3D {
-    private stageIdx: number;
-
     private target: Laya.MeshSprite3D;
 
     private type: number = Const.TargetType.DEFAULT;
@@ -22,9 +20,6 @@ export default class Target extends Laya.Script3D {
     }
 
     onAwake() {
-        // record game stage index
-        this.stageIdx = GameScene.instance.stageIdx;
-        // get sprite
         this.target = this.owner as Laya.MeshSprite3D;
         this.setRigidbody();
         this.initPieces();
@@ -52,8 +47,8 @@ export default class Target extends Laya.Script3D {
     }
 
     onUpdate() {
-        // check stage
-        if (this.stageIdx !== GameScene.instance.stageIdx) {
+        // check spirte alive
+        if (this.target.destroyed) {
             this.destroy();
             return;
         }
@@ -97,12 +92,14 @@ export default class Target extends Laya.Script3D {
 
     /** set rigidbody */
     private setRigidbody() {
+        // get size of bounding box
+        let boundingBox: Laya.BoundBox = this.target.meshFilter.sharedMesh.boundingBox.clone();
+        this.sizeX = boundingBox.max.x - boundingBox.min.x;
+        this.sizeY = boundingBox.max.y - boundingBox.min.y;
+        this.sizeZ = boundingBox.max.z - boundingBox.min.z;
+        // add rigidbody
         let rigidbody: Laya.Rigidbody3D = this.target.addComponent(Laya.Rigidbody3D);
         if (this.target.name.search("Cube") >= 0) {
-            let boundingBox: Laya.BoundBox = this.target.meshFilter.sharedMesh.boundingBox.clone();
-            this.sizeX = boundingBox.max.x - boundingBox.min.x;
-            this.sizeY = boundingBox.max.y - boundingBox.min.y;
-            this.sizeZ = boundingBox.max.z - boundingBox.min.z;
             rigidbody.colliderShape = new Laya.BoxColliderShape(this.sizeX, this.sizeY, this.sizeZ);
         }
         else {
@@ -173,9 +170,9 @@ export default class Target extends Laya.Script3D {
             // active pieces
             this.piecesList[idx].active = true;
             // set size scale
-            let scaleX: number = (Math.random() * 0.5 + 0.5) * 2.5 * this.sizeX * Const.StageInitScale.x;
-            let scaleY: number = (Math.random() * 0.5 + 0.5) * 2.5 * this.sizeY * Const.StageInitScale.y;
-            let scaleZ: number = (Math.random() * 0.5 + 0.5) * 2.5 * this.sizeZ * Const.StageInitScale.z;
+            let scaleX: number = (Math.random() * 0.5 + 0.5) * 1.5 * this.sizeX * this.target.transform.localScaleX * Const.StageInitScale.x;
+            let scaleY: number = (Math.random() * 0.5 + 0.5) * 1.5 * this.sizeY * this.target.transform.localScaleY * Const.StageInitScale.y;
+            let scaleZ: number = (Math.random() * 0.5 + 0.5) * 1.5 * this.sizeZ * this.target.transform.localScaleZ * Const.StageInitScale.z;
             this.piecesList[idx].transform.localScale = new Laya.Vector3(scaleX, scaleY, scaleZ);
             // set rot
             this.piecesList[idx].transform.localRotationEulerX = (Math.random() - 0.5) * 2 * 90;
