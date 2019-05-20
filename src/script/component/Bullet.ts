@@ -1,3 +1,4 @@
+import GameScene from "../runtime/GameScene";
 
 export default class BulletScript extends Laya.Script3D {
     private bullet: Laya.MeshSprite3D;
@@ -25,6 +26,9 @@ export default class BulletScript extends Laya.Script3D {
         this.lifetime--;
         if (this.lifetime < 0) {
             Laya.timer.frameOnce(1, this, () => {
+                // update counter
+                GameScene.instance.currBulletNum++;
+                // destroy
                 this.bullet.removeSelf();
                 this.destroy();
             });

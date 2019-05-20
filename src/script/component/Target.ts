@@ -10,7 +10,7 @@ export default class Target extends Laya.Script3D {
     private sizeY: number;
     private sizeZ: number;
 
-    private collisionBlackList: string[] = ["stand", "rotator"];
+    private collisionBlackList: string[] = ["stand", "Guard"];
 
     /** target object pieces */
     private piecesList: Laya.MeshSprite3D[] = [];
@@ -33,7 +33,7 @@ export default class Target extends Laya.Script3D {
             let velocity: Laya.Vector3 = (this.target.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D).linearVelocity.clone();
             let velocityOther: Laya.Vector3 = new Laya.Vector3(0, 0, 0);
             // not playform
-            if (this.collisionBlackList.indexOf(other.name) < 0) {
+            if (this.collisionBlackList.indexOf(other.name) < 0 && other.name.indexOf("Guard") < 0) {
                 velocityOther = (other.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D).linearVelocity.clone();
             }
             Laya.Vector3.subtract(velocity, velocityOther, velocity);

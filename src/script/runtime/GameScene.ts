@@ -3,7 +3,7 @@ import * as Const from "../Const";
 import Bullet from "../component/Bullet";
 import Stand from "../component/Stand";
 import Target from "../component/Target";
-import Rotator from "../component/Rotator";
+import Guard from "../component/Guard";
 
 export default class GameScene extends ui.game.GameSceneUI {
     static instance: GameScene;
@@ -31,10 +31,14 @@ export default class GameScene extends ui.game.GameSceneUI {
     private directionLight: Laya.DirectionLight;
 
     /** stage */
-    private gameStage: Laya.Sprite3D;
+    public gameStage: Laya.Sprite3D;
     public stageIdx: number;
-    public MaxBulletNum: number = 5;
+    public MaxBulletNum: number = 20;
     public currBulletNum: number = 0;
+
+    /** stand: for win check */
+    private standNum: number;
+    public standClearCnt: number;
 
     /** bullet */
     private _bullet: Laya.MeshSprite3D;
@@ -67,11 +71,8 @@ export default class GameScene extends ui.game.GameSceneUI {
 
         this.initBullet();
 
-        this.stageIdx = 9;
+        this.stageIdx = 24;
         this.loadGameStage();
-
-        // mouse click event listen: shoot a bullet
-        Laya.stage.on(Laya.Event.CLICK, this, this.onClick);
     }
 
     /** initialize scene */
@@ -143,28 +144,15 @@ export default class GameScene extends ui.game.GameSceneUI {
         this._bullet.name = "_bullet";
     }
 
-    /** restart current stage */
-    restart() {
-        this.loadGameStage();
-    }
-
-    /** start next stage */
-    nextStage() {
-        this.stageIdx++;
-        if (this.stageIdx <= Const.StageNum) {
-            this.loadGameStage();
-        }
-        else {
-            console.log("通关");
-        }
-    }
-
     /** load game stage by index */
     private loadGameStage() {
         // reset
         this.gameStage && this.gameStage.destroyChildren();
         this.gameStage && this.gameStage.destroy();
         this.currBulletNum = 0;
+
+        this.standNum = 0;
+        this.standClearCnt = 0;
 
         // load stage
         let satgeResUrl: string = Const.StageResUrl + this.stageIdx + ".lh";
@@ -210,6 +198,8 @@ export default class GameScene extends ui.game.GameSceneUI {
                     // 获取台子boundbox，添加脚本，需要兼容多个平台时胜利判断, & mesh collider shape碰撞抖动问题 todo <=======================
                     child.addComponent(Stand);
 
+                    // update
+                    this.standNum++;
                 }
                 /** stand_cylinder */
                 else if (child.name.search("Cylinder") >= 0) {
@@ -221,36 +211,57 @@ export default class GameScene extends ui.game.GameSceneUI {
                     colliderShape.mesh = child.meshFilter.sharedMesh;
                     rigid.colliderShape = colliderShape;
                 }
-                /** Rotator */
-                else if (child.name.search("Rotator") >= 0) {
-                    console.log(child.name + " to rotator")
+                /** Guard */
+                else if (child.name.search("Guard") >= 0) {
+                    console.log(child.name + " to guard")
                     // add script
-                    let rotator: Rotator = child.addComponent(Rotator);
-                    let moveType: string = "move_left";
-                    if (child.name.search("Rotator.\\\(1\\\)_0") >= 0) {
-                        moveType = "move_right";
-                    }
-                    else if (child.name.search("Rotator.\\\(2\\\)_0") >= 0) {
-                        moveType = "move_up";
-                    }
-                    else if (child.name.search("Rotator.\\\(3\\\)_0") >= 0) {
-                        moveType = "move_down";
-                    }
-                    rotator.setMoveType(moveType);
-                    child.name = "rotator";
+                    let guard: Guard = child.addComponent(Guard);
                 }
                 else {
                     child.destroy();
                 }
             }
+
+            // set stage listener
+            Laya.timer.frameLoop(1, this, this.stageListener);
+            // mouse click event listen: shoot a bullet
+            Laya.stage.on(Laya.Event.CLICK, this, this.onClick);
         }));
+    }
+
+    /** game stage listener */
+    private stageListener() {
+        if (this.standClearCnt >= this.standNum) {
+            console.log("You win. Stage: " + this.stageIdx);
+            this.nextStage();
+            // clear listener
+            Laya.timer.clear(this, this.stageListener);
+        }
+        else if (this.currBulletNum >= this.MaxBulletNum) {
+            console.log("out of ammo");
+            this.restart();
+            Laya.timer.clear(this, this.stageListener);
+        }
+    }
+
+    /** restart current stage */
+    restart() {
+        this.loadGameStage();
+    }
+
+    /** start next stage */
+    nextStage() {
+        this.stageIdx++;
+        if (this.stageIdx <= Const.StageNum) {
+            this.loadGameStage();
+        }
+        else {
+            console.log("通关");
+        }
     }
 
     /** mouse click event: shoot a bullet */
     private onClick() {
-        // update
-        this.currBulletNum++;
-
         // play shoot animation
         this.shootTime = Const.PlayerShootLifeTime;
         this.playerAni.speed = 1;

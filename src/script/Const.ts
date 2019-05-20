@@ -16,11 +16,11 @@ export const LightInitPos: Laya.Vector3 = new Laya.Vector3(-3, 5, 0);
 export const LightInitRotEuler: Laya.Vector3 = new Laya.Vector3(-45, -30, 0);
 
 /** game stage */
-export const StageResUrl: string = "res/stage/";
+export const StageResUrl: string = "res/stage/out/";
 export const StageInitPos: Laya.Vector3 = new Laya.Vector3(0, 0, 0);
 export const StageInitRot: Laya.Vector3 = new Laya.Vector3(0, 180, 0);
 export const StageInitScale: Laya.Vector3 = new Laya.Vector3(40, 40, 40);
-export const StageNum: number = 20;
+export const StageNum: number = 30;
 // winning check frame
 export const WinCheckTime: number = 120;
 

@@ -28,7 +28,7 @@
 			{
 				"type":"Animator",
 				"avatar":{
-					"path":"Assets/18/18-18-18Avatar.lav",
+					"path":"Assets/models/18/18-18-18Avatar.lav",
 					"linkSprites":{
 						"Cube_0":[
 							"Cube_0"
@@ -84,11 +84,8 @@
 						"Obstacles-CylinderGlass (15)_0":[
 							"Obstacles-CylinderGlass (15)_0"
 						],
-						"Rotator_0":[
-							"Rotator_0"
-						],
-						"Rotator (1)_0":[
-							"Rotator (1)_0"
+						"Guard_move_down":[
+							"Guard_move_down"
 						]
 					}
 				},
@@ -121,12 +118,12 @@
 						0.589,
 						1.70814
 					],
-					"meshPath":"Assets/18/18-Cube_0.lm",
+					"meshPath":"Assets/models/18/18-Cube_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/18/18.lmat"
+							"path":"Assets/models/18/18.lmat"
 						}
 					]
 				},
@@ -156,12 +153,12 @@
 						3.6124,
 						1
 					],
-					"meshPath":"Assets/18/18-Cylinder_0.lm",
+					"meshPath":"Assets/models/18/18-Cylinder_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/18/18.lmat"
+							"path":"Assets/models/18/18.lmat"
 						}
 					]
 				},
@@ -191,12 +188,12 @@
 						0.7,
 						1.5
 					],
-					"meshPath":"Assets/18/18-Obstacles-CylinderGlass_0.lm",
+					"meshPath":"Assets/models/18/18-Obstacles-CylinderGlass_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/18/18.lmat"
+							"path":"Assets/models/18/18.lmat"
 						}
 					]
 				},
@@ -226,12 +223,12 @@
 						0.7,
 						1.5
 					],
-					"meshPath":"Assets/18/18-Obstacles-CylinderGlass (1)_0.lm",
+					"meshPath":"Assets/models/18/18-Obstacles-CylinderGlass (1)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/18/18.lmat"
+							"path":"Assets/models/18/18.lmat"
 						}
 					]
 				},
@@ -261,12 +258,12 @@
 						0.7,
 						1.5
 					],
-					"meshPath":"Assets/18/18-Obstacles-CylinderGlass (2)_0.lm",
+					"meshPath":"Assets/models/18/18-Obstacles-CylinderGlass (2)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/18/18.lmat"
+							"path":"Assets/models/18/18.lmat"
 						}
 					]
 				},
@@ -296,12 +293,12 @@
 						0.7,
 						1.5
 					],
-					"meshPath":"Assets/18/18-Obstacles-CylinderGlass (3)_0.lm",
+					"meshPath":"Assets/models/18/18-Obstacles-CylinderGlass (3)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/18/18.lmat"
+							"path":"Assets/models/18/18.lmat"
 						}
 					]
 				},
@@ -331,12 +328,12 @@
 						0.7,
 						1.5
 					],
-					"meshPath":"Assets/18/18-Obstacles-CylinderGlass (4)_0.lm",
+					"meshPath":"Assets/models/18/18-Obstacles-CylinderGlass (4)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/18/18.lmat"
+							"path":"Assets/models/18/18.lmat"
 						}
 					]
 				},
@@ -366,12 +363,12 @@
 						0.7,
 						1.5
 					],
-					"meshPath":"Assets/18/18-Obstacles-CylinderGlass (5)_0.lm",
+					"meshPath":"Assets/models/18/18-Obstacles-CylinderGlass (5)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/18/18.lmat"
+							"path":"Assets/models/18/18.lmat"
 						}
 					]
 				},
@@ -401,12 +398,12 @@
 						0.7,
 						1.5
 					],
-					"meshPath":"Assets/18/18-Obstacles-CylinderGlass (6)_0.lm",
+					"meshPath":"Assets/models/18/18-Obstacles-CylinderGlass (6)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/18/18.lmat"
+							"path":"Assets/models/18/18.lmat"
 						}
 					]
 				},
@@ -436,12 +433,12 @@
 						0.7,
 						1.5
 					],
-					"meshPath":"Assets/18/18-Obstacles-CylinderGlass (7)_0.lm",
+					"meshPath":"Assets/models/18/18-Obstacles-CylinderGlass (7)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/18/18.lmat"
+							"path":"Assets/models/18/18.lmat"
 						}
 					]
 				},
@@ -471,12 +468,12 @@
 						0.7,
 						1.5
 					],
-					"meshPath":"Assets/18/18-Obstacles-CylinderGlass (8)_0.lm",
+					"meshPath":"Assets/models/18/18-Obstacles-CylinderGlass (8)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/18/18.lmat"
+							"path":"Assets/models/18/18.lmat"
 						}
 					]
 				},
@@ -506,12 +503,12 @@
 						0.7,
 						1.5
 					],
-					"meshPath":"Assets/18/18-Obstacles-CylinderGlass (9)_0.lm",
+					"meshPath":"Assets/models/18/18-Obstacles-CylinderGlass (9)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/18/18.lmat"
+							"path":"Assets/models/18/18.lmat"
 						}
 					]
 				},
@@ -541,12 +538,12 @@
 						0.7,
 						1.5
 					],
-					"meshPath":"Assets/18/18-Obstacles-CylinderGlass (10)_0.lm",
+					"meshPath":"Assets/models/18/18-Obstacles-CylinderGlass (10)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/18/18.lmat"
+							"path":"Assets/models/18/18.lmat"
 						}
 					]
 				},
@@ -576,12 +573,12 @@
 						0.7,
 						1.5
 					],
-					"meshPath":"Assets/18/18-Obstacles-CylinderGlass (11)_0.lm",
+					"meshPath":"Assets/models/18/18-Obstacles-CylinderGlass (11)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/18/18.lmat"
+							"path":"Assets/models/18/18.lmat"
 						}
 					]
 				},
@@ -611,12 +608,12 @@
 						0.7,
 						1.5
 					],
-					"meshPath":"Assets/18/18-Obstacles-CylinderGlass (12)_0.lm",
+					"meshPath":"Assets/models/18/18-Obstacles-CylinderGlass (12)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/18/18.lmat"
+							"path":"Assets/models/18/18.lmat"
 						}
 					]
 				},
@@ -646,12 +643,12 @@
 						0.7,
 						1.5
 					],
-					"meshPath":"Assets/18/18-Obstacles-CylinderGlass (13)_0.lm",
+					"meshPath":"Assets/models/18/18-Obstacles-CylinderGlass (13)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/18/18.lmat"
+							"path":"Assets/models/18/18.lmat"
 						}
 					]
 				},
@@ -681,12 +678,12 @@
 						0.7,
 						1.5
 					],
-					"meshPath":"Assets/18/18-Obstacles-CylinderGlass (14)_0.lm",
+					"meshPath":"Assets/models/18/18-Obstacles-CylinderGlass (14)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/18/18.lmat"
+							"path":"Assets/models/18/18.lmat"
 						}
 					]
 				},
@@ -716,12 +713,12 @@
 						0.7,
 						1.5
 					],
-					"meshPath":"Assets/18/18-Obstacles-CylinderGlass (15)_0.lm",
+					"meshPath":"Assets/models/18/18-Obstacles-CylinderGlass (15)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/18/18.lmat"
+							"path":"Assets/models/18/18.lmat"
 						}
 					]
 				},
@@ -731,7 +728,7 @@
 			{
 				"type":"MeshSprite3D",
 				"props":{
-					"name":"Rotator_0",
+					"name":"Guard_move_down",
 					"active":true,
 					"isStatic":false,
 					"layer":0,
@@ -751,12 +748,12 @@
 						12.321,
 						1
 					],
-					"meshPath":"Assets/18/18-Rotator_0.lm",
+					"meshPath":"Assets/models/18/18-Rotator_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/18/18.lmat"
+							"path":"Assets/models/18/18.lmat"
 						}
 					]
 				},
@@ -766,7 +763,7 @@
 			{
 				"type":"MeshSprite3D",
 				"props":{
-					"name":"Rotator (1)_0",
+					"name":"Guard_move_down",
 					"active":true,
 					"isStatic":false,
 					"layer":0,
@@ -786,12 +783,12 @@
 						12.321,
 						1.222
 					],
-					"meshPath":"Assets/18/18-Rotator (1)_0.lm",
+					"meshPath":"Assets/models/18/18-Rotator (1)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/18/18.lmat"
+							"path":"Assets/models/18/18.lmat"
 						}
 					]
 				},

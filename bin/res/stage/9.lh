@@ -28,7 +28,7 @@
 			{
 				"type":"Animator",
 				"avatar":{
-					"path":"Assets/9/9-9-9Avatar.lav",
+					"path":"Assets/models/9/9-9-9Avatar.lav",
 					"linkSprites":{
 						"Cube_0":[
 							"Cube_0"
@@ -48,17 +48,17 @@
 						"Obstacles-CubeGlass (3)_0":[
 							"Obstacles-CubeGlass (3)_0"
 						],
-						"Rotator_0":[
-							"Rotator_0"
+						"Guard_move_left":[
+							"Guard_move_left"
 						],
-						"Rotator (1)_0":[
-							"Rotator (1)_0"
+						"Guard_move_right":[
+							"Guard_move_right"
 						],
-						"Rotator (2)_0":[
-							"Rotator (2)_0"
+						"Guard_move_down":[
+							"Guard_move_down"
 						],
-						"Rotator (3)_0":[
-							"Rotator (3)_0"
+						"Guard_move_up":[
+							"Guard_move_up"
 						]
 					}
 				},
@@ -91,12 +91,12 @@
 						0.589,
 						1.70814
 					],
-					"meshPath":"Assets/9/9-Cube_0.lm",
+					"meshPath":"Assets/models/9/9-Cube_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/9/9.lmat"
+							"path":"Assets/models/9/9.lmat"
 						}
 					]
 				},
@@ -126,12 +126,12 @@
 						3.6124,
 						1
 					],
-					"meshPath":"Assets/9/9-Cylinder_0.lm",
+					"meshPath":"Assets/models/9/9-Cylinder_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/9/9.lmat"
+							"path":"Assets/models/9/9.lmat"
 						}
 					]
 				},
@@ -161,12 +161,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/9/9-Obstacles-CubeGlass_0.lm",
+					"meshPath":"Assets/models/9/9-Obstacles-CubeGlass_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/9/9.lmat"
+							"path":"Assets/models/9/9.lmat"
 						}
 					]
 				},
@@ -196,12 +196,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/9/9-Obstacles-CubeGlass (1)_0.lm",
+					"meshPath":"Assets/models/9/9-Obstacles-CubeGlass (1)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/9/9.lmat"
+							"path":"Assets/models/9/9.lmat"
 						}
 					]
 				},
@@ -231,12 +231,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/9/9-Obstacles-CubeGlass (2)_0.lm",
+					"meshPath":"Assets/models/9/9-Obstacles-CubeGlass (2)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/9/9.lmat"
+							"path":"Assets/models/9/9.lmat"
 						}
 					]
 				},
@@ -266,12 +266,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/9/9-Obstacles-CubeGlass (3)_0.lm",
+					"meshPath":"Assets/models/9/9-Obstacles-CubeGlass (3)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/9/9.lmat"
+							"path":"Assets/models/9/9.lmat"
 						}
 					]
 				},
@@ -281,7 +281,7 @@
 			{
 				"type":"MeshSprite3D",
 				"props":{
-					"name":"Rotator_0",
+					"name":"Guard_move_left",
 					"active":true,
 					"isStatic":false,
 					"layer":0,
@@ -301,12 +301,12 @@
 						12.321,
 						1
 					],
-					"meshPath":"Assets/9/9-Rotator_0.lm",
+					"meshPath":"Assets/models/9/9-Rotator_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/9/9.lmat"
+							"path":"Assets/models/9/9.lmat"
 						}
 					]
 				},
@@ -316,7 +316,7 @@
 			{
 				"type":"MeshSprite3D",
 				"props":{
-					"name":"Rotator (1)_0",
+					"name":"Guard_move_right",
 					"active":true,
 					"isStatic":false,
 					"layer":0,
@@ -336,12 +336,12 @@
 						12.321,
 						1
 					],
-					"meshPath":"Assets/9/9-Rotator (1)_0.lm",
+					"meshPath":"Assets/models/9/9-Rotator (1)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/9/9.lmat"
+							"path":"Assets/models/9/9.lmat"
 						}
 					]
 				},
@@ -351,7 +351,7 @@
 			{
 				"type":"MeshSprite3D",
 				"props":{
-					"name":"Rotator (2)_0",
+					"name":"Guard_move_down",
 					"active":true,
 					"isStatic":false,
 					"layer":0,
@@ -371,12 +371,12 @@
 						12.321,
 						1
 					],
-					"meshPath":"Assets/9/9-Rotator (2)_0.lm",
+					"meshPath":"Assets/models/9/9-Rotator (2)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/9/9.lmat"
+							"path":"Assets/models/9/9.lmat"
 						}
 					]
 				},
@@ -386,7 +386,7 @@
 			{
 				"type":"MeshSprite3D",
 				"props":{
-					"name":"Rotator (3)_0",
+					"name":"Guard_move_up",
 					"active":true,
 					"isStatic":false,
 					"layer":0,
@@ -406,12 +406,12 @@
 						12.32101,
 						1
 					],
-					"meshPath":"Assets/9/9-Rotator (3)_0.lm",
+					"meshPath":"Assets/models/9/9-Rotator (3)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/9/9.lmat"
+							"path":"Assets/models/9/9.lmat"
 						}
 					]
 				},
