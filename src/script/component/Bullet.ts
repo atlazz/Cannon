@@ -2,6 +2,7 @@ import GameScene from "../runtime/GameScene";
 
 export default class BulletScript extends Laya.Script3D {
     private bullet: Laya.MeshSprite3D;
+    private rigidbody: Laya.Rigidbody3D;
 
     private lifetime: number = 120;
 
@@ -13,6 +14,7 @@ export default class BulletScript extends Laya.Script3D {
 
     onAwake() {
         this.bullet = this.owner as Laya.MeshSprite3D;
+        this.rigidbody = this.bullet.getComponent(Laya.Rigidbody3D);
     }
 
     onUpdate() {

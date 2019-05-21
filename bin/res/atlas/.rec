@@ -56,6 +56,17 @@ R 83654F0F human-shadow_0.lm
 R C8148F7C human-Take 001.lani
 R 75AE4237 human.lmat
 R 62ADF3AA zombie_police_shadow.lmat
+D res/navigator
+P A614D413 arrow.png
+P 9401CC40 blank.png
+P 49DC2E75 close_button.png
+P 5266C71E drawer_button.png
+R 2DFF186E drawer_panel.png
+R D27275C8 guessyoulike.png
+P 256CB3E7 more_game_button.png
+R 0D90BB27 moregame_panel.png
+P D4B739EB tips.png
+P 856FAF02 tips2.png
 D res/stage
 R 77A633BE 1.lh
 R 770270AD 10.lh

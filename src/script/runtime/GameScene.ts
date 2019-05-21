@@ -1,5 +1,6 @@
 import { ui } from "./../../ui/layaMaxUI";
 import * as Const from "../Const";
+import Navigator from "../util/Navigator";
 import Bullet from "../component/Bullet";
 import Target from "../component/Target";
 import Guard from "../component/Guard";
@@ -144,8 +145,11 @@ export default class GameScene extends ui.game.GameSceneUI {
     /** load game stage by index */
     private loadGameStage() {
         // destroy old stage
-        this.gameStage && this.gameStage.destroyChildren();
-        this.gameStage && this.gameStage.destroy();
+        if (this.gameStage) {
+            this.gameStage.destroyChildren();
+            this.gameStage.destroy();
+            Laya.stage.off(Laya.Event.CLICK, this, this.onClick);
+        }
 
         // reset
         this.currBulletNum = 0;
@@ -236,8 +240,6 @@ export default class GameScene extends ui.game.GameSceneUI {
             this.restart();
             Laya.timer.clear(this, this.stageListener);
         }
-        // update win check counter
-        // this.winCheckCnt++
     }
 
     /** restart current stage */
@@ -262,9 +264,6 @@ export default class GameScene extends ui.game.GameSceneUI {
         if (!this.gameStage || !this.player || !this._bullet) {
             return;
         }
-
-        // stage start: 开放物理受力
-        this.isStageStart = true;
 
         // play shoot animation
         this.shootTime = Const.PlayerShootLifeTime;
@@ -297,13 +296,25 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.bulletVelocity = 50;
         Laya.Vector3.scale(this.bulletDirection, this.bulletVelocity, this.bulletDirection);
 
+        // 开放物体物理受力：玩家有效输入前，子弹发射轨迹形状检测是否有碰撞
+        if (!this.isStageStart) {
+            var shape = new Laya.SphereColliderShape(Const.BulletRadius * 5);
+            var checkHitResult: Laya.HitResult[] = [];
+            if (this.scene3D.physicsSimulation.shapeCastAll(shape, Const.BulletInitPos, this.bulletDirection, checkHitResult)) {
+                for (let i in checkHitResult) {
+                    if (checkHitResult[i].collider.owner.name !== "stand") {
+                        this.isStageStart = true;
+                    }
+                }
+            }
+        }
+
         // generate bullet
         let bullet: Laya.MeshSprite3D = this._bullet.clone();
         bullet.name = "bullet";
         this.scene3D.addChild(bullet);
         let bulletRigid: Laya.Rigidbody3D = bullet.getComponent(Laya.Rigidbody3D);
         bulletRigid.linearVelocity = this.bulletDirection.clone();
-
         bullet.addComponent(Bullet);
     }
 }

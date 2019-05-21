@@ -24,7 +24,7 @@ export default class Target extends Laya.Script3D {
         this.target = this.owner as Laya.MeshSprite3D;
 
         this.setRigidbody();
-        // 玩家操作前，屏蔽物理受力
+        // 延后几帧屏蔽物理受力，以等待物体掉落放置
         Laya.timer.frameOnce(Const.SetKinematicWaitTime, this, () => {
             if (!GameScene.instance.isStageStart) {
                 this.rigidbody.isKinematic = true;
