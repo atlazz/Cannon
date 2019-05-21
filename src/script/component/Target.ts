@@ -1,5 +1,6 @@
 import * as Const from "../Const";
 import GameScene from "../runtime/GameScene";
+import Bullet from "../component/Bullet"
 
 export default class Target extends Laya.Script3D {
     private target: Laya.MeshSprite3D;
@@ -41,6 +42,19 @@ export default class Target extends Laya.Script3D {
         // }
 
         let other: Laya.MeshSprite3D = collision.other.owner as Laya.MeshSprite3D;
+
+        // 子弹效果处理
+        if (other.name === "bullet") {
+            let bullet: Bullet = other.getComponent(Bullet);
+            if (bullet.type === Const.BulletType.DEFAULT) {
+
+            }
+            else if (bullet.type === Const.BulletType.FROZEN) {
+                this.setType(Const.TargetType.GLASS);
+            }
+        }
+
+        // 本体受击打处理
         if (this.type === Const.TargetType.GLASS) {
             // 相对速度高可击碎
             let velocity: Laya.Vector3 = this.rigidbody.linearVelocity.clone();
@@ -57,12 +71,25 @@ export default class Target extends Laya.Script3D {
         }
     }
 
-    // onCollisionStay(collision: Laya.Collision): void {
-    //     // reset win check counter
-    //     if (collision.other.owner.name === "stand") {
-    //         GameScene.instance.winCheckCnt = 0;
-    //     }
-    // }
+    onCollisionStay(collision: Laya.Collision): void {
+        // // reset win check counter
+        // if (collision.other.owner.name === "stand") {
+        //     GameScene.instance.winCheckCnt = 0;
+        // }
+        
+        let other: Laya.MeshSprite3D = collision.other.owner as Laya.MeshSprite3D;
+
+        // 子弹效果处理
+        if (other.name === "bullet") {
+            let bullet: Bullet = other.getComponent(Bullet);
+            if (bullet.type === Const.BulletType.DEFAULT) {
+
+            }
+            else if (bullet.type === Const.BulletType.FROZEN) {
+                this.setType(Const.TargetType.GLASS);
+            }
+        }
+    }
 
     // onCollisionExit(collision: Laya.Collision): void {
     //     // reset win check counter
@@ -137,6 +164,9 @@ export default class Target extends Laya.Script3D {
         this.rigidbody = this.target.addComponent(Laya.Rigidbody3D);
         if (this.target.name.search("Cube") >= 0) {
             this.rigidbody.colliderShape = new Laya.BoxColliderShape(this.sizeX, this.sizeY, this.sizeZ);
+        }
+        else if (this.target.name.search("Triangle") >= 0) {
+            this.rigidbody.colliderShape = new Laya.ConeColliderShape(this.sizeX / 2, this.sizeY);
         }
         else {
             let colliderShape: Laya.MeshColliderShape = new Laya.MeshColliderShape();
@@ -215,9 +245,9 @@ export default class Target extends Laya.Script3D {
             this.piecesList[idx].transform.localRotationEulerZ = (Math.random() - 0.5) * 2 * 90;
             // set pos
             let velocity: Laya.Vector3 = new Laya.Vector3();
-            velocity.x = (Math.random() - 0.5) * Const.BulletRadius;
-            velocity.y = (Math.random() - 0.5) * Const.BulletRadius;
-            velocity.z = (Math.random() - 0.5) * Const.BulletRadius;
+            velocity.x = (Math.random() - 0.5);
+            velocity.y = (Math.random() - 0.5);
+            velocity.z = (Math.random() - 0.5);
             this.piecesList[idx].transform.position = this.target.transform.position.clone();
             Laya.Vector3.add(this.piecesList[idx].transform.localPosition, velocity, this.piecesList[idx].transform.localPosition);
             // set velocity of pieces

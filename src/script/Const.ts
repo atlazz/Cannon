@@ -24,13 +24,13 @@ export const StageNum: number = 30;
 // winning check frame
 export const MaxWinCheckTime: number = 90;
 // 屏蔽物体物理受力前等待时间
-export const SetKinematicWaitTime: number = 10;
+export const SetKinematicWaitTime: number = 20;
 
 /** cube */
 export const enum TargetType {
-    DEFAULT = 1,
-    GLASS = 2,
-    TNT = 3
+    DEFAULT = 0,
+    GLASS = 1,
+    TNT = 2
 }
 
 /** glass */
@@ -45,7 +45,28 @@ export const PiecesBrokenTime: number = 120;
 export const BulletResUrl: string = "res/bullet.lh";
 export const BulletInitPos: Laya.Vector3 = new Laya.Vector3(0, 0, -1);
 export const BulletInitRot: Laya.Vector3 = new Laya.Vector3(180, 0, 0);
+// type
+export const enum BulletType {
+    DEFAULT = 0,
+    FROZEN = 1,
+}
+// init radius
 export const BulletRadius: number = 0.15;
+// scale
+export const BulletScale = [
+    1,      // DEFAULT
+    1.5,    // FROZEN
+];
+// mass
+export const BulletMass = [
+    10,     // DEFAULT
+    10,     // FROZEN
+];
+// velocity
+export const BulletVelocity = [
+    50,     // DEFAULT
+    50,     // FROZEN
+];
 
 /** player */
 export const PlayerResUrl: string = "res/human.lh";

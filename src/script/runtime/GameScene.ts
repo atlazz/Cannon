@@ -33,17 +33,14 @@ export default class GameScene extends ui.game.GameSceneUI {
     /** stage */
     public gameStage: Laya.Sprite3D;
     public stageIdx: number;
-    public MaxBulletNum: number = 20;
+    public MaxBulletNum: number = 100;
     public currBulletNum: number = 0;
     public winCheckCnt: number = 0;
     public isStageStart: boolean = false;
 
     /** bullet */
     private _bullet: Laya.MeshSprite3D;
-    private bulletRadius: number = 0.02;
-    private bulletVelocity: number = 1;
-    private bulletInitPos: Laya.Vector3;
-    private bulletDirection: Laya.Vector3 = new Laya.Vector3();
+    public bulletType: number = Const.BulletType.DEFAULT;
 
     /** cannon */
     private player: Laya.MeshSprite3D;
@@ -119,27 +116,19 @@ export default class GameScene extends ui.game.GameSceneUI {
         }));
     }
 
-    /** initialize bullet */
+    /** init bullet */
     private initBullet() {
-        this._bullet = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(Const.BulletRadius));
+        let radius: number = Const.BulletRadius;
+        this._bullet = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(radius));
+        this._bullet.name = "_bullet";
 
-        /** add rigidbody */
-        let bulletRigid: Laya.Rigidbody3D = this._bullet.addComponent(Laya.Rigidbody3D);
-        bulletRigid.colliderShape = new Laya.SphereColliderShape(Const.BulletRadius);
-
-        /** set physics */
-        bulletRigid.mass = 10;
-        bulletRigid.overrideGravity = true;
-        bulletRigid.gravity = new Laya.Vector3(0, -5, 0);
-        // quick moving detecion
-        bulletRigid.ccdMotionThreshold = 0.0001;
-        bulletRigid.ccdSweptSphereRadius = Const.BulletRadius;
-
-        /** trasform */
+        // trasform
         this._bullet.transform.localPosition = Const.BulletInitPos.clone();
         this._bullet.transform.localRotationEuler = Const.BulletInitRot.clone();
 
-        this._bullet.name = "_bullet";
+        // add rigidbody
+        let bulletRigid: Laya.Rigidbody3D = this._bullet.addComponent(Laya.Rigidbody3D);
+        bulletRigid.colliderShape = new Laya.SphereColliderShape(radius);
     }
 
     /** load game stage by index */
@@ -275,9 +264,10 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.camera.viewportPointToRay(this.mousePoint, this.ray);
 
         // get bullet shooting direction
+        let bulletDirection: Laya.Vector3 = new Laya.Vector3();
         if (this.scene3D.physicsSimulation.rayCast(this.ray, this.hitResult, 30)) {
             // direction vector: [bullet init point] to [mouse hit point]
-            Laya.Vector3.subtract(this.hitResult.point, Const.BulletInitPos, this.bulletDirection);
+            Laya.Vector3.subtract(this.hitResult.point, Const.BulletInitPos, bulletDirection);
         }
         else {
             // direction vector: [camera point] to [mouse hit point]
@@ -290,17 +280,52 @@ export default class GameScene extends ui.game.GameSceneUI {
             var bV3: Laya.Vector3 = new Laya.Vector3();
             Laya.Vector3.subtract(this.camera.transform.position, Const.BulletInitPos, bV3);
             // direction vector: [bullet init point] to [mouse hit point]
-            Laya.Vector3.add(aV3, bV3, this.bulletDirection);
+            Laya.Vector3.add(aV3, bV3, bulletDirection);
         }
-        Laya.Vector3.normalize(this.bulletDirection, this.bulletDirection);
-        this.bulletVelocity = 50;
-        Laya.Vector3.scale(this.bulletDirection, this.bulletVelocity, this.bulletDirection);
+        Laya.Vector3.normalize(bulletDirection, bulletDirection);
 
+        // create bullet
+        this.createBullet(Const.BulletType.FROZEN, bulletDirection);
+    }
+
+    /** create bullet */
+    private createBullet(type: number, direction: Laya.Vector3) {
+        this.bulletType = type;
+
+        let bullet: Laya.MeshSprite3D = this._bullet.clone();
+        bullet.name = "bullet";
+        this.scene3D.addChild(bullet);
+
+        // trasform
+        bullet.transform.localPosition = Const.BulletInitPos.clone();
+        bullet.transform.localRotationEuler = Const.BulletInitRot.clone();
+        Laya.Vector3.scale(bullet.transform.localScale, Const.BulletScale[this.bulletType], bullet.transform.localScale);
+
+        // add rigidbody
+        let bulletRigid: Laya.Rigidbody3D = bullet.getComponent(Laya.Rigidbody3D);
+
+        // quick moving detecion
+        bulletRigid.ccdMotionThreshold = 0.0001;
+        bulletRigid.ccdSweptSphereRadius = Const.BulletRadius * Const.BulletScale[this.bulletType];
+
+        // set physics
+        bulletRigid.mass = Const.BulletMass[this.bulletType];
+
+        // set velocity
+        let velocity: Laya.Vector3 = direction.clone();
+        Laya.Vector3.scale(velocity, Const.BulletVelocity[this.bulletType], velocity);
+        bulletRigid.linearVelocity = velocity.clone();
+
+        // add script
+        let bulletScript: Bullet = bullet.addComponent(Bullet);
+        // set type
+        bulletScript.setType(this.bulletType);
+        
         // 开放物体物理受力：玩家有效输入前，子弹发射轨迹形状检测是否有碰撞
         if (!this.isStageStart) {
             var shape = new Laya.SphereColliderShape(Const.BulletRadius * 5);
             var checkHitResult: Laya.HitResult[] = [];
-            if (this.scene3D.physicsSimulation.shapeCastAll(shape, Const.BulletInitPos, this.bulletDirection, checkHitResult)) {
+            if (this.scene3D.physicsSimulation.shapeCastAll(shape, Const.BulletInitPos, velocity, checkHitResult)) {
                 for (let i in checkHitResult) {
                     if (checkHitResult[i].collider.owner.name !== "stand") {
                         this.isStageStart = true;
@@ -308,13 +333,5 @@ export default class GameScene extends ui.game.GameSceneUI {
                 }
             }
         }
-
-        // generate bullet
-        let bullet: Laya.MeshSprite3D = this._bullet.clone();
-        bullet.name = "bullet";
-        this.scene3D.addChild(bullet);
-        let bulletRigid: Laya.Rigidbody3D = bullet.getComponent(Laya.Rigidbody3D);
-        bulletRigid.linearVelocity = this.bulletDirection.clone();
-        bullet.addComponent(Bullet);
     }
 }
