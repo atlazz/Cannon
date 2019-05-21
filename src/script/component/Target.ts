@@ -3,6 +3,7 @@ import GameScene from "../runtime/GameScene";
 
 export default class Target extends Laya.Script3D {
     private target: Laya.MeshSprite3D;
+    private rigidbody: Laya.Rigidbody3D;
 
     private type: number = Const.TargetType.DEFAULT;
 
@@ -21,23 +22,35 @@ export default class Target extends Laya.Script3D {
 
     onAwake() {
         this.target = this.owner as Laya.MeshSprite3D;
+
         this.setRigidbody();
+        // 玩家操作前，屏蔽物理受力
+        Laya.timer.frameOnce(Const.SetKinematicWaitTime, this, () => {
+            if (!GameScene.instance.isStageStart) {
+                this.rigidbody.isKinematic = true;
+            }
+        });
+
         this.initPieces();
     }
 
     onCollisionEnter(collision: Laya.Collision): void {
+        // reset win check counter
+        if (collision.other.owner.name === "stand") {
+            GameScene.instance.winCheckCnt = 0;
+        }
+
         let other: Laya.MeshSprite3D = collision.other.owner as Laya.MeshSprite3D;
         // if (this.collisionBlackList.indexOf(other.name) < 0) {
         if (this.type === Const.TargetType.GLASS) {
             // 相对速度高可击碎
-            let velocity: Laya.Vector3 = (this.target.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D).linearVelocity.clone();
+            let velocity: Laya.Vector3 = this.rigidbody.linearVelocity.clone();
             let velocityOther: Laya.Vector3 = new Laya.Vector3(0, 0, 0);
             // not playform
             if (this.collisionBlackList.indexOf(other.name) < 0 && other.name.indexOf("Guard") < 0) {
                 velocityOther = (other.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D).linearVelocity.clone();
             }
-            Laya.Vector3.subtract(velocity, velocityOther, velocity);
-            let velocityValue: number = Math.sqrt(Math.pow(velocity.x, 2) + Math.pow(velocity.y, 2) + Math.pow(velocity.z, 2));
+            let velocityValue: number = Laya.Vector3.distance(velocity, velocityOther);
             if (velocityValue >= Const.GlassBrokenVelocity) {
                 // this.isHit = true;
                 this.broken();
@@ -46,11 +59,37 @@ export default class Target extends Laya.Script3D {
         // }
     }
 
+    onCollisionStay(collision: Laya.Collision): void {
+        // reset win check counter
+        if (collision.other.owner.name === "stand") {
+            GameScene.instance.winCheckCnt = 0;
+        }
+    }
+
+    onCollisionExit(collision: Laya.Collision): void {
+        // reset win check counter
+        if (collision.other.owner.name === "stand") {
+            GameScene.instance.winCheckCnt = 0;
+        }
+    }
+
     onUpdate() {
         // check spirte alive
         if (this.target.destroyed) {
             this.destroy();
             return;
+        }
+
+        // stage start
+        if (this.rigidbody.isKinematic && GameScene.instance.isStageStart) {
+            this.rigidbody.isKinematic = false;
+        }
+
+        // 引擎bug：物体架在两个平台夹缝上时，不触发onCollisionStay
+        var dist: number = Laya.Vector3.distance(this.target.transform.position, GameScene.instance.gameStage.transform.position);
+        if (dist < 20) {
+            // reset win check counter
+            GameScene.instance.winCheckCnt = 0;
         }
 
         // physics engine bug detecting and fixing
@@ -71,9 +110,8 @@ export default class Target extends Laya.Script3D {
      *  故在此检测该情况并对刚体销毁重建
      * */
     private physics_engine_bug_fixing() {
-        let rigidbody: Laya.Rigidbody3D = this.target.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D;
-        if (rigidbody.isActive == false) {
-            rigidbody.destroy();
+        if (this.rigidbody.isActive == false) {
+            this.rigidbody.destroy();
             this.setRigidbody();
             console.log("Physics_engine_bug_fixing: Reset rigidbody.");
         }
@@ -98,29 +136,28 @@ export default class Target extends Laya.Script3D {
         this.sizeY = boundingBox.max.y - boundingBox.min.y;
         this.sizeZ = boundingBox.max.z - boundingBox.min.z;
         // add rigidbody
-        let rigidbody: Laya.Rigidbody3D = this.target.addComponent(Laya.Rigidbody3D);
+        this.rigidbody = this.target.addComponent(Laya.Rigidbody3D);
         if (this.target.name.search("Cube") >= 0) {
-            rigidbody.colliderShape = new Laya.BoxColliderShape(this.sizeX, this.sizeY, this.sizeZ);
+            this.rigidbody.colliderShape = new Laya.BoxColliderShape(this.sizeX, this.sizeY, this.sizeZ);
         }
         else {
             let colliderShape: Laya.MeshColliderShape = new Laya.MeshColliderShape();
             colliderShape.mesh = this.target.meshFilter.sharedMesh;
-            rigidbody.colliderShape = colliderShape;
+            this.rigidbody.colliderShape = colliderShape;
         }
         this.setPhysicsParam();
     }
 
     /** set physics param */
     private setPhysicsParam() {
-        let rigidbody: Laya.Rigidbody3D = this.target.getComponent(Laya.Rigidbody3D);
-        rigidbody.isKinematic = false;
+        this.rigidbody.isKinematic = false;
         if (this.type === Const.TargetType.DEFAULT) {
-            rigidbody.mass = 10;
-            rigidbody.friction = 10;
+            this.rigidbody.mass = 10;
+            this.rigidbody.friction = 10;
         }
         else if (this.type === Const.TargetType.GLASS) {
-            rigidbody.mass = 0.1;
-            rigidbody.friction = 2;
+            this.rigidbody.mass = 0.1;
+            this.rigidbody.friction = 2;
         }
     }
 

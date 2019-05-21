@@ -1,7 +1,6 @@
 import { ui } from "./../../ui/layaMaxUI";
 import * as Const from "../Const";
 import Bullet from "../component/Bullet";
-import Stand from "../component/Stand";
 import Target from "../component/Target";
 import Guard from "../component/Guard";
 
@@ -35,10 +34,8 @@ export default class GameScene extends ui.game.GameSceneUI {
     public stageIdx: number;
     public MaxBulletNum: number = 20;
     public currBulletNum: number = 0;
-
-    /** stand: for win check */
-    private standNum: number;
-    public standClearCnt: number;
+    public winCheckCnt: number = 0;
+    public isStageStart: boolean = false;
 
     /** bullet */
     private _bullet: Laya.MeshSprite3D;
@@ -146,13 +143,14 @@ export default class GameScene extends ui.game.GameSceneUI {
 
     /** load game stage by index */
     private loadGameStage() {
-        // reset
+        // destroy old stage
         this.gameStage && this.gameStage.destroyChildren();
         this.gameStage && this.gameStage.destroy();
-        this.currBulletNum = 0;
 
-        this.standNum = 0;
-        this.standClearCnt = 0;
+        // reset
+        this.currBulletNum = 0;
+        this.winCheckCnt = 0;
+        this.isStageStart = false;
 
         // load stage
         let satgeResUrl: string = Const.StageResUrl + this.stageIdx + ".lh";
@@ -188,28 +186,22 @@ export default class GameScene extends ui.game.GameSceneUI {
                     console.log(child.name + " to stand")
                     child.name = "stand";
                     // add collider
-                    let rigid: Laya.PhysicsCollider = child.addComponent(Laya.PhysicsCollider);
+                    let collider: Laya.PhysicsCollider = child.addComponent(Laya.PhysicsCollider);
                     let boundingBox: Laya.BoundBox = child.meshFilter.sharedMesh.boundingBox.clone();
                     let sizeX: number = boundingBox.max.x - boundingBox.min.x;
                     let sizeY: number = boundingBox.max.y - boundingBox.min.y;
                     let sizeZ: number = boundingBox.max.z - boundingBox.min.z;
-                    rigid.colliderShape = new Laya.BoxColliderShape(sizeX, sizeY, sizeZ);
-                    // add script
-                    // 获取台子boundbox，添加脚本，需要兼容多个平台时胜利判断, & mesh collider shape碰撞抖动问题 todo <=======================
-                    child.addComponent(Stand);
-
-                    // update
-                    this.standNum++;
+                    collider.colliderShape = new Laya.BoxColliderShape(sizeX, sizeY, sizeZ);
                 }
                 /** stand_cylinder */
                 else if (child.name.search("Cylinder") >= 0) {
                     console.log(child.name + " to stand")
                     child.name = "stand";
                     // add collider
-                    let rigid: Laya.PhysicsCollider = child.addComponent(Laya.PhysicsCollider);
+                    let collider: Laya.PhysicsCollider = child.addComponent(Laya.PhysicsCollider);
                     let colliderShape: Laya.MeshColliderShape = new Laya.MeshColliderShape();
                     colliderShape.mesh = child.meshFilter.sharedMesh;
-                    rigid.colliderShape = colliderShape;
+                    collider.colliderShape = colliderShape;
                 }
                 /** Guard */
                 else if (child.name.search("Guard") >= 0) {
@@ -231,17 +223,21 @@ export default class GameScene extends ui.game.GameSceneUI {
 
     /** game stage listener */
     private stageListener() {
-        if (this.standClearCnt >= this.standNum) {
+        // player win
+        if (this.winCheckCnt++ >= Const.MaxWinCheckTime) {
             console.log("You win. Stage: " + this.stageIdx);
             this.nextStage();
             // clear listener
             Laya.timer.clear(this, this.stageListener);
         }
+        // player fail: out of ammo
         else if (this.currBulletNum >= this.MaxBulletNum) {
             console.log("out of ammo");
             this.restart();
             Laya.timer.clear(this, this.stageListener);
         }
+        // update win check counter
+        // this.winCheckCnt++
     }
 
     /** restart current stage */
@@ -262,6 +258,14 @@ export default class GameScene extends ui.game.GameSceneUI {
 
     /** mouse click event: shoot a bullet */
     private onClick() {
+        // check res loading complete
+        if (!this.gameStage || !this.player || !this._bullet) {
+            return;
+        }
+
+        // stage start: 开放物理受力
+        this.isStageStart = true;
+
         // play shoot animation
         this.shootTime = Const.PlayerShootLifeTime;
         this.playerAni.speed = 1;
