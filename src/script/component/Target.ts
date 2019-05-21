@@ -35,13 +35,12 @@ export default class Target extends Laya.Script3D {
     }
 
     onCollisionEnter(collision: Laya.Collision): void {
-        // reset win check counter
-        if (collision.other.owner.name === "stand") {
-            GameScene.instance.winCheckCnt = 0;
-        }
+        // // reset win check counter
+        // if (collision.other.owner.name === "stand") {
+        //     GameScene.instance.winCheckCnt = 0;
+        // }
 
         let other: Laya.MeshSprite3D = collision.other.owner as Laya.MeshSprite3D;
-        // if (this.collisionBlackList.indexOf(other.name) < 0) {
         if (this.type === Const.TargetType.GLASS) {
             // 相对速度高可击碎
             let velocity: Laya.Vector3 = this.rigidbody.linearVelocity.clone();
@@ -56,22 +55,21 @@ export default class Target extends Laya.Script3D {
                 this.broken();
             }
         }
-        // }
     }
 
-    onCollisionStay(collision: Laya.Collision): void {
-        // reset win check counter
-        if (collision.other.owner.name === "stand") {
-            GameScene.instance.winCheckCnt = 0;
-        }
-    }
+    // onCollisionStay(collision: Laya.Collision): void {
+    //     // reset win check counter
+    //     if (collision.other.owner.name === "stand") {
+    //         GameScene.instance.winCheckCnt = 0;
+    //     }
+    // }
 
-    onCollisionExit(collision: Laya.Collision): void {
-        // reset win check counter
-        if (collision.other.owner.name === "stand") {
-            GameScene.instance.winCheckCnt = 0;
-        }
-    }
+    // onCollisionExit(collision: Laya.Collision): void {
+    //     // reset win check counter
+    //     if (collision.other.owner.name === "stand") {
+    //         GameScene.instance.winCheckCnt = 0;
+    //     }
+    // }
 
     onUpdate() {
         // check spirte alive
@@ -85,35 +83,35 @@ export default class Target extends Laya.Script3D {
             this.rigidbody.isKinematic = false;
         }
 
-        // 引擎bug：物体架在两个平台夹缝上时，不触发onCollisionStay
+        /** win check
+         *  引擎bug：物体架在两个平台夹缝上时，不触发onCollisionStay,
+         *  故完善关卡胜利判断，根据物体与关卡模型中心距离判定是否掉出平台
+         *  ps：物理引擎bug较多，可以来引擎呈现物理宏观效果，但尽量少依赖碰撞做需要稳定的底层处理
+         */
         var dist: number = Laya.Vector3.distance(this.target.transform.position, GameScene.instance.gameStage.transform.position);
         if (dist < 20) {
             // reset win check counter
             GameScene.instance.winCheckCnt = 0;
         }
 
-        // physics engine bug detecting and fixing
-        this.physics_engine_bug_fixing();
-
-        // // hit handling
-        // if (this.isHit) {
-        //     if (this.type === Const.TargetType.GLASS) {
-        //         this.broken();
-        //     }
-        // }
+        /** physics engine bug detecting and fixing
+         *  引擎bug：姿态稳定情况下，某个物体作用力方向（如重力时的底下）的碰撞物体快速消失，
+         *  而此过程中相互作用影响过小导致自身姿态没有变化时，引擎会自动将该物体的刚体非激活，从而导致腾空现象，
+         *  增大物体间相互作用力（如摩擦系数）可减少该情况发生，但不能杜绝，
+         *  故在此检测该情况并对刚体销毁重建
+         * */
+        if (this.rigidbody && this.rigidbody.isActive == false) {
+            this.refreshRigidbody();
+            console.log("Physics_engine_bug_fixing: Reset rigidbody.");
+        }
     }
 
-    /** physics engine bug detecting and fixing
-     *  引擎bug：姿态稳定情况下，某个物体作用力方向（如重力时的底下）的碰撞物体快速消失，
-     *  而此过程中相互作用影响过小导致自身姿态没有变化时，引擎会自动将该物体的刚体非激活，从而导致腾空现象，
-     *  增大物体间相互作用力（如摩擦系数）可减少该情况发生，但不能杜绝，
-     *  故在此检测该情况并对刚体销毁重建
-     * */
-    private physics_engine_bug_fixing() {
-        if (this.rigidbody.isActive == false) {
+    /** destroy and recreate rigidbody */
+    private refreshRigidbody() {
+        if (this.rigidbody) {
             this.rigidbody.destroy();
             this.setRigidbody();
-            console.log("Physics_engine_bug_fixing: Reset rigidbody.");
+            console.log("refresh rigidbody")
         }
     }
 
@@ -226,8 +224,8 @@ export default class Target extends Laya.Script3D {
             Laya.Vector3.scale(velocity, 50, velocity);
             (this.piecesList[idx].getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D).linearVelocity = velocity.clone();
             // set hiding effect
-            Laya.Tween.to(this.piecesList[idx].transform.localScale, {x: scaleX / 2, y: scaleY / 2, z: scaleZ / 2}, Const.PiecesBrokenTime / 60 * 1000, Laya.Ease.linearNone);
-            Laya.Tween.to(this.piecesList[idx].meshRenderer.material, {albedoColorA: 0}, Const.PiecesBrokenTime / 60 * 1000, Laya.Ease.linearNone, Laya.Handler.create(this, () => {
+            Laya.Tween.to(this.piecesList[idx].transform.localScale, { x: scaleX / 2, y: scaleY / 2, z: scaleZ / 2 }, Const.PiecesBrokenTime / 60 * 1000, Laya.Ease.linearNone);
+            Laya.Tween.to(this.piecesList[idx].meshRenderer.material, { albedoColorA: 0 }, Const.PiecesBrokenTime / 60 * 1000, Laya.Ease.linearNone, Laya.Handler.create(this, () => {
                 this.piecesList[+idx].destroy();
             }));
         }
