@@ -66,7 +66,7 @@ export default class GameScene extends ui.game.GameSceneUI {
 
         this.initBullet();
 
-        this.stageIdx = 1;
+        this.stageIdx = 22;
         this.loadGameStage();
     }
 
@@ -198,7 +198,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                     let sizeZ: number = boundingBox.max.z - boundingBox.min.z;
                     collider.colliderShape = new Laya.BoxColliderShape(sizeX, sizeY, sizeZ);
                     // 刷新渲染模式，不然其上设置成透明渲染的物体会被遮盖
-                    (child.meshRenderer.material as Laya.PBRSpecularMaterial).renderMode = Laya.PBRSpecularMaterial.RENDERMODE_CUTOUT;
+                    (child.meshRenderer.material as Laya.PBRSpecularMaterial).renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
                 }
                 /** stand_cylinder */
                 else if (child.name.search("Cylinder") >= 0) {
@@ -210,7 +210,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                     colliderShape.mesh = child.meshFilter.sharedMesh;
                     collider.colliderShape = colliderShape;
                     // 刷新渲染模式，不然其上设置成透明渲染的物体会被遮盖
-                    (child.meshRenderer.material as Laya.PBRSpecularMaterial).renderMode = Laya.PBRSpecularMaterial.RENDERMODE_CUTOUT;
+                    (child.meshRenderer.material as Laya.PBRSpecularMaterial).renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
                 }
                 /** Guard */
                 else if (child.name.search("Guard") >= 0) {

@@ -76,7 +76,7 @@ export default class Target extends Laya.Script3D {
         // if (collision.other.owner.name === "stand") {
         //     GameScene.instance.winCheckCnt = 0;
         // }
-        
+
         let other: Laya.MeshSprite3D = collision.other.owner as Laya.MeshSprite3D;
 
         // 子弹效果处理
@@ -108,6 +108,11 @@ export default class Target extends Laya.Script3D {
         // stage start
         if (this.rigidbody.isKinematic && GameScene.instance.isStageStart) {
             this.rigidbody.isKinematic = false;
+        }
+
+        // 刷新渲染模式，不然临近设置成透明渲染的物体会被遮盖
+        if (this.type !== Const.TargetType.GLASS) {
+            (this.target.meshRenderer.material as Laya.PBRSpecularMaterial).renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
         }
 
         /** win check
