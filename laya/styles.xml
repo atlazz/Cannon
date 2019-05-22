@@ -24,4 +24,8 @@
    <item name="res/stage/Assets/3/mutou_06.jpg" type="Sprite" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
    <item name="res/stage/Assets/4/mutou_06.jpg" type="Sprite" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
    <item name="res/stage/Assets/9/mutou_06.jpg" type="Sprite" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="res/stage/out/materials/mutou_06.jpg" type="Sprite" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="res/stage/out/materials/wood.png" type="Sprite" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="res/stage/out/materials/wood.jpg" type="Sprite" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="res/stage/out/materials/wood1.jpg" type="Sprite" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
 </res>

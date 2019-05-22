@@ -23,42 +23,81 @@ for (var i = fromIdx; i <= toIdx; i++) {
         console.log("Read file: " + fileName);
 
         stage = JSON.parse(stage.toString())
+
+        // clear animator
+        stage.data.components = [];
+
         for (let i = 0; i < stage.data.child.length; i++) {
             let item = stage.data.child[i];
-            // stand cube
-            if (item.props.name.indexOf("Cube") >= 0) {
-                item.props.meshPath = "models/Cube.lm"
-                item.props.materials = [];
-            }
-            // stand cylinder
-            else if (item.props.name.indexOf("Cylinder") >= 0) {
-                item.props.meshPath = "models/Cylinder.lm"
-                item.props.materials = [];
-            }
             // target cube
-            else if (item.props.name.indexOf("Obstacles-Cube") >= 0) {
-                item.props.meshPath = "models/Obstacles-Cube.lm"
-                item.props.materials = [];
+            if (item.props.name.indexOf("Obstacles-Cube") >= 0) {
+                item.props.meshPath = "models/Obstacles-Cube.lm";
+                item.props.materials = [
+                    {
+                        "type":"Laya.PBRSpecularMaterial",
+                        "path":"materials/wood.lmat"
+                    }
+                ]
             }
             // target cylinder
             else if (item.props.name.indexOf("Obstacles-Cylinder") >= 0) {
                 item.props.meshPath = "models/Obstacles-Cylinder.lm"
-                item.props.materials = [];
+                item.props.materials = [
+                    {
+                        "type":"Laya.PBRSpecularMaterial",
+                        "path":"materials/wood.lmat"
+                    }
+                ]
             }
             // target triangle
             else if (item.props.name.indexOf("Obstacles-Triangle") >= 0) {
                 item.props.meshPath = "models/Obstacles-Triangle.lm"
-                item.props.materials = [];
+                item.props.materials = [
+                    {
+                        "type":"Laya.PBRSpecularMaterial",
+                        "path":"materials/wood.lmat"
+                    }
+                ]
             }
             // target gate
             else if (item.props.name.indexOf("Obstacle-Gate") >= 0) {
                 item.props.meshPath = "models/Obstacle-Gate.lm"
-                item.props.materials = [];
+                item.props.materials = [
+                    {
+                        "type":"Laya.PBRSpecularMaterial",
+                        "path":"materials/wood.lmat"
+                    }
+                ]
             }
             // guard
             else if (item.props.name.indexOf("Guard") >= 0) {
                 item.props.meshPath = "models/Rotator.lm"
-                item.props.materials = [];
+                item.props.materials = [
+                    {
+                        "type":"Laya.PBRSpecularMaterial",
+                        "path":"materials/stand.lmat"
+                    }
+                ];
+            }
+            // stand cube
+            else if (item.props.name.indexOf("Cube") >= 0) {
+                item.props.meshPath = "models/Cube.lm"
+                item.props.materials = [
+                    {
+                        "type":"Laya.PBRSpecularMaterial",
+                        "path":"materials/stand.lmat"
+                    }
+                ];
+            }
+            // stand cylinder
+            else if (item.props.name.indexOf("Cylinder") >= 0) {
+                item.props.meshPath = "models/Cylinder.lm"
+                item.props.materials = [
+                    {
+                        "type":"Laya.PBRSpecularMaterial",
+                        "path":"materials/stand.lmat"
+                    }
+                ];
             }
         }
 

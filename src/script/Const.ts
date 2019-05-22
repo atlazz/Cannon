@@ -12,8 +12,9 @@ export const CameraInitPos: Laya.Vector3 = new Laya.Vector3(0, 0.3, 0.2);
 export const CameraInitRotEuler: Laya.Vector3 = new Laya.Vector3(0, 0, 0);
 
 /** directional light */
-export const LightInitPos: Laya.Vector3 = new Laya.Vector3(-3, 5, 0);
-export const LightInitRotEuler: Laya.Vector3 = new Laya.Vector3(-45, -30, 0);
+export const LightInitPos: Laya.Vector3 = new Laya.Vector3(0, 5, 0);
+export const LightInitRotEuler: Laya.Vector3 = new Laya.Vector3(-30, 0, 0);
+export const LightInitColor: Laya.Vector3 = new Laya.Vector3(1, 1, 1);
 
 /** game stage */
 export const StageResUrl: string = "res/stage/out/";

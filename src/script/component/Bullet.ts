@@ -44,14 +44,14 @@ export default class BulletScript extends Laya.Script3D {
     setType(type: number) {
         this.type = type;
         if (this.type === Const.BulletType.DEFAULT) {
-            let mat: Laya.BlinnPhongMaterial = new Laya.BlinnPhongMaterial();
-            mat.renderMode = Laya.BlinnPhongMaterial.RENDERMODE_TRANSPARENT;
+            let mat: Laya.PBRSpecularMaterial = new Laya.PBRSpecularMaterial();
+            mat.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_TRANSPARENT;
             mat.albedoColor = new Laya.Vector4(1, 0.7, 1, 0.7);
             this.bullet.meshRenderer.material = mat;
         }
         else if (this.type === Const.BulletType.FROZEN) {
-            let mat: Laya.BlinnPhongMaterial = new Laya.BlinnPhongMaterial();
-            mat.renderMode = Laya.BlinnPhongMaterial.RENDERMODE_TRANSPARENT;
+            let mat: Laya.PBRSpecularMaterial = new Laya.PBRSpecularMaterial();
+            mat.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_TRANSPARENT;
             mat.albedoColor = new Laya.Vector4(0.2, 0.2, 1, 0.7);
             this.bullet.meshRenderer.material = mat;
         }

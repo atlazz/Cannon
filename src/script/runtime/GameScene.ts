@@ -66,7 +66,7 @@ export default class GameScene extends ui.game.GameSceneUI {
 
         this.initBullet();
 
-        this.stageIdx = 25;
+        this.stageIdx = 4;
         this.loadGameStage();
     }
 
@@ -84,6 +84,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.directionLight = this.scene3D.addChild(new Laya.DirectionLight()) as Laya.DirectionLight;
         this.directionLight.transform.localPosition = Const.LightInitPos.clone();
         this.directionLight.transform.localRotationEuler = Const.LightInitRotEuler.clone();
+        this.directionLight.color = Const.LightInitColor.clone();
     }
 
     /** initialize player */
@@ -156,14 +157,15 @@ export default class GameScene extends ui.game.GameSceneUI {
             this.gameStage.transform.localScale = Const.StageInitScale.clone();
 
             // destroy animator component: 不然会约束物理碰撞效果
-            (this.gameStage.getComponent(Laya.Animator) as Laya.Animator).destroy();
+            let stageAni = (this.gameStage.getComponent(Laya.Animator) as Laya.Animator);
+            stageAni && stageAni.destroy();
 
             let child: Laya.MeshSprite3D;
             for (let i: number = 0; i < this.gameStage.numChildren; i++) {
                 child = this.gameStage.getChildAt(i) as Laya.MeshSprite3D;
                 /** target object */
                 if (child.name.search("Obstacle") >= 0) {
-                    console.log(child.name + " to target")
+                    // console.log(child.name + " to target")
                     // add scipt
                     let targetScript: Target = child.addComponent(Target);
                     // set type
@@ -176,7 +178,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                 }
                 /** stand_box */
                 else if (child.name.search("Cube") >= 0) {
-                    console.log(child.name + " to stand")
+                    // console.log(child.name + " to stand")
                     child.name = "stand";
                     // add collider
                     let collider: Laya.PhysicsCollider = child.addComponent(Laya.PhysicsCollider);
@@ -185,20 +187,24 @@ export default class GameScene extends ui.game.GameSceneUI {
                     let sizeY: number = boundingBox.max.y - boundingBox.min.y;
                     let sizeZ: number = boundingBox.max.z - boundingBox.min.z;
                     collider.colliderShape = new Laya.BoxColliderShape(sizeX, sizeY, sizeZ);
+                    // 刷新渲染模式，不然其上设置成透明渲染的物体会被遮盖
+                    (child.meshRenderer.material as Laya.PBRSpecularMaterial).renderMode = Laya.PBRSpecularMaterial.RENDERMODE_CUTOUT;
                 }
                 /** stand_cylinder */
                 else if (child.name.search("Cylinder") >= 0) {
-                    console.log(child.name + " to stand")
+                    // console.log(child.name + " to stand")
                     child.name = "stand";
                     // add collider
                     let collider: Laya.PhysicsCollider = child.addComponent(Laya.PhysicsCollider);
                     let colliderShape: Laya.MeshColliderShape = new Laya.MeshColliderShape();
                     colliderShape.mesh = child.meshFilter.sharedMesh;
                     collider.colliderShape = colliderShape;
+                    // 刷新渲染模式，不然其上设置成透明渲染的物体会被遮盖
+                    (child.meshRenderer.material as Laya.PBRSpecularMaterial).renderMode = Laya.PBRSpecularMaterial.RENDERMODE_CUTOUT;
                 }
                 /** Guard */
                 else if (child.name.search("Guard") >= 0) {
-                    console.log(child.name + " to guard")
+                    // console.log(child.name + " to guard")
                     // add script
                     let guard: Guard = child.addComponent(Guard);
                 }
@@ -320,7 +326,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         let bulletScript: Bullet = bullet.addComponent(Bullet);
         // set type
         bulletScript.setType(this.bulletType);
-        
+
         // 开放物体物理受力：玩家有效输入前，子弹发射轨迹形状检测是否有碰撞
         if (!this.isStageStart) {
             var shape = new Laya.SphereColliderShape(Const.BulletRadius * 5);

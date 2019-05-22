@@ -1,6 +1,39 @@
-2019/05/22-10:00:54.151 1394 Reusing MANIFEST leveldb/MANIFEST-000001
-2019/05/22-10:00:54.164 1394 Recovering log #48
-2019/05/22-10:00:54.164 1394 Reusing old log leveldb/000048.log 
-2019/05/22-11:19:44.815 313c Level-0 table #51: started
-2019/05/22-11:19:44.855 313c Level-0 table #51: 9762 bytes OK
-2019/05/22-11:19:44.876 313c Delete type=0 #48
+2019/05/22-11:19:50.052 2ea8 Reusing MANIFEST leveldb/MANIFEST-000001
+2019/05/22-11:19:50.052 2ea8 Recovering log #50
+2019/05/22-11:19:50.053 2ea8 Reusing old log leveldb/000050.log 
+2019/05/22-11:39:55.253 15d8 Level-0 table #54: started
+2019/05/22-11:39:55.289 15d8 Level-0 table #54: 11984 bytes OK
+2019/05/22-11:39:55.309 15d8 Delete type=0 #50
+2019/05/22-12:00:30.729 15d8 Level-0 table #56: started
+2019/05/22-12:00:30.767 15d8 Level-0 table #56: 10794 bytes OK
+2019/05/22-12:00:30.789 15d8 Delete type=0 #53
+2019/05/22-12:00:30.789 1b6c Compacting 4@0 + 1@1 files
+2019/05/22-12:00:30.831 1b6c Generated table #57@0: 32 keys, 2606 bytes
+2019/05/22-12:00:30.831 1b6c Compacted 4@0 + 1@1 files => 2606 bytes
+2019/05/22-12:00:30.851 1b6c compacted to: files[ 0 1 1 0 0 0 0 ]
+2019/05/22-12:00:30.852 1b6c Delete type=2 #45
+2019/05/22-12:00:30.853 1b6c Delete type=2 #47
+2019/05/22-12:00:30.853 1b6c Delete type=2 #51
+2019/05/22-12:00:30.853 1b6c Delete type=2 #54
+2019/05/22-12:00:30.854 1b6c Delete type=2 #56
+2019/05/22-13:13:12.141 1ebc Level-0 table #59: started
+2019/05/22-13:13:12.183 1ebc Level-0 table #59: 10657 bytes OK
+2019/05/22-13:13:12.204 1ebc Delete type=0 #55
+2019/05/22-13:19:09.802 1ebc Level-0 table #61: started
+2019/05/22-13:19:09.842 1ebc Level-0 table #61: 10646 bytes OK
+2019/05/22-13:19:09.862 1ebc Delete type=0 #58
+2019/05/22-13:26:49.443 2474 Level-0 table #63: started
+2019/05/22-13:26:49.482 2474 Level-0 table #63: 10634 bytes OK
+2019/05/22-13:26:49.499 2474 Delete type=0 #60
+2019/05/22-13:47:27.365 e9c Level-0 table #65: started
+2019/05/22-13:47:27.397 e9c Level-0 table #65: 10672 bytes OK
+2019/05/22-13:47:27.417 e9c Delete type=0 #62
+2019/05/22-13:47:27.417 3890 Compacting 4@0 + 1@1 files
+2019/05/22-13:47:27.454 3890 Generated table #66@0: 32 keys, 2623 bytes
+2019/05/22-13:47:27.454 3890 Compacted 4@0 + 1@1 files => 2623 bytes
+2019/05/22-13:47:27.479 3890 compacted to: files[ 0 1 1 0 0 0 0 ]
+2019/05/22-13:47:27.480 3890 Delete type=2 #57
+2019/05/22-13:47:27.480 3890 Delete type=2 #59
+2019/05/22-13:47:27.481 3890 Delete type=2 #61
+2019/05/22-13:47:27.481 3890 Delete type=2 #63
+2019/05/22-13:47:27.481 3890 Delete type=2 #65

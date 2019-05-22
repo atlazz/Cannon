@@ -146,10 +146,12 @@ export default class Target extends Laya.Script3D {
     setType(type: number) {
         this.type = type;
         if (this.type === Const.TargetType.GLASS) {
-            let mat: Laya.BlinnPhongMaterial = new Laya.BlinnPhongMaterial();
-            mat.renderMode = Laya.BlinnPhongMaterial.RENDERMODE_TRANSPARENT;
+            let mat: Laya.PBRSpecularMaterial = this.target.meshRenderer.material as Laya.PBRSpecularMaterial;
+            mat.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_TRANSPARENT;
+            mat.albedoTexture = null;
             mat.albedoColor = new Laya.Vector4(0.7, 0.7, 1, 0.7);
-            this.target.meshRenderer.material = mat;
+            mat.specularColor = new Laya.Vector4(0, 0, 0, 1);
+            mat.enableEmission = true;
         }
     }
 
