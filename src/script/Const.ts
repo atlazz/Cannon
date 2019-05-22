@@ -27,6 +27,13 @@ export const MaxWinCheckTime: number = 90;
 // 屏蔽物体物理受力前等待时间
 export const SetKinematicWaitTime: number = 10;
 
+/** background */
+export const BgResUrl: string[] = [
+    "res/scene/Scenes_02.lh",
+    "res/scene/Scenes_04.lh",
+    "res/scene/Scenes_07.lh",
+]
+
 /** cube */
 export const enum TargetType {
     DEFAULT = 0,

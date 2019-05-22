@@ -66,7 +66,7 @@ export default class GameScene extends ui.game.GameSceneUI {
 
         this.initBullet();
 
-        this.stageIdx = 4;
+        this.stageIdx = 1;
         this.loadGameStage();
     }
 
@@ -85,6 +85,16 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.directionLight.transform.localPosition = Const.LightInitPos.clone();
         this.directionLight.transform.localRotationEuler = Const.LightInitRotEuler.clone();
         this.directionLight.color = Const.LightInitColor.clone();
+
+        // background
+        Laya.Sprite3D.load(Const.BgResUrl[0], Laya.Handler.create(this, (res) => {
+            let sceneSp: Laya.Sprite3D = this.scene3D.addChild(res) as Laya.Sprite3D;
+            // transform
+            sceneSp.transform.localPosition = Const.StageInitPos.clone();
+            // sceneSp.transform.localPositionZ -= 3;
+            sceneSp.transform.localRotationEuler = Const.StageInitRot.clone();
+            sceneSp.transform.localScale = Const.StageInitScale.clone();
+        }));
     }
 
     /** initialize player */
@@ -151,7 +161,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         Laya.Sprite3D.load(satgeResUrl, Laya.Handler.create(this, (res) => {
             this.gameStage = this.scene3D.addChild(res) as Laya.Sprite3D;
 
-            // set pos
+            // transform
             this.gameStage.transform.localPosition = Const.StageInitPos.clone();
             this.gameStage.transform.localRotationEuler = Const.StageInitRot.clone();
             this.gameStage.transform.localScale = Const.StageInitScale.clone();

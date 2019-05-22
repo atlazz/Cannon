@@ -46,7 +46,6 @@ D res
 R 8A4998B2 bullet.lh
 R C33056AD cube_piece.lm
 R 25BDD880 human.lh
-R 44529635 stage.zip
 D res/Assets
 R 9A6759DA character_shadow.png
 R 9F8ED4D0 Everyman.png
@@ -67,6 +66,10 @@ P 256CB3E7 more_game_button.png
 R 0D90BB27 moregame_panel.png
 P D4B739EB tips.png
 P 856FAF02 tips2.png
+D res/scene
+R 1CA6375A Scenes_02.lh
+R 43D37B58 Scenes_04.lh
+R 9FB60D0F Scenes_07.lh
 D res/stage
 R 77A633BE 1.lh
 R 770270AD 10.lh
@@ -110,6 +113,7 @@ R DB8B578C Boss7.lh
 R F249D64F Boss8.lh
 R 236BEDC9 Boss9.lh
 R A01988E2 CannonStageRewriter.js
+D res/scene/Assets
 D res/stage/out
 R 912FA136 1.lh
 R CE2E9496 10.lh
@@ -152,6 +156,7 @@ R 9DEFDAD0 Boss6.lh
 R AE7F656B Boss7.lh
 R 3B719128 Boss8.lh
 R 6F02E4B8 Boss9.lh
+D res/scene/Assets/models
 D res/stage/out/materials
 R A600ACF0 mutou_06.jpg
 R E5CD7B77 stand.lmat
