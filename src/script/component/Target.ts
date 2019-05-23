@@ -65,6 +65,11 @@ export default class Target extends Laya.Script3D {
             }
         }
 
+        // reset win check
+        if (inBlackList) {
+            GameScene.instance.winCheckCnt = 0;
+        }
+
         // 子弹效果处理
         if (other.name === "bullet") {
             let bullet: Bullet = other.getComponent(Bullet);
@@ -111,7 +116,7 @@ export default class Target extends Laya.Script3D {
          *  ps：物理引擎bug较多，可以来引擎呈现物理宏观效果，但尽量少依赖碰撞做需要稳定的底层处理
          */
         this.distance = Laya.Vector3.distance(this.target.transform.position, GameScene.instance.gameStage.transform.position);
-        if (this.distance < 20) {
+        if (this.distance < 15) {
             // reset win check counter
             GameScene.instance.winCheckCnt = 0;
         }

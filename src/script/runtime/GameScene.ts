@@ -30,6 +30,14 @@ export default class GameScene extends ui.game.GameSceneUI {
     private camera: Laya.Camera;
     private directionLight: Laya.DirectionLight;
 
+    /** background */
+    private background: Laya.Sprite3D;
+    private bgIdx: number = 0;
+    private cloud0: Laya.MeshSprite3D;
+    private cloud1: Laya.MeshSprite3D;
+    private flag_cloud0_move: boolean;
+    private flag_cloud1_move: boolean;
+
     /** stage */
     public gameStage: Laya.Sprite3D;
     public stageIdx: number;
@@ -70,7 +78,7 @@ export default class GameScene extends ui.game.GameSceneUI {
 
         this.initBullet();
 
-        this.stageIdx = 2;
+        this.stageIdx = 13;
         this.loadGameStage();
     }
 
@@ -91,13 +99,24 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.directionLight.color = Const.LightInitColor.clone();
 
         // background
-        Laya.Sprite3D.load(Const.BgResUrl[0], Laya.Handler.create(this, (res) => {
-            let sceneSp: Laya.Sprite3D = this.scene3D.addChild(res) as Laya.Sprite3D;
+        Laya.Sprite3D.load(Const.BgResUrl[this.bgIdx], Laya.Handler.create(this, (res) => {
+            this.background = this.scene3D.addChild(res) as Laya.Sprite3D;
             // transform
-            sceneSp.transform.localPosition = Const.StageInitPos.clone();
+            this.background.transform.localPosition = Const.StageInitPos.clone();
             // sceneSp.transform.localPositionZ -= 3;
-            sceneSp.transform.localRotationEuler = Const.StageInitRot.clone();
-            sceneSp.transform.localScale = Const.StageInitScale.clone();
+            this.background.transform.localRotationEuler = Const.StageInitRot.clone();
+            this.background.transform.localScale = Const.StageInitScale.clone();
+
+            // destroy animator component
+            let bgAni = (this.background.getComponent(Laya.Animator) as Laya.Animator);
+            bgAni && bgAni.destroy();
+
+            if (this.bgIdx === 0) {
+                this.cloud0 = this.background.getChildByName("cloud01_0") as Laya.MeshSprite3D;
+                this.cloud1 = this.background.getChildByName("cloud03_0") as Laya.MeshSprite3D;
+                this.flag_cloud0_move = true;
+                this.flag_cloud1_move = true;
+            }
         }));
     }
 
@@ -235,7 +254,7 @@ export default class GameScene extends ui.game.GameSceneUI {
             Laya.timer.clear(this, this.stageLooping);
         }
 
-        /** looping handler */
+        /** cannon recoil playing */
         if (this.recoilTime < this.MaxRecoilTime) {
             if (this.recoilTime < this.MaxRecoilTime / 2) {
                 this.turret.transform.localPositionX += this.bulletDirection.x * 0.0005;
@@ -253,6 +272,9 @@ export default class GameScene extends ui.game.GameSceneUI {
             this.turret.transform.position = this.turretInitPos.clone();
             this.recoilTime = this.MaxRecoilTime;
         }
+
+        /** background moving */
+        this.bgMoving();
     }
 
     /** restart current stage */
@@ -304,7 +326,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         Laya.Vector3.normalize(this.bulletDirection, this.bulletDirection);
 
         // create bullet
-        this.createBullet(Const.BulletType.FROZEN, this.bulletDirection);
+        this.createBullet(Const.BulletType.DEFAULT, this.bulletDirection);
 
         // set turret transform
         this.turret.transform.localRotationEuler = Const.TurretInitLocalRot.clone();
@@ -356,6 +378,28 @@ export default class GameScene extends ui.game.GameSceneUI {
                         this.isStageStart = true;
                     }
                 }
+            }
+        }
+    }
+
+    /** background moving effect */
+    private bgMoving() {
+        if (this.bgIdx === 0) {
+            if (this.flag_cloud0_move) {
+                if (this.cloud0.transform.localPositionX > 0.3) { this.flag_cloud0_move = false; }
+                else { this.cloud0.transform.localPositionX += 0.003; }
+            }
+            else {
+                if (this.cloud0.transform.localPositionX < -0.3) { this.flag_cloud0_move = true; }
+                else { this.cloud0.transform.localPositionX -= 0.003; }
+            }
+            if (this.flag_cloud1_move) {
+                if (this.cloud1.transform.localPositionX < -0.25) { this.flag_cloud1_move = false; }
+                else { this.cloud1.transform.localPositionX -= 0.002; }
+            }
+            else {
+                if (this.cloud1.transform.localPositionX > 0.25) { this.flag_cloud1_move = true; }
+                else { this.cloud1.transform.localPositionX += 0.002; }
             }
         }
     }

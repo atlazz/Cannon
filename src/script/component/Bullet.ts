@@ -58,7 +58,7 @@ export default class BulletScript extends Laya.Script3D {
     private refreshMaterial() {
         if (this.type === Const.BulletType.DEFAULT) {
             this.material.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
-            this.material.albedoColor = new Laya.Vector4(1, 0.7, 1, 1);
+            this.material.albedoColor = new Laya.Vector4(1, 0, 0, 1);
         }
         else if (this.type === Const.BulletType.FROZEN) {
             this.material.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_TRANSPARENT;

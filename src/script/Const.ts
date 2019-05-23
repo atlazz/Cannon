@@ -23,7 +23,7 @@ export const StageInitRot: Laya.Vector3 = new Laya.Vector3(0, 180, 0);
 export const StageInitScale: Laya.Vector3 = new Laya.Vector3(20, 20, 20);
 export const StageNum: number = 30;
 // winning check frame
-export const MaxWinCheckTime: number = 90;
+export const MaxWinCheckTime: number = 60;
 // 屏蔽物体物理受力前等待时间
 export const SetKinematicWaitTime: number = 10;
 
