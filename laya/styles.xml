@@ -64,4 +64,8 @@
    <item name="res/scene/Assets/models/Scenes_04/_0002_Tree02.png" type="Sprite" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
    <item name="res/scene/Assets/models/Scenes_04/_0003_Bush01.png" type="Sprite" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
    <item name="res/scene/Assets/models" type="" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="res/stage" type="" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="res/scene" type="" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="res/cannon" type="" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="res/Assets" type="" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
 </res>

@@ -4,12 +4,15 @@ import * as Const from "../Const"
 export default class BulletScript extends Laya.Script3D {
     private bullet: Laya.MeshSprite3D;
     private rigidbody: Laya.Rigidbody3D;
+    private material: Laya.PBRSpecularMaterial;
 
     public type: number = Const.BulletType.DEFAULT;
 
     private lifetime: number = 120;
 
     private collisionBlackList: string[] = ["bullet", "player"];
+
+    private flag_active: boolean = false;
 
     constructor() {
         super();
@@ -18,6 +21,11 @@ export default class BulletScript extends Laya.Script3D {
     onAwake() {
         this.bullet = this.owner as Laya.MeshSprite3D;
         this.rigidbody = this.bullet.getComponent(Laya.Rigidbody3D);
+        // new mat: 初始隐身
+        this.material = new Laya.PBRSpecularMaterial();
+        this.material.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_FADE;
+        this.material.albedoColorA = 0;
+        this.bullet.meshRenderer.material = this.material;
     }
 
     onUpdate() {
@@ -38,22 +46,23 @@ export default class BulletScript extends Laya.Script3D {
                 this.bullet.destroy();
             });
         }
+
+        // 超出炮管距离才显示，根据z轴判断
+        if(!this.flag_active && this.bullet.transform.position.z < -1) {
+            this.refreshMaterial();
+            this.flag_active = true;
+        }
     }
 
-    /** set material by type */
-    setType(type: number) {
-        this.type = type;
+    /** refresh material by type */
+    private refreshMaterial() {
         if (this.type === Const.BulletType.DEFAULT) {
-            let mat: Laya.PBRSpecularMaterial = new Laya.PBRSpecularMaterial();
-            mat.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
-            mat.albedoColor = new Laya.Vector4(1, 0.7, 1, 1);
-            this.bullet.meshRenderer.material = mat;
+            this.material.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
+            this.material.albedoColor = new Laya.Vector4(1, 0.7, 1, 1);
         }
         else if (this.type === Const.BulletType.FROZEN) {
-            let mat: Laya.PBRSpecularMaterial = new Laya.PBRSpecularMaterial();
-            mat.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_TRANSPARENT;
-            mat.albedoColor = new Laya.Vector4(0.2, 0.2, 1, 0.7);
-            this.bullet.meshRenderer.material = mat;
+            this.material.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_TRANSPARENT;
+            this.material.albedoColor = new Laya.Vector4(0.2, 0.2, 1, 0.7);
         }
     }
 

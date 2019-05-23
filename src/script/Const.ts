@@ -49,10 +49,16 @@ export const PieceResUrl: string = "res/cube_piece.lm";
 export const PiecesNum: number = 3;
 export const PiecesBrokenTime: number = 120;
 
+/** player */
+export const PlayerResUrl: string = "res/cannon/Cannon_01.lh";
+export const PlayerInitPos: Laya.Vector3 = new Laya.Vector3(0, 0.05, -0.2);
+export const PlayerInitRot: Laya.Vector3 = new Laya.Vector3(0, 180, 0);
+export const PlayerInitScale: Laya.Vector3 = new Laya.Vector3(25, 25, 25);
+export const PlayerShootLifeTime: number = 10;
+export const TurretInitLocalRot: Laya.Vector3 = new Laya.Vector3(0, 0, 0);
+
 /** bullet */
 export const BulletResUrl: string = "res/bullet.lh";
-export const BulletInitPos: Laya.Vector3 = new Laya.Vector3(0, 0, -1);
-export const BulletInitRot: Laya.Vector3 = new Laya.Vector3(180, 0, 0);
 // type
 export const enum BulletType {
     DEFAULT = 0,
@@ -76,9 +82,3 @@ export const BulletVelocity = [
     40,     // FROZEN
 ];
 
-/** player */
-export const PlayerResUrl: string = "res/human.lh";
-export const PlayerInitPos: Laya.Vector3 = new Laya.Vector3(0, -0.1, -0.5);
-export const PlayerInitRot: Laya.Vector3 = new Laya.Vector3(90, 168, 0);
-export const PlayerInitScale: Laya.Vector3 = new Laya.Vector3(15, 15, 15);
-export const PlayerShootLifeTime: number = 10;
