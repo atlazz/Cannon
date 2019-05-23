@@ -23,8 +23,8 @@ export default class BulletScript extends Laya.Script3D {
         this.rigidbody = this.bullet.getComponent(Laya.Rigidbody3D);
         // new mat: 初始隐身
         this.material = new Laya.PBRSpecularMaterial();
-        this.material.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_FADE;
-        this.material.albedoColorA = 0;
+        // this.material.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_FADE;
+        // this.material.albedoColorA = 0;
         this.bullet.meshRenderer.material = this.material;
     }
 

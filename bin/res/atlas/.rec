@@ -1,5 +1,4 @@
 D .
-D backup
 D comp
 P 9401CC40 blank.png
 P B03390E5 btn_close.png
@@ -45,8 +44,6 @@ P 2BFF7046 vslider.png
 D res
 R 8A4998B2 bullet.lh
 R C33056AD cube_piece.lm
-R 25BDD880 human.lh
-D res/Assets
 D res/cannon
 D res/navigator
 P A614D413 arrow.png

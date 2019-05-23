@@ -57,7 +57,7 @@ export default class GameScene extends ui.game.GameSceneUI {
     private turretInitPos: Laya.Vector3;
     private isRecoil: boolean = true;
     private recoilTime: number;
-    private MaxRecoilTime: number = 5;
+    private MaxRecoilTime: number = 8;
 
     /** raycast */
     private mousePoint: Laya.Vector2 = new Laya.Vector2();
@@ -78,12 +78,13 @@ export default class GameScene extends ui.game.GameSceneUI {
 
         this.initBullet();
 
-        this.stageIdx = 13;
+        this.stageIdx = 1;
         this.loadGameStage();
     }
 
     /** initialize scene */
     private initScene3D() {
+        console.log("initScene3D start")
         // add scene
         this.scene3D = Laya.stage.addChild(new Laya.Scene3D()) as Laya.Scene3D;
 
@@ -101,6 +102,8 @@ export default class GameScene extends ui.game.GameSceneUI {
         // background
         Laya.Sprite3D.load(Const.BgResUrl[this.bgIdx], Laya.Handler.create(this, (res) => {
             this.background = this.scene3D.addChild(res) as Laya.Sprite3D;
+            console.log("background")
+            console.log(this.background)
             // transform
             this.background.transform.localPosition = Const.StageInitPos.clone();
             // sceneSp.transform.localPositionZ -= 3;
@@ -116,16 +119,22 @@ export default class GameScene extends ui.game.GameSceneUI {
                 this.cloud1 = this.background.getChildByName("cloud03_0") as Laya.MeshSprite3D;
                 this.flag_cloud0_move = true;
                 this.flag_cloud1_move = true;
+                console.log("cloud0")
+                console.log(this.cloud0)
             }
+            console.log("initScene3D end")
         }));
     }
 
     /** initialize player */
     private initPlayer() {
+        console.log("initPlayer start")
         Laya.Sprite3D.load(Const.PlayerResUrl, Laya.Handler.create(this, (res) => {
             this.player = res;
             this.scene3D.addChild(this.player);
             this.player.name = "player";
+            console.log("player")
+            console.log(this.player)
 
             // this.playerAni = this.player.getComponent(Laya.Animator);
             this.player.transform.localPosition = Const.PlayerInitPos.clone();
@@ -134,6 +143,9 @@ export default class GameScene extends ui.game.GameSceneUI {
 
             this.turret = this.player.getChildByName("Turret_0") as Laya.MeshSprite3D;
             this.turretInitPos = this.turret.transform.position.clone();
+            console.log("turretInitPos")
+            console.log(this.turretInitPos)
+            console.log("initPlayer end")
         }));
     }
 
@@ -256,15 +268,15 @@ export default class GameScene extends ui.game.GameSceneUI {
 
         /** cannon recoil playing */
         if (this.recoilTime < this.MaxRecoilTime) {
-            if (this.recoilTime < this.MaxRecoilTime / 2) {
+            if (this.recoilTime < this.MaxRecoilTime / 4) {
                 this.turret.transform.localPositionX += this.bulletDirection.x * 0.0005;
                 this.turret.transform.localPositionY += this.bulletDirection.y * 0.0005;
                 this.turret.transform.localPositionZ += this.bulletDirection.z * 0.0005;
             }
             else {
-                this.turret.transform.localPositionX -= this.bulletDirection.x * 0.0005;
-                this.turret.transform.localPositionY -= this.bulletDirection.y * 0.0005;
-                this.turret.transform.localPositionZ -= this.bulletDirection.z * 0.0005;
+                this.turret.transform.localPositionX -= this.bulletDirection.x * 0.0003;
+                this.turret.transform.localPositionY -= this.bulletDirection.y * 0.0003;
+                this.turret.transform.localPositionZ -= this.bulletDirection.z * 0.0003;
             }
             this.recoilTime++;
         }
@@ -295,6 +307,8 @@ export default class GameScene extends ui.game.GameSceneUI {
 
     /** mouse click event: shoot a bullet */
     private onClick() {
+        console.log("onClick start")
+
         // check res loading complete
         if (!this.gameStage || !this.player || !this._bullet) {
             return;
@@ -334,6 +348,8 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.turret.transform.localRotationEulerY -= this.bulletDirection.x * 90;
         this.isRecoil = true;
         this.recoilTime = 0;
+
+        console.log("onClick end")
     }
 
     /** create bullet */
