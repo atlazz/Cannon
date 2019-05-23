@@ -5,6 +5,7 @@ import Bullet from "../component/Bullet"
 export default class Target extends Laya.Script3D {
     private target: Laya.MeshSprite3D;
     private rigidbody: Laya.Rigidbody3D;
+    private material: Laya.PBRSpecularMaterial;
 
     private type: number = Const.TargetType.DEFAULT;
 
@@ -16,6 +17,9 @@ export default class Target extends Laya.Script3D {
 
     /** target object pieces */
     private piecesList: Laya.MeshSprite3D[] = [];
+
+    /** for win check */
+    private distance: number;
 
     constructor() {
         super();
@@ -35,21 +39,36 @@ export default class Target extends Laya.Script3D {
         this.initPieces();
     }
 
+    /** collision enter */
     onCollisionEnter(collision: Laya.Collision): void {
-        // // reset win check counter
-        // if (collision.other.owner.name === "stand") {
-        //     GameScene.instance.winCheckCnt = 0;
-        // }
+        this.collisionHandler(collision);
+    }
+    /** collision stay */
+    onCollisionStay(collision: Laya.Collision): void {
+        this.collisionHandler(collision);
+    }
+    /** collision exit */
+    onCollisionExit(collision: Laya.Collision): void {
+        this.collisionHandler(collision);
+    }
 
+    /** collision handler */
+    private collisionHandler(collision: Laya.Collision) {
         let other: Laya.MeshSprite3D = collision.other.owner as Laya.MeshSprite3D;
+
+        // check collision in black list: stand, guard
+        let inBlackList: boolean = false;
+        for (let item of this.collisionBlackList) {
+            if (other.name.indexOf(item) >= 0) {
+                inBlackList = true;
+                break;
+            }
+        }
 
         // 子弹效果处理
         if (other.name === "bullet") {
             let bullet: Bullet = other.getComponent(Bullet);
-            if (bullet.type === Const.BulletType.DEFAULT) {
-
-            }
-            else if (bullet.type === Const.BulletType.FROZEN) {
+            if (bullet.type === Const.BulletType.FROZEN) {
                 this.setType(Const.TargetType.GLASS);
             }
         }
@@ -59,8 +78,8 @@ export default class Target extends Laya.Script3D {
             // 相对速度高可击碎
             let velocity: Laya.Vector3 = this.rigidbody.linearVelocity.clone();
             let velocityOther: Laya.Vector3 = new Laya.Vector3(0, 0, 0);
-            // not playform
-            if (this.collisionBlackList.indexOf(other.name) < 0 && other.name.indexOf("Guard") < 0) {
+            // not stand and guard
+            if (!inBlackList) {
                 velocityOther = (other.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D).linearVelocity.clone();
             }
             let velocityValue: number = Laya.Vector3.distance(velocity, velocityOther);
@@ -70,33 +89,6 @@ export default class Target extends Laya.Script3D {
             }
         }
     }
-
-    onCollisionStay(collision: Laya.Collision): void {
-        // // reset win check counter
-        // if (collision.other.owner.name === "stand") {
-        //     GameScene.instance.winCheckCnt = 0;
-        // }
-
-        let other: Laya.MeshSprite3D = collision.other.owner as Laya.MeshSprite3D;
-
-        // 子弹效果处理
-        if (other.name === "bullet") {
-            let bullet: Bullet = other.getComponent(Bullet);
-            if (bullet.type === Const.BulletType.DEFAULT) {
-
-            }
-            else if (bullet.type === Const.BulletType.FROZEN) {
-                this.setType(Const.TargetType.GLASS);
-            }
-        }
-    }
-
-    // onCollisionExit(collision: Laya.Collision): void {
-    //     // reset win check counter
-    //     if (collision.other.owner.name === "stand") {
-    //         GameScene.instance.winCheckCnt = 0;
-    //     }
-    // }
 
     onUpdate() {
         // check spirte alive
@@ -111,17 +103,15 @@ export default class Target extends Laya.Script3D {
         }
 
         // 刷新渲染模式，不然临近设置成透明渲染的物体会被遮盖
-        if (this.type !== Const.TargetType.GLASS) {
-            (this.target.meshRenderer.material as Laya.PBRSpecularMaterial).renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
-        }
+        this.refreshRenderMode();
 
         /** win check
          *  引擎bug：物体架在两个平台夹缝上时，不触发onCollisionStay,
          *  故完善关卡胜利判断，根据物体与关卡模型中心距离判定是否掉出平台
          *  ps：物理引擎bug较多，可以来引擎呈现物理宏观效果，但尽量少依赖碰撞做需要稳定的底层处理
          */
-        var dist: number = Laya.Vector3.distance(this.target.transform.position, GameScene.instance.gameStage.transform.position);
-        if (dist < 20) {
+        this.distance = Laya.Vector3.distance(this.target.transform.position, GameScene.instance.gameStage.transform.position);
+        if (this.distance < 20) {
             // reset win check counter
             GameScene.instance.winCheckCnt = 0;
         }
@@ -133,31 +123,47 @@ export default class Target extends Laya.Script3D {
          *  故在此检测该情况并对刚体销毁重建
          * */
         if (this.rigidbody && this.rigidbody.isActive == false) {
-            this.refreshRigidbody();
             console.log("Physics_engine_bug_fixing: Reset rigidbody.");
+            this.refreshRigidbody();
+        }
+    }
+
+    /** refresh render mode of material */
+    private refreshRenderMode() {
+        if (this.type === Const.TargetType.GLASS) {
+            this.material.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_TRANSPARENT;
+        }
+        else {
+            this.material.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
         }
     }
 
     /** destroy and recreate rigidbody */
     private refreshRigidbody() {
         if (this.rigidbody) {
+            console.log("refresh rigidbody")
             this.rigidbody.destroy();
             this.setRigidbody();
-            console.log("refresh rigidbody")
         }
     }
 
     /** set material by type */
     setType(type: number) {
         this.type = type;
-        if (this.type === Const.TargetType.GLASS) {
-            let mat: Laya.PBRSpecularMaterial = this.target.meshRenderer.material as Laya.PBRSpecularMaterial;
-            mat.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_TRANSPARENT;
-            mat.albedoTexture = null;
-            mat.albedoColor = new Laya.Vector4(0.7, 0.7, 1, 0.7);
-            mat.specularColor = new Laya.Vector4(0, 0, 0, 1);
-            mat.enableEmission = true;
+        // get material
+        this.material = this.target.meshRenderer.material as Laya.PBRSpecularMaterial;
+        if (!this.material) {
+            this.material = new Laya.PBRSpecularMaterial();
+            this.target.meshRenderer.material = this.material;
         }
+        // set material by type
+        if (this.type === Const.TargetType.GLASS) {
+            this.material.albedoTexture = null;
+            this.material.albedoColor = new Laya.Vector4(0.7, 0.7, 1, 0.7);
+            this.material.specularColor = new Laya.Vector4(0, 0, 0, 1);
+            this.material.enableEmission = true;
+        }
+        this.refreshRenderMode();
     }
 
     /** set rigidbody */

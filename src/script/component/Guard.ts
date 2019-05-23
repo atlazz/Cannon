@@ -4,14 +4,16 @@ import GameScene from "../runtime/GameScene";
 export default class Guard extends Laya.Script3D {
     private guard: Laya.MeshSprite3D;
 
-    private initPos: Laya.Vector3;
-
     private sizeX: number;
     private sizeY: number;
     private sizeZ: number;
 
-    private MaxMoveTimes: number = 60;
+    private MaxMoveTimes: number;
     private moveTimes: number = 0;
+
+    private flag_move: boolean;
+    private moveStepX: number;
+    private moveStepY: number;
 
     constructor() {
         super();
@@ -28,8 +30,63 @@ export default class Guard extends Laya.Script3D {
         // add collider
         let collider: Laya.PhysicsCollider = this.guard.addComponent(Laya.PhysicsCollider);
         collider.colliderShape = new Laya.BoxColliderShape(this.sizeX, this.sizeY, this.sizeZ);
-        // record init pos
-        this.initPos = this.guard.transform.localPosition.clone();
+
+        /** 平移参数设置 */
+        // 全屏水平移动
+        if (this.guard.name.search("move_x") >= 0) {
+            this.MaxMoveTimes = 120;
+            this.moveStepY = 0;
+            // 旋转了90度
+            if (Math.floor((Math.abs(this.guard.transform.localRotationEulerZ) + 90.5) % 180) === 0) {
+                this.moveStepX = this.guard.transform.localPositionY * 2 / this.MaxMoveTimes;
+            } else {
+                this.moveStepX = this.guard.transform.localPositionX * 2 / this.MaxMoveTimes;
+            }
+        }
+        // 全屏纵向移动
+        else if (this.guard.name.search("move_y") >= 0) {
+            this.MaxMoveTimes = 120;
+            this.moveStepX = 0;
+            // 旋转了90度
+            if (Math.floor((Math.abs(this.guard.transform.localRotationEulerZ) + 90.5) % 180) === 0) {
+                this.moveStepY = this.guard.transform.localPositionX * 2 / this.MaxMoveTimes;
+            } else {
+                this.moveStepY = this.guard.transform.localPositionY * 2 / this.MaxMoveTimes;
+            }
+        }
+        // 半屏移动
+        else if (this.guard.name.search("move_") >= 0) {
+            this.MaxMoveTimes = 60;
+            // X和Y方向平移步进
+            let stepX: number = this.sizeX * this.guard.transform.localScaleX / 2 / this.MaxMoveTimes;
+            let stepY: number = this.sizeY * this.guard.transform.localScaleY / 2 / this.MaxMoveTimes;
+            // Z轴旋转90，X和Y互换
+            if (Math.floor((Math.abs(this.guard.transform.localRotationEulerZ) + 90.5) % 180) === 0) {
+                let tmp = stepX;
+                stepX = stepY;
+                stepY = tmp;
+            }
+
+            if (this.guard.name.search("move_left") >= 0) {
+                this.moveStepX = -stepX;
+                this.moveStepY = 0;
+            }
+            else if (this.guard.name.search("move_right") >= 0) {
+                this.MaxMoveTimes = 60;
+                this.moveStepX = stepX;
+                this.moveStepY = 0;
+            }
+            else if (this.guard.name.search("move_up") >= 0) {
+                this.MaxMoveTimes = 60;
+                this.moveStepX = 0;
+                this.moveStepY = -stepY;
+            }
+            else if (this.guard.name.search("move_down") >= 0) {
+                this.MaxMoveTimes = 60;
+                this.moveStepX = 0;
+                this.moveStepY = stepY;
+            }
+        }
     }
 
     onUpdate() {
@@ -40,53 +97,19 @@ export default class Guard extends Laya.Script3D {
         }
 
         /** 平移 */
-        this.moveTimes = (this.moveTimes + 1) % (this.MaxMoveTimes * 2);
-        // 位移方向标志
-        var flag = Math.floor((this.moveTimes / this.MaxMoveTimes) % 2);
-        // X和Y方向平移步进
-        var moveStepX: number = this.sizeX * this.guard.transform.localScaleX / 2 / this.MaxMoveTimes;
-        var moveStepY: number = this.sizeY * this.guard.transform.localScaleY / 2 / this.MaxMoveTimes;
-        // Z轴旋转90，X和Y互换
-        if (Math.floor((Math.abs(this.guard.transform.localRotationEulerZ) + 90.5) % 180) === 0) {
-            let tmp = moveStepX;
-            moveStepX = moveStepY;
-            moveStepY = tmp;
+        if (this.guard.name.search("move") >= 0) {
+            // update
+            this.moveTimes = (this.moveTimes + 1) % (this.MaxMoveTimes * 2);
+            this.flag_move = Math.floor((this.moveTimes / this.MaxMoveTimes) % 2) > 0;
+            if (this.flag_move) {
+                this.guard.transform.localPositionX += this.moveStepX;
+                this.guard.transform.localPositionY += this.moveStepY;
+            }
+            else {
+                this.guard.transform.localPositionX -= this.moveStepX;
+                this.guard.transform.localPositionY -= this.moveStepY;
+            }
         }
-        
-        // 全屏水平移动
-        if (this.guard.name.search("move_x") >= 0) {
-            this.MaxMoveTimes = 120;
-            moveStepX = this.initPos.x * 2 / this.MaxMoveTimes;
-            flag = Math.floor((this.moveTimes / this.MaxMoveTimes) % 2);
-            if (flag) { this.guard.transform.localPositionX += moveStepX; }
-            else { this.guard.transform.localPositionX -= moveStepX; }
-        }
-        // 全屏纵向移动
-        else if (this.guard.name.search("move_y") >= 0) {
-            this.MaxMoveTimes = 120;
-            moveStepY = this.initPos.y * 2 / this.MaxMoveTimes;
-            flag = Math.floor((this.moveTimes / this.MaxMoveTimes) % 2);
-            if (flag) { this.guard.transform.localPositionY += moveStepY; }
-            else { this.guard.transform.localPositionY -= moveStepY; }
-        }
-        // 半屏移动
-        else if (this.guard.name.search("move_left") >= 0) {
-            if (flag) { this.guard.transform.localPositionX -= moveStepX; }
-            else { this.guard.transform.localPositionX += moveStepX; }
-        }
-        else if (this.guard.name.search("move_right") >= 0) {
-            if (flag) { this.guard.transform.localPositionX += moveStepX; }
-            else { this.guard.transform.localPositionX -= moveStepX; }
-        }
-        else if (this.guard.name.search("move_up") >= 0) {
-            if (flag) { this.guard.transform.localPositionY -= moveStepY; }
-            else { this.guard.transform.localPositionY += moveStepY; }
-        }
-        else if (this.guard.name.search("move_down") >= 0) {
-            if (flag) { this.guard.transform.localPositionY += moveStepY; }
-            else { this.guard.transform.localPositionY -= moveStepY; }
-        }
-
         /** 旋转 */
         else if (this.guard.name.search("rotate_left") >= 0) {
             this.guard.transform.localRotationEulerY = (this.guard.transform.localRotationEulerY + 1) % 360;

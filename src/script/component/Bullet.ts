@@ -34,8 +34,8 @@ export default class BulletScript extends Laya.Script3D {
                 // update counter
                 GameScene.instance.currBulletNum++;
                 // destroy
-                this.bullet.removeSelf();
                 this.destroy();
+                this.bullet.destroy();
             });
         }
     }
@@ -45,8 +45,8 @@ export default class BulletScript extends Laya.Script3D {
         this.type = type;
         if (this.type === Const.BulletType.DEFAULT) {
             let mat: Laya.PBRSpecularMaterial = new Laya.PBRSpecularMaterial();
-            mat.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_TRANSPARENT;
-            mat.albedoColor = new Laya.Vector4(1, 0.7, 1, 0.7);
+            mat.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
+            mat.albedoColor = new Laya.Vector4(1, 0.7, 1, 1);
             this.bullet.meshRenderer.material = mat;
         }
         else if (this.type === Const.BulletType.FROZEN) {
