@@ -1,7 +1,7 @@
 {
 	"version":"LAYAMATERIAL:02",
 	"props":{
-		"type":"Laya.PBRStandardMaterial",
+		"type":"Laya.UnlitMaterial",
 		"name":"cloud03",
 		"renderStates":[
 			{
@@ -13,17 +13,11 @@
 				"depthTest":515
 			}
 		],
+		"enableVertexColor":false,
 		"alphaTest":false,
 		"alphaTestValue":0.5,
 		"renderQueue":3000,
-		"metallic":0,
-		"smoothness":0,
-		"smoothnessTextureScale":0,
-		"smoothnessSource":1,
-		"normalTextureScale":1,
-		"parallaxTextureScale":0.02,
-		"occlusionTextureStrength":1,
-		"enableReflection":false,
+		"albedoIntensity":1,
 		"textures":[
 			{
 				"name":"albedoTexture",
@@ -59,15 +53,6 @@
 					1,
 					1,
 					1
-				]
-			},
-			{
-				"name":"emissionColor",
-				"value":[
-					0,
-					0,
-					0,
-					0
 				]
 			}
 		],

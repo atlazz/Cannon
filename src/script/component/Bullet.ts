@@ -6,7 +6,7 @@ export default class BulletScript extends Laya.Script3D {
     private rigidbody: Laya.Rigidbody3D;
     private material: Laya.PBRSpecularMaterial;
 
-    public type: number = Const.BulletType.DEFAULT;
+    public type: number = Const.CannonType.DEFAULT;
 
     private lifetime: number = 120;
 
@@ -23,8 +23,8 @@ export default class BulletScript extends Laya.Script3D {
         this.rigidbody = this.bullet.getComponent(Laya.Rigidbody3D);
         // new mat: 初始隐身
         this.material = new Laya.PBRSpecularMaterial();
-        // this.material.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_FADE;
-        // this.material.albedoColorA = 0;
+        this.material.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_FADE;
+        this.material.albedoColorA = 0;
         this.bullet.meshRenderer.material = this.material;
     }
 
@@ -56,11 +56,11 @@ export default class BulletScript extends Laya.Script3D {
 
     /** refresh material by type */
     private refreshMaterial() {
-        if (this.type === Const.BulletType.DEFAULT) {
+        if (this.type === Const.CannonType.DEFAULT) {
             this.material.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
             this.material.albedoColor = new Laya.Vector4(1, 0, 0, 1);
         }
-        else if (this.type === Const.BulletType.FROZEN) {
+        else if (this.type === Const.CannonType.FROZEN) {
             this.material.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_TRANSPARENT;
             this.material.albedoColor = new Laya.Vector4(0.2, 0.2, 1, 0.7);
         }

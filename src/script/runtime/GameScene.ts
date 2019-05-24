@@ -33,10 +33,8 @@ export default class GameScene extends ui.game.GameSceneUI {
     /** background */
     private background: Laya.Sprite3D;
     private bgIdx: number = 0;
-    private cloud0: Laya.MeshSprite3D;
-    private cloud1: Laya.MeshSprite3D;
-    private flag_cloud0_move: boolean;
-    private flag_cloud1_move: boolean;
+    private cloud0: Laya.Sprite3D;
+    private cloud1: Laya.Sprite3D;
 
     /** stage */
     public gameStage: Laya.Sprite3D;
@@ -46,18 +44,18 @@ export default class GameScene extends ui.game.GameSceneUI {
     public winCheckCnt: number = 0;
     public isStageStart: boolean = false;
 
-    /** bullet */
-    private _bullet: Laya.MeshSprite3D;
-    public bulletType: number = Const.BulletType.DEFAULT;
-    private bulletDirection: Laya.Vector3 = new Laya.Vector3();
-
     /** cannon */
-    private player: Laya.MeshSprite3D;
+    public cannonType: number = Const.CannonType.DEFAULT;
+    private cannon: Laya.MeshSprite3D;
     private turret: Laya.MeshSprite3D;
     private turretInitPos: Laya.Vector3;
-    private isRecoil: boolean = true;
+    private isRecoil: boolean = false;
     private recoilTime: number;
     private MaxRecoilTime: number = 8;
+
+    /** bullet */
+    private _bullet: Laya.MeshSprite3D;
+    private bulletDirection: Laya.Vector3 = new Laya.Vector3();
 
     /** raycast */
     private mousePoint: Laya.Vector2 = new Laya.Vector2();
@@ -74,24 +72,27 @@ export default class GameScene extends ui.game.GameSceneUI {
 
         this.initScene3D();
 
-        this.initPlayer();
+        this.initCannon();
 
         this.initBullet();
 
-        this.stageIdx = 1;
-        this.loadGameStage();
+        // load texture
+        Laya.loader.load(Const.StageTexUrl, Laya.Handler.create(this, () => {
+            this.stageIdx = 8;
+            this.loadGameStage();
+        }));
     }
 
     /** initialize scene */
     private initScene3D() {
-        console.log("initScene3D start")
         // add scene
-        this.scene3D = Laya.stage.addChild(new Laya.Scene3D()) as Laya.Scene3D;
+        this.scene3D = this.scene3DBox.addChild(new Laya.Scene3D()) as Laya.Scene3D;
 
         // camera
         this.camera = this.scene3D.addChild(new Laya.Camera()) as Laya.Camera;
         this.camera.transform.localPosition = Const.CameraInitPos.clone();
         this.camera.transform.localRotationEuler = Const.CameraInitRotEuler.clone();
+        this.camera.clearColor = null;
 
         // direction light
         this.directionLight = this.scene3D.addChild(new Laya.DirectionLight()) as Laya.DirectionLight;
@@ -102,8 +103,6 @@ export default class GameScene extends ui.game.GameSceneUI {
         // background
         Laya.Sprite3D.load(Const.BgResUrl[this.bgIdx], Laya.Handler.create(this, (res) => {
             this.background = this.scene3D.addChild(res) as Laya.Sprite3D;
-            console.log("background")
-            console.log(this.background)
             // transform
             this.background.transform.localPosition = Const.StageInitPos.clone();
             // sceneSp.transform.localPositionZ -= 3;
@@ -115,37 +114,25 @@ export default class GameScene extends ui.game.GameSceneUI {
             bgAni && bgAni.destroy();
 
             if (this.bgIdx === 0) {
-                this.cloud0 = this.background.getChildByName("cloud01_0") as Laya.MeshSprite3D;
-                this.cloud1 = this.background.getChildByName("cloud03_0") as Laya.MeshSprite3D;
-                this.flag_cloud0_move = true;
-                this.flag_cloud1_move = true;
-                console.log("cloud0")
-                console.log(this.cloud0)
+                this.cloud0 = this.background.getChildByName("Scenes_02").getChildByName("cloud01") as Laya.Sprite3D;
+                this.cloud1 = this.background.getChildByName("Scenes_02").getChildByName("cloud03") as Laya.Sprite3D;
             }
-            console.log("initScene3D end")
         }));
     }
 
     /** initialize player */
-    private initPlayer() {
-        console.log("initPlayer start")
-        Laya.Sprite3D.load(Const.PlayerResUrl, Laya.Handler.create(this, (res) => {
-            this.player = res;
-            this.scene3D.addChild(this.player);
-            this.player.name = "player";
-            console.log("player")
-            console.log(this.player)
+    private initCannon() {
+        Laya.Sprite3D.load(Const.CannonResUrl[0], Laya.Handler.create(this, (res) => {
+            this.cannon = res;
+            this.scene3D.addChild(this.cannon);
+            this.cannon.name = "player";
 
-            // this.playerAni = this.player.getComponent(Laya.Animator);
-            this.player.transform.localPosition = Const.PlayerInitPos.clone();
-            this.player.transform.localRotationEuler = Const.PlayerInitRot.clone();
-            this.player.transform.localScale = Const.PlayerInitScale.clone();
+            this.cannon.transform.localPosition = Const.CannonInitPos.clone();
+            this.cannon.transform.localRotationEuler = Const.CannonInitRot.clone();
+            this.cannon.transform.localScale = Const.CannonInitScale.clone();
 
-            this.turret = this.player.getChildByName("Turret_0") as Laya.MeshSprite3D;
+            this.turret = this.cannon.getChildByName("Turret_0") as Laya.MeshSprite3D;
             this.turretInitPos = this.turret.transform.position.clone();
-            console.log("turretInitPos")
-            console.log(this.turretInitPos)
-            console.log("initPlayer end")
         }));
     }
 
@@ -173,6 +160,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.currBulletNum = 0;
         this.winCheckCnt = 0;
         this.isStageStart = false;
+        this.isRecoil = false;
         this.recoilTime = this.MaxRecoilTime;
 
         // load stage
@@ -192,6 +180,8 @@ export default class GameScene extends ui.game.GameSceneUI {
             let child: Laya.MeshSprite3D;
             for (let i: number = 0; i < this.gameStage.numChildren; i++) {
                 child = this.gameStage.getChildAt(i) as Laya.MeshSprite3D;
+                // 关闭阴影
+                child.meshRenderer.castShadow = false;
                 /** target object */
                 if (child.name.search("Obstacle") >= 0) {
                     // console.log(child.name + " to target")
@@ -216,8 +206,12 @@ export default class GameScene extends ui.game.GameSceneUI {
                     let sizeY: number = boundingBox.max.y - boundingBox.min.y;
                     let sizeZ: number = boundingBox.max.z - boundingBox.min.z;
                     collider.colliderShape = new Laya.BoxColliderShape(sizeX, sizeY, sizeZ);
+                    // set material
+                    let mat: Laya.PBRSpecularMaterial = new Laya.PBRSpecularMaterial();
                     // 刷新渲染模式，不然其上设置成透明渲染的物体会被遮盖
-                    (child.meshRenderer.material as Laya.PBRSpecularMaterial).renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
+                    mat.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
+                    mat.albedoTexture = Laya.loader.getRes(Const.StageTexUrl[0]);
+                    child.meshRenderer.material = mat;
                 }
                 /** stand_cylinder */
                 else if (child.name.search("Cylinder") >= 0) {
@@ -228,8 +222,12 @@ export default class GameScene extends ui.game.GameSceneUI {
                     let colliderShape: Laya.MeshColliderShape = new Laya.MeshColliderShape();
                     colliderShape.mesh = child.meshFilter.sharedMesh;
                     collider.colliderShape = colliderShape;
+                    // set material
+                    let mat: Laya.PBRSpecularMaterial = new Laya.PBRSpecularMaterial();
                     // 刷新渲染模式，不然其上设置成透明渲染的物体会被遮盖
-                    (child.meshRenderer.material as Laya.PBRSpecularMaterial).renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
+                    mat.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
+                    mat.albedoTexture = Laya.loader.getRes(Const.StageTexUrl[0]);
+                    child.meshRenderer.material = mat;
                 }
                 /** Guard */
                 else if (child.name.search("Guard") >= 0) {
@@ -267,26 +265,29 @@ export default class GameScene extends ui.game.GameSceneUI {
         }
 
         /** cannon recoil playing */
-        if (this.recoilTime < this.MaxRecoilTime) {
-            if (this.recoilTime < this.MaxRecoilTime / 4) {
-                this.turret.transform.localPositionX += this.bulletDirection.x * 0.0005;
-                this.turret.transform.localPositionY += this.bulletDirection.y * 0.0005;
-                this.turret.transform.localPositionZ += this.bulletDirection.z * 0.0005;
+        if (this.isRecoil) {
+            if (this.recoilTime < this.MaxRecoilTime) {
+                if (this.recoilTime < this.MaxRecoilTime / 4) {
+                    this.turret.transform.localPositionX += this.bulletDirection.x * 0.0005;
+                    this.turret.transform.localPositionY += this.bulletDirection.y * 0.0005;
+                    this.turret.transform.localPositionZ += this.bulletDirection.z * 0.0005;
+                }
+                else {
+                    this.turret.transform.localPositionX -= this.bulletDirection.x * 0.0003;
+                    this.turret.transform.localPositionY -= this.bulletDirection.y * 0.0003;
+                    this.turret.transform.localPositionZ -= this.bulletDirection.z * 0.0003;
+                }
+                this.recoilTime++;
             }
             else {
-                this.turret.transform.localPositionX -= this.bulletDirection.x * 0.0003;
-                this.turret.transform.localPositionY -= this.bulletDirection.y * 0.0003;
-                this.turret.transform.localPositionZ -= this.bulletDirection.z * 0.0003;
+                this.turret.transform.position = this.turretInitPos.clone();
+                this.isRecoil = false;
+                this.recoilTime = this.MaxRecoilTime;
             }
-            this.recoilTime++;
-        }
-        else {
-            this.turret.transform.position = this.turretInitPos.clone();
-            this.recoilTime = this.MaxRecoilTime;
         }
 
         /** background moving */
-        this.bgMoving();
+        this.background && this.bgMoving();
     }
 
     /** restart current stage */
@@ -307,10 +308,8 @@ export default class GameScene extends ui.game.GameSceneUI {
 
     /** mouse click event: shoot a bullet */
     private onClick() {
-        console.log("onClick start")
-
         // check res loading complete
-        if (!this.gameStage || !this.player || !this._bullet) {
+        if (!this.gameStage || !this.cannon || !this._bullet) {
             return;
         }
 
@@ -340,7 +339,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         Laya.Vector3.normalize(this.bulletDirection, this.bulletDirection);
 
         // create bullet
-        this.createBullet(Const.BulletType.DEFAULT, this.bulletDirection);
+        this.createBullet(Const.CannonType.DEFAULT, this.bulletDirection);
 
         // set turret transform
         this.turret.transform.localRotationEuler = Const.TurretInitLocalRot.clone();
@@ -348,13 +347,11 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.turret.transform.localRotationEulerY -= this.bulletDirection.x * 90;
         this.isRecoil = true;
         this.recoilTime = 0;
-
-        console.log("onClick end")
     }
 
     /** create bullet */
     private createBullet(type: number, direction: Laya.Vector3) {
-        this.bulletType = type;
+        this.cannonType = type;
 
         let bullet: Laya.MeshSprite3D = this._bullet.clone();
         bullet.name = "bullet";
@@ -362,27 +359,27 @@ export default class GameScene extends ui.game.GameSceneUI {
 
         // trasform
         bullet.transform.localPosition = this.turretInitPos.clone();
-        Laya.Vector3.scale(bullet.transform.localScale, Const.BulletScale[this.bulletType], bullet.transform.localScale);
+        Laya.Vector3.scale(bullet.transform.localScale, Const.BulletScale[this.cannonType], bullet.transform.localScale);
 
         // add rigidbody
         let bulletRigid: Laya.Rigidbody3D = bullet.getComponent(Laya.Rigidbody3D);
 
         // quick moving detecion
         bulletRigid.ccdMotionThreshold = 0.0001;
-        bulletRigid.ccdSweptSphereRadius = Const.BulletRadius * Const.BulletScale[this.bulletType];
+        bulletRigid.ccdSweptSphereRadius = Const.BulletRadius * Const.BulletScale[this.cannonType];
 
         // set physics
-        bulletRigid.mass = Const.BulletMass[this.bulletType];
+        bulletRigid.mass = Const.BulletMass[this.cannonType];
 
         // set velocity
         let velocity: Laya.Vector3 = direction.clone();
-        Laya.Vector3.scale(velocity, Const.BulletVelocity[this.bulletType], velocity);
+        Laya.Vector3.scale(velocity, Const.BulletVelocity[this.cannonType], velocity);
         bulletRigid.linearVelocity = velocity.clone();
 
         // add script
         let bulletScript: Bullet = bullet.addComponent(Bullet);
         // set type
-        bulletScript.type = this.bulletType;
+        bulletScript.type = this.cannonType;
 
         // 开放物体物理受力：玩家有效输入前，子弹发射轨迹形状检测是否有碰撞
         if (!this.isStageStart) {
@@ -401,22 +398,10 @@ export default class GameScene extends ui.game.GameSceneUI {
     /** background moving effect */
     private bgMoving() {
         if (this.bgIdx === 0) {
-            if (this.flag_cloud0_move) {
-                if (this.cloud0.transform.localPositionX > 0.3) { this.flag_cloud0_move = false; }
-                else { this.cloud0.transform.localPositionX += 0.003; }
-            }
-            else {
-                if (this.cloud0.transform.localPositionX < -0.3) { this.flag_cloud0_move = true; }
-                else { this.cloud0.transform.localPositionX -= 0.003; }
-            }
-            if (this.flag_cloud1_move) {
-                if (this.cloud1.transform.localPositionX < -0.25) { this.flag_cloud1_move = false; }
-                else { this.cloud1.transform.localPositionX -= 0.002; }
-            }
-            else {
-                if (this.cloud1.transform.localPositionX > 0.25) { this.flag_cloud1_move = true; }
-                else { this.cloud1.transform.localPositionX += 0.002; }
-            }
+            if (this.cloud0.transform.localPositionX > 0.5) { this.cloud0.transform.localPositionX = -0.5; }
+            this.cloud0.transform.localPositionX += 0.0007;
+            if (this.cloud1.transform.localPositionX < -0.5) { this.cloud1.transform.localPositionX = 0.5; }
+            this.cloud1.transform.localPositionX -= 0.0005;
         }
     }
 }

@@ -138,6 +138,27 @@ export default class Navigator {
             }
         }, [], false);
 
+        /**刷新首页图标*/
+        let refreshHomeIcons = () => {
+            for (let i = 0; i < homeIconInfosList.length; i++) {
+                let iconInfos = homeIconInfosList[i];
+                let iconInfo = this.getRandom(iconInfos);
+                currentHomeIconInfoList[i] = iconInfo;
+            }
+            homeIconList.array = currentHomeIconInfoList;
+            homeIconList.refresh();
+        }
+
+        /**每隔三秒刷新一次*/
+        let scheduleRefreshHomeIcons = () => {
+            refreshHomeIcons();
+            homeIconBox.timerLoop(3000, this, () => {
+                if (!homeIconBox.destroyed && visibleSprite && visibleSprite.visible) {
+                    refreshHomeIcons();
+                }
+            });
+        }
+
         //后台获取图标信息
         let fetchParams = [];
         for (let pos of posList) {
@@ -158,27 +179,6 @@ export default class Navigator {
                 scheduleRefreshHomeIcons();
             },
         });
-
-        /**每隔三秒刷新一次*/
-        let scheduleRefreshHomeIcons = () => {
-            refreshHomeIcons();
-            Laya.timer.loop(3000, this, () => {
-                if (!homeIconBox.destroyed && visibleSprite && visibleSprite.visible) {
-                    refreshHomeIcons();
-                }
-            });
-        }
-
-        /**刷新首页图标*/
-        let refreshHomeIcons = () => {
-            for (let i = 0; i < homeIconInfosList.length; i++) {
-                let iconInfos = homeIconInfosList[i];
-                let iconInfo = this.getRandom(iconInfos);
-                currentHomeIconInfoList[i] = iconInfo;
-            }
-            homeIconList.array = currentHomeIconInfoList;
-            homeIconList.refresh();
-        }
 
         return homeIconBox;
     }
@@ -403,7 +403,7 @@ export default class Navigator {
         let leftX = Math.round(13 * this.SCALE);
         let rightX = Math.round(28 * this.SCALE);
         let isLeft = false;
-        Laya.timer.loop(500, this, () => {
+        drawerBox.timerLoop(500, this, () => {
             if (isLeft) {
                 openArrow.x = rightX;
                 isLeft = false;
@@ -487,7 +487,7 @@ export default class Navigator {
         openButton.centerY = -465 * this.SCALE;
         openButton.loadImage("res/texture/navigator/more_game_button.png", Laya.Handler.create(this, () => {
             //缩放
-            Laya.timer.loop(1005, this, () => {
+            moreGameBox.timerLoop(1005, this, () => {
                 Laya.Tween.to(openButton, { scaleX: 0.9 * SCALE, scaleY: 0.9 * SCALE }, 500, Laya.Ease.linearNone, Laya.Handler.create(this, () => {
                     Laya.Tween.to(openButton, { scaleX: SCALE, scaleY: SCALE }, 500, Laya.Ease.linearNone);
                 }));
@@ -736,6 +736,27 @@ export default class Navigator {
             }
         }, [], false);
 
+
+        /**刷新结束页图标*/
+        let refreshOverIcons = () => {
+            for (let i = 0; i < overIconInfosList.length; i++) {
+                let iconInfos = overIconInfosList[i];
+                let iconInfo = this.getRandom(iconInfos);
+                currentOverIconInfoList[i] = iconInfo;
+            }
+            overIconList.array = currentOverIconInfoList;
+            overIconList.refresh();
+        }
+        /**每隔三秒刷新一次*/
+        let scheduleRefreshOverIcons = () => {
+            refreshOverIcons();
+            overIconBox.timerLoop(3000, this, () => {
+                if (!overIconBox.destroyed && visibleSprite && visibleSprite.visible) {
+                    refreshOverIcons();
+                }
+            });
+        }
+
         //后台获取图标信息
         let fetchParams = [];
         for (let pos of posList) {
@@ -756,27 +777,6 @@ export default class Navigator {
                 scheduleRefreshOverIcons();
             },
         });
-
-        /**每隔三秒刷新一次*/
-        let scheduleRefreshOverIcons = () => {
-            refreshOverIcons();
-            Laya.timer.loop(3000, this, () => {
-                if (!overIconBox.destroyed && visibleSprite && visibleSprite.visible) {
-                    refreshOverIcons();
-                }
-            });
-        }
-
-        /**刷新结束页图标*/
-        let refreshOverIcons = () => {
-            for (let i = 0; i < overIconInfosList.length; i++) {
-                let iconInfos = overIconInfosList[i];
-                let iconInfo = this.getRandom(iconInfos);
-                currentOverIconInfoList[i] = iconInfo;
-            }
-            overIconList.array = currentOverIconInfoList;
-            overIconList.refresh();
-        }
 
         return overIconBox;
     }
@@ -897,6 +897,27 @@ export default class Navigator {
             }
         }, [], false);
 
+        /**刷新猜你喜欢图标*/
+        let refreshOverIcons = () => {
+            for (let i = 0; i < guessLikeIconInfosList.length; i++) {
+                let iconInfos = guessLikeIconInfosList[i];
+                let iconInfo = this.getRandom(iconInfos);
+                currentOverIconInfoList[i] = iconInfo;
+            }
+            guessLikeIconList.array = currentOverIconInfoList;
+            guessLikeIconList.refresh();
+        }
+
+        /**每隔三秒刷新一次*/
+        let scheduleRefreshOverIcons = () => {
+            refreshOverIcons();
+            guessLikeIconBox.timerLoop(3000, this, () => {
+                if (!guessLikeIconBox.destroyed && visibleSprite && visibleSprite.visible) {
+                    refreshOverIcons();
+                }
+            });
+        }
+
         //后台获取图标信息
         let fetchParams = [];
         for (let pos of posList) {
@@ -917,27 +938,6 @@ export default class Navigator {
                 scheduleRefreshOverIcons();
             },
         });
-
-        /**每隔三秒刷新一次*/
-        let scheduleRefreshOverIcons = () => {
-            refreshOverIcons();
-            Laya.timer.loop(3000, this, () => {
-                if (!guessLikeIconBox.destroyed && visibleSprite && visibleSprite.visible) {
-                    refreshOverIcons();
-                }
-            });
-        }
-
-        /**刷新猜你喜欢图标*/
-        let refreshOverIcons = () => {
-            for (let i = 0; i < guessLikeIconInfosList.length; i++) {
-                let iconInfos = guessLikeIconInfosList[i];
-                let iconInfo = this.getRandom(iconInfos);
-                currentOverIconInfoList[i] = iconInfo;
-            }
-            guessLikeIconList.array = currentOverIconInfoList;
-            guessLikeIconList.refresh();
-        }
 
         return guessLikeIconBox;
     }

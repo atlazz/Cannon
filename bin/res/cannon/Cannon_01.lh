@@ -49,12 +49,11 @@
 						1,
 						1
 					],
-					"meshPath":"models/Cannon_01/Cannon_01-Base_0.lm",
+					"meshPath":"Assets/Cannon_01/Cannon_01-Base_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
-							"type":"Laya.PBRSpecularMaterial",
-							"path":"models/Cannon_01/Cannon_01.lmat"
+							"path":"Assets/Cannon_01/cannon01_04.lmat"
 						}
 					]
 				},
@@ -84,12 +83,11 @@
 						1,
 						1
 					],
-					"meshPath":"models/Cannon_01/Cannon_01-Turret_0.lm",
+					"meshPath":"Assets/Cannon_01/Cannon_01-Turret_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
-							"type":"Laya.PBRSpecularMaterial",
-							"path":"models/Cannon_01/Cannon_01.lmat"
+							"path":"Assets/Cannon_01/cannon01_04.lmat"
 						}
 					]
 				},

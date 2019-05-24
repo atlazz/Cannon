@@ -171,7 +171,7 @@
 			{
 				"type":"MeshSprite3D",
 				"props":{
-					"name":"Obstacle-Gate_0",
+					"name":"Obstacle-GateCube_0",
 					"active":true,
 					"isStatic":false,
 					"layer":0,

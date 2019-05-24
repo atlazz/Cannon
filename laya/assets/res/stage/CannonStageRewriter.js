@@ -32,72 +32,42 @@ for (var i = fromIdx; i <= toIdx; i++) {
             // target cube
             if (item.props.name.indexOf("Obstacles-Cube") >= 0) {
                 item.props.meshPath = "models/Obstacles-Cube.lm";
-                item.props.materials = [
-                    {
-                        "type":"Laya.PBRSpecularMaterial",
-                        "path":"materials/wood.lmat"
-                    }
-                ]
+                item.props.materials = [];
             }
             // target cylinder
             else if (item.props.name.indexOf("Obstacles-Cylinder") >= 0) {
                 item.props.meshPath = "models/Obstacles-Cylinder.lm"
-                item.props.materials = [
-                    {
-                        "type":"Laya.PBRSpecularMaterial",
-                        "path":"materials/wood.lmat"
-                    }
-                ]
+                item.props.materials = [];
             }
             // target triangle
             else if (item.props.name.indexOf("Obstacles-Triangle") >= 0) {
                 item.props.meshPath = "models/Obstacles-Triangle.lm"
-                item.props.materials = [
-                    {
-                        "type":"Laya.PBRSpecularMaterial",
-                        "path":"materials/wood.lmat"
-                    }
-                ]
+                item.props.materials = [];
+            }
+            // target gate to cube
+            else if (item.props.name.indexOf("Obstacle-GateCube") >= 0) {
+                item.props.meshPath = "models/Obstacle-GateCube.lm"
+                item.props.materials = [];
             }
             // target gate
             else if (item.props.name.indexOf("Obstacle-Gate") >= 0) {
                 item.props.meshPath = "models/Obstacle-Gate.lm"
-                item.props.materials = [
-                    {
-                        "type":"Laya.PBRSpecularMaterial",
-                        "path":"materials/wood.lmat"
-                    }
-                ]
+                item.props.materials = [];
             }
             // guard
             else if (item.props.name.indexOf("Guard") >= 0) {
                 item.props.meshPath = "models/Rotator.lm"
-                item.props.materials = [
-                    {
-                        "type":"Laya.PBRSpecularMaterial",
-                        "path":"materials/stand.lmat"
-                    }
-                ];
+                item.props.materials = [];
             }
             // stand cube
             else if (item.props.name.indexOf("Cube") >= 0) {
                 item.props.meshPath = "models/Cube.lm"
-                item.props.materials = [
-                    {
-                        "type":"Laya.PBRSpecularMaterial",
-                        "path":"materials/stand.lmat"
-                    }
-                ];
+                item.props.materials = [];
             }
             // stand cylinder
             else if (item.props.name.indexOf("Cylinder") >= 0) {
                 item.props.meshPath = "models/Cylinder.lm"
-                item.props.materials = [
-                    {
-                        "type":"Laya.PBRSpecularMaterial",
-                        "path":"materials/stand.lmat"
-                    }
-                ];
+                item.props.materials = [];
             }
         }
 

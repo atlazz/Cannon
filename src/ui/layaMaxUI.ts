@@ -4,7 +4,9 @@ import Dialog=Laya.Dialog;
 import Scene=Laya.Scene;
 var REG: Function = Laya.ClassUtils.regClass;
 export module ui.game {
-    export class GameSceneUI extends Scene {
+    export class GameSceneUI extends View {
+		public scene3DBox:Laya.Sprite;
+		public tutorialBox:Laya.Box;
         constructor(){ super()}
         createChildren():void {
             super.createChildren();
@@ -12,4 +14,28 @@ export module ui.game {
         }
     }
     REG("ui.game.GameSceneUI",GameSceneUI);
+}
+export module ui.home {
+    export class HomeViewUI extends View {
+		public homeIconBox:Laya.Box;
+		public drawerBox:Laya.Box;
+		public moreGameBox:Laya.Box;
+		public startButton:Laya.Image;
+        constructor(){ super()}
+        createChildren():void {
+            super.createChildren();
+            this.loadScene("home/HomeView");
+        }
+    }
+    REG("ui.home.HomeViewUI",HomeViewUI);
+}
+export module ui.over {
+    export class OverViewUI extends View {
+        constructor(){ super()}
+        createChildren():void {
+            super.createChildren();
+            this.loadScene("over/OverView");
+        }
+    }
+    REG("ui.over.OverViewUI",OverViewUI);
 }

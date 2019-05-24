@@ -30,6 +30,13 @@ export default class Guard extends Laya.Script3D {
         // add collider
         let collider: Laya.PhysicsCollider = this.guard.addComponent(Laya.PhysicsCollider);
         collider.colliderShape = new Laya.BoxColliderShape(this.sizeX, this.sizeY, this.sizeZ);
+        // add material
+        let material: Laya.PBRSpecularMaterial = new Laya.PBRSpecularMaterial();
+        material.albedoTexture = Laya.loader.getRes(Const.StageTexUrl[0]);
+        material.specularColor = new Laya.Vector4(0, 0, 0, 1);
+        material.enableEmission = true;
+        material.emissionColor = new Laya.Vector4(0.2, 0.2, 0.2, 1);
+        this.guard.meshRenderer.material = material;
 
         /** 平移参数设置 */
         // 全屏水平移动

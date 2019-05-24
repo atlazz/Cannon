@@ -73,7 +73,7 @@ export default class Target extends Laya.Script3D {
         // 子弹效果处理
         if (other.name === "bullet") {
             let bullet: Bullet = other.getComponent(Bullet);
-            if (bullet.type === Const.BulletType.FROZEN) {
+            if (bullet.type === Const.CannonType.FROZEN && this.type !== Const.TargetType.GLASS) {
                 this.setType(Const.TargetType.GLASS);
             }
         }
@@ -116,7 +116,7 @@ export default class Target extends Laya.Script3D {
          *  ps：物理引擎bug较多，可以来引擎呈现物理宏观效果，但尽量少依赖碰撞做需要稳定的底层处理
          */
         this.distance = Laya.Vector3.distance(this.target.transform.position, GameScene.instance.gameStage.transform.position);
-        if (this.distance < 15) {
+        if (this.distance < 20) {
             // reset win check counter
             GameScene.instance.winCheckCnt = 0;
         }
@@ -162,11 +162,18 @@ export default class Target extends Laya.Script3D {
             this.target.meshRenderer.material = this.material;
         }
         // set material by type
-        if (this.type === Const.TargetType.GLASS) {
+        if (this.type === Const.TargetType.DEFAULT) {
+            this.material.albedoTexture = Laya.loader.getRes(Const.StageTexUrl[1]);
+            this.material.specularColor = new Laya.Vector4(0, 0, 0, 1);
+            this.material.enableEmission = true;
+            this.material.emissionColor = new Laya.Vector4(0.1, 0.1, 0.1, 1);
+        }
+        else if (this.type === Const.TargetType.GLASS) {
             this.material.albedoTexture = null;
             this.material.albedoColor = new Laya.Vector4(0.7, 0.7, 1, 0.7);
             this.material.specularColor = new Laya.Vector4(0, 0, 0, 1);
             this.material.enableEmission = true;
+            this.material.emissionColor = new Laya.Vector4(0.2, 0.2, 0.2, 1);
         }
         this.refreshRenderMode();
     }
@@ -180,7 +187,7 @@ export default class Target extends Laya.Script3D {
         this.sizeZ = boundingBox.max.z - boundingBox.min.z;
         // add rigidbody
         this.rigidbody = this.target.addComponent(Laya.Rigidbody3D);
-        if (this.target.name.search("Cube") >= 0) {
+        if (this.target.name.search("Cube") >= 0 || this.target.name.search("GateCube") >= 0) {
             this.rigidbody.colliderShape = new Laya.BoxColliderShape(this.sizeX, this.sizeY, this.sizeZ);
         }
         else if (this.target.name.search("Cylinder") >= 0) {
@@ -228,9 +235,13 @@ export default class Target extends Laya.Script3D {
             piece.name = "piece";
 
             // set material
-            let mat: Laya.BlinnPhongMaterial = new Laya.BlinnPhongMaterial();
-            mat.renderMode = Laya.BlinnPhongMaterial.RENDERMODE_TRANSPARENT;
+            let mat: Laya.PBRSpecularMaterial = new Laya.PBRSpecularMaterial();
+            mat.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_TRANSPARENT;
+            mat.albedoTexture = null;
             mat.albedoColor = new Laya.Vector4(0.7, 0.7, 1, 0.7);
+            mat.specularColor = new Laya.Vector4(0, 0, 0, 1);
+            mat.enableEmission = true;
+            mat.emissionColor = new Laya.Vector4(0.2, 0.2, 0.2, 1);
             piece.meshRenderer.material = mat;
 
             // set rigidbody
