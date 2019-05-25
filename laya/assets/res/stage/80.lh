@@ -435,26 +435,11 @@
 						"Obstacles-TNT_0":[
 							"Obstacles-TNT_0"
 						],
-						"Obstacles-TNT (1)_0":[
-							"Obstacles-TNT (1)_0"
-						],
-						"Obstacles-TNT (2)_0":[
-							"Obstacles-TNT (2)_0"
-						],
-						"Obstacles-TNT (3)_0":[
-							"Obstacles-TNT (3)_0"
-						],
-						"Obstacles-TNT (4)_0":[
-							"Obstacles-TNT (4)_0"
-						],
 						"Obstacles-TNT (5)_0":[
 							"Obstacles-TNT (5)_0"
 						],
-						"Obstacles-TNT (6)_0":[
-							"Obstacles-TNT (6)_0"
-						],
-						"Obstacles-TNT (7)_0":[
-							"Obstacles-TNT (7)_0"
+						"Obstacles-CubeGlass":[
+							"Obstacles-CubeGlass"
 						]
 					}
 				},
@@ -5192,7 +5177,7 @@
 			{
 				"type":"MeshSprite3D",
 				"props":{
-					"name":"Obstacles-TNT (1)_0",
+					"name":"Obstacles-TNT_0",
 					"active":true,
 					"isStatic":false,
 					"layer":0,
@@ -5227,7 +5212,7 @@
 			{
 				"type":"MeshSprite3D",
 				"props":{
-					"name":"Obstacles-TNT (2)_0",
+					"name":"Obstacles-TNT_0",
 					"active":true,
 					"isStatic":false,
 					"layer":0,
@@ -5262,7 +5247,7 @@
 			{
 				"type":"MeshSprite3D",
 				"props":{
-					"name":"Obstacles-TNT (3)_0",
+					"name":"Obstacles-TNT_0",
 					"active":true,
 					"isStatic":false,
 					"layer":0,
@@ -5297,7 +5282,7 @@
 			{
 				"type":"MeshSprite3D",
 				"props":{
-					"name":"Obstacles-TNT (4)_0",
+					"name":"Obstacles-TNT_0",
 					"active":true,
 					"isStatic":false,
 					"layer":0,
@@ -5367,7 +5352,7 @@
 			{
 				"type":"MeshSprite3D",
 				"props":{
-					"name":"Obstacles-TNT (6)_0",
+					"name":"Obstacles-TNT_0",
 					"active":true,
 					"isStatic":false,
 					"layer":0,
@@ -5402,7 +5387,7 @@
 			{
 				"type":"MeshSprite3D",
 				"props":{
-					"name":"Obstacles-TNT (7)_0",
+					"name":"Obstacles-TNT_0",
 					"active":true,
 					"isStatic":false,
 					"layer":0,
@@ -7677,7 +7662,7 @@
 			{
 				"type":"MeshSprite3D",
 				"props":{
-					"name":"Obstacles-CubeGlass (70)_0",
+					"name":"Obstacles-CubeGlass",
 					"active":true,
 					"isStatic":false,
 					"layer":0,
@@ -10092,7 +10077,7 @@
 			{
 				"type":"MeshSprite3D",
 				"props":{
-					"name":"Obstacles-TNT (1)_0",
+					"name":"Obstacles-TNT_0",
 					"active":true,
 					"isStatic":false,
 					"layer":0,
@@ -10127,7 +10112,7 @@
 			{
 				"type":"MeshSprite3D",
 				"props":{
-					"name":"Obstacles-TNT (2)_0",
+					"name":"Obstacles-TNT_0",
 					"active":true,
 					"isStatic":false,
 					"layer":0,
@@ -10162,7 +10147,7 @@
 			{
 				"type":"MeshSprite3D",
 				"props":{
-					"name":"Obstacles-TNT (3)_0",
+					"name":"Obstacles-TNT_0",
 					"active":true,
 					"isStatic":false,
 					"layer":0,
@@ -10197,7 +10182,7 @@
 			{
 				"type":"MeshSprite3D",
 				"props":{
-					"name":"Obstacles-TNT (4)_0",
+					"name":"Obstacles-TNT_0",
 					"active":true,
 					"isStatic":false,
 					"layer":0,
@@ -10232,7 +10217,7 @@
 			{
 				"type":"MeshSprite3D",
 				"props":{
-					"name":"Obstacles-TNT (5)_0",
+					"name":"Obstacles-TNT_0",
 					"active":true,
 					"isStatic":false,
 					"layer":0,
@@ -10267,7 +10252,7 @@
 			{
 				"type":"MeshSprite3D",
 				"props":{
-					"name":"Obstacles-TNT (6)_0",
+					"name":"Obstacles-TNT_0",
 					"active":true,
 					"isStatic":false,
 					"layer":0,
@@ -10302,7 +10287,7 @@
 			{
 				"type":"MeshSprite3D",
 				"props":{
-					"name":"Obstacles-TNT (7)_0",
+					"name":"Obstacles-TNT_0",
 					"active":true,
 					"isStatic":false,
 					"layer":0,

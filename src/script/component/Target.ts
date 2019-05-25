@@ -17,6 +17,9 @@ export default class Target extends Laya.Script3D {
 
     /** target object pieces */
     private piecesList: Laya.MeshSprite3D[] = [];
+    
+    /** 空中无碰撞计数，用于玻璃掉落碎掉 */
+    private jumpCnt: number = 0;
 
     /** for win check */
     private distance: number;
@@ -71,7 +74,7 @@ export default class Target extends Laya.Script3D {
         }
 
         /** 子弹效果处理 */
-        if (other.name === "bullet") {
+        if (other.name === "bullet" || other.name === "bulletTrigger") {
             let bullet: Bullet = other.getComponent(Bullet);
             if (bullet.type === Const.CannonType.FROZEN && this.type !== Const.TargetType.GLASS) {
                 this.setType(Const.TargetType.GLASS);
@@ -81,8 +84,6 @@ export default class Target extends Laya.Script3D {
         /** TNT炸弹冲击波处理 */
         if (other.name === "bomb") {
             let velocity: Laya.Vector3 = new Laya.Vector3();
-            // console.log(this.target.transform.localPosition);
-            // console.log(other.transform.localPosition);
             Laya.Vector3.subtract(this.target.transform.position, other.transform.position, velocity);
             Laya.Vector3.normalize(velocity, velocity);
             Laya.Vector3.scale(velocity, 3 / other.transform.localScaleX, velocity);
@@ -94,15 +95,24 @@ export default class Target extends Laya.Script3D {
         // Glass
         if (this.type === Const.TargetType.GLASS) {
             // 相对速度高可击碎
-            let velocity: Laya.Vector3 = this.rigidbody.linearVelocity.clone();
-            let velocityOther: Laya.Vector3 = new Laya.Vector3(0, 0, 0);
-            // not stand and guard
-            if (!inBlackList) {
-                velocityOther = (other.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D).linearVelocity.clone();
+            // falling broken
+            if (this.jumpCnt > 60) {
+                let velocityValueSelf: number = Laya.Vector3.distance(this.rigidbody.linearVelocity, new Laya.Vector3(0, 0, 0));
+                if (velocityValueSelf >= Const.GlassFallingBrokenVelocity) {
+                    console.log("falling broken");
+                    this.broken();
+                }
             }
-            let velocityValue: number = Laya.Vector3.distance(velocity, velocityOther);
-            if (velocityValue >= Const.GlassBrokenVelocity || other.name.indexOf("bomb") >= 0) {
-                // this.isHit = true;
+            // not stand and guard
+            if (!inBlackList && other.name !== "bulletTrigger") {
+                let velocityOther: Laya.Vector3 = (other.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D).linearVelocity.clone();
+                let velocityValueSelf: number = Laya.Vector3.distance(this.rigidbody.linearVelocity, new Laya.Vector3(0, 0, 0));
+                let velocityValueOther: number = Laya.Vector3.distance(velocityOther, new Laya.Vector3(0, 0, 0));
+                if (velocityValueSelf >= Const.GlassBrokenVelocity || velocityValueOther >= Const.GlassBrokenVelocity) {
+                    this.broken();
+                }
+            }
+            else if (other.name === "bomb") {
                 this.broken();
             }
         }
@@ -110,6 +120,8 @@ export default class Target extends Laya.Script3D {
         else if (this.type === Const.TargetType.TNT) {
             // hit by bullet => bomb
             if ((other.name.indexOf("bullet") >= 0 || other.name.indexOf("bomb") >= 0) && this.target.parent) {
+                console.log("hit by")
+                console.log(other.name)
                 let bombRadius: number = this.sizeX / 2 * this.target.transform.localScaleX * 1;
                 let bomb: Laya.MeshSprite3D = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(bombRadius));
                 this.target.parent.addChild(bomb);
@@ -135,7 +147,7 @@ export default class Target extends Laya.Script3D {
                 // n帧后销毁隐形炸弹
                 let cnt: number = 0;
                 bomb.timer.frameLoop(1, bomb, () => {
-                    if (cnt++ > 15) {
+                    if (cnt++ > 12) {
                         bomb.timer.clearAll(bomb);
                         bomb.destroy();
                         this.target.destroy();
@@ -148,6 +160,9 @@ export default class Target extends Laya.Script3D {
                 });
             }
         }
+
+        // reset counter
+        this.jumpCnt = 0;
     }
 
     onUpdate() {
@@ -161,6 +176,9 @@ export default class Target extends Laya.Script3D {
         if (this.rigidbody.isKinematic && GameScene.instance.isStageStart) {
             this.rigidbody.isKinematic = false;
         }
+
+        // update counter
+        this.jumpCnt++;
 
         // 刷新渲染模式，不然临近设置成透明渲染的物体会被遮盖
         this.refreshRenderMode();
@@ -281,8 +299,12 @@ export default class Target extends Laya.Script3D {
 
         // show pieces
         this.effectPiecesBroken();
+        // // enlarge velocity
+        // let velocity =  this.rigidbody.linearVelocity;
+        // velocity.y *= 1.2;
+        // this.rigidbody.linearVelocity = velocity;
         // hide target
-        Laya.timer.frameOnce(1, this, () => {
+        Laya.timer.frameOnce(2, this, () => {
             this.target.active = false;
         });
     }

@@ -31,7 +31,7 @@ export const StageInitRot: Laya.Vector3 = new Laya.Vector3(0, 180, 0);
 export const StageInitScale: Laya.Vector3 = new Laya.Vector3(20, 20, 20);
 export const StageNum: number = 80;
 // winning check frame
-export const MaxWinCheckTime: number = 60;
+export const MaxWinCheckTime: number = 30;
 // 屏蔽物体物理受力前等待时间
 export const SetKinematicWaitTime: number = 10;
 
@@ -50,7 +50,8 @@ export const enum TargetType {
 }
 
 /** glass */
-export const GlassBrokenVelocity: number = 2.5;
+export const GlassBrokenVelocity: number = 12.5;
+export const GlassFallingBrokenVelocity: number = 1;
 
 /** piece of target object */
 export const PieceResUrl: string = "res/cube_piece.lm";
@@ -82,7 +83,7 @@ export const BulletScale = [
 ];
 // mass
 export const BulletMass = [
-    10,     // DEFAULT
+    40,     // DEFAULT
     10,     // FROZEN
 ];
 // velocity

@@ -28,6 +28,16 @@ export default class BulletScript extends Laya.Script3D {
         this.bullet.meshRenderer.material = this.material;
     }
 
+    onCollisionExit(collision: Laya.Collision) {
+        if (this.type === 999) {
+            Laya.timer.frameOnce(1, this, () => {
+                this.destroy();
+                this.bullet.destroy();
+                console.log("hidden bullet destroyed")
+            });
+        }
+    }
+
     onUpdate() {
         // check spirte alive
         if (this.bullet.destroyed) {
@@ -47,8 +57,8 @@ export default class BulletScript extends Laya.Script3D {
             });
         }
 
-        // 超出炮管距离才显示，根据z轴判断
-        if(!this.flag_active && this.bullet.transform.position.z < -1) {
+        // 超出炮管距离才显示，根据z轴判断，999为隐形子弹编号
+        if(this.type != 999 && !this.flag_active && this.bullet.transform.position.z < -1) {
             this.refreshMaterial();
             this.flag_active = true;
         }
@@ -65,7 +75,4 @@ export default class BulletScript extends Laya.Script3D {
             this.material.albedoColor = new Laya.Vector4(0.2, 0.2, 1, 0.7);
         }
     }
-
-    // onCollisionEnter(collision: Laya.Collision) {
-    // }
 }

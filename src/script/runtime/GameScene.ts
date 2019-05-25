@@ -78,9 +78,12 @@ export default class GameScene extends ui.game.GameSceneUI {
 
         // load texture
         Laya.loader.load(Const.StageTexUrl, Laya.Handler.create(this, () => {
-            this.stageIdx = 1;
+            this.stageIdx = 76;
             this.loadGameStage();
         }));
+
+
+        this.scene3D.physicsSimulation.fixedTimeStep = 0.5 / 60;
     }
 
     /** initialize scene */
@@ -370,7 +373,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         // quick moving detecion
         bulletRigid.ccdMotionThreshold = 0.001;
         // 半径越小越精准
-        bulletRigid.ccdSweptSphereRadius = Const.BulletRadius * Const.BulletScale[this.cannonType] / 1000;
+        bulletRigid.ccdSweptSphereRadius = Const.BulletRadius * Const.BulletScale[this.cannonType];
 
         // set physics
         bulletRigid.mass = Const.BulletMass[this.cannonType];
@@ -379,6 +382,24 @@ export default class GameScene extends ui.game.GameSceneUI {
         let velocity: Laya.Vector3 = direction.clone();
         Laya.Vector3.scale(velocity, Const.BulletVelocity[this.cannonType], velocity);
         bulletRigid.linearVelocity = velocity.clone();
+
+
+        // hidden bullet for quick moving detection setting start <===========================
+        let bulletTrigger: Laya.MeshSprite3D = bullet.clone();
+        bulletTrigger.name = "bulletTrigger";
+        this.scene3D.addChild(bulletTrigger);
+        // set trigger
+        (bulletTrigger.getComponent(Laya.Rigidbody3D)).isTrigger = true;
+        // quick moving detecion
+        (bulletTrigger.getComponent(Laya.Rigidbody3D)).ccdMotionThreshold = 0.001;
+        // 半径越小越精准
+        (bulletTrigger.getComponent(Laya.Rigidbody3D)).ccdSweptSphereRadius = Const.BulletRadius * Const.BulletScale[this.cannonType] / 1000;
+        // add script
+        let triggerScript: Bullet = bulletTrigger.addComponent(Bullet);
+        // set type
+        triggerScript.type = 999;
+        // hidden bullet setting end <========================================================
+
 
         // add script
         let bulletScript: Bullet = bullet.addComponent(Bullet);
