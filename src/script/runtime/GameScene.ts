@@ -78,7 +78,7 @@ export default class GameScene extends ui.game.GameSceneUI {
 
         // load texture
         Laya.loader.load(Const.StageTexUrl, Laya.Handler.create(this, () => {
-            this.stageIdx = 76;
+            this.stageIdx = 1;
             this.loadGameStage();
         }));
 
