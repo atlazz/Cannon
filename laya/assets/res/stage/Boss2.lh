@@ -302,7 +302,7 @@
 			{
 				"type":"MeshSprite3D",
 				"props":{
-					"name":"Obstacle-GateCube_0",
+					"name":"Obstacle-GateScale10",
 					"active":true,
 					"isStatic":false,
 					"layer":0,
@@ -318,9 +318,9 @@
 						-0.7071067
 					],
 					"scale":[
-						6.740009,
-						5,
-						10.49001
+						0.6740009,
+						0.5,
+						1.049001
 					],
 					"meshPath":"Assets/models/Boss2/Boss2-Obstacle-Gate_0.lm",
 					"enableRender":true,

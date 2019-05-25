@@ -29,8 +29,9 @@ for (var i = fromIdx; i <= toIdx; i++) {
 
         for (let i = 0; i < stage.data.child.length; i++) {
             let item = stage.data.child[i];
+            item.components = [];
             // target cube
-            if (item.props.name.indexOf("Obstacles-Cube") >= 0) {
+            if (item.props.name.indexOf("Obstacles-Cube") >= 0 || item.props.name.indexOf("Obstacles-TNT") >= 0) {
                 item.props.meshPath = "models/Obstacles-Cube.lm";
                 item.props.materials = [];
             }
@@ -45,8 +46,8 @@ for (var i = fromIdx; i <= toIdx; i++) {
                 item.props.materials = [];
             }
             // target gate to cube
-            else if (item.props.name.indexOf("Obstacle-GateCube") >= 0) {
-                item.props.meshPath = "models/Obstacle-GateCube.lm"
+            else if (item.props.name.indexOf("Obstacle-GateCube") >= 0 || item.props.name.indexOf("Obstacle-GateScale10") >= 0) {
+                item.props.meshPath = "models/Obstacle-GateScale10.lm"
                 item.props.materials = [];
             }
             // target gate

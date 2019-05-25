@@ -78,7 +78,7 @@ export default class GameScene extends ui.game.GameSceneUI {
 
         // load texture
         Laya.loader.load(Const.StageTexUrl, Laya.Handler.create(this, () => {
-            this.stageIdx = 8;
+            this.stageIdx = 1;
             this.loadGameStage();
         }));
     }
@@ -190,6 +190,9 @@ export default class GameScene extends ui.game.GameSceneUI {
                     // set type
                     if (child.name.search("Glass") >= 0) {
                         targetScript.setType(Const.TargetType.GLASS);
+                    }
+                    else if (child.name.search("TNT") >= 0) {
+                        targetScript.setType(Const.TargetType.TNT);
                     }
                     else {
                         targetScript.setType(Const.TargetType.DEFAULT);
@@ -365,8 +368,9 @@ export default class GameScene extends ui.game.GameSceneUI {
         let bulletRigid: Laya.Rigidbody3D = bullet.getComponent(Laya.Rigidbody3D);
 
         // quick moving detecion
-        bulletRigid.ccdMotionThreshold = 0.0001;
-        bulletRigid.ccdSweptSphereRadius = Const.BulletRadius * Const.BulletScale[this.cannonType];
+        bulletRigid.ccdMotionThreshold = 0.001;
+        // 半径越小越精准
+        bulletRigid.ccdSweptSphereRadius = Const.BulletRadius * Const.BulletScale[this.cannonType] / 1000;
 
         // set physics
         bulletRigid.mass = Const.BulletMass[this.cannonType];
@@ -383,7 +387,7 @@ export default class GameScene extends ui.game.GameSceneUI {
 
         // 开放物体物理受力：玩家有效输入前，子弹发射轨迹形状检测是否有碰撞
         if (!this.isStageStart) {
-            var shape = new Laya.SphereColliderShape(Const.BulletRadius * 5);
+            var shape = new Laya.SphereColliderShape(Const.BulletRadius * 3);
             var checkHitResult: Laya.HitResult[] = [];
             if (this.scene3D.physicsSimulation.shapeCastAll(shape, this.turretInitPos, velocity, checkHitResult)) {
                 for (let i in checkHitResult) {

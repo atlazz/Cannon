@@ -20,14 +20,16 @@ export const LightInitColor: Laya.Vector3 = new Laya.Vector3(1, 1, 1);
 export const StageTexUrl: string[] = [
     // stand
     "res/stage/out/materials/mutou_06.jpg",
-    // target
+    // target wood
     "res/stage/out/materials/box 13.png",
+    // target TNT
+    "res/stage/out/materials/TNT.png",
 ]
 export const StageResUrl: string = "res/stage/out/";
 export const StageInitPos: Laya.Vector3 = new Laya.Vector3(0, 0, 0);
 export const StageInitRot: Laya.Vector3 = new Laya.Vector3(0, 180, 0);
 export const StageInitScale: Laya.Vector3 = new Laya.Vector3(20, 20, 20);
-export const StageNum: number = 30;
+export const StageNum: number = 80;
 // winning check frame
 export const MaxWinCheckTime: number = 60;
 // 屏蔽物体物理受力前等待时间

@@ -13,7 +13,7 @@ export default class Target extends Laya.Script3D {
     private sizeY: number;
     private sizeZ: number;
 
-    private collisionBlackList: string[] = ["stand", "Guard"];
+    private collisionBlackList: string[] = ["stand", "Guard", "bomb"];
 
     /** target object pieces */
     private piecesList: Laya.MeshSprite3D[] = [];
@@ -70,7 +70,7 @@ export default class Target extends Laya.Script3D {
             GameScene.instance.winCheckCnt = 0;
         }
 
-        // 子弹效果处理
+        /** 子弹效果处理 */
         if (other.name === "bullet") {
             let bullet: Bullet = other.getComponent(Bullet);
             if (bullet.type === Const.CannonType.FROZEN && this.type !== Const.TargetType.GLASS) {
@@ -78,7 +78,20 @@ export default class Target extends Laya.Script3D {
             }
         }
 
-        // 本体受击打处理
+        /** TNT炸弹冲击波处理 */
+        if (other.name === "bomb") {
+            let velocity: Laya.Vector3 = new Laya.Vector3();
+            // console.log(this.target.transform.localPosition);
+            // console.log(other.transform.localPosition);
+            Laya.Vector3.subtract(this.target.transform.position, other.transform.position, velocity);
+            Laya.Vector3.normalize(velocity, velocity);
+            Laya.Vector3.scale(velocity, 3 / other.transform.localScaleX, velocity);
+            Laya.Vector3.add(this.rigidbody.linearVelocity, velocity, velocity);
+            this.rigidbody.linearVelocity = velocity;
+        }
+
+        /** 本体受击打处理 */
+        // Glass
         if (this.type === Const.TargetType.GLASS) {
             // 相对速度高可击碎
             let velocity: Laya.Vector3 = this.rigidbody.linearVelocity.clone();
@@ -88,9 +101,51 @@ export default class Target extends Laya.Script3D {
                 velocityOther = (other.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D).linearVelocity.clone();
             }
             let velocityValue: number = Laya.Vector3.distance(velocity, velocityOther);
-            if (velocityValue >= Const.GlassBrokenVelocity) {
+            if (velocityValue >= Const.GlassBrokenVelocity || other.name.indexOf("bomb") >= 0) {
                 // this.isHit = true;
                 this.broken();
+            }
+        }
+        // TNT
+        else if (this.type === Const.TargetType.TNT) {
+            // hit by bullet => bomb
+            if ((other.name.indexOf("bullet") >= 0 || other.name.indexOf("bomb") >= 0) && this.target.parent) {
+                let bombRadius: number = this.sizeX / 2 * this.target.transform.localScaleX * 1;
+                let bomb: Laya.MeshSprite3D = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(bombRadius));
+                this.target.parent.addChild(bomb);
+                bomb.name = ("bomb");
+                // set rigidbody
+                let collider: Laya.PhysicsCollider = bomb.addComponent(Laya.PhysicsCollider);
+                collider.colliderShape = new Laya.SphereColliderShape(bombRadius);
+                collider.isTrigger = true;
+                // 设置碰撞组，避免像玻璃碎片之类过多数量碰撞爆内存
+                collider.canCollideWith = 1;
+                // set transform
+                bomb.transform.localPosition = this.target.transform.localPosition.clone();
+                bomb.transform.localScale = this.target.transform.localScale.clone();
+                // set material
+                let mat: Laya.UnlitMaterial = new Laya.UnlitMaterial();
+                bomb.meshRenderer.material = mat;
+                mat.renderMode = Laya.UnlitMaterial.RENDERMODE_TRANSPARENT;
+                mat.albedoColor = new Laya.Vector4(1, 0.5, 0, 0.2);
+                // 1帧后从场景中移除本体
+                Laya.timer.frameOnce(1, this, () => {
+                    this.target.removeSelf();
+                });
+                // n帧后销毁隐形炸弹
+                let cnt: number = 0;
+                bomb.timer.frameLoop(1, bomb, () => {
+                    if (cnt++ > 15) {
+                        bomb.timer.clearAll(bomb);
+                        bomb.destroy();
+                        this.target.destroy();
+                        this.destroy();
+                        return;
+                    }
+                    bomb.transform.localScaleX *= 1.2;
+                    bomb.transform.localScaleY *= 1.2;
+                    bomb.transform.localScaleZ *= 1.2;
+                });
             }
         }
     }
@@ -175,6 +230,12 @@ export default class Target extends Laya.Script3D {
             this.material.enableEmission = true;
             this.material.emissionColor = new Laya.Vector4(0.2, 0.2, 0.2, 1);
         }
+        else if (this.type === Const.TargetType.TNT) {
+            this.material.albedoTexture = Laya.loader.getRes(Const.StageTexUrl[2]);
+            this.material.specularColor = new Laya.Vector4(0, 0, 0, 1);
+            this.material.enableEmission = true;
+            this.material.emissionColor = new Laya.Vector4(0.1, 0.1, 0.1, 1);
+        }
         this.refreshRenderMode();
     }
 
@@ -187,7 +248,7 @@ export default class Target extends Laya.Script3D {
         this.sizeZ = boundingBox.max.z - boundingBox.min.z;
         // add rigidbody
         this.rigidbody = this.target.addComponent(Laya.Rigidbody3D);
-        if (this.target.name.search("Cube") >= 0 || this.target.name.search("GateCube") >= 0) {
+        if (this.target.name.search("Cube") >= 0) {
             this.rigidbody.colliderShape = new Laya.BoxColliderShape(this.sizeX, this.sizeY, this.sizeZ);
         }
         else if (this.target.name.search("Cylinder") >= 0) {
@@ -249,6 +310,7 @@ export default class Target extends Laya.Script3D {
             let pieceColliderShape: Laya.MeshColliderShape = new Laya.MeshColliderShape();
             pieceColliderShape.mesh = piece.meshFilter.sharedMesh;
             pieceRigid.colliderShape = pieceColliderShape;
+            pieceRigid.collisionGroup = 2;
 
             // add pieces to scene
             for (let i = 0; i < Const.PiecesNum; i++) {
@@ -281,6 +343,7 @@ export default class Target extends Laya.Script3D {
             Laya.Vector3.add(this.piecesList[idx].transform.localPosition, velocity, this.piecesList[idx].transform.localPosition);
             // set velocity of pieces
             Laya.Vector3.scale(velocity, 50, velocity);
+            Laya.Vector3.add(velocity, this.rigidbody.linearVelocity, velocity);
             (this.piecesList[idx].getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D).linearVelocity = velocity.clone();
             // set hiding effect
             Laya.Tween.to(this.piecesList[idx].transform.localScale, { x: scaleX / 2, y: scaleY / 2, z: scaleZ / 2 }, Const.PiecesBrokenTime / 60 * 1000, Laya.Ease.linearNone);

@@ -187,9 +187,9 @@
 						-0.3826835
 					],
 					"scale":[
-						10.585,
-						3.837087,
-						3.510095
+						1.0585,
+						0.3837087,
+						0.3510095
 					],
 					"meshPath":"Assets/8/8-Obstacle-Gate_0.lm",
 					"enableRender":true,
