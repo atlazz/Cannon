@@ -2,11 +2,11 @@
     "x":0,
     "type":"View",
     "selectedBox":2,
-    "selecteID":4,
+    "selecteID":15,
     "searchKey":"View",
     "props":{"width":720,"sceneWidth":720,"sceneHeight":1280,"sceneColor":"#000000","runtime":"script/runtime/GameScene.ts","right":0,"left":0,"height":1280,"centerY":0,"centerX":0},
     "nodeParent":-1,
-    "maxID":5,
+    "maxID":16,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -39,6 +39,132 @@
             "isAniNode":true,
             "hasChild":false,
             "compId":4,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Label",
+            "searchKey":"Label,lvlLabel",
+            "props":{"visible":true,"var":"lvlLabel","valign":"middle","top":100,"text":"level 1","fontSize":60,"centerX":0,"bold":true,"align":"center"},
+            "nodeParent":2,
+            "label":"lvlLabel",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":5,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Image",
+            "searchKey":"Image,restartBtn",
+            "props":{"var":"restartBtn","skin":"res/ui/btn_1.png","scaleY":0.5,"scaleX":0.5,"left":50,"bottom":100},
+            "nodeParent":2,
+            "label":"restartBtn",
+            "isOpen":true,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":6,
+            "child":[
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "searchKey":"Sprite,restartMask",
+                    "props":{"width":375,"visible":false,"var":"restartMask","texture":"comp/blank.png","height":190},
+                    "nodeParent":6,
+                    "label":"restartMask",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":13,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "searchKey":"Text,restartText",
+                    "props":{"y":35,"x":35,"var":"restartText","valign":"middle","text":"restart","fontSize":100,"bold":true,"align":"center"},
+                    "nodeParent":6,
+                    "label":"restartText",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":7,
+                    "child":[
+                        ]
+                }]
+        },
+        {
+            "x":15,
+            "type":"Image",
+            "searchKey":"Image,nextBtn",
+            "props":{"y":0,"var":"nextBtn","skin":"res/ui/btn_2.png","scaleY":0.5,"scaleX":0.5,"right":50,"bottom":100},
+            "nodeParent":2,
+            "label":"nextBtn",
+            "isOpen":true,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":9,
+            "child":[
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "searchKey":"Sprite,nextMask",
+                    "props":{"y":0,"x":0,"width":375,"visible":false,"var":"nextMask","texture":"comp/blank.png","height":190},
+                    "nodeParent":9,
+                    "label":"nextMask",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":14,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "searchKey":"Text,nextText",
+                    "props":{"y":35,"x":80,"var":"nextText","valign":"middle","text":"next","fontSize":100,"bold":true,"align":"center"},
+                    "nodeParent":9,
+                    "label":"nextText",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":10,
+                    "child":[
+                        ]
+                }]
+        },
+        {
+            "x":15,
+            "type":"Label",
+            "searchKey":"Label,winLabel",
+            "props":{"visible":false,"var":"winLabel","valign":"middle","text":"You Win","fontSize":80,"centerY":0.5,"centerX":0.5,"bold":true,"align":"center"},
+            "nodeParent":2,
+            "label":"winLabel",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":11,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"TextInput",
+            "searchKey":"TextInput,lvlSelect",
+            "props":{"width":165,"var":"lvlSelect","skin":"comp/textinput.png","right":60,"prompt":"input level index","height":30,"fontSize":20,"bottom":195},
+            "nodeParent":2,
+            "label":"lvlSelect",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":15,
             "child":[
                 ]
         }],

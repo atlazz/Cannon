@@ -13,7 +13,8 @@ export default class Target extends Laya.Script3D {
     private sizeY: number;
     private sizeZ: number;
 
-    private collisionBlackList: string[] = ["stand", "Guard", "bomb"];
+    /** 有效碰撞体: target object or bullet */
+    private collisionWhiteList: string[] = ["bullet", "Obstacle"];
 
     /** target object pieces */
     private piecesList: Laya.MeshSprite3D[] = [];
@@ -59,30 +60,38 @@ export default class Target extends Laya.Script3D {
     private collisionHandler(collision: Laya.Collision) {
         let other: Laya.MeshSprite3D = collision.other.owner as Laya.MeshSprite3D;
 
-        // check collision in black list: stand, guard
-        let inBlackList: boolean = false;
-        for (let item of this.collisionBlackList) {
+        // check collision in white list: [target, bullet]
+        let inWhiteList: boolean = false;
+        for (let item of this.collisionWhiteList) {
             if (other.name.indexOf(item) >= 0) {
-                inBlackList = true;
+                inWhiteList = true;
                 break;
             }
         }
 
-        // reset win check
-        if (inBlackList) {
+        /** 外物碰撞处理 */
+        // stand or guard
+        if (other.name === "stand" || other.name.indexOf("Guard") >= 0) {
+            // reset win check
             GameScene.instance.winCheckCnt = 0;
         }
-
-        /** 子弹效果处理 */
-        if (other.name === "bullet" || other.name === "bulletTrigger") {
+        // ground
+        else if (other.name === "ground") {
+            Laya.timer.frameOnce(60, this, () => {
+                // destroy
+                this.destroy();
+                this.target.destroy();
+            });
+        }
+        // bullet
+        else if (other.name === "bullet" || other.name === "bulletTrigger") {
             let bullet: Bullet = other.getComponent(Bullet);
             if (bullet.type === Const.CannonType.FROZEN && this.type !== Const.TargetType.GLASS) {
                 this.setType(Const.TargetType.GLASS);
             }
         }
-
-        /** TNT炸弹冲击波处理 */
-        if (other.name === "bomb") {
+        // TNT bomb wave
+        else if (other.name === "bomb") {
             let velocity: Laya.Vector3 = new Laya.Vector3();
             Laya.Vector3.subtract(this.target.transform.position, other.transform.position, velocity);
             Laya.Vector3.normalize(velocity, velocity);
@@ -91,7 +100,7 @@ export default class Target extends Laya.Script3D {
             this.rigidbody.linearVelocity = velocity;
         }
 
-        /** 本体受击打处理 */
+        /** 本体类型碰撞处理 */
         // Glass
         if (this.type === Const.TargetType.GLASS) {
             // 相对速度高可击碎
@@ -99,12 +108,11 @@ export default class Target extends Laya.Script3D {
             if (this.jumpCnt > 60) {
                 let velocityValueSelf: number = Laya.Vector3.distance(this.rigidbody.linearVelocity, new Laya.Vector3(0, 0, 0));
                 if (velocityValueSelf >= Const.GlassFallingBrokenVelocity) {
-                    console.log("falling broken");
                     this.broken();
                 }
             }
-            // not stand and guard
-            if (!inBlackList && other.name !== "bulletTrigger") {
+            // target and bullet
+            if (inWhiteList) {
                 let velocityOther: Laya.Vector3 = (other.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D).linearVelocity.clone();
                 let velocityValueSelf: number = Laya.Vector3.distance(this.rigidbody.linearVelocity, new Laya.Vector3(0, 0, 0));
                 let velocityValueOther: number = Laya.Vector3.distance(velocityOther, new Laya.Vector3(0, 0, 0));
@@ -112,7 +120,8 @@ export default class Target extends Laya.Script3D {
                     this.broken();
                 }
             }
-            else if (other.name === "bomb") {
+            // certainly broken
+            else if (other.name === "ground" || other.name === "bomb") {
                 this.broken();
             }
         }

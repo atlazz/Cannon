@@ -82,6 +82,7 @@ export default class GameScene extends ui.game.GameSceneUI {
             this.loadGameStage();
         }));
 
+        this.bindButton();
 
         this.scene3D.physicsSimulation.fixedTimeStep = 0.5 / 60;
     }
@@ -119,6 +120,10 @@ export default class GameScene extends ui.game.GameSceneUI {
             if (this.bgIdx === 0) {
                 this.cloud0 = this.background.getChildByName("Scenes_02").getChildByName("cloud01") as Laya.Sprite3D;
                 this.cloud1 = this.background.getChildByName("Scenes_02").getChildByName("cloud03") as Laya.Sprite3D;
+                let plane: Laya.MeshSprite3D = this.background.getChildByName("Scenes_02").getChildByName("Plane").getChildByName("Plane_0") as Laya.MeshSprite3D;
+                plane.name = "ground";
+                let planeCollider: Laya.PhysicsCollider = plane.addComponent(Laya.PhysicsCollider);
+                planeCollider.colliderShape = new Laya.StaticPlaneColliderShape(new Laya.Vector3(0, 1, 0), 0);
             }
         }));
     }
@@ -150,6 +155,35 @@ export default class GameScene extends ui.game.GameSceneUI {
         bulletRigid.colliderShape = new Laya.SphereColliderShape(radius);
     }
 
+    /** bind button */
+    private bindButton() {
+        // restart button
+        this.restartBtn.on(Laya.Event.MOUSE_DOWN, this, () => {
+            this.restartMask.visible = true;
+        });
+        this.restartBtn.on(Laya.Event.MOUSE_UP, this, () => {
+            this.restartMask.visible = false;
+            this.restart();
+        });
+        this.restartBtn.on(Laya.Event.MOUSE_OUT, this, () => {
+            this.restartMask.visible = false;
+        });
+        // next button
+        this.nextBtn.on(Laya.Event.MOUSE_DOWN, this, () => {
+            this.nextMask.visible = true;
+        });
+        this.nextBtn.on(Laya.Event.MOUSE_UP, this, () => {
+            this.nextMask.visible = false;
+            if (this.lvlSelect.text) {
+                this.stageIdx = +this.lvlSelect.text - 1;
+            }
+            this.nextStage();
+        });
+        this.nextBtn.on(Laya.Event.MOUSE_OUT, this, () => {
+            this.nextMask.visible = false;
+        });
+    }
+
     /** load game stage by index */
     private loadGameStage() {
         // destroy old stage
@@ -166,10 +200,15 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.isRecoil = false;
         this.recoilTime = this.MaxRecoilTime;
 
+        this.winLabel.visible = false;
+
         // load stage
         let satgeResUrl: string = Const.StageResUrl + this.stageIdx + ".lh";
         Laya.Sprite3D.load(satgeResUrl, Laya.Handler.create(this, (res) => {
             this.gameStage = this.scene3D.addChild(res) as Laya.Sprite3D;
+
+            // change level label
+            this.lvlLabel.changeText("Level " + this.stageIdx);
 
             // transform
             this.gameStage.transform.localPosition = Const.StageInitPos.clone();
@@ -259,16 +298,18 @@ export default class GameScene extends ui.game.GameSceneUI {
         // player win
         if (this.winCheckCnt++ >= Const.MaxWinCheckTime) {
             console.log("You win. Stage: " + this.stageIdx);
-            this.nextStage();
+            this.winLabel.visible = true;
+            Laya.stage.off(Laya.Event.CLICK, this, this.onClick);
+            // this.nextStage();
             // clear stage looping
             Laya.timer.clear(this, this.stageLooping);
         }
-        // player fail: out of ammo
-        else if (this.currBulletNum >= this.MaxBulletNum) {
-            console.log("out of ammo");
-            this.restart();
-            Laya.timer.clear(this, this.stageLooping);
-        }
+        // // player fail: out of ammo
+        // else if (this.currBulletNum >= this.MaxBulletNum) {
+        //     console.log("out of ammo");
+        //     this.restart();
+        //     Laya.timer.clear(this, this.stageLooping);
+        // }
 
         /** cannon recoil playing */
         if (this.isRecoil) {

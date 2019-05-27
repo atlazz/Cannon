@@ -1,18 +1,16 @@
 {
-	"description": "项目配置文件。",
+	"description": "",
 	"setting": {
 		"urlCheck": false,
 		"es6": false,
 		"postcss": true,
 		"minified": false,
-		"newFeature": true,
-		"autoAudits": false,
-		"checkInvalidKey": true
+		"newFeature": true
 	},
 	"compileType": "game",
 	"libVersion": "game",
-	"appid": "wx9170ca1ff6f31088",
-	"projectname": "layaWXTest",
+	"appid": "wx29f0df8fbf850c7c",
+	"projectname": "cannon",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {

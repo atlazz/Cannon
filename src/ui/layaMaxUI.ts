@@ -7,6 +7,15 @@ export module ui.game {
     export class GameSceneUI extends View {
 		public scene3DBox:Laya.Sprite;
 		public tutorialBox:Laya.Box;
+		public lvlLabel:Laya.Label;
+		public restartBtn:Laya.Image;
+		public restartMask:Laya.Sprite;
+		public restartText:laya.display.Text;
+		public nextBtn:Laya.Image;
+		public nextMask:Laya.Sprite;
+		public nextText:laya.display.Text;
+		public winLabel:Laya.Label;
+		public lvlSelect:Laya.TextInput;
         constructor(){ super()}
         createChildren():void {
             super.createChildren();
