@@ -86,7 +86,7 @@ export default class Target extends Laya.Script3D {
         // bullet
         else if (other.name === "bullet" || other.name === "bulletTrigger") {
             let bullet: Bullet = other.getComponent(Bullet);
-            if (bullet.type === Const.BulletType.FROZEN && this.type !== Const.TargetType.GLASS) {
+            if (bullet.type === Const.CannonType.FROZEN && this.type !== Const.TargetType.GLASS) {
                 this.setType(Const.TargetType.GLASS);
             }
         }

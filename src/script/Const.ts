@@ -78,7 +78,8 @@ export const PiecesBrokenTime: number = 120;
 /** cannon */
 export const enum CannonType {
     DEFAULT = 1,
-    FROZEN = 2,
+    SHOTGUN = 2,
+    FROZEN = 3,
 }
 export const CannonResUrl = {
     1: "res/cannon/Cannon_01.lh",   // DEFAULT
@@ -90,11 +91,9 @@ export const CannonInitScale: Laya.Vector3 = new Laya.Vector3(25, 25, 25);
 export const TurretInitLocalRot: Laya.Vector3 = new Laya.Vector3(0, 0, 0);
 
 /** bullet */
-export const enum BulletType {
-    DEFAULT = 1,
-    FROZEN = 2,
-}
-export const BulletResUrl: string = "res/bullet.lh";
+export const BulletResUrl = {
+    1: "res/bullet/blackhole.lh",
+};
 // init radius
 export const BulletRadius: number = 0.08;
 // scale

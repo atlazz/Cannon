@@ -44,6 +44,7 @@ P 2BFF7046 vslider.png
 D res
 R 8A4998B2 bullet.lh
 R C33056AD cube_piece.lm
+D res/bullet
 D res/cannon
 D res/navigator
 P A614D413 arrow.png

@@ -503,6 +503,11 @@ export default class GameScene extends ui.game.GameSceneUI {
         // add to scene
         this.scene3D.addChild(bullet);
 
+        /******************** 黑洞测试 ***********************/
+        Laya.Sprite3D.load(Const.BulletResUrl[1], Laya.Handler.create(this, (res) => {
+            let bulletBlackHole: Laya.Sprite3D = bullet.addChild(res) as Laya.Sprite3D;
+        }));
+
         /******************* hidden bullet trigger: 防止快速移动碰撞检测丢失（ccd半径越小越精准） *****************/
         // get bullet trigger from pool
         let trigger: Laya.MeshSprite3D = Laya.Pool.getItem("bulletTrigger");

@@ -68,4 +68,5 @@
    <item name="res/scene" type="" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
    <item name="res/cannon" type="" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
    <item name="res/Assets" type="" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="res/bullet" type="" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
 </res>
