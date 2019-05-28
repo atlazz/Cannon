@@ -8,14 +8,11 @@ export module ui.game {
 		public scene3DBox:Laya.Sprite;
 		public tutorialBox:Laya.Box;
 		public lvlLabel:Laya.Label;
-		public restartBtn:Laya.Image;
-		public restartMask:Laya.Sprite;
-		public restartText:laya.display.Text;
-		public nextBtn:Laya.Image;
-		public nextMask:Laya.Sprite;
-		public nextText:laya.display.Text;
 		public winLabel:Laya.Label;
-		public lvlSelect:Laya.TextInput;
+		public btn_back:Laya.Image;
+		public btn_cannon:Laya.Image;
+		public btn_restart:Laya.Image;
+		public btn_next:Laya.Image;
         constructor(){ super()}
         createChildren():void {
             super.createChildren();
@@ -26,10 +23,22 @@ export module ui.game {
 }
 export module ui.home {
     export class HomeViewUI extends View {
-		public homeIconBox:Laya.Box;
-		public drawerBox:Laya.Box;
-		public moreGameBox:Laya.Box;
-		public startButton:Laya.Image;
+		public mask_homeView:Laya.Image;
+		public box_homeIcon:Laya.Box;
+		public box_drawer:Laya.Box;
+		public box_moreGame:Laya.Box;
+		public btn_background:Laya.Image;
+		public btn_bullet:Laya.Image;
+		public btn_cannon:Laya.Image;
+		public btn_sound:Laya.Image;
+		public btn_start:Laya.Image;
+		public btn_vibration:Laya.Image;
+		public logo_diamond:Laya.Image;
+		public text_diamond:laya.display.Text;
+		public label_highScore:Laya.Label;
+		public label_level:Laya.Label;
+		public logo_gameTitle:Laya.Image;
+		public box_bannar:Laya.Image;
         constructor(){ super()}
         createChildren():void {
             super.createChildren();

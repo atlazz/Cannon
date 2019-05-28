@@ -1,6 +1,23 @@
 /** version */
 export const VERSION = "1.0.0";
 
+/************** 后台参数设置 *******************/
+/** 分享位置 */
+export const RewardPos = {
+    OverShare: 'OverShare',
+    Revive: 'revive',
+}
+/** Banner广告位置 */
+export const BannerPos = {
+    HomeView: 'HomeView',
+    GameScene: 'HomeView',
+    OverView: 'HomeView',
+    ReviveDialog: 'HomeView',
+}
+/** 复活倒数秒数 */
+export const ReviveCountdown: number = 5;
+/**********************************************/
+
 /** pages */
 export const URL_HomeView: string = "home/HomeView.scene";
 export const URL_GameScene: string = "game/GameScene.scene";
@@ -60,35 +77,39 @@ export const PiecesBrokenTime: number = 120;
 
 /** cannon */
 export const enum CannonType {
-    DEFAULT = 0,
-    FROZEN = 1,
+    DEFAULT = 1,
+    FROZEN = 2,
 }
-export const CannonResUrl: string[] = [
-    "res/cannon/Cannon_01.lh",
-    "res/cannon/Cannon_22.lh",
-];
-export const CannonInitPos: Laya.Vector3 = new Laya.Vector3(0, 0.05, -0.2);
+export const CannonResUrl = {
+    1: "res/cannon/Cannon_01.lh",   // DEFAULT
+    2: "res/cannon/Cannon_22.lh",   // FROZEN
+};
+export const CannonInitPos: Laya.Vector3 = new Laya.Vector3(0, 0.04, -0.17);
 export const CannonInitRot: Laya.Vector3 = new Laya.Vector3(0, 180, 0);
 export const CannonInitScale: Laya.Vector3 = new Laya.Vector3(25, 25, 25);
 export const TurretInitLocalRot: Laya.Vector3 = new Laya.Vector3(0, 0, 0);
 
 /** bullet */
+export const enum BulletType {
+    DEFAULT = 1,
+    FROZEN = 2,
+}
 export const BulletResUrl: string = "res/bullet.lh";
 // init radius
 export const BulletRadius: number = 0.08;
 // scale
-export const BulletScale = [
-    1,      // DEFAULT
-    1.2,    // FROZEN
-];
+export const BulletScale = {
+    1: 1,       // DEFAULT
+    2: 1.2,     // FROZEN
+};
 // mass
-export const BulletMass = [
-    40,     // DEFAULT
-    10,     // FROZEN
-];
+export const BulletMass = {
+    1: 40,      // DEFAULT
+    2: 10,      // FROZEN
+};
 // velocity
-export const BulletVelocity = [
-    40,     // DEFAULT
-    40,     // FROZEN
-];
+export const BulletVelocity = {
+    1: 40,      // DEFAULT
+    2: 40,      // FROZEN
+};
 

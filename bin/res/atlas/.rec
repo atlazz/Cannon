@@ -59,5 +59,17 @@ P 856FAF02 tips2.png
 D res/scene
 D res/stage
 D res/ui
+D res/ui/game
 P 2B4626AC btn_1.png
 P 2427B901 btn_2.png
+P C8171FFA btn_back.png
+P 54FEF5BF btn_cannon.png
+D res/ui/home
+P 9401CC40 blank.png
+P 6F26E988 btn_background.png
+P 6DA1FECE btn_bullet.png
+P 54FEF5BF btn_cannon.png
+P C1E424D7 btn_sound.png
+P B79B6026 btn_start.png
+P C17A50B3 btn_vibration.png
+P D7BA0F34 icon_diamond.png

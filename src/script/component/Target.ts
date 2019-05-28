@@ -18,7 +18,7 @@ export default class Target extends Laya.Script3D {
 
     /** target object pieces */
     private piecesList: Laya.MeshSprite3D[] = [];
-    
+
     /** 空中无碰撞计数，用于玻璃掉落碎掉 */
     private jumpCnt: number = 0;
 
@@ -86,7 +86,7 @@ export default class Target extends Laya.Script3D {
         // bullet
         else if (other.name === "bullet" || other.name === "bulletTrigger") {
             let bullet: Bullet = other.getComponent(Bullet);
-            if (bullet.type === Const.CannonType.FROZEN && this.type !== Const.TargetType.GLASS) {
+            if (bullet.type === Const.BulletType.FROZEN && this.type !== Const.TargetType.GLASS) {
                 this.setType(Const.TargetType.GLASS);
             }
         }
@@ -245,7 +245,9 @@ export default class Target extends Laya.Script3D {
         }
         // set material by type
         if (this.type === Const.TargetType.DEFAULT) {
-            this.material.albedoTexture = Laya.loader.getRes(Const.StageTexUrl[1]);
+            Laya.Texture2D.load(Const.StageTexUrl[1], Laya.Handler.create(this, (tex) => {
+                this.material.albedoTexture = tex;
+            }));
             this.material.specularColor = new Laya.Vector4(0, 0, 0, 1);
             this.material.enableEmission = true;
             this.material.emissionColor = new Laya.Vector4(0.1, 0.1, 0.1, 1);
@@ -258,7 +260,9 @@ export default class Target extends Laya.Script3D {
             this.material.emissionColor = new Laya.Vector4(0.2, 0.2, 0.2, 1);
         }
         else if (this.type === Const.TargetType.TNT) {
-            this.material.albedoTexture = Laya.loader.getRes(Const.StageTexUrl[2]);
+            Laya.Texture2D.load(Const.StageTexUrl[2], Laya.Handler.create(this, (tex) => {
+                this.material.albedoTexture = tex;
+            }));
             this.material.specularColor = new Laya.Vector4(0, 0, 0, 1);
             this.material.enableEmission = true;
             this.material.emissionColor = new Laya.Vector4(0.1, 0.1, 0.1, 1);
@@ -297,8 +301,8 @@ export default class Target extends Laya.Script3D {
             this.rigidbody.friction = 10;
         }
         else if (this.type === Const.TargetType.GLASS) {
-            this.rigidbody.mass = 0.1;
-            this.rigidbody.friction = 2;
+            this.rigidbody.mass = 10;
+            this.rigidbody.friction = 10;
         }
     }
 

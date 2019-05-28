@@ -1,9 +1,12 @@
-import { ui } from "./../../ui/layaMaxUI";
+import { ui } from "../../ui/layaMaxUI";
 import * as Const from "../Const";
-import Navigator from "../util/Navigator";
+import Global from "../Global";
+import Navigator from "../utils/Navigator";
+import wx from "../utils/wx";
 import Bullet from "../component/Bullet";
 import Target from "../component/Target";
 import Guard from "../component/Guard";
+import HomeView from "./HomeView";
 
 export default class GameScene extends ui.game.GameSceneUI {
     static instance: GameScene;
@@ -22,8 +25,17 @@ export default class GameScene extends ui.game.GameSceneUI {
     }
 
     onOpened(param?: any) {
+        console.log("GameScene onOpened()");
         this.visible = true;
         // this.state = Const.GameState.READY;
+
+
+        this.lvlLabel.visible = true;
+
+
+        this.showUI();
+        this.stageIdx = Global.gameData.stageIndex;
+        this.newStage();
     }
 
     public scene3D: Laya.Scene3D;
@@ -48,14 +60,14 @@ export default class GameScene extends ui.game.GameSceneUI {
     public cannonType: number = Const.CannonType.DEFAULT;
     private cannon: Laya.MeshSprite3D;
     private turret: Laya.MeshSprite3D;
-    private turretInitPos: Laya.Vector3;
+    public turretInitPos: Laya.Vector3;
     private isRecoil: boolean = false;
     private recoilTime: number;
     private MaxRecoilTime: number = 8;
 
     /** bullet */
-    private _bullet: Laya.MeshSprite3D;
-    private bulletDirection: Laya.Vector3 = new Laya.Vector3();
+    public bulletType: number = Const.CannonType.DEFAULT;
+    public bulletDirection: Laya.Vector3 = new Laya.Vector3();
 
     /** raycast */
     private mousePoint: Laya.Vector2 = new Laya.Vector2();
@@ -67,24 +79,32 @@ export default class GameScene extends ui.game.GameSceneUI {
 
     constructor() {
         super();
+        console.log("GameScene constructor()");
 
         GameScene.instance = this;
 
         this.initScene3D();
 
-        this.initCannon();
+        this.newCannon();
 
-        this.initBullet();
-
-        // load texture
-        Laya.loader.load(Const.StageTexUrl, Laya.Handler.create(this, () => {
-            this.stageIdx = 1;
-            this.loadGameStage();
-        }));
-
-        this.bindButton();
+        // preload texture
+        Laya.loader.load(Const.StageTexUrl);
+        // Laya.loader.load(Const.StageTexUrl, Laya.Handler.create(this, () => {
+        //     this.stageIdx = 1;
+        //     this.newStage();
+        // }));
 
         this.scene3D.physicsSimulation.fixedTimeStep = 0.5 / 60;
+        // Laya.timer.scale = 0.5;
+        // Laya.stage.frameRate = "slow";
+
+        // if (Laya.Browser.onMiniGame) {
+        //     wx.setPreferredFramesPerSecond(30);
+        // }
+    }
+
+    onEnable() {
+        this.bindButtons();
     }
 
     /** initialize scene */
@@ -128,9 +148,14 @@ export default class GameScene extends ui.game.GameSceneUI {
         }));
     }
 
-    /** initialize player */
-    private initCannon() {
-        Laya.Sprite3D.load(Const.CannonResUrl[0], Laya.Handler.create(this, (res) => {
+    /** create new cannon */
+    private newCannon() {
+        // destroy old cannon
+        if (this.cannon) {
+            this.cannon.destroy();
+        }
+        // load new cannon
+        Laya.Sprite3D.load(Const.CannonResUrl[this.cannonType], Laya.Handler.create(this, (res) => {
             this.cannon = res;
             this.scene3D.addChild(this.cannon);
             this.cannon.name = "player";
@@ -144,54 +169,75 @@ export default class GameScene extends ui.game.GameSceneUI {
         }));
     }
 
-    /** init bullet */
-    private initBullet() {
-        let radius: number = Const.BulletRadius;
-        this._bullet = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(radius));
-        this._bullet.name = "_bullet";
+    /** show game ui */
+    showUI() {
+        this.btn_back.visible = true;
+        this.btn_cannon.visible = true;
+    }
 
-        // add rigidbody
-        let bulletRigid: Laya.Rigidbody3D = this._bullet.addComponent(Laya.Rigidbody3D);
-        bulletRigid.colliderShape = new Laya.SphereColliderShape(radius);
+    /** hide game ui */
+    hideUI() {
+        this.btn_back.visible = false;
+        this.btn_cannon.visible = false;
+        this.btn_restart.visible = false;
+        this.btn_next.visible = false;
+        this.winLabel.visible = false;
     }
 
     /** bind button */
-    private bindButton() {
-        // restart button
-        this.restartBtn.on(Laya.Event.MOUSE_DOWN, this, () => {
-            this.restartMask.visible = true;
+    private bindButtons() {
+        // back home
+        this.btn_back.on(Laya.Event.CLICK, this, () => {
+            this.cleanStage();
+            this.hideUI();
+            // reset cannon rotation
+            if (this.turret) {
+                this.turret.transform.localRotationEuler = Const.TurretInitLocalRot.clone();
+            }
+            HomeView.openInstance();
         });
-        this.restartBtn.on(Laya.Event.MOUSE_UP, this, () => {
-            this.restartMask.visible = false;
+        // change cannon
+        this.btn_cannon.on(Laya.Event.CLICK, this, () => {
+            if (this.cannonType === Const.CannonType.DEFAULT) {
+                this.cannonType = Const.CannonType.FROZEN;
+                this.bulletType = this.cannonType;
+                this.newCannon();
+            }
+            else {
+                this.cannonType = Const.CannonType.DEFAULT;
+                this.bulletType = this.cannonType;
+                this.newCannon();
+            }
+        });
+
+        // restart
+        this.btn_restart.on(Laya.Event.CLICK, this, () => {
             this.restart();
         });
-        this.restartBtn.on(Laya.Event.MOUSE_OUT, this, () => {
-            this.restartMask.visible = false;
-        });
-        // next button
-        this.nextBtn.on(Laya.Event.MOUSE_DOWN, this, () => {
-            this.nextMask.visible = true;
-        });
-        this.nextBtn.on(Laya.Event.MOUSE_UP, this, () => {
-            this.nextMask.visible = false;
-            if (this.lvlSelect.text) {
-                this.stageIdx = +this.lvlSelect.text - 1;
-            }
+        // next stage
+        this.btn_next.on(Laya.Event.CLICK, this, () => {
             this.nextStage();
-        });
-        this.nextBtn.on(Laya.Event.MOUSE_OUT, this, () => {
-            this.nextMask.visible = false;
         });
     }
 
-    /** load game stage by index */
-    private loadGameStage() {
-        // destroy old stage
+    /** clean stage */
+    private cleanStage() {
         if (this.gameStage) {
             this.gameStage.destroyChildren();
             this.gameStage.destroy();
-            Laya.stage.off(Laya.Event.CLICK, this, this.onClick);
+            this.gameStage.timer.clearAll(this);
         }
+    }
+
+    /** create new stage by index */
+    newStage() {
+        // destroy old stage
+        this.cleanStage();
+
+        // hide
+        this.winLabel.visible = false;
+        this.btn_restart.visible = false;
+        this.btn_next.visible = false;
 
         // reset
         this.currBulletNum = 0;
@@ -199,8 +245,12 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.isStageStart = false;
         this.isRecoil = false;
         this.recoilTime = this.MaxRecoilTime;
-
         this.winLabel.visible = false;
+        this.bulletType = this.cannonType;
+        // reset turret rotation
+        if (this.turret) {
+            this.turret.transform.localRotationEuler = Const.TurretInitLocalRot.clone();
+        }
 
         // load stage
         let satgeResUrl: string = Const.StageResUrl + this.stageIdx + ".lh";
@@ -252,11 +302,13 @@ export default class GameScene extends ui.game.GameSceneUI {
                     let sizeZ: number = boundingBox.max.z - boundingBox.min.z;
                     collider.colliderShape = new Laya.BoxColliderShape(sizeX, sizeY, sizeZ);
                     // set material
-                    let mat: Laya.PBRSpecularMaterial = new Laya.PBRSpecularMaterial();
-                    // 刷新渲染模式，不然其上设置成透明渲染的物体会被遮盖
-                    mat.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
-                    mat.albedoTexture = Laya.loader.getRes(Const.StageTexUrl[0]);
-                    child.meshRenderer.material = mat;
+                    Laya.Texture2D.load(Const.StageTexUrl[0], Laya.Handler.create(this, (tex) => {
+                        let mat: Laya.PBRSpecularMaterial = new Laya.PBRSpecularMaterial();
+                        // 刷新渲染模式，不然其上设置成透明渲染的物体会被遮盖
+                        mat.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
+                        mat.albedoTexture = tex;
+                        child.meshRenderer.material = mat;
+                    }));
                 }
                 /** stand_cylinder */
                 else if (child.name.search("Cylinder") >= 0) {
@@ -268,11 +320,13 @@ export default class GameScene extends ui.game.GameSceneUI {
                     colliderShape.mesh = child.meshFilter.sharedMesh;
                     collider.colliderShape = colliderShape;
                     // set material
-                    let mat: Laya.PBRSpecularMaterial = new Laya.PBRSpecularMaterial();
-                    // 刷新渲染模式，不然其上设置成透明渲染的物体会被遮盖
-                    mat.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
-                    mat.albedoTexture = Laya.loader.getRes(Const.StageTexUrl[0]);
-                    child.meshRenderer.material = mat;
+                    Laya.Texture2D.load(Const.StageTexUrl[0], Laya.Handler.create(this, (tex) => {
+                        let mat: Laya.PBRSpecularMaterial = new Laya.PBRSpecularMaterial();
+                        // 刷新渲染模式，不然其上设置成透明渲染的物体会被遮盖
+                        mat.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
+                        mat.albedoTexture = tex;
+                        child.meshRenderer.material = mat;
+                    }));
                 }
                 /** Guard */
                 else if (child.name.search("Guard") >= 0) {
@@ -286,9 +340,9 @@ export default class GameScene extends ui.game.GameSceneUI {
             }
 
             // set stage listener
-            Laya.timer.frameLoop(1, this, this.stageLooping);
+            this.gameStage.frameLoop(1, this, this.stageLooping);
             // mouse click event listen: shoot a bullet
-            Laya.stage.on(Laya.Event.CLICK, this, this.onClick);
+            this.scene3DBox.on(Laya.Event.CLICK, this, this.onClick);
         }));
     }
 
@@ -298,17 +352,21 @@ export default class GameScene extends ui.game.GameSceneUI {
         // player win
         if (this.winCheckCnt++ >= Const.MaxWinCheckTime) {
             console.log("You win. Stage: " + this.stageIdx);
+            // off shoot
+            this.scene3DBox.off(Laya.Event.CLICK, this, this.onClick);
+            // show
             this.winLabel.visible = true;
-            Laya.stage.off(Laya.Event.CLICK, this, this.onClick);
+            this.btn_restart.visible = true;
+            this.btn_next.visible = true;
             // this.nextStage();
             // clear stage looping
-            Laya.timer.clear(this, this.stageLooping);
+            this.gameStage.timer.clear(this, this.stageLooping);
         }
         // // player fail: out of ammo
         // else if (this.currBulletNum >= this.MaxBulletNum) {
         //     console.log("out of ammo");
         //     this.restart();
-        //     Laya.timer.clear(this, this.stageLooping);
+        //     this.gameStage.timer.clear(this, this.stageLooping);
         // }
 
         /** cannon recoil playing */
@@ -339,14 +397,14 @@ export default class GameScene extends ui.game.GameSceneUI {
 
     /** restart current stage */
     restart() {
-        this.loadGameStage();
+        this.newStage();
     }
 
     /** start next stage */
     nextStage() {
         this.stageIdx++;
         if (this.stageIdx <= Const.StageNum) {
-            this.loadGameStage();
+            this.newStage();
         }
         else {
             console.log("通关");
@@ -356,7 +414,7 @@ export default class GameScene extends ui.game.GameSceneUI {
     /** mouse click event: shoot a bullet */
     private onClick() {
         // check res loading complete
-        if (!this.gameStage || !this.cannon || !this._bullet) {
+        if (!this.gameStage || !this.cannon) {
             return;
         }
 
@@ -366,7 +424,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.camera.viewportPointToRay(this.mousePoint, this.ray);
 
         // get bullet shooting direction
-        if (this.scene3D.physicsSimulation.rayCast(this.ray, this.hitResult, 30)) {
+        if (this.scene3D.physicsSimulation.rayCast(this.ray, this.hitResult, 30, 1, 1)) {
             // direction vector: [bullet init point] to [mouse hit point]
             Laya.Vector3.subtract(this.hitResult.point, this.turretInitPos, this.bulletDirection);
         }
@@ -383,82 +441,82 @@ export default class GameScene extends ui.game.GameSceneUI {
             // direction vector: [bullet init point] to [mouse hit point]
             Laya.Vector3.add(aV3, bV3, this.bulletDirection);
         }
+        // z轴过近>0，会导致仰角过大，屏蔽掉
+        var flag_turretDirection: boolean = this.bulletDirection.z < 0;
         Laya.Vector3.normalize(this.bulletDirection, this.bulletDirection);
 
+        // 开放物体物理受力：玩家有效输入前，子弹发射轨迹形状检测是否有碰撞
+        this.physicsStartCheck();
+
         // create bullet
-        this.createBullet(Const.CannonType.DEFAULT, this.bulletDirection);
+        this.createBullet();
 
         // set turret transform
         this.turret.transform.localRotationEuler = Const.TurretInitLocalRot.clone();
-        this.turret.transform.localRotationEulerX -= this.bulletDirection.y * 90;
-        this.turret.transform.localRotationEulerY -= this.bulletDirection.x * 90;
+        if (flag_turretDirection) {
+            this.turret.transform.localRotationEulerX -= this.bulletDirection.y * 90;
+            this.turret.transform.localRotationEulerY -= this.bulletDirection.x * 90;
+        }
         this.isRecoil = true;
         this.recoilTime = 0;
     }
 
-    /** create bullet */
-    private createBullet(type: number, direction: Laya.Vector3) {
-        this.cannonType = type;
-
-        let bullet: Laya.MeshSprite3D = this._bullet.clone();
-        bullet.name = "bullet";
-        this.scene3D.addChild(bullet);
-
-        // trasform
-        bullet.transform.localPosition = this.turretInitPos.clone();
-        Laya.Vector3.scale(bullet.transform.localScale, Const.BulletScale[this.cannonType], bullet.transform.localScale);
-
-        // add rigidbody
-        let bulletRigid: Laya.Rigidbody3D = bullet.getComponent(Laya.Rigidbody3D);
-
-        // quick moving detecion
-        bulletRigid.ccdMotionThreshold = 0.001;
-        // 半径越小越精准
-        bulletRigid.ccdSweptSphereRadius = Const.BulletRadius * Const.BulletScale[this.cannonType];
-
-        // set physics
-        bulletRigid.mass = Const.BulletMass[this.cannonType];
-
-        // set velocity
-        let velocity: Laya.Vector3 = direction.clone();
-        Laya.Vector3.scale(velocity, Const.BulletVelocity[this.cannonType], velocity);
-        bulletRigid.linearVelocity = velocity.clone();
-
-
-        // hidden bullet for quick moving detection setting start <===========================
-        let bulletTrigger: Laya.MeshSprite3D = bullet.clone();
-        bulletTrigger.name = "bulletTrigger";
-        this.scene3D.addChild(bulletTrigger);
-        // set trigger
-        (bulletTrigger.getComponent(Laya.Rigidbody3D)).isTrigger = true;
-        // quick moving detecion
-        (bulletTrigger.getComponent(Laya.Rigidbody3D)).ccdMotionThreshold = 0.001;
-        // 半径越小越精准
-        (bulletTrigger.getComponent(Laya.Rigidbody3D)).ccdSweptSphereRadius = Const.BulletRadius * Const.BulletScale[this.cannonType] / 1000;
-        // add script
-        let triggerScript: Bullet = bulletTrigger.addComponent(Bullet);
-        // set type
-        triggerScript.type = 999;
-        // hidden bullet setting end <========================================================
-
-
-        // add script
-        let bulletScript: Bullet = bullet.addComponent(Bullet);
-        // set type
-        bulletScript.type = this.cannonType;
-
-        // 开放物体物理受力：玩家有效输入前，子弹发射轨迹形状检测是否有碰撞
+    /** check physics start
+     *  开放物体物理受力：玩家有效输入前，子弹发射轨迹形状检测是否有碰撞
+     * */
+    private physicsStartCheck() {
         if (!this.isStageStart) {
-            var shape = new Laya.SphereColliderShape(Const.BulletRadius * 3);
+            var checkShape = new Laya.SphereColliderShape(Const.BulletRadius * Const.BulletScale[this.bulletType] * 3);
             var checkHitResult: Laya.HitResult[] = [];
-            if (this.scene3D.physicsSimulation.shapeCastAll(shape, this.turretInitPos, velocity, checkHitResult)) {
+            // get velocity
+            var velocity: Laya.Vector3 = this.bulletDirection.clone();
+            Laya.Vector3.scale(velocity, Const.BulletVelocity[this.bulletType], velocity);
+            if (this.scene3D.physicsSimulation.shapeCastAll(checkShape, this.turretInitPos, velocity, checkHitResult)) {
+                // check if target
                 for (let i in checkHitResult) {
-                    if (checkHitResult[i].collider.owner.name !== "stand") {
+                    if (checkHitResult[i].collider.owner.name.indexOf("Obstacle") >= 0) {
                         this.isStageStart = true;
+                        break;
                     }
                 }
             }
         }
+    }
+
+    /** create bullet */
+    private createBullet(type: number = this.bulletType) {
+        // update counter
+        this.currBulletNum++;
+
+        /**************************** bullet **************************/
+        // get bullet from pool
+        let bullet: Laya.MeshSprite3D = Laya.Pool.getItem("bullet");
+        // new bullet
+        if (!bullet) {
+            bullet = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(Const.BulletRadius));
+            bullet.name = "bullet";
+            bullet.addComponent(Bullet);
+        }
+        // reset bullet by type
+        let bulletScript: Bullet = bullet.getComponent(Bullet);
+        bulletScript.reset(type);
+        // add to scene
+        this.scene3D.addChild(bullet);
+
+        /******************* hidden bullet trigger: 防止快速移动碰撞检测丢失（ccd半径越小越精准） *****************/
+        // get bullet trigger from pool
+        let trigger: Laya.MeshSprite3D = Laya.Pool.getItem("bulletTrigger");
+        // new bullet trigger
+        if (!trigger) {
+            trigger = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(Const.BulletRadius));
+            trigger.name = "bulletTrigger";
+            trigger.addComponent(Bullet);
+        }
+        // reset bullet trigger by type
+        let triggerScript: Bullet = trigger.getComponent(Bullet);
+        triggerScript.reset(type);
+        // add to scene
+        this.scene3D.addChild(trigger);
     }
 
     /** background moving effect */
