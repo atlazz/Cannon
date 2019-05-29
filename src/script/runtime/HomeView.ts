@@ -35,11 +35,41 @@ export default class HomeView extends ui.home.HomeViewUI {
 
     private isGameDataLoaded: boolean = false;
 
+    private cannonScene3D: Laya.Scene3D;
+
     constructor() {
         super();
         console.log("HomeView constructor()");
         GameScene.openInstance();
         HomeView.instance = this;
+        this.initCannonSelect();
+    }
+
+    private initCannonSelect() {
+        // add scene
+        this.cannonScene3D = this.box_cannonScene3D.addChild(new Laya.Scene3D()) as Laya.Scene3D;
+
+        // camera
+        let camera = this.cannonScene3D.addChild(new Laya.Camera()) as Laya.Camera;
+        camera.transform.localPosition = new Laya.Vector3(0, 0, 10);
+        camera.transform.localRotationEuler = new Laya.Vector3(-20, 0, 0);
+        // camera.clearColor = null;
+
+        // direction light
+        let directionLight = this.cannonScene3D.addChild(new Laya.DirectionLight()) as Laya.DirectionLight;
+        directionLight.transform.localPosition = Const.LightInitPos.clone();
+        directionLight.transform.localRotationEuler = Const.LightInitRotEuler.clone();
+        directionLight.color = Const.LightInitColor.clone();
+
+        let bullet = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(1));
+        this.cannonScene3D.addChild(bullet);
+        // load cannon
+        Laya.Sprite3D.load(Const.CannonResUrl[1], Laya.Handler.create(this, (res) => {
+            let cannon = this.cannonScene3D.addChild(res) as Laya.Sprite3D;
+            // cannon.transform.localPosition = new Laya.Vector3(0, 0, -3);
+            // cannon.transform.localRotationEuler = new Laya.Vector3(0, -120, 0);
+            cannon.transform.localScale = new Laya.Vector3(100, 100, 100);
+        }));
     }
 
     onEnable() {
@@ -80,6 +110,16 @@ export default class HomeView extends ui.home.HomeViewUI {
         this.btn_vibration.on(Laya.Event.CLICK, this, () => {
             Global.gameData.vibrationEnabled = !Global.gameData.vibrationEnabled;
             this.btn_vibration.gray = !Global.gameData.vibrationEnabled;
+        });
+        // cannon select
+        this.btn_cannon.on(Laya.Event.CLICK, this, () => {
+            this.box_cannon.visible = true;
+            this.box_UI.visible = false;
+        });
+        // cannon back
+        this.btn_cannonBack.on(Laya.Event.CLICK, this, () => {
+            this.box_UI.visible = true;
+            this.box_cannon.visible = false;
         });
         //抽屉打开
         // this.drawerOpenButton.on(Laya.Event.MOUSE_DOWN, this, () => {

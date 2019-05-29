@@ -26,6 +26,7 @@ export module ui.game {
 export module ui.home {
     export class HomeViewUI extends View {
 		public mask_homeView:Laya.Image;
+		public box_UI:Laya.Box;
 		public box_homeIcon:Laya.Box;
 		public box_drawer:Laya.Box;
 		public box_moreGame:Laya.Box;
@@ -35,11 +36,14 @@ export module ui.home {
 		public btn_sound:Laya.Image;
 		public btn_start:Laya.Image;
 		public btn_vibration:Laya.Image;
-		public icon_diamond:Laya.Image;
-		public text_diamond:laya.display.Text;
 		public label_highScore:Laya.Label;
 		public label_level:Laya.Label;
 		public icon_gameTitle:Laya.Image;
+		public box_cannon:Laya.Box;
+		public box_cannonScene3D:Laya.Box;
+		public btn_cannonBack:Laya.Image;
+		public icon_diamond:Laya.Image;
+		public text_diamond:laya.display.Text;
 		public box_bannar:Laya.Image;
         constructor(){ super()}
         createChildren():void {
