@@ -1,7 +1,7 @@
 /** version */
 export const VERSION = "1.0.0";
 
-/************** 后台参数设置 *******************/
+/************** 后台设置参数 *******************/
 /** 分享位置 */
 export const RewardPos = {
     OverShare: 'OverShare',
@@ -16,7 +16,15 @@ export const BannerPos = {
 }
 /** 复活倒数秒数 */
 export const ReviveCountdown: number = 5;
-/**********************************************/
+
+/************** 游戏控制参数 **************/
+/** 游戏运行状态 */
+export enum GameState {
+    /** 游戏开始 */
+    START = 1,
+    /** 游戏结束 */
+    OVER = 2,
+}
 
 /** pages */
 export const URL_HomeView: string = "home/HomeView.scene";
@@ -61,13 +69,13 @@ export const BgResUrl: string[] = [
 
 /** target object */
 export const enum TargetType {
-    DEFAULT = 0,
-    GLASS = 1,
-    TNT = 2
+    DEFAULT = 1,
+    GLASS = 2,
+    TNT = 3,
 }
 
 /** glass */
-export const GlassBrokenVelocity: number = 12.5;
+export const GlassBrokenVelocity: number = 14;
 export const GlassFallingBrokenVelocity: number = 1;
 
 /** piece of target object */
@@ -78,8 +86,8 @@ export const PiecesBrokenTime: number = 120;
 /** cannon */
 export const enum CannonType {
     DEFAULT = 1,
-    SHOTGUN = 2,
-    FROZEN = 3,
+    SHOTGUN = 3,
+    FROZEN = 2,
 }
 export const CannonResUrl = {
     1: "res/cannon/Cannon_01.lh",   // DEFAULT
@@ -90,25 +98,75 @@ export const CannonInitRot: Laya.Vector3 = new Laya.Vector3(0, 180, 0);
 export const CannonInitScale: Laya.Vector3 = new Laya.Vector3(25, 25, 25);
 export const TurretInitLocalRot: Laya.Vector3 = new Laya.Vector3(0, 0, 0);
 
-/** bullet */
-export const BulletResUrl = {
-    1: "res/bullet/blackhole.lh",
+/******** bullet ********/
+/** reward bullet */
+export const enum BulletRewardType {
+    BLACKHOLE = 1,
 };
+export const BulletRewardResUrl = {
+    1: "res/bullet/blackhole.lh",   // BLACKHOLE
+};
+
+/** bullet physics */
 // init radius
 export const BulletRadius: number = 0.08;
 // scale
 export const BulletScale = {
-    1: 1,       // DEFAULT
-    2: 1.2,     // FROZEN
+    /** cannon bullet */
+    0: {
+        1: 1,       // DEFAULT
+        2: 1.2,     // FROZEN
+    },
+    /** reward bullet */
+    1: {
+        1: 7,       // BLACKHOLE
+    }
 };
 // mass
 export const BulletMass = {
-    1: 40,      // DEFAULT
-    2: 10,      // FROZEN
+    /** cannon bullet */
+    0: {
+        1: 40,      // DEFAULT
+        2: 10,      // FROZEN
+    },
+    /** reward bullet */
+    1: {
+        1: 100,       // BLACKHOLE
+    }
 };
 // velocity
 export const BulletVelocity = {
-    1: 40,      // DEFAULT
-    2: 40,      // FROZEN
+    /** cannon bullet */
+    0: {
+        1: 40,      // DEFAULT
+        2: 40,      // FROZEN
+    },
+    /** reward bullet */
+    1: {
+        1: 5,       // BLACKHOLE
+    }
 };
-
+// trigger or not
+export const BulletTrigger = {
+    /** cannon bullet */
+    0: {
+        1: false,      // DEFAULT
+        2: false,      // FROZEN
+    },
+    /** reward bullet */
+    1: {
+        1: true,       // BLACKHOLE
+    }
+}
+// override gravity
+export const BulletOverrideGravity = {
+    /** cannon bullet */
+    0: {
+        1: false,      // DEFAULT
+        2: false,      // FROZEN
+    },
+    /** reward bullet */
+    1: {
+        1: true,       // BLACKHOLE
+    }
+}

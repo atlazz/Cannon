@@ -55,21 +55,21 @@ export default class HomeView extends ui.home.HomeViewUI {
     /**绑定按钮 */
     private bindButtons() {
         // start game
-        this.btn_start.on(Laya.Event.MOUSE_DOWN, this, () => {
-            this.btn_start.alpha = 0.8;
-        });
-        this.btn_start.on(Laya.Event.MOUSE_OUT, this, () => {
-            this.btn_start.alpha = 1;
-        });
-        this.btn_start.on(Laya.Event.MOUSE_UP, this, () => {
-            this.btn_start.alpha = 1;
-            if (GameScene.instance) {
-                // ws.traceEvent("Click_Startgame");
-                // hide home view
-                this.hide();
-                // show game scene
-                GameScene.openInstance();
-            }
+        this.btn_start.on(Laya.Event.CLICK, this, () => {
+            let scaleX: number = this.btn_start.scaleX;
+            let scaleY: number = this.btn_start.scaleY;
+            Laya.Tween.to(this.btn_start, {alpha: 0.8, scaleX: scaleX * 0.9, scaleY: scaleY * 0.9}, 50, Laya.Ease.linearInOut, Laya.Handler.create(this, () => {
+                Laya.Tween.to(this.btn_start, {alpha: 1, scaleX: scaleX, scaleY: scaleY}, 50, Laya.Ease.linearInOut, Laya.Handler.create(this, () => {
+                    if (GameScene.instance) {
+                        // ws.traceEvent("Click_Startgame");
+                        // hide home view
+                        this.hide();
+                        // show game scene
+                        GameScene.instance.state = Const.GameState.START;
+                        GameScene.openInstance();
+                    }
+                }));
+            }));
         });
         // sound control
         this.btn_sound.on(Laya.Event.CLICK, this, () => {
@@ -216,8 +216,8 @@ export default class HomeView extends ui.home.HomeViewUI {
         this.label_highScore.visible = true;
         this.label_level.visible = true;
         // 调整钻石及其数量位置居中
-        this.logo_diamond.x = this.stage.width / 2 - (this.text_diamond.text.length * this.text_diamond.fontSize + this.text_diamond.x) / 2;
-        this.logo_diamond.visible = true;
+        this.icon_diamond.x = this.stage.width / 2 - (this.text_diamond.text.length * this.text_diamond.fontSize + this.text_diamond.x) / 2;
+        this.icon_diamond.visible = true;
     }
 
     /**提交游戏数据*/

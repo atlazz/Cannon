@@ -27,15 +27,13 @@ export default class GameScene extends ui.game.GameSceneUI {
     onOpened(param?: any) {
         console.log("GameScene onOpened()");
         this.visible = true;
-        // this.state = Const.GameState.READY;
 
-
-        this.lvlLabel.visible = true;
-
-
-        this.showUI();
-        this.stageIdx = Global.gameData.stageIndex;
-        this.newStage();
+        if (this.state === Const.GameState.START) {
+            this.lvlLabel.visible = true;
+            this.showUI();
+            this.stageIdx = 11//Global.gameData.stageIndex;
+            this.newStage();
+        }
     }
 
     public scene3D: Laya.Scene3D;
@@ -68,6 +66,8 @@ export default class GameScene extends ui.game.GameSceneUI {
     /** bullet */
     public bulletType: number = Const.CannonType.DEFAULT;
     public bulletDirection: Laya.Vector3 = new Laya.Vector3();
+    public isRewardBullet: boolean = false;
+    public bulletRewardType: number;
 
     /** raycast */
     private mousePoint: Laya.Vector2 = new Laya.Vector2();
@@ -110,7 +110,7 @@ export default class GameScene extends ui.game.GameSceneUI {
     /** initialize scene */
     private initScene3D() {
         // add scene
-        this.scene3D = this.scene3DBox.addChild(new Laya.Scene3D()) as Laya.Scene3D;
+        this.scene3D = this.box_scene3D.addChild(new Laya.Scene3D()) as Laya.Scene3D;
 
         // camera
         this.camera = this.scene3D.addChild(new Laya.Camera()) as Laya.Camera;
@@ -171,23 +171,19 @@ export default class GameScene extends ui.game.GameSceneUI {
 
     /** show game ui */
     showUI() {
-        this.btn_back.visible = true;
-        this.btn_cannon.visible = true;
+        this.box_UI.visible = true;
     }
 
     /** hide game ui */
     hideUI() {
-        this.btn_back.visible = false;
-        this.btn_cannon.visible = false;
-        this.btn_restart.visible = false;
-        this.btn_next.visible = false;
-        this.winLabel.visible = false;
+        this.box_UI.visible = false;
     }
 
     /** bind button */
     private bindButtons() {
         // back home
         this.btn_back.on(Laya.Event.CLICK, this, () => {
+            this.state = Const.GameState.OVER;
             this.cleanStage();
             this.hideUI();
             // reset cannon rotation
@@ -208,6 +204,16 @@ export default class GameScene extends ui.game.GameSceneUI {
                 this.bulletType = this.cannonType;
                 this.newCannon();
             }
+        });
+        // reward bullet
+        this.btn_rewardBullet.on(Laya.Event.CLICK, this, () => {
+            let scaleX: number = this.btn_rewardBullet.scaleX;
+            let scaleY: number = this.btn_rewardBullet.scaleY;
+            Laya.Tween.to(this.btn_rewardBullet, { scaleX: scaleX * 0.9, scaleY: scaleY * 0.9 }, 50, Laya.Ease.linearInOut, Laya.Handler.create(this, () => {
+                Laya.Tween.to(this.btn_rewardBullet, { scaleX: scaleX, scaleY: scaleY }, 50, Laya.Ease.linearInOut, Laya.Handler.create(this, () => {
+                    this.isRewardBullet = true;
+                }));
+            }));
         });
 
         // restart
@@ -342,32 +348,14 @@ export default class GameScene extends ui.game.GameSceneUI {
             // set stage listener
             this.gameStage.frameLoop(1, this, this.stageLooping);
             // mouse click event listen: shoot a bullet
-            this.scene3DBox.on(Laya.Event.CLICK, this, this.onClick);
+            this.box_scene3D.on(Laya.Event.CLICK, this, this.onClick);
         }));
     }
 
     /** game stage looping */
     private stageLooping() {
         /** win check */
-        // player win
-        if (this.winCheckCnt++ >= Const.MaxWinCheckTime) {
-            console.log("You win. Stage: " + this.stageIdx);
-            // off shoot
-            this.scene3DBox.off(Laya.Event.CLICK, this, this.onClick);
-            // show
-            this.winLabel.visible = true;
-            this.btn_restart.visible = true;
-            this.btn_next.visible = true;
-            // this.nextStage();
-            // clear stage looping
-            this.gameStage.timer.clear(this, this.stageLooping);
-        }
-        // // player fail: out of ammo
-        // else if (this.currBulletNum >= this.MaxBulletNum) {
-        //     console.log("out of ammo");
-        //     this.restart();
-        //     this.gameStage.timer.clear(this, this.stageLooping);
-        // }
+        this.winCheck();
 
         /** cannon recoil playing */
         if (this.isRecoil) {
@@ -393,6 +381,30 @@ export default class GameScene extends ui.game.GameSceneUI {
 
         /** background moving */
         this.background && this.bgMoving();
+    }
+
+    /** win check */
+    private winCheck() {
+        // player win
+        if (this.winCheckCnt++ >= Const.MaxWinCheckTime) {
+            console.log("You win. Stage: " + this.stageIdx);
+            // off shoot
+            this.box_scene3D.off(Laya.Event.CLICK, this, this.onClick);
+            // show
+            this.winLabel.visible = true;
+            this.btn_restart.visible = true;
+            this.btn_next.visible = true;
+            // this.nextStage();
+            // clear stage looping
+            this.gameStage.timer.clear(this, this.stageLooping);
+        }
+        // // player fail: out of ammo
+        // else if (this.currBulletNum >= this.MaxBulletNum) {
+        //     console.log("out of ammo");
+        //     this.btn_restart.visible = true;
+        //     this.btn_next.visible = true;
+        //     this.gameStage.timer.clear(this, this.stageLooping);
+        // }
     }
 
     /** restart current stage */
@@ -466,11 +478,11 @@ export default class GameScene extends ui.game.GameSceneUI {
      * */
     private physicsStartCheck() {
         if (!this.isStageStart) {
-            var checkShape = new Laya.SphereColliderShape(Const.BulletRadius * Const.BulletScale[this.bulletType] * 3);
+            var checkShape = new Laya.SphereColliderShape(Const.BulletRadius * Const.BulletScale[+this.isRewardBullet][this.bulletType] * 3);
             var checkHitResult: Laya.HitResult[] = [];
             // get velocity
             var velocity: Laya.Vector3 = this.bulletDirection.clone();
-            Laya.Vector3.scale(velocity, Const.BulletVelocity[this.bulletType], velocity);
+            Laya.Vector3.scale(velocity, Const.BulletVelocity[+this.isRewardBullet][this.bulletType], velocity);
             if (this.scene3D.physicsSimulation.shapeCastAll(checkShape, this.turretInitPos, velocity, checkHitResult)) {
                 // check if target
                 for (let i in checkHitResult) {
@@ -484,44 +496,68 @@ export default class GameScene extends ui.game.GameSceneUI {
     }
 
     /** create bullet */
-    private createBullet(type: number = this.bulletType) {
+    private createBullet() {
         // update counter
         this.currBulletNum++;
 
-        /**************************** bullet **************************/
-        // get bullet from pool
-        let bullet: Laya.MeshSprite3D = Laya.Pool.getItem("bullet");
-        // new bullet
-        if (!bullet) {
-            bullet = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(Const.BulletRadius));
-            bullet.name = "bullet";
-            bullet.addComponent(Bullet);
+        this.bulletRewardType = 1;
+        /** reward bullet active */
+        if (this.isRewardBullet) {
+            // add effect sprite
+            Laya.Sprite3D.load(Const.BulletRewardResUrl[this.bulletRewardType], Laya.Handler.create(this, (res) => {
+                let bullet: Laya.MeshSprite3D = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(Const.BulletRadius));
+                bullet.name = "bullet";
+                let bulletBlackHole: Laya.Sprite3D = bullet.addChild(res) as Laya.Sprite3D;
+                bulletBlackHole.name = "effect";
+                // reset bullet by type
+                let bulletScript: Bullet = bullet.addComponent(Bullet);
+                bulletScript.reset(this.bulletRewardType, true);
+                // add to scene
+                this.scene3D.addChild(bullet);
+                
+                let trigger: Laya.MeshSprite3D = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(Const.BulletRadius));
+                trigger.name = "bulletTrigger";
+                // reset bullet trigger by type
+                let triggerScript: Bullet = trigger.addComponent(Bullet);
+                triggerScript.reset(this.bulletRewardType, true);
+                // add to scene
+                this.scene3D.addChild(trigger);
+            }));
+            // reset
+            this.isRewardBullet = false;
         }
-        // reset bullet by type
-        let bulletScript: Bullet = bullet.getComponent(Bullet);
-        bulletScript.reset(type);
-        // add to scene
-        this.scene3D.addChild(bullet);
+        /** cannon bullet */
+        else {
+            /**************************** bullet **************************/
+            // get bullet from pool
+            let bullet: Laya.MeshSprite3D = Laya.Pool.getItem("bullet");
+            // new bullet
+            if (!bullet) {
+                bullet = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(Const.BulletRadius));
+                bullet.name = "bullet";
+                bullet.addComponent(Bullet);
+            }
+            // reset bullet by type
+            let bulletScript: Bullet = bullet.getComponent(Bullet);
+            bulletScript.reset(this.bulletType);
+            // add to scene
+            this.scene3D.addChild(bullet);
 
-        /******************** 黑洞测试 ***********************/
-        Laya.Sprite3D.load(Const.BulletResUrl[1], Laya.Handler.create(this, (res) => {
-            let bulletBlackHole: Laya.Sprite3D = bullet.addChild(res) as Laya.Sprite3D;
-        }));
-
-        /******************* hidden bullet trigger: 防止快速移动碰撞检测丢失（ccd半径越小越精准） *****************/
-        // get bullet trigger from pool
-        let trigger: Laya.MeshSprite3D = Laya.Pool.getItem("bulletTrigger");
-        // new bullet trigger
-        if (!trigger) {
-            trigger = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(Const.BulletRadius));
-            trigger.name = "bulletTrigger";
-            trigger.addComponent(Bullet);
+            /******************* hidden bullet trigger: 防止快速移动碰撞检测丢失（ccd半径越小越精准） *****************/
+            // get bullet trigger from pool
+            let trigger: Laya.MeshSprite3D = Laya.Pool.getItem("bulletTrigger");
+            // new bullet trigger
+            if (!trigger) {
+                trigger = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(Const.BulletRadius));
+                trigger.name = "bulletTrigger";
+                trigger.addComponent(Bullet);
+            }
+            // reset bullet trigger by type
+            let triggerScript: Bullet = trigger.getComponent(Bullet);
+            triggerScript.reset(this.bulletType);
+            // add to scene
+            this.scene3D.addChild(trigger);
         }
-        // reset bullet trigger by type
-        let triggerScript: Bullet = trigger.getComponent(Bullet);
-        triggerScript.reset(type);
-        // add to scene
-        this.scene3D.addChild(trigger);
     }
 
     /** background moving effect */

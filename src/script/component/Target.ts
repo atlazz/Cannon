@@ -85,10 +85,7 @@ export default class Target extends Laya.Script3D {
         }
         // bullet
         else if (other.name === "bullet" || other.name === "bulletTrigger") {
-            let bullet: Bullet = other.getComponent(Bullet);
-            if (bullet.type === Const.CannonType.FROZEN && this.type !== Const.TargetType.GLASS) {
-                this.setType(Const.TargetType.GLASS);
-            }
+            this.bulletHit(other.getComponent(Bullet));
         }
         // TNT bomb wave
         else if (other.name === "bomb") {
@@ -174,6 +171,29 @@ export default class Target extends Laya.Script3D {
         this.jumpCnt = 0;
     }
 
+    /** bullet hit handler */
+    private bulletHit(bullet: Bullet) {
+        /** reward bullet */
+        if (bullet.isReward) {
+            // if (bullet.type === Const.BulletRewardType.BLACKHOLE) {
+            //     // this.target.timer.frameOnce(1, this, () => {
+            //         this.rigidbody.destroy();
+            //     // });
+            //     let toPos = bullet.bullet.transform.position.clone();
+            //     Laya.Tween.to(this.target.transform.position, {x: toPos.x, y: toPos.y, z: toPos.z - 1}, 200, Laya.Ease.linearInOut, Laya.Handler.create(this, () => {
+            //         this.target.destroy();
+            //     }));
+            // }
+        }
+        /** cannon bullet */
+        else {
+            // Frozen
+            if (bullet.type === Const.CannonType.FROZEN && this.type !== Const.TargetType.GLASS) {
+                this.setType(Const.TargetType.GLASS);
+            }
+        }
+    }
+
     onUpdate() {
         // check spirte alive
         if (this.target.destroyed) {
@@ -209,7 +229,7 @@ export default class Target extends Laya.Script3D {
          *  增大物体间相互作用力（如摩擦系数）可减少该情况发生，但不能杜绝，
          *  故在此检测该情况并对刚体销毁重建
          * */
-        if (this.rigidbody && this.rigidbody.isActive == false) {
+        if (!this.rigidbody.destroyed && this.rigidbody.isActive == false) {
             console.log("Physics_engine_bug_fixing: Reset rigidbody.");
             this.refreshRigidbody();
         }

@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":2,
-    "selecteID":31,
+    "selectedBox":35,
+    "selecteID":26,
     "searchKey":"View",
     "props":{"width":720,"sceneWidth":720,"sceneHeight":1280,"sceneColor":"#000000","runtime":"script/runtime/GameScene.ts","right":0,"left":0,"height":1280,"centerY":0,"centerX":0},
     "nodeParent":-1,
-    "maxID":33,
+    "maxID":36,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -17,10 +17,10 @@
         {
             "x":15,
             "type":"Sprite",
-            "searchKey":"Sprite,scene3DBox",
-            "props":{"y":0,"x":0,"width":720,"var":"scene3DBox","height":1280},
+            "searchKey":"Sprite,box_scene3D",
+            "props":{"y":0,"x":0,"width":720,"var":"box_scene3D","height":1280},
             "nodeParent":2,
-            "label":"scene3DBox",
+            "label":"box_scene3D",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
@@ -31,129 +31,168 @@
         {
             "x":15,
             "type":"Box",
-            "searchKey":"Box,tutorialBox",
-            "props":{"width":720,"visible":false,"var":"tutorialBox","height":800,"centerX":0,"bottom":0,"anchorY":0.5,"anchorX":0.5},
+            "searchKey":"Box,box_UI",
+            "props":{"y":0,"x":0,"width":720,"visible":false,"var":"box_UI","mouseThrough":true,"height":1280},
             "nodeParent":2,
-            "label":"tutorialBox",
+            "label":"box_UI",
+            "isOpen":true,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":35,
+            "child":[
+                {
+                    "x":30,
+                    "type":"Label",
+                    "searchKey":"Label,lvlLabel",
+                    "props":{"y":100,"x":268,"visible":false,"var":"lvlLabel","valign":"middle","top":100,"text":"level 1","fontSize":60,"centerX":0,"bold":true,"align":"center"},
+                    "nodeParent":35,
+                    "label":"lvlLabel",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":5,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Label",
+                    "searchKey":"Label,winLabel",
+                    "props":{"y":601,"x":204,"visible":false,"var":"winLabel","valign":"middle","text":"You Win","fontSize":80,"centerY":0.5,"centerX":0.5,"bold":true,"align":"center"},
+                    "nodeParent":35,
+                    "label":"winLabel",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":11,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image,btn_back",
+                    "props":{"y":20,"x":20,"visible":true,"var":"btn_back","top":20,"skin":"res/ui/game/btn_back.png","scaleY":2,"scaleX":2,"left":20},
+                    "nodeParent":35,
+                    "label":"btn_back",
+                    "isOpen":true,
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":26,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image,btn_cannon",
+                    "props":{"y":1134,"x":313,"visible":true,"var":"btn_cannon","skin":"res/ui/game/btn_cannon.png","scaleY":1.5,"scaleX":1.5,"centerX":0.5,"bottom":50},
+                    "nodeParent":35,
+                    "label":"btn_cannon",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":28,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image,btn_restart",
+                    "props":{"y":750,"x":150,"visible":false,"var":"btn_restart","top":750,"skin":"res/ui/game/btn_1.png","scaleY":0.5,"scaleX":0.5,"left":150},
+                    "nodeParent":35,
+                    "label":"btn_restart",
+                    "isOpen":false,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":29,
+                    "child":[
+                        {
+                            "type":"Text",
+                            "searchKey":"Text",
+                            "props":{"width":376,"valign":"middle","text":"重来","height":184,"fontSize":100,"font":"SimHei","align":"center"},
+                            "nodeParent":29,
+                            "label":"Text",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":30,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image,btn_next",
+                    "props":{"y":750,"x":382,"visible":false,"var":"btn_next","top":750,"skin":"res/ui/game/btn_2.png","scaleY":0.5,"scaleX":0.5,"right":150},
+                    "nodeParent":35,
+                    "label":"btn_next",
+                    "isOpen":false,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":31,
+                    "child":[
+                        {
+                            "type":"Text",
+                            "searchKey":"Text",
+                            "props":{"width":376,"valign":"middle","text":"下一关","height":184,"fontSize":100,"font":"SimHei","align":"center"},
+                            "nodeParent":31,
+                            "label":"Text",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":32,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image,btn_rewardBullet",
+                    "props":{"y":1016,"x":606,"var":"btn_rewardBullet","skin":"res/ui/game/RB_1.png","scaleY":1.5,"scaleX":1.5,"right":50,"bottom":200,"anchorY":0.5,"anchorX":0.5},
+                    "nodeParent":35,
+                    "label":"btn_rewardBullet",
+                    "isOpen":false,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":33,
+                    "child":[
+                        {
+                            "type":"Image",
+                            "searchKey":"Image",
+                            "props":{"skin":"res/ui/game/tips_trail.png","scaleY":0.75,"scaleX":0.75,"right":0,"bottom":0},
+                            "nodeParent":33,
+                            "label":"Image",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":34,
+                            "child":[
+                                ]
+                        }]
+                }]
+        },
+        {
+            "x":15,
+            "type":"Box",
+            "searchKey":"Box,box_tutorial",
+            "props":{"width":720,"visible":false,"var":"box_tutorial","height":800,"centerX":0,"bottom":0,"anchorY":0.5,"anchorX":0.5},
+            "nodeParent":2,
+            "label":"box_tutorial",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
             "compId":4,
             "child":[
                 ]
-        },
-        {
-            "x":15,
-            "type":"Label",
-            "searchKey":"Label,lvlLabel",
-            "props":{"visible":false,"var":"lvlLabel","valign":"middle","top":100,"text":"level 1","fontSize":60,"centerX":0,"bold":true,"align":"center"},
-            "nodeParent":2,
-            "label":"lvlLabel",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":5,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"Label",
-            "searchKey":"Label,winLabel",
-            "props":{"visible":false,"var":"winLabel","valign":"middle","text":"You Win","fontSize":80,"centerY":0.5,"centerX":0.5,"bold":true,"align":"center"},
-            "nodeParent":2,
-            "label":"winLabel",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":11,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"Image",
-            "searchKey":"Image,btn_back",
-            "props":{"visible":false,"var":"btn_back","top":20,"skin":"res/ui/game/btn_back.png","scaleY":2,"scaleX":2,"left":20},
-            "nodeParent":2,
-            "label":"btn_back",
-            "isOpen":true,
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":26,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"Image",
-            "searchKey":"Image,btn_cannon",
-            "props":{"visible":false,"var":"btn_cannon","skin":"res/ui/game/btn_cannon.png","scaleY":1.5,"scaleX":1.5,"centerX":0.5,"bottom":50},
-            "nodeParent":2,
-            "label":"btn_cannon",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":28,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"Image",
-            "searchKey":"Image,btn_restart",
-            "props":{"y":750,"x":150,"visible":false,"var":"btn_restart","top":750,"skin":"res/ui/game/btn_1.png","scaleY":0.5,"scaleX":0.5,"left":150},
-            "nodeParent":2,
-            "label":"btn_restart",
-            "isOpen":true,
-            "isDirectory":true,
-            "isAniNode":true,
-            "hasChild":true,
-            "compId":29,
-            "child":[
-                {
-                    "x":30,
-                    "type":"Text",
-                    "searchKey":"Text",
-                    "props":{"width":376,"valign":"middle","text":"重来","height":184,"fontSize":100,"font":"SimHei","align":"center"},
-                    "nodeParent":29,
-                    "label":"Text",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":30,
-                    "child":[
-                        ]
-                }]
-        },
-        {
-            "x":15,
-            "type":"Image",
-            "searchKey":"Image,btn_next",
-            "props":{"visible":false,"var":"btn_next","top":750,"skin":"res/ui/game/btn_2.png","scaleY":0.5,"scaleX":0.5,"right":150},
-            "nodeParent":2,
-            "label":"btn_next",
-            "isOpen":true,
-            "isDirectory":true,
-            "isAniNode":true,
-            "hasChild":true,
-            "compId":31,
-            "child":[
-                {
-                    "x":30,
-                    "type":"Text",
-                    "searchKey":"Text",
-                    "props":{"width":376,"valign":"middle","text":"下一关","height":184,"fontSize":100,"font":"SimHei","align":"center"},
-                    "nodeParent":31,
-                    "label":"Text",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":32,
-                    "child":[
-                        ]
-                }]
         }],
     "animations":[
         {

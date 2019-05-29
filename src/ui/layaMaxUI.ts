@@ -5,14 +5,16 @@ import Scene=Laya.Scene;
 var REG: Function = Laya.ClassUtils.regClass;
 export module ui.game {
     export class GameSceneUI extends View {
-		public scene3DBox:Laya.Sprite;
-		public tutorialBox:Laya.Box;
+		public box_scene3D:Laya.Sprite;
+		public box_UI:Laya.Box;
 		public lvlLabel:Laya.Label;
 		public winLabel:Laya.Label;
 		public btn_back:Laya.Image;
 		public btn_cannon:Laya.Image;
 		public btn_restart:Laya.Image;
 		public btn_next:Laya.Image;
+		public btn_rewardBullet:Laya.Image;
+		public box_tutorial:Laya.Box;
         constructor(){ super()}
         createChildren():void {
             super.createChildren();
@@ -33,11 +35,11 @@ export module ui.home {
 		public btn_sound:Laya.Image;
 		public btn_start:Laya.Image;
 		public btn_vibration:Laya.Image;
-		public logo_diamond:Laya.Image;
+		public icon_diamond:Laya.Image;
 		public text_diamond:laya.display.Text;
 		public label_highScore:Laya.Label;
 		public label_level:Laya.Label;
-		public logo_gameTitle:Laya.Image;
+		public icon_gameTitle:Laya.Image;
 		public box_bannar:Laya.Image;
         constructor(){ super()}
         createChildren():void {

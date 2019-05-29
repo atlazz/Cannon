@@ -145,7 +145,7 @@
 					"playOnAwake":true,
 					"maxParticles":1000,
 					"autoRandomSeed":true,
-					"randomSeed":1.585932E+09,
+					"randomSeed":8.309262E+07,
 					"emission":{
 						"enable":true,
 						"emissionRate":1,
@@ -361,9 +361,9 @@
 						-0.7071068
 					],
 					"scale":[
-						0.383155,
-						0.3831554,
-						0.3831554
+						0.45212,
+						0.4521202,
+						0.4521202
 					],
 					"meshPath":"Library/unity default resources-Sphere.lm",
 					"enableRender":true,
@@ -386,7 +386,7 @@
 					"position":[
 						0,
 						0,
-						-0.1067301
+						-0.12594
 					],
 					"rotation":[
 						1,
@@ -395,9 +395,9 @@
 						0
 					],
 					"scale":[
-						1.273842,
-						1.273844,
-						1.273844
+						1.50313,
+						1.50314,
+						1.50314
 					],
 					"meshPath":"Library/unity default resources-Quad.lm",
 					"enableRender":true,
@@ -529,7 +529,7 @@
 					"playOnAwake":true,
 					"maxParticles":1000,
 					"autoRandomSeed":true,
-					"randomSeed":1.618628E+09,
+					"randomSeed":2.157138E+09,
 					"emission":{
 						"enable":true,
 						"emissionRate":10,
@@ -729,7 +729,7 @@
 					"playOnAwake":true,
 					"maxParticles":1000,
 					"autoRandomSeed":true,
-					"randomSeed":4.209627E+09,
+					"randomSeed":1.125712E+09,
 					"emission":{
 						"enable":true,
 						"emissionRate":1,
@@ -834,7 +834,7 @@
 						1
 					],
 					"isPerformanceMode":true,
-					"duration":5,
+					"duration":10,
 					"looping":true,
 					"prewarm":false,
 					"startDelayType":0,
@@ -929,12 +929,67 @@
 					"playOnAwake":true,
 					"maxParticles":1000,
 					"autoRandomSeed":true,
-					"randomSeed":2.686663E+08,
+					"randomSeed":2.110368E+08,
 					"emission":{
 						"enable":true,
 						"emissionRate":10,
 						"emissionRateTip":"Time",
 						"bursts":[]
+					},
+					"sizeOverLifetime":{
+						"enable":true,
+						"size":{
+							"type":1,
+							"separateAxes":false,
+							"gradient":{
+								"sizes":[]
+							},
+							"gradientX":{
+								"sizes":[]
+							},
+							"gradientY":{
+								"sizes":[]
+							},
+							"gradientZ":{
+								"sizes":[]
+							},
+							"constantMin":0.8,
+							"constantMax":1,
+							"constantMinSeparate":[
+								0.8,
+								1,
+								1
+							],
+							"constantMaxSeparate":[
+								1,
+								1,
+								1
+							],
+							"gradientMin":{
+								"sizes":[]
+							},
+							"gradientMax":{
+								"sizes":[]
+							},
+							"gradientXMin":{
+								"sizes":[]
+							},
+							"gradientXMax":{
+								"sizes":[]
+							},
+							"gradientYMin":{
+								"sizes":[]
+							},
+							"gradientYMax":{
+								"sizes":[]
+							},
+							"gradientZMin":{
+								"sizes":[]
+							},
+							"gradientZMax":{
+								"sizes":[]
+							}
+						}
 					},
 					"textureSheetAnimation":{
 						"enable":true,

@@ -18,7 +18,7 @@
 		"textures":[
 			{
 				"name":"texture",
-				"path":"lightning_blue.png",
+				"path":"lightning_purple.png",
 				"constructParams":[
 					256,
 					256,
