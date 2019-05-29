@@ -50,7 +50,7 @@ export default class BulletScript extends Laya.Script3D {
         /** initialize */
         if (this.rigidbody === undefined) {
             this.init();
-        }
+        } 
 
         /** set material: 初始隐身 */
         this.material.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_FADE;

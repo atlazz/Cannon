@@ -31,7 +31,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         if (this.state === Const.GameState.START) {
             this.lvlLabel.visible = true;
             this.showUI();
-            this.stageIdx = 11//Global.gameData.stageIndex;
+            this.stageIdx = 15//Global.gameData.stageIndex;
             this.newStage();
         }
     }
@@ -482,7 +482,7 @@ export default class GameScene extends ui.game.GameSceneUI {
             var checkHitResult: Laya.HitResult[] = [];
             // get velocity
             var velocity: Laya.Vector3 = this.bulletDirection.clone();
-            Laya.Vector3.scale(velocity, Const.BulletVelocity[+this.isRewardBullet][this.bulletType], velocity);
+            Laya.Vector3.scale(velocity, 50, velocity);
             if (this.scene3D.physicsSimulation.shapeCastAll(checkShape, this.turretInitPos, velocity, checkHitResult)) {
                 // check if target
                 for (let i in checkHitResult) {
