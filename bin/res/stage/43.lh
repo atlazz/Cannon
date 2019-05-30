@@ -500,7 +500,7 @@
 			{
 				"type":"MeshSprite3D",
 				"props":{
-					"name":"Guard_move_right",
+					"name":"Guard_move_x",
 					"active":true,
 					"isStatic":false,
 					"layer":0,

@@ -57,6 +57,11 @@ export default class BulletScript extends Laya.Script3D {
         /** set material: 初始隐身 */
         this.material.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_FADE;
         this.material.albedoColorA = 0;
+        if (!this.isReward && this.type === Const.CannonType.LIGHTNING) {
+            Laya.Texture2D.load(Const.BulletTextureUrl[this.type], Laya.Handler.create(this, (tex) => {
+                this.material.albedoTexture = tex;
+            }));
+        }
         this.effect && (this.effect.active = false);
 
         /** set trasform */
@@ -88,7 +93,7 @@ export default class BulletScript extends Laya.Script3D {
         if (this.bullet.name === "bulletTrigger") {
             this.rigidbody.isTrigger = true;
             // quick moving detecion
-            this.rigidbody.ccdMotionThreshold = 0.001;
+            this.rigidbody.ccdMotionThreshold = 0.0001;
             // 半径越小越精准
             this.rigidbody.ccdSweptSphereRadius = Const.BulletRadius * Const.BulletScale[+this.isReward][this.type] / 1000;
         }
@@ -183,9 +188,17 @@ export default class BulletScript extends Laya.Script3D {
                 this.material.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
                 this.material.albedoColor = new Laya.Vector4(1, 0, 0, 1);
             }
+            else if (this.type === Const.CannonType.SHOTGUN_X2) {
+                this.material.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
+                this.material.albedoColor = new Laya.Vector4(1, 0, 0, 1);
+            }
             else if (this.type === Const.CannonType.FROZEN) {
                 this.material.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_TRANSPARENT;
                 this.material.albedoColor = new Laya.Vector4(0.2, 0.2, 1, 0.7);
+            }
+            else if (this.type === Const.CannonType.LIGHTNING) {
+                this.material.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
+                this.material.albedoColorA = 1;
             }
         }
     }

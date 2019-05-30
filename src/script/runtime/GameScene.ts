@@ -31,7 +31,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         if (this.state === Const.GameState.START) {
             this.lvlLabel.visible = true;
             this.showUI();
-            this.stageIdx = 40//Global.gameData.stageIndex;
+            this.stageIdx = Global.gameData.stageIndex;
             this.newStage();
         }
     }
@@ -93,6 +93,9 @@ export default class GameScene extends ui.game.GameSceneUI {
         //     this.stageIdx = 1;
         //     this.newStage();
         // }));
+
+        // multiple touch input disable
+        this.scene3D.input.multiTouchEnabled = false;
 
         this.scene3D.physicsSimulation.fixedTimeStep = 0.5 / 60;
         // Laya.timer.scale = 0.5;
@@ -194,16 +197,9 @@ export default class GameScene extends ui.game.GameSceneUI {
         });
         // change cannon
         this.btn_cannon.on(Laya.Event.CLICK, this, () => {
-            if (this.cannonType === Const.CannonType.DEFAULT) {
-                this.cannonType = Const.CannonType.FROZEN;
-                this.bulletType = this.cannonType;
-                this.newCannon();
-            }
-            else {
-                this.cannonType = Const.CannonType.DEFAULT;
-                this.bulletType = this.cannonType;
-                this.newCannon();
-            }
+            this.cannonType = this.cannonType % 6 + 1;
+            this.bulletType = (this.cannonType > 3 && this.cannonType < 6) ? 1 : this.cannonType;
+            this.newCannon();
         });
         // reward bullet
         this.btn_rewardBullet.on(Laya.Event.CLICK, this, () => {
@@ -262,6 +258,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         let satgeResUrl: string = Const.StageResUrl + this.stageIdx + ".lh";
         Laya.Sprite3D.load(satgeResUrl, Laya.Handler.create(this, (res) => {
             this.gameStage = this.scene3D.addChild(res) as Laya.Sprite3D;
+            Laya.loader.clearRes(satgeResUrl);
 
             // change level label
             this.lvlLabel.changeText("Level " + this.stageIdx);
@@ -507,14 +504,14 @@ export default class GameScene extends ui.game.GameSceneUI {
             Laya.Sprite3D.load(Const.BulletRewardResUrl[this.bulletRewardType], Laya.Handler.create(this, (res) => {
                 let bullet: Laya.MeshSprite3D = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(Const.BulletRadius));
                 bullet.name = "bullet";
-                let bulletBlackHole: Laya.Sprite3D = bullet.addChild(res) as Laya.Sprite3D;
+                let bulletBlackHole: Laya.Sprite3D = bullet.addChild(res.clone()) as Laya.Sprite3D;
                 bulletBlackHole.name = "effect";
                 // reset bullet by type
                 let bulletScript: Bullet = bullet.addComponent(Bullet);
                 bulletScript.reset(this.bulletRewardType, true);
                 // add to scene
                 this.scene3D.addChild(bullet);
-                
+
                 let trigger: Laya.MeshSprite3D = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(Const.BulletRadius));
                 trigger.name = "bulletTrigger";
                 // reset bullet trigger by type
@@ -528,35 +525,98 @@ export default class GameScene extends ui.game.GameSceneUI {
         }
         /** cannon bullet */
         else {
-            /**************************** bullet **************************/
-            // get bullet from pool
-            let bullet: Laya.MeshSprite3D = Laya.Pool.getItem("bullet");
-            // new bullet
-            if (!bullet) {
-                bullet = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(Const.BulletRadius));
-                bullet.name = "bullet";
-                bullet.addComponent(Bullet);
+            if (this.cannonType === Const.CannonType.SHOTGUN_X2) {
+                let offsetX: number = 0.1 / Const.BulletScale[0][this.cannonType];
+                this.createSingleBullet(-offsetX, 0);
+                this.createSingleBullet(offsetX, 0);
             }
+            else if (this.cannonType === Const.CannonType.LIGHTNING) {
+                Laya.Sprite3D.load(Const.BulletLightningUrl, Laya.Handler.create(this, (res) => {
+                    Laya.Mesh.load(Const.BulletMeshUrl, Laya.Handler.create(this, (mesh) => {
+                        let bullet: Laya.MeshSprite3D = new Laya.MeshSprite3D(mesh);
+                        bullet.name = "bullet";
+                        let bulletBlackHole: Laya.Sprite3D = bullet.addChild(res.clone()) as Laya.Sprite3D;
+                        bulletBlackHole.name = "effect";
+                        // reset bullet by type
+                        let bulletScript: Bullet = bullet.addComponent(Bullet);
+                        bulletScript.reset(this.bulletType);
+                        // add to scene
+                        this.scene3D.addChild(bullet);
+
+                        let trigger: Laya.MeshSprite3D = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(Const.BulletRadius));
+                        trigger.name = "bulletTrigger";
+                        // reset bullet trigger by type
+                        let triggerScript: Bullet = trigger.addComponent(Bullet);
+                        triggerScript.reset(this.bulletType);
+                        // add to scene
+                        this.scene3D.addChild(trigger);
+                    }));
+                }));
+            }
+            else {
+                this.createSingleBullet();
+            }
+        }
+    }
+
+    /** create single bullet by offset */
+    private createSingleBullet(offsetX: number = 0, offsetY: number = 0) {
+        /**************************** bullet **************************/
+        // get bullet from pool
+        let bullet: Laya.MeshSprite3D = Laya.Pool.getItem("bullet");
+        if (bullet) {
             // reset bullet by type
             let bulletScript: Bullet = bullet.getComponent(Bullet);
             bulletScript.reset(this.bulletType);
+            // set position offset
+            bullet.transform.localPositionX += offsetX;
+            bullet.transform.localPositionY += offsetY;
             // add to scene
             this.scene3D.addChild(bullet);
+        }
+        // new bullet
+        else {
+            Laya.Mesh.load(Const.BulletMeshUrl, Laya.Handler.create(this, (mesh) => {
+                bullet = new Laya.MeshSprite3D(mesh);
+                bullet.name = "bullet";
+                // add script
+                let bulletScript: Bullet = bullet.addComponent(Bullet);
+                bulletScript.reset(this.bulletType);
+                // set position offset
+                bullet.transform.localPositionX += offsetX;
+                bullet.transform.localPositionY += offsetY;
+                // add to scene
+                this.scene3D.addChild(bullet);
+            }));
+        }
 
-            /******************* hidden bullet trigger: 防止快速移动碰撞检测丢失（ccd半径越小越精准） *****************/
-            // get bullet trigger from pool
-            let trigger: Laya.MeshSprite3D = Laya.Pool.getItem("bulletTrigger");
-            // new bullet trigger
-            if (!trigger) {
-                trigger = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(Const.BulletRadius));
-                trigger.name = "bulletTrigger";
-                trigger.addComponent(Bullet);
-            }
+        /******************* hidden bullet trigger: 防止快速移动碰撞检测丢失（ccd半径越小越精准） *****************/
+        // get bullet trigger from pool
+        let trigger: Laya.MeshSprite3D = Laya.Pool.getItem("bulletTrigger");
+        if (trigger) {
             // reset bullet trigger by type
             let triggerScript: Bullet = trigger.getComponent(Bullet);
             triggerScript.reset(this.bulletType);
+            // set position offset
+            trigger.transform.localPositionX += offsetX;
+            trigger.transform.localPositionY += offsetY;
             // add to scene
             this.scene3D.addChild(trigger);
+        }
+        // new bullet trigger
+        else {
+            Laya.Mesh.load(Const.BulletMeshUrl, Laya.Handler.create(this, (mesh) => {
+                trigger = new Laya.MeshSprite3D(mesh);
+                trigger.name = "bulletTrigger";
+                // add script
+                let triggerScript: Bullet = trigger.addComponent(Bullet);
+                triggerScript.reset(this.bulletType);
+                // set position offset
+                trigger.transform.localPositionX += offsetX;
+                trigger.transform.localPositionY += offsetY;
+                // add to scene
+                this.scene3D.addChild(trigger);
+            }));
         }
     }
 

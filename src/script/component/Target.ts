@@ -69,34 +69,6 @@ export default class Target extends Laya.Script3D {
             }
         }
 
-        /** 外物碰撞处理 */
-        // stand or guard
-        if (other.name === "stand" || other.name.indexOf("Guard") >= 0) {
-            // reset win check
-            GameScene.instance.winCheckCnt = 0;
-        }
-        // ground
-        else if (other.name === "ground") {
-            Laya.timer.frameOnce(60, this, () => {
-                // destroy
-                this.destroy();
-                this.target.destroy();
-            });
-        }
-        // bullet
-        else if (other.name === "bullet" || other.name === "bulletTrigger") {
-            this.bulletHit(other.getComponent(Bullet));
-        }
-        // TNT bomb wave
-        else if (other.name === "bomb") {
-            let velocity: Laya.Vector3 = new Laya.Vector3();
-            Laya.Vector3.subtract(this.target.transform.position, other.transform.position, velocity);
-            Laya.Vector3.normalize(velocity, velocity);
-            Laya.Vector3.scale(velocity, 3 / other.transform.localScaleX, velocity);
-            Laya.Vector3.add(this.rigidbody.linearVelocity, velocity, velocity);
-            this.rigidbody.linearVelocity = velocity;
-        }
-
         /** 本体类型碰撞处理 */
         // Glass
         if (this.type === Const.TargetType.GLASS) {
@@ -123,52 +95,95 @@ export default class Target extends Laya.Script3D {
             }
         }
         // TNT
-        else if (this.type === Const.TargetType.TNT) {
+        else if (this.type === Const.TargetType.TNT && this.target.parent) {
             // hit by bullet => bomb
-            if ((other.name.indexOf("bullet") >= 0 || other.name.indexOf("bomb") >= 0) && this.target.parent) {
-                console.log("hit by")
-                console.log(other.name)
-                let bombRadius: number = this.sizeX / 2 * this.target.transform.localScaleX * 1;
-                let bomb: Laya.MeshSprite3D = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(bombRadius));
-                this.target.parent.addChild(bomb);
-                bomb.name = ("bomb");
-                // set rigidbody
-                let collider: Laya.PhysicsCollider = bomb.addComponent(Laya.PhysicsCollider);
-                collider.colliderShape = new Laya.SphereColliderShape(bombRadius);
-                collider.isTrigger = true;
-                // 设置碰撞组，避免像玻璃碎片之类过多数量碰撞爆内存
-                collider.canCollideWith = 1;
-                // set transform
-                bomb.transform.localPosition = this.target.transform.localPosition.clone();
-                bomb.transform.localScale = this.target.transform.localScale.clone();
-                // set material
-                let mat: Laya.UnlitMaterial = new Laya.UnlitMaterial();
-                bomb.meshRenderer.material = mat;
-                mat.renderMode = Laya.UnlitMaterial.RENDERMODE_TRANSPARENT;
-                mat.albedoColor = new Laya.Vector4(1, 0.5, 0, 0.2);
-                // 1帧后从场景中移除本体
-                Laya.timer.frameOnce(1, this, () => {
-                    this.target.removeSelf();
-                });
-                // n帧后销毁隐形炸弹
-                let cnt: number = 0;
-                bomb.timer.frameLoop(1, bomb, () => {
-                    if (cnt++ > 12) {
-                        bomb.timer.clearAll(bomb);
-                        bomb.destroy();
-                        this.target.destroy();
-                        this.destroy();
-                        return;
-                    }
-                    bomb.transform.localScaleX *= 1.2;
-                    bomb.transform.localScaleY *= 1.2;
-                    bomb.transform.localScaleZ *= 1.2;
-                });
+            if (other.name.indexOf("bullet") >= 0 || other.name.indexOf("bomb") >= 0) {
+                this.TNTBomb();
             }
+            else {
+                let rigid: Laya.Rigidbody3D = other.getComponent(Laya.Rigidbody3D);
+                let velocityOther = new Laya.Vector3(0, 0, 0);
+                rigid && (velocityOther = rigid.linearVelocity.clone());
+                if (Laya.Vector3.distance(velocityOther, this.rigidbody.linearVelocity) >= 10 ) {
+                    this.TNTBomb();
+                }
+            }
+        }
+        
+        /** 外物碰撞处理 */
+        // stand or guard
+        if (other.name === "stand" || other.name.indexOf("Guard") >= 0) {
+            // reset win check
+            GameScene.instance.winCheckCnt = 0;
+        }
+        // ground
+        else if (other.name === "ground") {
+            Laya.timer.frameOnce(60, this, () => {
+                // destroy
+                this.destroy();
+                this.target.destroy();
+            });
+        }
+        // bullet
+        else if (other.name === "bullet" || other.name === "bulletTrigger") {
+            this.bulletHit(other.getComponent(Bullet));
+        }
+        // TNT bomb wave
+        else if (other.name === "bomb") {
+            let velocity: Laya.Vector3 = new Laya.Vector3();
+            Laya.Vector3.subtract(this.target.transform.position, other.transform.position, velocity);
+            Laya.Vector3.normalize(velocity, velocity);
+            Laya.Vector3.scale(velocity, 20 / other.transform.localScaleX, velocity);
+            Laya.Vector3.add(this.rigidbody.linearVelocity, velocity, velocity);
+            this.rigidbody.linearVelocity = velocity;
         }
 
         // reset counter
         this.jumpCnt = 0;
+    }
+
+    /** TNT bomb */
+    TNTBomb() {
+        let bombRadius: number = this.sizeX / 2 * this.target.transform.localScaleX * 1;
+        let bomb: Laya.MeshSprite3D = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(bombRadius));
+        GameScene.instance.scene3D.addChild(bomb);
+        bomb.name = ("bomb");
+        // set rigidbody
+        let collider: Laya.PhysicsCollider = bomb.addComponent(Laya.PhysicsCollider);
+        collider.colliderShape = new Laya.SphereColliderShape(bombRadius);
+        collider.isTrigger = true;
+        // 设置碰撞组，避免像玻璃碎片之类过多数量碰撞爆内存
+        collider.collisionGroup = 3;
+        collider.canCollideWith = 1;
+        // set transform
+        bomb.transform.position = this.target.transform.position.clone();
+        bomb.transform.scale = this.target.transform.scale.clone();
+        // set material
+        let mat: Laya.UnlitMaterial = new Laya.UnlitMaterial();
+        bomb.meshRenderer.material = mat;
+        mat.renderMode = Laya.UnlitMaterial.RENDERMODE_TRANSPARENT;
+        mat.albedoColor = new Laya.Vector4(1, 0.5, 0, 0.2);
+        // 1帧后从场景中移除本体
+        // Laya.timer.frameOnce(1, this, () => {
+            this.target.removeSelf();
+        // });
+        // n帧后销毁隐形炸弹
+        let cnt: number = 0;
+        let scaleStepX: number = bomb.transform.localScaleX * 0.4;
+        let scaleStepY: number = bomb.transform.localScaleY * 0.4;
+        let scaleStepZ: number = bomb.transform.localScaleZ * 0.4;
+        bomb.timer.frameLoop(1, bomb, () => {
+            if (cnt++ > 15) {
+                bomb.timer.clearAll(bomb);
+                bomb.destroy();
+                this.target.destroy();
+                this.destroy();
+                return;
+            }
+            bomb.transform.localScaleX += scaleStepX; //*= 1.12;
+            bomb.transform.localScaleY += scaleStepY; //*= 1.12;
+            bomb.transform.localScaleZ += scaleStepZ; //*= 1.12;
+        });
     }
 
     /** bullet hit handler */
@@ -280,6 +295,9 @@ export default class Target extends Laya.Script3D {
             this.material.emissionColor = new Laya.Vector4(0.2, 0.2, 0.2, 1);
         }
         else if (this.type === Const.TargetType.TNT) {
+            // // add TNT trigger for large range bomb check
+            // let trigger: Laya.Sprite3D = this.target.addChild(new Laya.Sprite3D("Obstacles-TNT-Trigger")) as Laya.Sprite3D;
+            // trigger.addComponent(TriggerTNT);
             Laya.Texture2D.load(Const.StageTexUrl[2], Laya.Handler.create(this, (tex) => {
                 this.material.albedoTexture = tex;
             }));
@@ -294,9 +312,10 @@ export default class Target extends Laya.Script3D {
     private setRigidbody() {
         // get size of bounding box
         let boundingBox: Laya.BoundBox = this.target.meshFilter.sharedMesh.boundingBox.clone();
-        this.sizeX = boundingBox.max.x - boundingBox.min.x;
-        this.sizeY = boundingBox.max.y - boundingBox.min.y;
-        this.sizeZ = boundingBox.max.z - boundingBox.min.z;
+        // 往下取小一点，避免位置坐标偏差交叠导致物理引擎内存爆炸
+        this.sizeX = (boundingBox.max.x - boundingBox.min.x)// * 0.99;
+        this.sizeY = (boundingBox.max.y - boundingBox.min.y)// * 0.99;
+        this.sizeZ = (boundingBox.max.z - boundingBox.min.z)// * 0.99;
         // add rigidbody
         this.rigidbody = this.target.addComponent(Laya.Rigidbody3D);
         if (this.target.name.search("Cube") >= 0) {
@@ -323,6 +342,10 @@ export default class Target extends Laya.Script3D {
         else if (this.type === Const.TargetType.GLASS) {
             this.rigidbody.mass = 10;
             this.rigidbody.friction = 10;
+        }
+        else if (this.type === Const.TargetType.TNT) {
+            this.rigidbody.mass = 50;
+            this.rigidbody.friction = 100;
         }
     }
 
@@ -366,9 +389,11 @@ export default class Target extends Laya.Script3D {
             pieceColliderShape.mesh = piece.meshFilter.sharedMesh;
             pieceRigid.colliderShape = pieceColliderShape;
             pieceRigid.collisionGroup = 2;
+            pieceRigid.canCollideWith = 1;
 
             // add pieces to scene
-            for (let i = 0; i < Const.PiecesNum; i++) {
+            let pieceNum = Const.PiecesNum - Math.floor(Math.random() + 0.5);
+            for (let i = 0; i < pieceNum; i++) {
                 this.piecesList.push(piece.clone());
                 GameScene.instance.scene3D.addChild(this.piecesList[i]);
             }

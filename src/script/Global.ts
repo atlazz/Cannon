@@ -15,7 +15,7 @@ let Global = {
         shareCount: 0,
         lastShareTimestamp: 0,
         //关卡索引
-        stageIndex: 1,
+        stageIndex: 4,
         //当前炮台类型
         cannonType: 1,
 

@@ -28,13 +28,16 @@
 			{
 				"type":"Animator",
 				"avatar":{
-					"path":"Assets/fbx格式文件/41/41-41-41Avatar.lav",
+					"path":"Assets/fbx文件/41/41-41-41Avatar.lav",
 					"linkSprites":{
 						"Cube_0":[
 							"Cube_0"
 						],
-						"Guard_unmove":[
-							"Guard_unmove"
+						"Cube (1)_0":[
+							"Cube (1)_0"
+						],
+						"Cube (2)_0":[
+							"Cube (2)_0"
 						],
 						"Cylinder_0":[
 							"Cylinder_0"
@@ -57,14 +60,26 @@
 						"Obstacles-TriangleGlass_0":[
 							"Obstacles-TriangleGlass_0"
 						],
+						"Cube":[
+							"Cube"
+						],
+						"Cylinder":[
+							"Cylinder"
+						],
 						"Obstacle-Gate_0":[
 							"Obstacle-Gate_0"
+						],
+						"Obstacles-Cube":[
+							"Obstacles-Cube"
 						],
 						"Obstacles-Cube (4)_0":[
 							"Obstacles-Cube (4)_0"
 						],
 						"Obstacles-CubeGlass (1)_0":[
 							"Obstacles-CubeGlass (1)_0"
+						],
+						"Obstacles-Triangle":[
+							"Obstacles-Triangle"
 						]
 					}
 				},
@@ -97,12 +112,12 @@
 						0.589,
 						1.816806
 					],
-					"meshPath":"Assets/fbx格式文件/41/41-Cube_0.lm",
+					"meshPath":"Assets/fbx文件/41/41-Cube_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/41/41.lmat"
+							"path":"Assets/fbx文件/41/41.lmat"
 						}
 					]
 				},
@@ -112,7 +127,7 @@
 			{
 				"type":"MeshSprite3D",
 				"props":{
-					"name":"Guard_unmove",
+					"name":"Cube (1)_0",
 					"active":true,
 					"isStatic":false,
 					"layer":0,
@@ -132,12 +147,12 @@
 						0.589,
 						1.81681
 					],
-					"meshPath":"Assets/fbx格式文件/41/41-Cube (1)_0.lm",
+					"meshPath":"Assets/fbx文件/41/41-Cube (1)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/41/41.lmat"
+							"path":"Assets/fbx文件/41/41.lmat"
 						}
 					]
 				},
@@ -147,7 +162,7 @@
 			{
 				"type":"MeshSprite3D",
 				"props":{
-					"name":"Guard_unmove",
+					"name":"Cube (2)_0",
 					"active":true,
 					"isStatic":false,
 					"layer":0,
@@ -167,12 +182,12 @@
 						0.5890003,
 						1.81681
 					],
-					"meshPath":"Assets/fbx格式文件/41/41-Cube (2)_0.lm",
+					"meshPath":"Assets/fbx文件/41/41-Cube (2)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/41/41.lmat"
+							"path":"Assets/fbx文件/41/41.lmat"
 						}
 					]
 				},
@@ -202,12 +217,12 @@
 						3.6124,
 						1
 					],
-					"meshPath":"Assets/fbx格式文件/41/41-Cylinder_0.lm",
+					"meshPath":"Assets/fbx文件/41/41-Cylinder_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/41/41.lmat"
+							"path":"Assets/fbx文件/41/41.lmat"
 						}
 					]
 				},
@@ -237,12 +252,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/41/41-Obstacles-Cube (2)_0.lm",
+					"meshPath":"Assets/fbx文件/41/41-Obstacles-Cube (2)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/41/41.lmat"
+							"path":"Assets/fbx文件/41/41.lmat"
 						}
 					]
 				},
@@ -272,12 +287,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/41/41-Obstacles-Cube (3)_0.lm",
+					"meshPath":"Assets/fbx文件/41/41-Obstacles-Cube (3)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/41/41.lmat"
+							"path":"Assets/fbx文件/41/41.lmat"
 						}
 					]
 				},
@@ -307,12 +322,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/41/41-Obstacles-Cube (5)_0.lm",
+					"meshPath":"Assets/fbx文件/41/41-Obstacles-Cube (5)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/41/41.lmat"
+							"path":"Assets/fbx文件/41/41.lmat"
 						}
 					]
 				},
@@ -342,12 +357,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/41/41-Obstacles-Cube (6)_0.lm",
+					"meshPath":"Assets/fbx文件/41/41-Obstacles-Cube (6)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/41/41.lmat"
+							"path":"Assets/fbx文件/41/41.lmat"
 						}
 					]
 				},
@@ -377,12 +392,12 @@
 						4.176,
 						3
 					],
-					"meshPath":"Assets/fbx格式文件/41/41-Obstacles-Triangle_0.lm",
+					"meshPath":"Assets/fbx文件/41/41-Obstacles-Triangle_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/41/41.lmat"
+							"path":"Assets/fbx文件/41/41.lmat"
 						}
 					]
 				},
@@ -412,12 +427,12 @@
 						2.181,
 						3
 					],
-					"meshPath":"Assets/fbx格式文件/41/41-Obstacles-TriangleGlass_0.lm",
+					"meshPath":"Assets/fbx文件/41/41-Obstacles-TriangleGlass_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/41/41.lmat"
+							"path":"Assets/fbx文件/41/41.lmat"
 						}
 					]
 				},
@@ -427,14 +442,14 @@
 			{
 				"type":"MeshSprite3D",
 				"props":{
-					"name":"Cube_0",
+					"name":"Cube",
 					"active":true,
 					"isStatic":false,
 					"layer":0,
 					"position":[
-						0.0006375378,
-						-0.03223,
-						0.3685
+						0.0002375338,
+						-0.03043,
+						0.3689
 					],
 					"rotation":[
 						0,
@@ -443,33 +458,56 @@
 						-1
 					],
 					"scale":[
-						8.39999,
+						6.524699,
 						0.589,
-						1.81681
+						1.816806
 					],
-					"meshPath":"Assets/fbx格式文件/41/41-Cube_0.lm",
+					"meshPath":"Library/unity default resources-Cube.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/41/41.lmat"
+							"path":"Resources/unity_builtin_extra.lmat"
 						}
 					]
 				},
-				"components":[],
+				"components":[
+					{
+						"type":"PhysicsCollider",
+						"restitution":0,
+						"friction":0.5,
+						"rollingFriction":0,
+						"shapes":[
+							{
+								"type":"BoxColliderShape",
+								"center":[
+									0,
+									0,
+									0
+								],
+								"size":[
+									1,
+									1,
+									1
+								]
+							}
+						],
+						"isTrigger":false
+					}
+				],
 				"child":[]
 			},
 			{
 				"type":"MeshSprite3D",
 				"props":{
-					"name":"Cylinder_0",
+					"name":"Cylinder",
 					"active":true,
 					"isStatic":false,
 					"layer":0,
 					"position":[
-						0.0006375378,
-						-0.0713,
-						0.3705
+						0.0002375357,
+						-0.0695,
+						0.3709
 					],
 					"rotation":[
 						0,
@@ -482,16 +520,36 @@
 						3.6124,
 						1
 					],
-					"meshPath":"Assets/fbx格式文件/41/41-Cylinder_0.lm",
+					"meshPath":"Library/unity default resources-Cylinder.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/41/41.lmat"
+							"path":"Resources/unity_builtin_extra.lmat"
 						}
 					]
 				},
-				"components":[],
+				"components":[
+					{
+						"type":"PhysicsCollider",
+						"restitution":0,
+						"friction":0.5,
+						"rollingFriction":0,
+						"shapes":[
+							{
+								"type":"CapsuleColliderShape",
+								"center":[
+									5.960464E-08,
+									0,
+									-8.940697E-08
+								],
+								"radius":0.5000001,
+								"height":2
+							}
+						],
+						"isTrigger":false
+					}
+				],
 				"child":[]
 			},
 			{
@@ -517,16 +575,132 @@
 						3.59725,
 						3.59725
 					],
-					"meshPath":"Assets/fbx格式文件/41/41-Obstacle-Gate_0.lm",
+					"meshPath":"Assets/fbx文件/41/41-Obstacle-Gate_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/41/41.lmat"
+							"path":"Assets/fbx文件/41/41.lmat"
 						}
 					]
 				},
 				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.01593754,
+						0.001999997,
+						0.3685
+					],
+					"rotation":[
+						0,
+						0,
+						0,
+						-1
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Library/unity default resources-Cube.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Resources/unity_builtin_extra.lmat"
+						}
+					]
+				},
+				"components":[
+					{
+						"type":"PhysicsCollider",
+						"restitution":0,
+						"friction":0.5,
+						"rollingFriction":0,
+						"shapes":[
+							{
+								"type":"BoxColliderShape",
+								"center":[
+									0,
+									0,
+									0
+								],
+								"size":[
+									1,
+									1,
+									1
+								]
+							}
+						],
+						"isTrigger":false
+					}
+				],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.01536246,
+						0.001999997,
+						0.3685
+					],
+					"rotation":[
+						0,
+						0,
+						0,
+						-1
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Library/unity default resources-Cube.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Resources/unity_builtin_extra.lmat"
+						}
+					]
+				},
+				"components":[
+					{
+						"type":"PhysicsCollider",
+						"restitution":0,
+						"friction":0.5,
+						"rollingFriction":0,
+						"shapes":[
+							{
+								"type":"BoxColliderShape",
+								"center":[
+									0,
+									0,
+									0
+								],
+								"size":[
+									1,
+									1,
+									1
+								]
+							}
+						],
+						"isTrigger":false
+					}
+				],
 				"child":[]
 			},
 			{
@@ -552,16 +726,132 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/41/41-Obstacles-Cube (4)_0.lm",
+					"meshPath":"Assets/fbx文件/41/41-Obstacles-Cube (4)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/41/41.lmat"
+							"path":"Assets/fbx文件/41/41.lmat"
 						}
 					]
 				},
 				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.01593754,
+						0.01750001,
+						0.3685
+					],
+					"rotation":[
+						0,
+						0,
+						0,
+						-1
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Library/unity default resources-Cube.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Resources/unity_builtin_extra.lmat"
+						}
+					]
+				},
+				"components":[
+					{
+						"type":"PhysicsCollider",
+						"restitution":0,
+						"friction":0.5,
+						"rollingFriction":0,
+						"shapes":[
+							{
+								"type":"BoxColliderShape",
+								"center":[
+									0,
+									0,
+									0
+								],
+								"size":[
+									1,
+									1,
+									1
+								]
+							}
+						],
+						"isTrigger":false
+					}
+				],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.01536246,
+						0.01750001,
+						0.3685
+					],
+					"rotation":[
+						0,
+						0,
+						0,
+						-1
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Library/unity default resources-Cube.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Resources/unity_builtin_extra.lmat"
+						}
+					]
+				},
+				"components":[
+					{
+						"type":"PhysicsCollider",
+						"restitution":0,
+						"friction":0.5,
+						"rollingFriction":0,
+						"shapes":[
+							{
+								"type":"BoxColliderShape",
+								"center":[
+									0,
+									0,
+									0
+								],
+								"size":[
+									1,
+									1,
+									1
+								]
+							}
+						],
+						"isTrigger":false
+					}
+				],
 				"child":[]
 			},
 			{
@@ -587,16 +877,74 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/41/41-Obstacles-CubeGlass (1)_0.lm",
+					"meshPath":"Assets/fbx文件/41/41-Obstacles-CubeGlass (1)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/41/41.lmat"
+							"path":"Assets/fbx文件/41/41.lmat"
 						}
 					]
 				},
 				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Triangle",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.0001175357,
+						0.03661,
+						0.3685
+					],
+					"rotation":[
+						0,
+						0,
+						0,
+						-1
+					],
+					"scale":[
+						9.075375,
+						4.176,
+						3
+					],
+					"meshPath":"Library/unity default resources-Cube.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Resources/unity_builtin_extra.lmat"
+						}
+					]
+				},
+				"components":[
+					{
+						"type":"PhysicsCollider",
+						"restitution":0,
+						"friction":0.5,
+						"rollingFriction":0,
+						"shapes":[
+							{
+								"type":"BoxColliderShape",
+								"center":[
+									0,
+									0,
+									0
+								],
+								"size":[
+									1,
+									1,
+									1
+								]
+							}
+						],
+						"isTrigger":false
+					}
+				],
 				"child":[]
 			}
 		]

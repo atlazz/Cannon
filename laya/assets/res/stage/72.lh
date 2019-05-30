@@ -28,7 +28,7 @@
 			{
 				"type":"Animator",
 				"avatar":{
-					"path":"Assets/fbx格式文件/72/72-72-72Avatar.lav",
+					"path":"Assets/fbx文件/72/72-72-72Avatar.lav",
 					"linkSprites":{
 						"Cube (1)_0":[
 							"Cube (1)_0"
@@ -588,7 +588,7 @@
 					"position":[
 						0.0511,
 						0.1477,
-						0.5859
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -601,12 +601,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (1)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (1)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -623,7 +623,7 @@
 					"position":[
 						0.036,
 						0.1477,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -636,12 +636,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (2)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (2)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -658,7 +658,7 @@
 					"position":[
 						0.0209,
 						0.1477,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -671,12 +671,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (3)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (3)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -693,7 +693,7 @@
 					"position":[
 						0.03599999,
 						0.1326,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -706,12 +706,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (4)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (4)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -728,7 +728,7 @@
 					"position":[
 						0.03599999,
 						0.1175,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -741,12 +741,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (5)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (5)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -763,7 +763,7 @@
 					"position":[
 						0.0209,
 						0.1175,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -776,12 +776,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (6)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (6)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -798,7 +798,7 @@
 					"position":[
 						0.0662,
 						0.1326,
-						0.5859
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -811,12 +811,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (7)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (7)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -833,7 +833,7 @@
 					"position":[
 						0.0662,
 						0.1175,
-						0.5859
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -846,12 +846,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (8)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (8)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -868,7 +868,7 @@
 					"position":[
 						0.0662,
 						0.1024,
-						0.5859
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -881,12 +881,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (9)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (9)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -903,7 +903,7 @@
 					"position":[
 						0.0511,
 						0.1024,
-						0.5859
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -916,12 +916,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (10)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (10)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -938,7 +938,7 @@
 					"position":[
 						-0.03949999,
 						0.1175,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -951,12 +951,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (13)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (13)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -973,7 +973,7 @@
 					"position":[
 						-0.03950001,
 						0.1024,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -986,12 +986,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (14)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (14)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -1008,7 +1008,7 @@
 					"position":[
 						-0.02440001,
 						0.1024,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -1021,12 +1021,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (15)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (15)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -1043,7 +1043,7 @@
 					"position":[
 						-0.0546,
 						0.1024,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -1056,12 +1056,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (16)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (16)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -1078,7 +1078,7 @@
 					"position":[
 						-0.0697,
 						0.1024,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -1091,12 +1091,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (17)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (17)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -1113,7 +1113,7 @@
 					"position":[
 						0.0511,
 						0.07220002,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -1126,12 +1126,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (18)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (18)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -1148,7 +1148,7 @@
 					"position":[
 						0.036,
 						0.07220002,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -1161,12 +1161,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (19)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (19)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -1183,7 +1183,7 @@
 					"position":[
 						-0.009300002,
 						0.07220002,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -1196,12 +1196,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (20)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (20)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -1218,7 +1218,7 @@
 					"position":[
 						0.005799958,
 						0.07220002,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -1231,12 +1231,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (21)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (21)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -1253,7 +1253,7 @@
 					"position":[
 						-0.02440001,
 						0.07220002,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -1266,12 +1266,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (22)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (22)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -1288,7 +1288,7 @@
 					"position":[
 						-0.0697,
 						0.05710001,
-						0.5859
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -1301,12 +1301,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (23)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (23)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -1323,7 +1323,7 @@
 					"position":[
 						-0.03949999,
 						0.05710001,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -1336,12 +1336,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (24)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (24)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -1358,7 +1358,7 @@
 					"position":[
 						-0.0546,
 						0.05710001,
-						0.5859001
+						0.3894001
 					],
 					"rotation":[
 						8.659559E-17,
@@ -1371,12 +1371,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (25)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (25)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -1393,7 +1393,7 @@
 					"position":[
 						-0.05460005,
 						0.04200001,
-						0.5859
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -1406,12 +1406,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (26)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (26)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -1428,7 +1428,7 @@
 					"position":[
 						-0.03950005,
 						0.04200001,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -1441,12 +1441,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (27)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (27)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -1463,7 +1463,7 @@
 					"position":[
 						-0.06970006,
 						0.04200001,
-						0.5859
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -1476,12 +1476,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (28)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (28)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -1498,7 +1498,7 @@
 					"position":[
 						-0.0848,
 						0.04200001,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -1511,12 +1511,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (29)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (29)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -1533,7 +1533,7 @@
 					"position":[
 						-0.0546,
 						0.02690001,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -1546,12 +1546,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (30)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (30)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -1568,7 +1568,7 @@
 					"position":[
 						0.005799943,
 						0.05710001,
-						0.5858999
+						0.3893999
 					],
 					"rotation":[
 						8.659559E-17,
@@ -1581,12 +1581,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (31)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (31)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -1603,7 +1603,7 @@
 					"position":[
 						-0.009300032,
 						0.05710001,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -1616,12 +1616,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (32)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (32)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -1638,7 +1638,7 @@
 					"position":[
 						0.03600001,
 						0.05710001,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -1651,12 +1651,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (33)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (33)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -1673,7 +1673,7 @@
 					"position":[
 						0.0511,
 						0.05710001,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -1686,12 +1686,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (34)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (34)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -1708,7 +1708,7 @@
 					"position":[
 						0.0511,
 						0.04200001,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -1721,12 +1721,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (35)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (35)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -1743,7 +1743,7 @@
 					"position":[
 						0.03600001,
 						0.04200001,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -1756,12 +1756,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (36)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (36)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -1778,7 +1778,7 @@
 					"position":[
 						0.0511,
 						0.02690001,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -1791,12 +1791,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (37)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (37)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -1813,7 +1813,7 @@
 					"position":[
 						0.0662,
 						0.04200001,
-						0.5859
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -1826,12 +1826,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (38)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (38)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -1848,7 +1848,7 @@
 					"position":[
 						0.06620002,
 						0.05710001,
-						0.5859
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -1861,12 +1861,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (39)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (39)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -1883,7 +1883,7 @@
 					"position":[
 						0.08130001,
 						0.04200001,
-						0.5859
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -1896,12 +1896,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (40)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (40)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -1918,7 +1918,7 @@
 					"position":[
 						0.03600001,
 						-0.04859999,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -1931,12 +1931,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (41)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (41)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -1953,7 +1953,7 @@
 					"position":[
 						0.03600001,
 						-0.03349999,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -1966,12 +1966,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (42)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (42)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -1988,7 +1988,7 @@
 					"position":[
 						0.0511,
 						-0.03349999,
-						0.5859
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -2001,12 +2001,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (43)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (43)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -2023,7 +2023,7 @@
 					"position":[
 						0.0511,
 						-0.04859999,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -2036,12 +2036,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (44)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (44)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -2058,7 +2058,7 @@
 					"position":[
 						0.0662,
 						-0.04859999,
-						0.5859
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -2071,12 +2071,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (45)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (45)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -2093,7 +2093,7 @@
 					"position":[
 						0.0662,
 						-0.03349999,
-						0.5859
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -2106,12 +2106,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (46)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (46)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -2128,7 +2128,7 @@
 					"position":[
 						0.08130001,
 						-0.04859999,
-						0.5859
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -2141,12 +2141,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (47)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (47)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -2163,7 +2163,7 @@
 					"position":[
 						-0.03950005,
 						-0.03349999,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -2176,12 +2176,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (48)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (48)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -2198,7 +2198,7 @@
 					"position":[
 						-0.03950005,
 						-0.04859999,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -2211,12 +2211,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (49)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (49)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -2233,7 +2233,7 @@
 					"position":[
 						-0.05460006,
 						-0.04859999,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -2246,12 +2246,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (50)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (50)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -2268,7 +2268,7 @@
 					"position":[
 						-0.05460007,
 						-0.03349999,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -2281,12 +2281,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (51)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (51)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -2303,7 +2303,7 @@
 					"position":[
 						-0.06970006,
 						-0.03349999,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -2316,12 +2316,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (52)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (52)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -2338,7 +2338,7 @@
 					"position":[
 						-0.0697,
 						-0.04859999,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -2351,12 +2351,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (53)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (53)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -2373,7 +2373,7 @@
 					"position":[
 						-0.0848,
 						-0.04859999,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -2386,12 +2386,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube (54)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube (54)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -2408,7 +2408,7 @@
 					"position":[
 						0.005800017,
 						0.1628,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -2421,12 +2421,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (11)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (11)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -2443,7 +2443,7 @@
 					"position":[
 						-0.009300002,
 						0.1628,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -2456,12 +2456,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (12)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (12)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -2478,7 +2478,7 @@
 					"position":[
 						-0.02440001,
 						0.1628,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -2491,12 +2491,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (13)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (13)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -2513,7 +2513,7 @@
 					"position":[
 						-0.03949999,
 						0.1628,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -2526,12 +2526,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (14)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (14)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -2548,7 +2548,7 @@
 					"position":[
 						-0.0546,
 						0.1628,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -2561,12 +2561,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (15)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (15)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -2583,7 +2583,7 @@
 					"position":[
 						-0.0697,
 						0.1628,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -2596,12 +2596,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (16)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (16)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -2618,7 +2618,7 @@
 					"position":[
 						0.0209,
 						0.1628,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -2631,12 +2631,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (17)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (17)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -2653,7 +2653,7 @@
 					"position":[
 						0.036,
 						0.1628,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -2666,12 +2666,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (18)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (18)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -2688,7 +2688,7 @@
 					"position":[
 						0.0511,
 						0.1628,
-						0.5859
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -2701,12 +2701,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (19)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (19)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -2723,7 +2723,7 @@
 					"position":[
 						0.03599999,
 						0.1779,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -2736,12 +2736,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (20)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (20)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -2758,7 +2758,7 @@
 					"position":[
 						0.0209,
 						0.1779,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -2771,12 +2771,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (21)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (21)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -2793,7 +2793,7 @@
 					"position":[
 						0.005800002,
 						0.1779,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -2806,12 +2806,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (22)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (22)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -2828,7 +2828,7 @@
 					"position":[
 						-0.009300002,
 						0.1779,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -2841,12 +2841,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (23)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (23)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -2863,7 +2863,7 @@
 					"position":[
 						-0.02440001,
 						0.1779,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -2876,12 +2876,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (24)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (24)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -2898,7 +2898,7 @@
 					"position":[
 						0.02089999,
 						0.07220002,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -2911,12 +2911,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (25)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (25)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -2933,7 +2933,7 @@
 					"position":[
 						0.02089998,
 						0.05710001,
-						0.5858999
+						0.3893999
 					],
 					"rotation":[
 						8.659559E-17,
@@ -2946,12 +2946,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (26)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (26)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -2968,7 +2968,7 @@
 					"position":[
 						0.02089996,
 						0.04200001,
-						0.5858999
+						0.3893999
 					],
 					"rotation":[
 						8.659559E-17,
@@ -2981,12 +2981,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (27)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (27)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -3003,7 +3003,7 @@
 					"position":[
 						0.005800002,
 						0.04200001,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -3016,12 +3016,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (28)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (28)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -3038,7 +3038,7 @@
 					"position":[
 						-0.009300002,
 						0.04200001,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -3051,12 +3051,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (29)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (29)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -3073,7 +3073,7 @@
 					"position":[
 						-0.02440001,
 						0.04200001,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -3086,12 +3086,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (30)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (30)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -3108,7 +3108,7 @@
 					"position":[
 						-0.02440004,
 						0.05710001,
-						0.5858999
+						0.3893999
 					],
 					"rotation":[
 						8.659559E-17,
@@ -3121,12 +3121,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (31)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (31)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -3143,7 +3143,7 @@
 					"position":[
 						0.036,
 						0.02690001,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -3156,12 +3156,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (32)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (32)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -3178,7 +3178,7 @@
 					"position":[
 						0.03600001,
 						0.01180001,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -3191,12 +3191,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (33)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (33)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -3213,7 +3213,7 @@
 					"position":[
 						0.03600001,
 						-0.003299989,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -3226,12 +3226,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (34)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (34)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -3248,7 +3248,7 @@
 					"position":[
 						0.0511,
 						-0.003299989,
-						0.5859
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -3261,12 +3261,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (35)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (35)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -3283,7 +3283,7 @@
 					"position":[
 						0.0511,
 						-0.01839998,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -3296,12 +3296,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (36)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (36)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -3318,7 +3318,7 @@
 					"position":[
 						-0.03949999,
 						0.02690001,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -3331,12 +3331,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (37)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (37)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -3353,7 +3353,7 @@
 					"position":[
 						0.03599999,
 						-0.0184,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -3366,12 +3366,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (38)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (38)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -3388,7 +3388,7 @@
 					"position":[
 						-0.03950005,
 						0.01180001,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -3401,12 +3401,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (39)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (39)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -3423,7 +3423,7 @@
 					"position":[
 						-0.03950007,
 						-0.003299989,
-						0.5858999
+						0.3893999
 					],
 					"rotation":[
 						8.659559E-17,
@@ -3436,12 +3436,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (40)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (40)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -3458,7 +3458,7 @@
 					"position":[
 						-0.02440001,
 						-0.003299989,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -3471,12 +3471,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (41)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (41)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -3493,7 +3493,7 @@
 					"position":[
 						0.0209,
 						0.01180001,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -3506,12 +3506,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (42)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (42)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -3528,7 +3528,7 @@
 					"position":[
 						0.02089999,
 						-0.003299989,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -3541,12 +3541,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (43)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (43)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -3563,7 +3563,7 @@
 					"position":[
 						0.02089998,
 						-0.01839998,
-						0.5858999
+						0.3893999
 					],
 					"rotation":[
 						8.659559E-17,
@@ -3576,12 +3576,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (44)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (44)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -3598,7 +3598,7 @@
 					"position":[
 						0.00579998,
 						-0.003299989,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -3611,12 +3611,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (45)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (45)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -3633,7 +3633,7 @@
 					"position":[
 						0.005799987,
 						0.01180001,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -3646,12 +3646,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (46)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (46)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -3668,7 +3668,7 @@
 					"position":[
 						0.005800002,
 						0.02690001,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -3681,12 +3681,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (47)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (47)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -3703,7 +3703,7 @@
 					"position":[
 						-0.009299987,
 						0.02690001,
-						0.5859
+						0.3894001
 					],
 					"rotation":[
 						8.659559E-17,
@@ -3716,12 +3716,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (48)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (48)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -3738,7 +3738,7 @@
 					"position":[
 						-0.009299994,
 						0.01180001,
-						0.5859
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -3751,12 +3751,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (49)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (49)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -3773,7 +3773,7 @@
 					"position":[
 						-0.009300002,
 						-0.003299989,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -3786,12 +3786,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (50)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (50)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -3808,7 +3808,7 @@
 					"position":[
 						-0.02439998,
 						0.01180001,
-						0.5859
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -3821,12 +3821,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (51)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (51)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -3843,7 +3843,7 @@
 					"position":[
 						-0.02440004,
 						-0.01839999,
-						0.5858999
+						0.3893999
 					],
 					"rotation":[
 						8.659559E-17,
@@ -3856,12 +3856,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (52)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (52)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -3878,7 +3878,7 @@
 					"position":[
 						-0.0395001,
 						-0.01839998,
-						0.5858999
+						0.3893999
 					],
 					"rotation":[
 						8.659559E-17,
@@ -3891,12 +3891,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (53)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (53)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -3913,7 +3913,7 @@
 					"position":[
 						-0.05460005,
 						-0.01839999,
-						0.5858999
+						0.3893999
 					],
 					"rotation":[
 						8.659559E-17,
@@ -3926,12 +3926,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (54)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (54)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -3948,7 +3948,7 @@
 					"position":[
 						-0.0546,
 						-0.003299989,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -3961,12 +3961,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cube (55)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cube (55)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -3983,7 +3983,7 @@
 					"position":[
 						-0.03949999,
 						0.1326,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -3996,12 +3996,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (48)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (48)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -4018,7 +4018,7 @@
 					"position":[
 						-0.03950001,
 						0.1477,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -4031,12 +4031,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (49)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (49)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -4053,7 +4053,7 @@
 					"position":[
 						-0.0546,
 						0.1326,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -4066,12 +4066,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (50)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (50)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -4088,7 +4088,7 @@
 					"position":[
 						-0.0697,
 						0.1326,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -4101,12 +4101,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (51)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (51)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -4123,7 +4123,7 @@
 					"position":[
 						-0.06970002,
 						0.1175,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -4136,12 +4136,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (52)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (52)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -4158,7 +4158,7 @@
 					"position":[
 						-0.0546,
 						0.1175,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -4171,12 +4171,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (53)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (53)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -4193,7 +4193,7 @@
 					"position":[
 						-0.0848,
 						0.1175,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -4206,12 +4206,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (54)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (54)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -4228,7 +4228,7 @@
 					"position":[
 						-0.0546,
 						0.0873,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -4241,12 +4241,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (55)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (55)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -4263,7 +4263,7 @@
 					"position":[
 						-0.03949999,
 						0.0873,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -4276,12 +4276,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (56)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (56)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -4298,7 +4298,7 @@
 					"position":[
 						-0.02440001,
 						0.0873,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -4311,12 +4311,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (57)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (57)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -4333,7 +4333,7 @@
 					"position":[
 						-0.009300002,
 						0.0873,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -4346,12 +4346,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (58)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (58)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -4368,7 +4368,7 @@
 					"position":[
 						0.005800002,
 						0.0873,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -4381,12 +4381,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (59)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (59)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -4403,7 +4403,7 @@
 					"position":[
 						0.0209,
 						0.0873,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -4416,12 +4416,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (60)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (60)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -4438,7 +4438,7 @@
 					"position":[
 						0.036,
 						0.0873,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -4451,12 +4451,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (61)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (61)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -4473,7 +4473,7 @@
 					"position":[
 						0.03599999,
 						0.1024,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -4486,12 +4486,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (62)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (62)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -4508,7 +4508,7 @@
 					"position":[
 						0.0209,
 						0.1024,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -4521,12 +4521,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (63)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (63)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -4543,7 +4543,7 @@
 					"position":[
 						0.005800002,
 						0.1024,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -4556,12 +4556,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (64)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (64)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -4578,7 +4578,7 @@
 					"position":[
 						-0.009300002,
 						0.1024,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -4591,12 +4591,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (65)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (65)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -4613,7 +4613,7 @@
 					"position":[
 						-0.009300002,
 						0.1175,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -4626,12 +4626,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (66)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (66)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -4648,7 +4648,7 @@
 					"position":[
 						0.005800002,
 						0.1175,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -4661,12 +4661,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (67)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (67)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -4683,7 +4683,7 @@
 					"position":[
 						0.005800002,
 						0.1326,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -4696,12 +4696,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (68)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (68)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -4718,7 +4718,7 @@
 					"position":[
 						-0.009300002,
 						0.1326,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -4731,12 +4731,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (69)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (69)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -4753,7 +4753,7 @@
 					"position":[
 						-0.009300002,
 						0.1477,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -4766,12 +4766,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (70)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (70)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -4788,7 +4788,7 @@
 					"position":[
 						0.005800002,
 						0.1477,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -4801,12 +4801,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (71)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (71)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -4823,7 +4823,7 @@
 					"position":[
 						0.0209,
 						0.1326,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -4836,12 +4836,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (72)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (72)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -4858,7 +4858,7 @@
 					"position":[
 						-0.02440001,
 						0.1175,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -4871,12 +4871,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (73)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (73)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -4893,7 +4893,7 @@
 					"position":[
 						0.05110001,
 						0.1326,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -4906,12 +4906,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (74)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (74)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -4928,7 +4928,7 @@
 					"position":[
 						0.0511,
 						0.1175,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -4941,12 +4941,12 @@
 						1.5,
 						1.5
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (75)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (75)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -4963,7 +4963,7 @@
 					"position":[
 						-0.06970003,
 						0.02690001,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -4976,12 +4976,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (78)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (78)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -4998,7 +4998,7 @@
 					"position":[
 						-0.0848,
 						0.02690001,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -5011,12 +5011,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (79)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (79)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -5033,7 +5033,7 @@
 					"position":[
 						-0.08480003,
 						0.01180001,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -5046,12 +5046,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (80)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (80)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -5068,7 +5068,7 @@
 					"position":[
 						-0.06970003,
 						0.01180001,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -5081,12 +5081,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (81)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (81)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -5103,7 +5103,7 @@
 					"position":[
 						-0.06970003,
 						-0.003299989,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -5116,12 +5116,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (82)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (82)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -5138,7 +5138,7 @@
 					"position":[
 						-0.08480003,
 						-0.003299989,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -5151,12 +5151,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (83)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (83)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -5173,7 +5173,7 @@
 					"position":[
 						-0.0546,
 						0.01180001,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -5186,12 +5186,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (84)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (84)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -5208,7 +5208,7 @@
 					"position":[
 						0.06620009,
 						-0.003299989,
-						0.5859
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -5221,12 +5221,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (85)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (85)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -5243,7 +5243,7 @@
 					"position":[
 						0.08130001,
 						-0.003299989,
-						0.5859
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -5256,12 +5256,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (86)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (86)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -5278,7 +5278,7 @@
 					"position":[
 						0.08130008,
 						0.01180001,
-						0.5859
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -5291,12 +5291,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (87)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (87)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -5313,7 +5313,7 @@
 					"position":[
 						0.06620009,
 						0.01180001,
-						0.5859
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -5326,12 +5326,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (88)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (88)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -5348,7 +5348,7 @@
 					"position":[
 						0.06620013,
 						0.02690001,
-						0.5859
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -5361,12 +5361,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (89)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (89)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -5383,7 +5383,7 @@
 					"position":[
 						0.08130008,
 						0.02690001,
-						0.5859
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -5396,12 +5396,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (90)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (90)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -5418,7 +5418,7 @@
 					"position":[
 						0.0511,
 						0.01180001,
-						0.5859
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -5431,12 +5431,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CubeGlass (91)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CubeGlass (91)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -5453,7 +5453,7 @@
 					"position":[
 						-0.08520001,
 						-0.02609999,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -5466,12 +5466,12 @@
 						1.5,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cylinder_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cylinder_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -5488,7 +5488,7 @@
 					"position":[
 						0.08090001,
 						-0.02609999,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -5501,12 +5501,12 @@
 						1.5,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cylinder (1)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cylinder (1)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -5523,7 +5523,7 @@
 					"position":[
 						0.06580002,
 						0.07959999,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -5536,12 +5536,12 @@
 						1.5,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cylinder (2)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cylinder (2)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -5558,7 +5558,7 @@
 					"position":[
 						-0.07010002,
 						0.07959999,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -5571,12 +5571,12 @@
 						1.5,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cylinder (3)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cylinder (3)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -5593,7 +5593,7 @@
 					"position":[
 						-0.08520001,
 						0.0795,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -5606,12 +5606,12 @@
 						3,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cylinder (4)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cylinder (4)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -5628,7 +5628,7 @@
 					"position":[
 						-0.05460002,
 						0.07180001,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -5641,12 +5641,12 @@
 						0.75,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cylinder (5)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cylinder (5)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -5663,7 +5663,7 @@
 					"position":[
 						-0.03950001,
 						0.07180001,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -5676,12 +5676,12 @@
 						0.75,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cylinder (6)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cylinder (6)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -5698,7 +5698,7 @@
 					"position":[
 						-0.06970002,
 						-0.01880001,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -5711,12 +5711,12 @@
 						0.75,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cylinder (7)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cylinder (7)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -5733,7 +5733,7 @@
 					"position":[
 						0.06620001,
 						-0.01880001,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -5746,12 +5746,12 @@
 						0.75,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cylinder (8)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cylinder (8)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -5768,7 +5768,7 @@
 					"position":[
 						-0.08520003,
 						0.155,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -5781,12 +5781,12 @@
 						3,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cylinder (9)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cylinder (9)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -5803,7 +5803,7 @@
 					"position":[
 						0.0812,
 						0.0795,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -5816,12 +5816,12 @@
 						3,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cylinder (10)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cylinder (10)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -5838,7 +5838,7 @@
 					"position":[
 						0.08140001,
 						0.1249,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -5851,12 +5851,12 @@
 						1.5,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cylinder (11)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cylinder (11)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -5873,7 +5873,7 @@
 					"position":[
 						0.0815,
 						0.1551,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -5886,12 +5886,12 @@
 						1.5,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cylinder (12)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cylinder (12)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -5908,7 +5908,7 @@
 					"position":[
 						0.0658,
 						0.1551,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -5921,12 +5921,12 @@
 						1.5,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cylinder (13)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cylinder (13)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -5943,7 +5943,7 @@
 					"position":[
 						0.06580003,
 						0.1853,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -5956,12 +5956,12 @@
 						1.5,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cylinder (14)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cylinder (14)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -5978,7 +5978,7 @@
 					"position":[
 						0.08130001,
 						0.1853,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -5991,12 +5991,12 @@
 						1.5,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cylinder (15)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cylinder (15)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -6013,7 +6013,7 @@
 					"position":[
 						0.05070001,
 						0.1853,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -6026,12 +6026,12 @@
 						1.5,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cylinder (16)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cylinder (16)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -6048,7 +6048,7 @@
 					"position":[
 						-0.0399,
 						0.1853,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -6061,12 +6061,12 @@
 						1.5,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cylinder (17)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cylinder (17)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -6083,7 +6083,7 @@
 					"position":[
 						-0.05500001,
 						0.1853,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -6096,12 +6096,12 @@
 						1.5,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cylinder (18)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cylinder (18)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -6118,7 +6118,7 @@
 					"position":[
 						-0.07010001,
 						0.1853,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -6131,12 +6131,12 @@
 						1.5,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cylinder (19)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cylinder (19)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -6153,7 +6153,7 @@
 					"position":[
 						0.036,
 						0.1926,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -6166,12 +6166,12 @@
 						0.75,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cylinder (20)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cylinder (20)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -6188,7 +6188,7 @@
 					"position":[
 						0.0209,
 						0.1926,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -6201,12 +6201,12 @@
 						0.75,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cylinder (21)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cylinder (21)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -6223,7 +6223,7 @@
 					"position":[
 						0.005800002,
 						0.1926,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -6236,12 +6236,12 @@
 						0.75,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cylinder (22)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cylinder (22)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -6258,7 +6258,7 @@
 					"position":[
 						-0.009300002,
 						0.1926,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -6271,12 +6271,12 @@
 						0.75,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cylinder (23)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cylinder (23)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -6293,7 +6293,7 @@
 					"position":[
 						-0.02440001,
 						0.1926,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -6306,12 +6306,12 @@
 						0.75,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cylinder (24)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cylinder (24)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -6328,7 +6328,7 @@
 					"position":[
 						-0.0697,
 						0.1473,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -6341,12 +6341,12 @@
 						0.75,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cylinder (25)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cylinder (25)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -6363,7 +6363,7 @@
 					"position":[
 						-0.0546,
 						0.1473,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -6376,12 +6376,12 @@
 						0.75,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cylinder (26)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cylinder (26)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -6398,7 +6398,7 @@
 					"position":[
 						-0.0848,
 						0.1926,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -6411,12 +6411,12 @@
 						0.75,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cylinder (27)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cylinder (27)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -6433,7 +6433,7 @@
 					"position":[
 						0.09700001,
 						0.07310002,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -6446,12 +6446,12 @@
 						13.03496,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cylinder (28)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cylinder (28)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -6468,7 +6468,7 @@
 					"position":[
 						-0.1008,
 						0.07360001,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -6481,12 +6481,12 @@
 						13.03496,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-Cylinder (29)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-Cylinder (29)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -6503,7 +6503,7 @@
 					"position":[
 						0.006200001,
 						-0.03409,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -6516,12 +6516,12 @@
 						2.325,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CylinderGlass (3)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CylinderGlass (3)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -6538,7 +6538,7 @@
 					"position":[
 						0.0213,
 						-0.0426,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -6551,12 +6551,12 @@
 						1.65,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CylinderGlass (4)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CylinderGlass (4)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -6573,7 +6573,7 @@
 					"position":[
 						-0.008900003,
 						-0.03409,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -6586,12 +6586,12 @@
 						2.325,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CylinderGlass (5)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CylinderGlass (5)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -6608,7 +6608,7 @@
 					"position":[
 						-0.02400001,
 						-0.0426,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -6621,12 +6621,12 @@
 						1.65,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CylinderGlass (6)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CylinderGlass (6)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -6643,7 +6643,7 @@
 					"position":[
 						0.05110001,
 						0.08689998,
-						0.5882
+						0.3917
 					],
 					"rotation":[
 						6.123233E-17,
@@ -6656,12 +6656,12 @@
 						0.75,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-CylinderGlass (12)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-CylinderGlass (12)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -6678,7 +6678,7 @@
 					"position":[
 						-0.02440001,
 						0.02690001,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -6691,12 +6691,12 @@
 						1.5,
 						1.500002
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-TNT_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-TNT_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -6713,7 +6713,7 @@
 					"position":[
 						0.0206,
 						0.02690001,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -6726,12 +6726,12 @@
 						1.5,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-TNT (1)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-TNT (1)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -6748,7 +6748,7 @@
 					"position":[
 						-0.02440001,
 						0.1469,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -6761,12 +6761,12 @@
 						1.5,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-TNT (2)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-TNT (2)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -6783,7 +6783,7 @@
 					"position":[
 						-0.02440001,
 						0.1318,
-						0.5858999
+						0.3894
 					],
 					"rotation":[
 						8.659559E-17,
@@ -6796,12 +6796,12 @@
 						1.5,
 						1.500001
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Obstacles-TNT (3)_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Obstacles-TNT (3)_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -6818,7 +6818,7 @@
 					"position":[
 						-0.000599999,
 						-0.06122999,
-						0.5883
+						0.3918
 					],
 					"rotation":[
 						0,
@@ -6831,12 +6831,12 @@
 						0.5,
 						3.312311
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cube_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cube_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
@@ -6853,7 +6853,7 @@
 					"position":[
 						-0.0006374366,
 						-0.1003,
-						0.5963399
+						0.39984
 					],
 					"rotation":[
 						0,
@@ -6866,12 +6866,12 @@
 						3.6124,
 						1
 					],
-					"meshPath":"Assets/fbx格式文件/72/72-Cylinder_0.lm",
+					"meshPath":"Assets/fbx文件/72/72-Cylinder_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/fbx格式文件/72/72.lmat"
+							"path":"Assets/fbx文件/72/72.lmat"
 						}
 					]
 				},
