@@ -31,7 +31,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         if (this.state === Const.GameState.START) {
             this.lvlLabel.visible = true;
             this.showUI();
-            this.stageIdx = 15//Global.gameData.stageIndex;
+            this.stageIdx = 40//Global.gameData.stageIndex;
             this.newStage();
         }
     }

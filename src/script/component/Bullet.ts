@@ -1,5 +1,7 @@
 import GameScene from "../runtime/GameScene";
 import * as Const from "../Const"
+import Target from "./Target";
+import Guard from "./Guard";
 
 export default class BulletScript extends Laya.Script3D {
     public bullet: Laya.MeshSprite3D;
@@ -107,23 +109,29 @@ export default class BulletScript extends Laya.Script3D {
         if (this.isReward) {
             /** black hole */
             if (this.type === Const.BulletRewardType.BLACKHOLE) {
+                GameScene.instance.isStageStart = true;
                 let otherSp: Laya.MeshSprite3D = other.owner as Laya.MeshSprite3D;
                 if (otherSp.name === "stand" || otherSp.name.indexOf("Guard") >= 0 || otherSp.name.indexOf("Obstacle") >= 0) {
                     otherSp.timer.frameOnce(1, this, () => {
                         otherSp.getComponent(Laya.PhysicsCollider) && otherSp.getComponent(Laya.PhysicsCollider).destroy();
                         otherSp.getComponent(Laya.Rigidbody3D) && otherSp.getComponent(Laya.Rigidbody3D).destroy();
+                        otherSp.getComponent(Target) && otherSp.getComponent(Target).destroy();
+                        otherSp.getComponent(Guard) && otherSp.getComponent(Guard).destroy();
                     });
                     // 消失动画
                     let cnt: number = 0;
-                    let MaxCnt: number = 90;
+                    let MaxCnt: number = 120;
                     let scaleStepX = otherSp.transform.localScaleX / MaxCnt;
                     let scaleStepY = otherSp.transform.localScaleY / MaxCnt;
                     let scaleStepZ = otherSp.transform.localScaleZ / MaxCnt;
-                    let rotStepX = Math.random() * 3;
-                    let rotStepY = Math.random() * 3;
-                    let rotStepZ = Math.random() * 3;
+                    let posStepX = (this.bullet.transform.position.x - otherSp.transform.position.x) / MaxCnt / GameScene.instance.gameStage.transform.scale.x;
+                    let posStepY = (this.bullet.transform.position.y - otherSp.transform.position.y) / MaxCnt / GameScene.instance.gameStage.transform.scale.y;
+                    let posStepZ = (this.bullet.transform.position.z - otherSp.transform.position.z) / MaxCnt / GameScene.instance.gameStage.transform.scale.z;
+                    let rotStepX = Math.random() * 5;
+                    let rotStepY = Math.random() * 5;
+                    let rotStepZ = Math.random() * 5;
                     otherSp.timer.frameLoop(1, otherSp, () => {
-                        if (cnt++ > MaxCnt) {
+                        if (cnt++ > MaxCnt / 2) {
                             otherSp.timer.clearAll(otherSp);
                             otherSp.destroy();
                             return;
@@ -133,9 +141,9 @@ export default class BulletScript extends Laya.Script3D {
                         otherSp.transform.localScaleY -= scaleStepY;
                         otherSp.transform.localScaleZ -= scaleStepZ;
                         // position
-                        otherSp.transform.localPositionX -= (this.bullet.transform.position.x - otherSp.transform.position.x) / MaxCnt / otherSp.transform.scale.x;
-                        otherSp.transform.localPositionY += (this.bullet.transform.position.y - otherSp.transform.position.y) / MaxCnt / otherSp.transform.scale.y;
-                        otherSp.transform.localPositionZ -= (this.bullet.transform.position.z - otherSp.transform.position.z) / MaxCnt / otherSp.transform.scale.z;
+                        otherSp.transform.localPositionX -= posStepX;
+                        otherSp.transform.localPositionY += posStepY;
+                        otherSp.transform.localPositionZ -= posStepZ;
                         // rotation
                         otherSp.transform.localRotationEulerX += rotStepX;
                         otherSp.transform.localRotationEulerY += rotStepY;

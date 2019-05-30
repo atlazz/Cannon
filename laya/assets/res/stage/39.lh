@@ -503,7 +503,7 @@
 			{
 				"type":"MeshSprite3D",
 				"props":{
-					"name":"Rotator (2)_down",
+					"name":"Guard_move_down",
 					"active":true,
 					"isStatic":false,
 					"layer":0,
