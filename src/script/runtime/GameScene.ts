@@ -382,7 +382,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         let tmpStage = StageConfig.Stage[HomeView.instance.systemName][this.stageIdx][this.missionIdx];
         this.rawIdx = this.missionRawIdxList[0];
         let tryCnt = 0;
-        while (tryCnt < 20 || this.missionRawIdxList.indexOf(this.rawIdx) >= 0) {
+        while (tryCnt < 20 && this.missionRawIdxList.indexOf(this.rawIdx) >= 0) {
             this.rawIdx = Math.round(Math.random() * (tmpStage.max - tmpStage.min)) + tmpStage.min;
             tryCnt++;
         }
@@ -594,6 +594,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         }
         this.missionIdx = 0;
         for (let i = 1; i <= 5; i++) {
+            this.missionRawIdxList[i - 1] = 0;
             this["level" + i].sizeGrid = "0, 96, 0, 0";
         }
         // clear reward cannon
