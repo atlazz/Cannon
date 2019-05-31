@@ -32,6 +32,7 @@ export default class GameScene extends ui.game.GameSceneUI {
 
         if (this.state === Const.GameState.START) {
             this.showUI();
+            // todo: 玩家进度记录进Global
             this.stageIdx = Global.gameData.stageIndex;
             this.missionIdx = 1;
             for (let i = 1; i <= 5; i++) {
@@ -51,9 +52,6 @@ export default class GameScene extends ui.game.GameSceneUI {
     private bgIdx: number = 0;
     private cloud0: Laya.Sprite3D;
     private cloud1: Laya.Sprite3D;
-
-    /** 机型系统判断 */
-    public isIOS;
 
     /** stage */
     public gameStage: Laya.Sprite3D;
@@ -300,6 +298,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                     this.isRevive = true;
                     this.box_revive.visible = false;
                     this.currBulletNum -= 3;
+                    this.label_ballNum.changeText("剩余炮弹：3");
                     this.box_scene3D.on(Laya.Event.CLICK, this, this.onClick);
                 },
                 complete: () => {
@@ -379,14 +378,14 @@ export default class GameScene extends ui.game.GameSceneUI {
         }
 
         // get raw stage index
-        let tmpStage = StageConfig.Stage["Android"][this.stageIdx][this.missionIdx];
+        let tmpStage = StageConfig.Stage[HomeView.instance.systemName][this.stageIdx][this.missionIdx];
         this.rawIdx = this.missionRawIdxList[0];
         let tryCnt = 0;
         while (this.missionRawIdxList.indexOf(this.rawIdx) >= 0 || tryCnt++ < 100) {
             this.rawIdx = Math.round(Math.random() * (tmpStage.max - tmpStage.min)) + tmpStage.min;
         }
         this.missionRawIdxList[this.missionIdx - 1] = this.rawIdx;
-        this.MaxBulletNum = StageConfig.Stage["Android"][this.stageIdx][this.missionIdx].ball_add + StageConfig.StageRaw[this.rawIdx].ball_num;
+        this.MaxBulletNum = tmpStage.ball_add + StageConfig.StageRaw[this.rawIdx].ball_num;
         this.label_ballNum.changeText("剩余炮弹：" + this.MaxBulletNum);
 
         console.log("stage: " + this.stageIdx + "\tmission: " + this.missionIdx + "\traw stage index: " + this.rawIdx);

@@ -37,6 +37,9 @@ export default class HomeView extends ui.home.HomeViewUI {
 
     private cannonScene3D: Laya.Scene3D;
 
+    /** 机型系统判断 */
+    public systemName;
+
     constructor() {
         super();
         console.log("HomeView constructor()");
@@ -93,6 +96,11 @@ export default class HomeView extends ui.home.HomeViewUI {
                 Laya.Tween.to(this.btn_start, { alpha: 1, scaleX: scaleX, scaleY: scaleY }, 50, Laya.Ease.linearInOut, Laya.Handler.create(this, () => {
                     if (GameScene.instance) {
                         ws.traceEvent("Click_Startgame");
+                        // 判断机型系统
+                        this.systemName = "Android";
+                        if (Laya.Browser.onMiniGame && ws.isIOS()) {
+                            this.systemName = "IOS";
+                        }
                         // hide home view
                         this.hide();
                         // show game scene
@@ -206,12 +214,6 @@ export default class HomeView extends ui.home.HomeViewUI {
                     ws.login();
                 }
             });
-        }
-
-        // 判断机型系统
-        GameScene.instance.isIOS = false;
-        if (Laya.Browser.onMiniGame && ws.isIOS()) {
-            GameScene.instance.isIOS = true;
         }
     }
 

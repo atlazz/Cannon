@@ -1,4 +1,4 @@
-// v1.0.0
+// v1.1.0
 // publish 2.x 也是用这个文件，需要做兼容
 let isPublish2 = process.argv[2].includes("publish_xmgame.js") && process.argv[3].includes("--evn=publish2");
 // 获取Node插件和工作路径
@@ -32,6 +32,8 @@ let
 	releaseDir,
     tempReleaseDir, // 小米临时拷贝目录
 	projDir; // 小米快游戏工程目录
+let IDEXMProjPath,
+	isUpdateIDEXMProj = false;
 // 创建小米项目前，拷贝小米引擎库、修改index.js
 // 应该在publish中的，但是为了方便发布2.0及IDE 1.x，放在这里修改
 gulp.task("preCreate_XM", prevTasks, function() {
@@ -73,7 +75,122 @@ gulp.task("copyPlatformFile_XM", ["preCreate_XM"], function() {
 });
 
 // 新建小米项目-小米项目与其他项目不同，需要新建小米快游戏项目，并打包成.rpk文件
-gulp.task("createProj_XM", ["copyPlatformFile_XM"], function() {
+gulp.task("checkIDEProj_XM", ["copyPlatformFile_XM"], function() {
+	// 如果不是小米快游戏
+	if (platform !== "xmgame") {
+		return;
+	}
+	if (!ideModuleDir) {
+		return;
+	}
+	IDEXMProjPath = path.join(ideModuleDir, "../", "out", "layarepublic", "xm");
+	if (process.platform === "darwin") {
+		return;
+	}
+	let ideLastXMProjPath = path.join(IDEXMProjPath, config.xmInfo.projName);
+	// 如果IDE中没有小米项目，跳过这一步
+	let isProjExist = fs.existsSync(ideLastXMProjPath + "/node_modules") && 
+					  fs.existsSync(ideLastXMProjPath + "/sign");
+	if (!isProjExist) {
+		console.log("IDE中没有小米项目，跳过检查小米项目版本号这一步");
+		return;
+	}
+	// 如果IDE中项目已经存在了，检查版本号
+	// npm view quickgame-cli version
+	// npm ls quickgame-cli
+	let remoteVersion, localVersion;
+	let isGetRemote, isGetLocal;
+	return new Promise((resolve, reject) => { // 远程版本号
+		childProcess.exec("npm view quickgame-cli version", function(error, stdout, stderr) {
+			if (!stdout) { // 获取 quickgame-cli 远程版本号失败
+				reject();
+				return;
+			}
+			remoteVersion = stdout;
+			isGetRemote = true;
+			if (isGetRemote && isGetLocal) {
+				resolve();
+			}
+		});
+		childProcess.exec("npm ls quickgame-cli", { cwd: ideLastXMProjPath }, function(error, stdout, stderr) {
+			if (!stdout) { // 获取 quickgame-cli 本地版本号失败
+				reject();
+				return;
+			}
+			localVersion = stdout.match(/quickgame-cli@(.+)/);
+			localVersion = localVersion && localVersion[1];
+			isGetLocal = true;
+			if (isGetRemote && isGetLocal) {
+				resolve();
+			}
+		});
+		setTimeout(() => {
+			if (!isGetLocal || !isGetRemote) {
+				console.log("获取远程版本号或本地版本号失败");
+				reject();
+				return;
+			}
+		}, 10000);
+	}).then(() => { // 比较两个版本号
+		if (!remoteVersion || !localVersion) {
+			console.log("获取远程版本号或本地版本号失败!");
+		}
+		console.log("quickgame-cli -> ", localVersion, "|", remoteVersion);
+		if (remoteVersion.trim() !== localVersion.trim()) { // 仅当两个版本号都获取到并且不相等，置为需要更新(true)
+			isUpdateIDEXMProj = true;
+		}
+	}).catch((e) => {
+		console.log("获取远程版本号或本地版本号失败 -> ", remoteVersion, "|", localVersion);
+		console.log(e);
+	});
+});
+
+gulp.task("createIDEProj_XM", ["checkIDEProj_XM"], function() {
+	// 如果不是小米快游戏
+	if (platform !== "xmgame") {
+		return;
+	}
+	if (!ideModuleDir) {
+		return;
+	}
+	if (process.platform === "darwin") {
+		return;
+	}
+	let ideLastXMProjPath = path.join(IDEXMProjPath, config.xmInfo.projName);
+	// 如果有即存项目，不再新建
+	let isProjExist = fs.existsSync(ideLastXMProjPath + "/node_modules") && 
+					  fs.existsSync(ideLastXMProjPath + "/sign");
+	if (isProjExist && !isUpdateIDEXMProj) { // 项目存在并且不需要更新IDE中的小米项目
+		return;
+	}
+	return new Promise((resolve, reject) => {
+		console.log("(IDE)开始创建小米快游戏项目，请耐心等待(预计需要10分钟)...");
+		let cmd = `npx${commandSuffix}`;
+		let args = ["create-quickgame", config.xmInfo.projName, `path=${IDEXMProjPath}`,
+					`package=${config.xmInfo.package}`, `versionName=${config.xmInfo.versionName}`,
+					`versionCode=${config.xmInfo.versionCode}`, `minPlatformVersion=${config.xmInfo.minPlatformVersion}`,
+                    `icon=/layaicon/${path.basename(config.xmInfo.icon)}`, `name=${config.xmInfo.name}`, `rebuild=true`];
+        console.log(JSON.stringify(args));
+        
+        let cp = childProcess.spawn(cmd, args);
+        
+		cp.stdout.on('data', (data) => {
+			console.log(`stdout: ${data}`);
+		});
+		
+		cp.stderr.on('data', (data) => {
+			console.log(`stderr: ${data}`);
+			// reject();
+		});
+		
+		cp.on('close', (code) => {
+			console.log(`子进程退出码：${code}`);
+			resolve();
+		});
+	});
+});
+
+gulp.task("createProj_XM", ["createIDEProj_XM"], function() {
 	// 如果不是小米快游戏
 	if (platform !== "xmgame") {
 		return;
@@ -86,13 +203,25 @@ gulp.task("createProj_XM", ["copyPlatformFile_XM"], function() {
 	if (isProjExist) {
 		return;
 	}
+	// 如果IDE中有即存项目，不再新建，从IDE中拷贝
+	let ideLastXMProjPath = path.join(IDEXMProjPath, config.xmInfo.projName);
+	let isIDEXMProjExist = fs.existsSync(ideLastXMProjPath + "/node_modules") && 
+						fs.existsSync(ideLastXMProjPath + "/sign");
+	if (isIDEXMProjExist) { // 如果用的IDE并且有IDEXM目录
+		console.log("使用IDE中的小米游戏项目，拷贝...");
+		// node-glob语法中，* 无法匹配 .开头的文件(夹)，必须手动匹配
+		let IDEXMProjPathStr = [`${IDEXMProjPath}/**/*.*`, `${ideLastXMProjPath}/node_modules/.bin/*.*`];
+		var stream = gulp.src(IDEXMProjPathStr, { base: IDEXMProjPath});
+		return stream.pipe(gulp.dest(releaseDir));
+	}
+	// 在项目中创建小米项目
 	return new Promise((resolve, reject) => {
-		console.log("开始创建小米快游戏项目，请耐心等待(预计需要10分钟)...");
+		console.log("(proj)开始创建小米快游戏项目，请耐心等待(预计需要10分钟)...");
 		let cmd = `npx${commandSuffix}`;
 		let args = ["create-quickgame", config.xmInfo.projName, `path=${releaseDir}`,
 					`package=${config.xmInfo.package}`, `versionName=${config.xmInfo.versionName}`,
 					`versionCode=${config.xmInfo.versionCode}`, `minPlatformVersion=${config.xmInfo.minPlatformVersion}`,
-                    `icon=./layaicon/${path.basename(config.xmInfo.icon)}`, `name=${config.xmInfo.name}`, `rebuild=true`];
+                    `icon=/layaicon/${path.basename(config.xmInfo.icon)}`, `name=${config.xmInfo.name}`, `rebuild=true`];
         console.log(JSON.stringify(args));
         
         let cp = childProcess.spawn(cmd, args);
@@ -161,7 +290,8 @@ gulp.task("generateSign_XM", ["clearTempDir_XM"], function() {
 		let args = ["req", "-newkey", "rsa:2048", "-nodes", "-keyout", "private.pem", 
 					"-x509", "-days", "3650", "-out", "certificate.pem"];
 		let opts = {
-			cwd: projDir
+			cwd: projDir,
+			shell: true
 		};
 		let cp = childProcess.spawn(cmd, args, opts);
 		cp.stdout.on('data', (data) => {
@@ -241,7 +371,20 @@ gulp.task("copySignFile_XM", ["generateSign_XM"], function() {
     }
 });
 
-gulp.task("modifyFile_XM", ["copySignFile_XM"], function() {
+gulp.task("deleteSignFile_XM", ["copySignFile_XM"], function() {
+	// 如果不是小米快游戏
+	if (platform !== "xmgame") {
+		return;
+	}
+	if (config.xmSign.generateSign) { // 新生成的签名
+		let 
+            privatePem = path.join(projDir, "private.pem"),
+            certificatePem = path.join(projDir, "certificate.pem");
+		return del([privatePem, certificatePem], { force: true });
+	}
+});
+
+gulp.task("modifyFile_XM", ["deleteSignFile_XM"], function() {
 	// 如果不是小米快游戏
 	if (platform !== "xmgame") {
 		return;
@@ -259,7 +402,7 @@ gulp.task("modifyFile_XM", ["copySignFile_XM"], function() {
 	manifestJson.versionName = config.xmInfo.versionName;
 	manifestJson.versionCode = config.xmInfo.versionCode;
 	manifestJson.minPlatformVersion = config.xmInfo.minPlatformVersion;
-	manifestJson.icon = `./layaicon/${path.basename(config.xmInfo.icon)}`;
+	manifestJson.icon = `/layaicon/${path.basename(config.xmInfo.icon)}`;
 	fs.writeFileSync(manifestPath, JSON.stringify(manifestJson, null, 4), "utf8");
 
 	// 修改main.js文件
@@ -278,7 +421,7 @@ gulp.task("modifyFile_XM", ["copySignFile_XM"], function() {
 })
 
 // 打包rpk
-gulp.task("buildRPK", ["modifyFile_XM"], function() {
+gulp.task("buildRPK_XM", ["modifyFile_XM"], function() {
 	// 如果不是小米快游戏
 	if (platform !== "xmgame") {
 		return;
@@ -313,7 +456,7 @@ gulp.task("buildRPK", ["modifyFile_XM"], function() {
 	});
 });
 
-gulp.task("showQRCode", ["buildRPK"], function() {
+gulp.task("showQRCode_XM", ["buildRPK_XM"], function() {
 	// 如果不是小米快游戏
 	if (platform !== "xmgame") {
 		return;
@@ -347,6 +490,6 @@ gulp.task("showQRCode", ["buildRPK"], function() {
 });
 
 
-gulp.task("buildXiaomiProj", ["showQRCode"], function() {
+gulp.task("buildXiaomiProj", ["showQRCode_XM"], function() {
 	console.log("all tasks completed");
 });

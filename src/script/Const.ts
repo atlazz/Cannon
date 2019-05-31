@@ -56,7 +56,7 @@ export const StageResUrl: string = "res/stage/out/";
 export const StageInitPos: Laya.Vector3 = new Laya.Vector3(0, 0, 0);
 export const StageInitRot: Laya.Vector3 = new Laya.Vector3(0, 180, 0);
 export const StageInitScale: Laya.Vector3 = new Laya.Vector3(20, 20, 20);
-export const StageNum: number = 3;
+export const StageNum: number = 10;
 // winning check frame
 export const MaxWinCheckTime: number = 30;
 // 屏蔽物体物理受力前等待时间
@@ -77,7 +77,7 @@ export const enum TargetType {
 }
 
 /** glass */
-export const GlassBrokenVelocity: number = 14;
+export const GlassBrokenVelocity: number = 10;
 export const GlassFallingBrokenVelocity: number = 1;
 
 /** piece of target object */

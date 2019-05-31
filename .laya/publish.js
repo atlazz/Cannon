@@ -1,4 +1,4 @@
-// v1.1.2
+// v1.2.0
 //是否使用IDE自带的node环境和插件，设置false后，则使用自己环境(使用命令行方式执行)
 const useIDENode = process.argv[0].indexOf("LayaAir") > -1 ? true : false;
 //获取Node插件和工作路径
@@ -23,7 +23,7 @@ global.workSpaceDir = workSpaceDir;
 
 // 结合compile.js使用
 global.publish = true;
-const fileList = ["compile.js", "publish_xmgame.js"];
+const fileList = ["compile.js", "publish_xmgame.js", "publish_oppogame.js"];
 requireDir('./', {
 	filter: function (fullPath) {
 		// 只用到了compile.js和publish.js
@@ -87,12 +87,15 @@ gulp.task("loadConfig", function () {
 gulp.task("clearReleaseDir", ["compile"], function (cb) {
 	if (config.clearReleaseDir) {
 		let delList = [releaseDir, releaseDir + "_pack", config.packfileTargetValue];
-		// 小米快游戏，使用即存的项目，只删掉src目录
-		// let xmProjSrc = path.join(releaseDir, config.xmInfo.projName, "src");
+		// 小米快游戏，使用即存的项目，删掉Laya工程文件，保留小米环境项目文件
 		if (platform === "xmgame") {
+			let xmProjSrc = path.join(releaseDir, config.xmInfo.projName);
 			// 不要删掉manifest.json/main.js文件
 			// 这里不是node-glob语法，详见: https://github.com/sindresorhus/del
-			delList = [];
+			delList = [`${xmProjSrc}/**`, `!${xmProjSrc}`, `!${xmProjSrc}/node_modules/**`, `!${xmProjSrc}/sign/**`, `!${xmProjSrc}/{babel.config.js,main.js,manifest.json,package.json,package-lock.json}`];
+		} else if (platform === "oppogame") {
+			let oppoProjSrc = path.join(releaseDir, config.oppoInfo.projName);
+			delList = [`${oppoProjSrc}/**`, `!${oppoProjSrc}`, `!${oppoProjSrc}/dist/**`, `!${oppoProjSrc}/{manifest.json}`];
 		}
 		del(delList, { force: true }).then(paths => {
 			cb();
@@ -427,6 +430,6 @@ gulp.task("packfile", ["version2"], function() {
 });
 
 // 起始任务
-gulp.task("publish", ["buildXiaomiProj"], function () {
+gulp.task("publish", ["buildXiaomiProj", "buildOPPOProj"], function () {
 	console.log("All tasks completed!");
 });
