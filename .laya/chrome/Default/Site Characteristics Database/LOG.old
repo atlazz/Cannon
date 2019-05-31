@@ -1,3 +1,5 @@
-2019/05/31-22:37:21.096 1194 Reusing MANIFEST F:\LayaProjects\cannon\.laya\chrome\Default\Site Characteristics Database/MANIFEST-000001
-2019/05/31-22:37:21.097 1194 Recovering log #9
-2019/05/31-22:37:21.097 1194 Reusing old log F:\LayaProjects\cannon\.laya\chrome\Default\Site Characteristics Database/000009.log 
+2019/06/01-02:31:40.117 15fc Log #9: 0 ops saved to Table #10 OK
+2019/06/01-02:31:40.118 15fc Archiving E:\Work\Projects\cannon\.laya\chrome\Default\Site Characteristics Database/000009.log: OK
+2019/06/01-02:31:40.118 15fc Table #4: 1 entries OK
+2019/06/01-02:31:40.131 15fc Archiving E:\Work\Projects\cannon\.laya\chrome\Default\Site Characteristics Database/MANIFEST-000001: OK
+2019/06/01-02:31:40.652 15fc **** Repaired leveldb E:\Work\Projects\cannon\.laya\chrome\Default\Site Characteristics Database; recovered 1 files; 130 bytes. Some data may have been lost. ****

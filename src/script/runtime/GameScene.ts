@@ -232,7 +232,8 @@ export default class GameScene extends ui.game.GameSceneUI {
                 this.turret.transform.localRotationEuler = Const.TurretInitLocalRot.clone();
             }
             // clear timer
-            Laya.timer.clearAll(this);
+            Laya.timer.clear(this, this.stageLooping);
+            Laya.timer.clear(this, this.stageFailCountDown);
             HomeView.openInstance();
         });
         // change cannon
@@ -381,8 +382,9 @@ export default class GameScene extends ui.game.GameSceneUI {
         let tmpStage = StageConfig.Stage[HomeView.instance.systemName][this.stageIdx][this.missionIdx];
         this.rawIdx = this.missionRawIdxList[0];
         let tryCnt = 0;
-        while (this.missionRawIdxList.indexOf(this.rawIdx) >= 0 || tryCnt++ < 100) {
+        while (tryCnt < 20 || this.missionRawIdxList.indexOf(this.rawIdx) >= 0) {
             this.rawIdx = Math.round(Math.random() * (tmpStage.max - tmpStage.min)) + tmpStage.min;
+            tryCnt++;
         }
         this.missionRawIdxList[this.missionIdx - 1] = this.rawIdx;
         this.MaxBulletNum = tmpStage.ball_add + StageConfig.StageRaw[this.rawIdx].ball_num;
