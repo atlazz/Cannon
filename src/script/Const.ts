@@ -4,6 +4,8 @@ export const VERSION = "1.0.0";
 /************** 后台设置参数 *******************/
 /** 分享位置 */
 export const RewardPos = {
+    Cannon: 'try_cannon',
+    Bullet: 'try_ball',
     OverShare: 'OverShare',
     Revive: 'revive',
 }
@@ -54,7 +56,7 @@ export const StageResUrl: string = "res/stage/out/";
 export const StageInitPos: Laya.Vector3 = new Laya.Vector3(0, 0, 0);
 export const StageInitRot: Laya.Vector3 = new Laya.Vector3(0, 180, 0);
 export const StageInitScale: Laya.Vector3 = new Laya.Vector3(20, 20, 20);
-export const StageNum: number = 74;
+export const StageNum: number = 3;
 // winning check frame
 export const MaxWinCheckTime: number = 30;
 // 屏蔽物体物理受力前等待时间
@@ -84,22 +86,6 @@ export const PiecesNum: number = 3;
 export const PiecesBrokenTime: number = 120;
 
 /** cannon */
-export const enum CannonType {
-    DEFAULT = 1,
-    SHOTGUN_X2 = 2,
-    FROZEN = 3,
-    REWARD = 4,
-    BOMB = 5,
-    LIGHTNING = 6,
-}
-export const CannonResUrl = {
-    1: "res/cannon/Cannon_Default.lh",      // DEFAULT
-    2: "res/cannon/Cannon_ShotgunX2.lh",    // SHOTGUN_X2
-    3: "res/cannon/Cannon_Frozen.lh",       // FROZEN
-    4: "res/cannon/Cannon_Reward.lh",       // REWARD
-    5: "res/cannon/Cannon_Bomb.lh",         // BOMB
-    6: "res/cannon/Cannon_Lightning.lh",    // LIGHTNING
-};
 export const CannonInitPos: Laya.Vector3 = new Laya.Vector3(0, 0.04, -0.17);
 export const CannonInitRot: Laya.Vector3 = new Laya.Vector3(0, 180, 0);
 export const CannonInitScale: Laya.Vector3 = new Laya.Vector3(25, 25, 25);
@@ -116,21 +102,42 @@ export const enum BulletRewardType {
 export const BulletRewardResUrl = {
     1: "res/bullet/blackhole/blackhole.lh",   // BLACKHOLE
 };
-
-// texture url
-export const BulletTextureUrl = {
-    6: "res/bullet/texture/lightning.jpg",
-}
-
 // init radius
 export const BulletRadius: number = 0.08;
+
+export const enum CannonType {
+    DEFAULT = 1,
+    SHOTGUN_X2 = 2,
+    FROZEN = 3,
+    SHOTGUN_X4 = 4,
+    BOMB = 5,
+    LIGHTNING = 6,
+}
+export const CannonResUrl = {
+    1: "res/cannon/Cannon_Default.lh",      // DEFAULT
+    2: "res/cannon/Cannon_ShotgunX2.lh",    // SHOTGUN_X2
+    3: "res/cannon/Cannon_Frozen.lh",       // FROZEN
+    4: "res/cannon/Cannon_Reward.lh",       // SHOTGUN_X4
+    5: "res/cannon/Cannon_Bomb.lh",         // BOMB
+    6: "res/cannon/Cannon_Lightning.lh",    // LIGHTNING
+};
+export const BulletTextureUrl = {
+    1: "res/bullet/ball_texture/normal.jpg",    // DEFAULT
+    2: "res/bullet/ball_texture/shotgun.jpg",   // SHOTGUN_X2
+    3: "res/bullet/ball_texture/ice.jpg",       // FROZEN
+    4: "res/bullet/ball_texture/shotgun.jpg",   // SHOTGUN_X4
+    5: "res/bullet/ball_texture/boom.jpg",      // BOMB
+    6: "res/bullet/ball_texture/lightning.jpg", // LIGHTNING
+}
 // scale
 export const BulletScale = {
     /** cannon bullet */
     0: {
         1: 1,       // DEFAULT
         2: 1,       // SHOTGUN_X2
-        3: 1.2,     // FROZEN
+        3: 1,       // FROZEN
+        4: 1,       // REWARD SHOTGUN_X4
+        5: 1,       // BOMB
         6: 1,       // LIGHTNING
     },
     /** reward bullet */
@@ -142,24 +149,28 @@ export const BulletScale = {
 export const BulletMass = {
     /** cannon bullet */
     0: {
-        1: 40,      // DEFAULT
-        2: 40,      // SHOTGUN_X2
-        3: 40,      // FROZEN
-        6: 40,      // LIGHTNING
+        1: 20,      // DEFAULT
+        2: 20,      // SHOTGUN_X2
+        3: 20,      // FROZEN
+        4: 20,      // REWARD SHOTGUN_X4
+        5: 20,      // BOMB
+        6: 100,     // LIGHTNING
     },
     /** reward bullet */
     1: {
-        1: 100,       // BLACKHOLE
+        1: 100,     // BLACKHOLE
     }
 };
 // velocity
 export const BulletVelocity = {
     /** cannon bullet */
     0: {
-        1: 40,      // DEFAULT
-        2: 40,      // SHOTGUN_X2
-        3: 40,      // FROZEN
-        6: 40,      // LIGHTNING
+        1: 30,      // DEFAULT
+        2: 30,      // SHOTGUN_X2
+        3: 30,      // FROZEN
+        4: 30,      // REWARD SHOTGUN_X4
+        5: 30,      // BOMB
+        6: 30,      // LIGHTNING
     },
     /** reward bullet */
     1: {
@@ -173,6 +184,8 @@ export const BulletTrigger = {
         1: false,      // DEFAULT
         2: false,      // SHOTGUN_X2
         3: false,      // FROZEN
+        4: false,      // REWARD SHOTGUN_X4
+        5: false,      // BOMB
         6: false,      // LIGHTNING
     },
     /** reward bullet */
@@ -187,6 +200,8 @@ export const BulletOverrideGravity = {
         1: false,      // DEFAULT
         2: false,      // SHOTGUN_X2
         3: false,      // FROZEN
+        4: false,      // REWARD SHOTGUN_X4
+        5: false,      // BOMB
         6: false,      // LIGHTNING
     },
     /** reward bullet */

@@ -392,7 +392,7 @@ export default class Target extends Laya.Script3D {
             pieceRigid.canCollideWith = 1;
 
             // add pieces to scene
-            let pieceNum = Const.PiecesNum - Math.floor(Math.random() + 0.5);
+            let pieceNum = Const.PiecesNum - Math.round(Math.random());
             for (let i = 0; i < pieceNum; i++) {
                 this.piecesList.push(piece.clone());
                 GameScene.instance.scene3D.addChild(this.piecesList[i]);

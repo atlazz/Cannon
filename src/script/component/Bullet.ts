@@ -45,19 +45,19 @@ export default class BulletScript extends Laya.Script3D {
         this.effect = this.bullet.getChildByName("effect") as Laya.Sprite3D;
         this.lifetime = 120;
         if (this.isReward && this.type === Const.BulletRewardType.BLACKHOLE) {
-            this.lifetime = 400;
+            this.lifetime = 300;
         }
         this.flag_active = false;
 
         /** initialize */
         if (this.rigidbody === undefined) {
             this.init();
-        } 
+        }
 
         /** set material: 初始隐身 */
         this.material.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_FADE;
         this.material.albedoColorA = 0;
-        if (!this.isReward && this.type === Const.CannonType.LIGHTNING) {
+        if (!this.isReward) {
             Laya.Texture2D.load(Const.BulletTextureUrl[this.type], Laya.Handler.create(this, (tex) => {
                 this.material.albedoTexture = tex;
             }));
@@ -184,22 +184,8 @@ export default class BulletScript extends Laya.Script3D {
     /** refresh material by type */
     private refreshMaterial() {
         if (!this.isReward) {
-            if (this.type === Const.CannonType.DEFAULT) {
-                this.material.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
-                this.material.albedoColor = new Laya.Vector4(1, 0, 0, 1);
-            }
-            else if (this.type === Const.CannonType.SHOTGUN_X2) {
-                this.material.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
-                this.material.albedoColor = new Laya.Vector4(1, 0, 0, 1);
-            }
-            else if (this.type === Const.CannonType.FROZEN) {
-                this.material.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_TRANSPARENT;
-                this.material.albedoColor = new Laya.Vector4(0.2, 0.2, 1, 0.7);
-            }
-            else if (this.type === Const.CannonType.LIGHTNING) {
-                this.material.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
-                this.material.albedoColorA = 1;
-            }
+            this.material.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
+            this.material.albedoColorA = 1;
         }
     }
 

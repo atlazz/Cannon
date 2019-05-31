@@ -42,6 +42,7 @@ export default class HomeView extends ui.home.HomeViewUI {
         console.log("HomeView constructor()");
         GameScene.openInstance();
         HomeView.instance = this;
+        this.label_version.changeText("v" + Const.VERSION);
         this.initCannonSelect();
     }
 
@@ -61,10 +62,10 @@ export default class HomeView extends ui.home.HomeViewUI {
         directionLight.transform.localRotationEuler = Const.LightInitRotEuler.clone();
         directionLight.color = Const.LightInitColor.clone();
 
-        let bullet = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(1));
-        this.cannonScene3D.addChild(bullet);
         // load cannon
         Laya.Sprite3D.load(Const.CannonResUrl[1], Laya.Handler.create(this, (res) => {
+            let bullet = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(1));
+            this.cannonScene3D.addChild(bullet);
             let cannon = this.cannonScene3D.addChild(res) as Laya.Sprite3D;
             // cannon.transform.localPosition = new Laya.Vector3(0, 0, -3);
             // cannon.transform.localRotationEuler = new Laya.Vector3(0, -120, 0);
@@ -75,11 +76,11 @@ export default class HomeView extends ui.home.HomeViewUI {
     onEnable() {
         console.log("HomeView onEnable()");
         this.bindButtons();
-        // if (Laya.Browser.onMiniGame) {
-        //     this.initWeixin();
-        // } else {
+        if (Laya.Browser.onMiniGame) {
+            this.initWeixin();
+        } else {
             this.onGameDataLoaded();
-        // }
+        }
     }
 
     /**绑定按钮 */
@@ -88,10 +89,10 @@ export default class HomeView extends ui.home.HomeViewUI {
         this.btn_start.on(Laya.Event.CLICK, this, () => {
             let scaleX: number = this.btn_start.scaleX;
             let scaleY: number = this.btn_start.scaleY;
-            Laya.Tween.to(this.btn_start, {alpha: 0.8, scaleX: scaleX * 0.9, scaleY: scaleY * 0.9}, 50, Laya.Ease.linearInOut, Laya.Handler.create(this, () => {
-                Laya.Tween.to(this.btn_start, {alpha: 1, scaleX: scaleX, scaleY: scaleY}, 50, Laya.Ease.linearInOut, Laya.Handler.create(this, () => {
+            Laya.Tween.to(this.btn_start, { alpha: 0.8, scaleX: scaleX * 0.9, scaleY: scaleY * 0.9 }, 50, Laya.Ease.linearInOut, Laya.Handler.create(this, () => {
+                Laya.Tween.to(this.btn_start, { alpha: 1, scaleX: scaleX, scaleY: scaleY }, 50, Laya.Ease.linearInOut, Laya.Handler.create(this, () => {
                     if (GameScene.instance) {
-                        // ws.traceEvent("Click_Startgame");
+                        ws.traceEvent("Click_Startgame");
                         // hide home view
                         this.hide();
                         // show game scene
@@ -164,8 +165,8 @@ export default class HomeView extends ui.home.HomeViewUI {
         ws.init({
             host: 'ws.lesscool.cn', // 暂时用这个域名，后面会支持api.websdk.cn这个域名
             version: Const.VERSION, // 当前的小游戏版本号，只能以数字
-            appid: 1093, // 此项目在云平台的appid
-            secret: '454b45bcf4f807978eba77ae23656f0d', // 此项目在云平台的secret, 用于与后端通信签名
+            appid: 1124, // 此项目在云平台的appid
+            secret: '79ce022eb0ca47bfde9bc7e753df2074', // 此项目在云平台的secret, 用于与后端通信签名
             share: {
                 title: '全民欢乐，天天游戏！', // 默认分享文案
                 image: 'http://oss.lesscool.cn/fcdh/96d172496dbafa4ab9c8335a7133476c.png', // 默认分享图片
@@ -206,6 +207,12 @@ export default class HomeView extends ui.home.HomeViewUI {
                 }
             });
         }
+
+        // 判断机型系统
+        GameScene.instance.isIOS = false;
+        if (Laya.Browser.onMiniGame && ws.isIOS()) {
+            GameScene.instance.isIOS = true;
+        }
     }
 
     /**后台配置加载完成*/
@@ -234,13 +241,13 @@ export default class HomeView extends ui.home.HomeViewUI {
             Ad.refreshCurrentBanner();
         });
         // this.initHomeIcons(["home_icon_1", "home_icon_2", "home_icon_3", "home_icon_4", "home_icon_5", "home_icon_6", "home_icon_7", "home_icon_8", "home_icon_9", "home_icon_10"]);
-        
+
         /** init navigation */
         let nav: Navigator = new Navigator(ws);
         // home icon
         this.box_homeIcon.visible = true;
         nav.createHomeIcons(this.box_homeIcon, this.box_homeIcon, ["home_icon_1", "home_icon_2", "home_icon_3", "home_icon_4", "home_icon_5", "home_icon_6", "home_icon_7", "home_icon_8", "home_icon_9", "home_icon_10"]);
-        
+
         this.box_drawer.visible = true;
         // this.btn_moreGameOpen.visible = true;
         this.onGameDataLoaded();
@@ -250,7 +257,7 @@ export default class HomeView extends ui.home.HomeViewUI {
     private onGameDataLoaded() {
         console.log('onGameDataLoaded', Global.gameData);
         this.isGameDataLoaded = true;
-        // Ad.posShowBanner(Const.BannerPos.HomeView);
+        Ad.posShowBanner(Const.BannerPos.HomeView);
 
         /** show */
         this.label_highScore.visible = true;

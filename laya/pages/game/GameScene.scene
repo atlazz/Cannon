@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":35,
-    "selecteID":26,
+    "selectedBox":70,
+    "selecteID":78,
     "searchKey":"View",
     "props":{"width":720,"sceneWidth":720,"sceneHeight":1280,"sceneColor":"#000000","runtime":"script/runtime/GameScene.ts","right":0,"left":0,"height":1280,"centerY":0,"centerX":0},
     "nodeParent":-1,
-    "maxID":36,
+    "maxID":79,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -43,44 +43,151 @@
             "child":[
                 {
                     "x":30,
-                    "type":"Label",
-                    "searchKey":"Label,lvlLabel",
-                    "props":{"y":100,"x":268,"visible":false,"var":"lvlLabel","valign":"middle","top":100,"text":"level 1","fontSize":60,"centerX":0,"bold":true,"align":"center"},
+                    "type":"Box",
+                    "searchKey":"Box,box_level",
+                    "props":{"y":120,"x":121,"width":480,"var":"box_level","top":120,"height":97,"centerX":0.5},
                     "nodeParent":35,
-                    "label":"lvlLabel",
-                    "isDirectory":false,
+                    "label":"box_level",
+                    "isOpen":false,
+                    "isDirectory":true,
                     "isAniNode":true,
-                    "hasChild":false,
-                    "compId":5,
+                    "hasChild":true,
+                    "compId":36,
                     "child":[
-                        ]
+                        {
+                            "type":"Image",
+                            "searchKey":"Image",
+                            "props":{"skin":"res/ui/game/level_bg.png","scaleY":1.5,"scaleX":1.5,"left":0,"centerY":0.5},
+                            "nodeParent":36,
+                            "label":"Image",
+                            "isOpen":true,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "compId":37,
+                            "child":[
+                                {
+                                    "type":"Label",
+                                    "searchKey":"Label,label_level",
+                                    "props":{"width":64,"var":"label_level","valign":"middle","text":"1","height":64,"fontSize":40,"color":"#cc5e20","bold":true,"align":"center"},
+                                    "nodeParent":37,
+                                    "label":"label_level",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":38,
+                                    "child":[
+                                        ]
+                                }]
+                        },
+                        {
+                            "type":"Image",
+                            "searchKey":"Image",
+                            "props":{"skin":"res/ui/game/level_bg4.png","scaleY":1.5,"scaleX":1.5,"right":0,"centerY":0.5},
+                            "nodeParent":36,
+                            "label":"Image",
+                            "isOpen":true,
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":39,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"Image",
+                            "searchKey":"Image,level1",
+                            "props":{"width":32,"var":"level1","skin":"res/ui/game/level_bg_total.png","sizeGrid":"0,96,0,0","scaleY":1.5,"scaleX":1.5,"left":111,"height":32,"centerY":0.5},
+                            "nodeParent":36,
+                            "label":"level1",
+                            "isOpen":true,
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":41,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"Image",
+                            "searchKey":"Image,level2",
+                            "props":{"width":32,"var":"level2","skin":"res/ui/game/level_bg_total.png","sizeGrid":"0,96,0,0","scaleY":1.5,"scaleX":1.5,"left":164,"height":32,"centerY":0.5},
+                            "nodeParent":36,
+                            "label":"level2",
+                            "isOpen":true,
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":42,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"Image",
+                            "searchKey":"Image,level3",
+                            "props":{"width":32,"var":"level3","skin":"res/ui/game/level_bg_total.png","sizeGrid":"0,96,0,0","scaleY":1.5,"scaleX":1.5,"height":32,"centerY":1,"centerX":1},
+                            "nodeParent":36,
+                            "label":"level3",
+                            "isOpen":true,
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":43,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"Image",
+                            "searchKey":"Image,level4",
+                            "props":{"width":32,"var":"level4","skin":"res/ui/game/level_bg_total.png","sizeGrid":"0,96,0,0","scaleY":1.5,"scaleX":1.5,"right":162,"height":32,"centerY":1},
+                            "nodeParent":36,
+                            "label":"level4",
+                            "isOpen":true,
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":44,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"Image",
+                            "searchKey":"Image,level5",
+                            "props":{"width":32,"var":"level5","skin":"res/ui/game/level_bg_total.png","sizeGrid":"0,96,0,0","scaleY":1.5,"scaleX":1.5,"right":109,"height":32,"centerY":1},
+                            "nodeParent":36,
+                            "label":"level5",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":45,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"Text",
+                            "searchKey":"Text",
+                            "props":{"y":-10,"width":480,"valign":"middle","text":"关卡","fontSize":30,"font":"SimHei","color":"#ffffff","bold":true,"align":"center"},
+                            "nodeParent":36,
+                            "label":"Text",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":46,
+                            "child":[
+                                ]
+                        }]
                 },
                 {
                     "x":30,
                     "type":"Label",
-                    "searchKey":"Label,winLabel",
-                    "props":{"y":601,"x":204,"visible":false,"var":"winLabel","valign":"middle","text":"You Win","fontSize":80,"centerY":0.5,"centerX":0.5,"bold":true,"align":"center"},
+                    "searchKey":"Label,label_ballNum",
+                    "props":{"var":"label_ballNum","text":"剩余炮弹：","left":20,"fontSize":30,"font":"SimHei","color":"#ffffff","bottom":130,"bold":true},
                     "nodeParent":35,
-                    "label":"winLabel",
+                    "label":"label_ballNum",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
-                    "compId":11,
-                    "child":[
-                        ]
-                },
-                {
-                    "x":30,
-                    "type":"Image",
-                    "searchKey":"Image,btn_back",
-                    "props":{"y":20,"x":20,"visible":true,"var":"btn_back","top":20,"skin":"res/ui/game/btn_back.png","scaleY":2,"scaleX":2,"left":20},
-                    "nodeParent":35,
-                    "label":"btn_back",
-                    "isOpen":true,
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":26,
+                    "compId":76,
                     "child":[
                         ]
                 },
@@ -88,7 +195,7 @@
                     "x":30,
                     "type":"Image",
                     "searchKey":"Image,btn_cannon",
-                    "props":{"y":1134,"x":313,"visible":true,"var":"btn_cannon","skin":"res/ui/game/btn_cannon.png","scaleY":1.5,"scaleX":1.5,"centerX":0.5,"bottom":50},
+                    "props":{"y":1134,"x":313,"visible":false,"var":"btn_cannon","skin":"res/ui/game/btn_cannon.png","scaleY":1.5,"scaleX":1.5,"centerX":0.5,"bottom":50},
                     "nodeParent":35,
                     "label":"btn_cannon",
                     "isDirectory":false,
@@ -101,53 +208,26 @@
                 {
                     "x":30,
                     "type":"Image",
-                    "searchKey":"Image,btn_restart",
-                    "props":{"y":750,"x":150,"visible":false,"var":"btn_restart","top":750,"skin":"res/ui/game/btn_1.png","scaleY":0.5,"scaleX":0.5,"left":150},
+                    "searchKey":"Image,btn_rewardCannon",
+                    "props":{"var":"btn_rewardCannon","skin":"res/ui/game/RC_1.png","scaleY":1.5,"scaleX":1.5,"right":50,"bottom":207,"anchorY":0.5,"anchorX":0.5},
                     "nodeParent":35,
-                    "label":"btn_restart",
+                    "label":"btn_rewardCannon",
                     "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
-                    "compId":29,
+                    "compId":54,
                     "child":[
                         {
-                            "type":"Text",
-                            "searchKey":"Text",
-                            "props":{"width":376,"valign":"middle","text":"重来","height":184,"fontSize":100,"font":"SimHei","align":"center"},
-                            "nodeParent":29,
-                            "label":"Text",
+                            "type":"Image",
+                            "searchKey":"Image",
+                            "props":{"skin":"res/ui/game/tips_trail.png","scaleY":0.7,"scaleX":0.7,"right":0,"bottom":0},
+                            "nodeParent":54,
+                            "label":"Image",
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
-                            "compId":30,
-                            "child":[
-                                ]
-                        }]
-                },
-                {
-                    "x":30,
-                    "type":"Image",
-                    "searchKey":"Image,btn_next",
-                    "props":{"y":750,"x":382,"visible":false,"var":"btn_next","top":750,"skin":"res/ui/game/btn_2.png","scaleY":0.5,"scaleX":0.5,"right":150},
-                    "nodeParent":35,
-                    "label":"btn_next",
-                    "isOpen":false,
-                    "isDirectory":true,
-                    "isAniNode":true,
-                    "hasChild":true,
-                    "compId":31,
-                    "child":[
-                        {
-                            "type":"Text",
-                            "searchKey":"Text",
-                            "props":{"width":376,"valign":"middle","text":"下一关","height":184,"fontSize":100,"font":"SimHei","align":"center"},
-                            "nodeParent":31,
-                            "label":"Text",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":32,
+                            "compId":55,
                             "child":[
                                 ]
                         }]
@@ -156,7 +236,7 @@
                     "x":30,
                     "type":"Image",
                     "searchKey":"Image,btn_rewardBullet",
-                    "props":{"y":1016,"x":606,"var":"btn_rewardBullet","skin":"res/ui/game/RB_1.png","scaleY":1.5,"scaleX":1.5,"right":50,"bottom":200,"anchorY":0.5,"anchorX":0.5},
+                    "props":{"var":"btn_rewardBullet","skin":"res/ui/game/RB_1.png","scaleY":1.5,"scaleX":1.5,"left":50,"bottom":192,"anchorY":0.5,"anchorX":0.5},
                     "nodeParent":35,
                     "label":"btn_rewardBullet",
                     "isOpen":false,
@@ -168,7 +248,7 @@
                         {
                             "type":"Image",
                             "searchKey":"Image",
-                            "props":{"skin":"res/ui/game/tips_trail.png","scaleY":0.75,"scaleX":0.75,"right":0,"bottom":0},
+                            "props":{"skin":"res/ui/game/vedio.png","centerY":0.5,"centerX":0.5},
                             "nodeParent":33,
                             "label":"Image",
                             "isDirectory":false,
@@ -178,13 +258,276 @@
                             "child":[
                                 ]
                         }]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image,missionWin",
+                    "props":{"visible":false,"var":"missionWin","top":450,"skin":"res/ui/game/grade_0_CN.png","scaleY":1.5,"scaleX":1.5,"centerX":0.5},
+                    "nodeParent":35,
+                    "label":"missionWin",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":66,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Box",
+                    "searchKey":"Box,box_win",
+                    "props":{"width":720,"visible":false,"var":"box_win","height":1280},
+                    "nodeParent":35,
+                    "label":"box_win",
+                    "isOpen":false,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":58,
+                    "child":[
+                        {
+                            "type":"Image",
+                            "searchKey":"Image,mask_gamescene",
+                            "props":{"y":-109,"x":-89,"width":900,"var":"mask_gamescene","skin":"res/ui/game/blank.png","height":1500,"centerY":0.5,"centerX":0.5},
+                            "nodeParent":58,
+                            "label":"mask_gamescene",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":57,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"Image",
+                            "searchKey":"Image",
+                            "props":{"top":500,"skin":"res/ui/game/stage_pass.png","centerX":0.5},
+                            "nodeParent":58,
+                            "label":"Image",
+                            "isOpen":true,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "compId":60,
+                            "child":[
+                                {
+                                    "type":"Label",
+                                    "searchKey":"Label,label_lvlPass",
+                                    "props":{"x":120,"width":100,"var":"label_lvlPass","valign":"middle","text":"1","height":55,"fontSize":55,"color":"#ffffff","bold":true,"align":"left"},
+                                    "nodeParent":60,
+                                    "label":"label_lvlPass",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":62,
+                                    "child":[
+                                        ]
+                                }]
+                        },
+                        {
+                            "type":"Image",
+                            "searchKey":"Image,winLabel",
+                            "props":{"var":"winLabel","top":300,"skin":"res/ui/game/congratulation.png","centerX":0.5},
+                            "nodeParent":58,
+                            "label":"winLabel",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":63,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"Image",
+                            "searchKey":"Image,btn_next",
+                            "props":{"y":1014,"x":268,"var":"btn_next","skin":"res/ui/game/btn_next.png","scaleY":1,"scaleX":1,"centerX":0.5,"bottom":220},
+                            "nodeParent":58,
+                            "label":"btn_next",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":59,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image,btn_back",
+                    "props":{"y":20,"x":20,"visible":true,"var":"btn_back","top":20,"skin":"res/ui/game/btn_back.png","scaleY":2.5,"scaleX":2.5,"left":20},
+                    "nodeParent":35,
+                    "label":"btn_back",
+                    "isOpen":true,
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":26,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Box",
+                    "searchKey":"Box,box_countdown",
+                    "props":{"width":720,"visible":false,"var":"box_countdown","height":1280},
+                    "nodeParent":35,
+                    "label":"box_countdown",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":75,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "searchKey":"Image,failCircle",
+                            "props":{"y":641,"x":361,"visible":true,"var":"failCircle","skin":"res/ui/game/scene_lock_masking.png","scaleY":1,"scaleX":1,"centerY":0.5,"centerX":0.5,"anchorY":0.5,"anchorX":0.5},
+                            "nodeParent":75,
+                            "label":"failCircle",
+                            "isOpen":true,
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":68,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "x":45,
+                            "type":"Label",
+                            "searchKey":"Label,label_failTimer",
+                            "props":{"y":602,"x":339,"visible":true,"var":"label_failTimer","text":"3","fontSize":80,"color":"#ffffff","centerY":0.5,"centerX":0.5,"bold":true},
+                            "nodeParent":75,
+                            "label":"label_failTimer",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":67,
+                            "child":[
+                                ]
+                        }]
+                }]
+        },
+        {
+            "x":15,
+            "type":"Box",
+            "searchKey":"Box,box_revive",
+            "props":{"y":0,"x":0,"width":720,"visible":false,"var":"box_revive","height":1280},
+            "nodeParent":2,
+            "label":"box_revive",
+            "isOpen":true,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":69,
+            "child":[
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image,mask_revive",
+                    "props":{"width":900,"var":"mask_revive","skin":"res/ui/game/blank.png","height":1500,"centerY":0.5,"centerX":0.5},
+                    "nodeParent":69,
+                    "label":"mask_revive",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":74,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"x":163,"top":260,"skin":"res/ui/game/gameover.png","scaleY":1.5,"scaleX":1.5,"centerX":0.5},
+                    "nodeParent":69,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":72,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image,btn_revive",
+                    "props":{"var":"btn_revive","skin":"res/ui/game/btn_start.png","scaleY":1.8,"scaleX":2,"centerX":0.5,"bottom":360},
+                    "nodeParent":69,
+                    "label":"btn_revive",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":70,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "searchKey":"Image",
+                            "props":{"skin":"res/ui/game/ball.png","scaleY":1.2,"scaleX":1.2,"right":40,"centerY":0.5},
+                            "nodeParent":70,
+                            "label":"Image",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":71,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "x":45,
+                            "type":"Text",
+                            "searchKey":"Text",
+                            "props":{"y":10,"x":130,"valign":"middle","text":"+3","fontSize":40,"color":"#ffffff","bold":true,"align":"center"},
+                            "nodeParent":70,
+                            "label":"Text",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":77,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "searchKey":"Image",
+                            "props":{"skin":"res/ui/game/vedio.png","scaleY":1.1,"left":40,"centerY":0.5},
+                            "nodeParent":70,
+                            "label":"Image",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":78,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image,btn_retry",
+                    "props":{"var":"btn_retry","skin":"res/ui/game/retry.png","centerX":0.5,"bottom":270},
+                    "nodeParent":69,
+                    "label":"btn_retry",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":73,
+                    "child":[
+                        ]
                 }]
         },
         {
             "x":15,
             "type":"Box",
             "searchKey":"Box,box_tutorial",
-            "props":{"width":720,"visible":false,"var":"box_tutorial","height":800,"centerX":0,"bottom":0,"anchorY":0.5,"anchorX":0.5},
+            "props":{"width":720,"visible":false,"var":"box_tutorial","height":800,"centerX":0,"bottom":-1,"anchorY":0.5,"anchorX":0.5},
             "nodeParent":2,
             "label":"box_tutorial",
             "isDirectory":false,

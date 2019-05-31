@@ -345,6 +345,40 @@
 			{
 				"type":"MeshSprite3D",
 				"props":{
+					"name":"holeinside",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0,
+						0,
+						0
+					],
+					"rotation":[
+						0.7071068,
+						0,
+						0,
+						-0.7071068
+					],
+					"scale":[
+						2.5,
+						2.5,
+						2.5
+					],
+					"meshPath":"../bullet.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"path":"Assets/holeinside.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
 					"name":"circlelight",
 					"active":true,
 					"isStatic":false,
@@ -847,7 +881,7 @@
 					"threeDStartRotation":false,
 					"startRotationType":2,
 					"startRotationConstant":360,
-					"startRotationConstantMin":-360,
+					"startRotationConstantMin":0,
 					"startRotationConstantMax":360,
 					"startRotationConstantSeparate":[
 						0,
@@ -857,7 +891,7 @@
 					"startRotationConstantMinSeparate":[
 						0,
 						0,
-						360
+						0
 					],
 					"startRotationConstantMaxSeparate":[
 						0,

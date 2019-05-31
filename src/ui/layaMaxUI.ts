@@ -7,13 +7,31 @@ export module ui.game {
     export class GameSceneUI extends View {
 		public box_scene3D:Laya.Sprite;
 		public box_UI:Laya.Box;
-		public lvlLabel:Laya.Label;
-		public winLabel:Laya.Label;
-		public btn_back:Laya.Image;
+		public box_level:Laya.Box;
+		public label_level:Laya.Label;
+		public level1:Laya.Image;
+		public level2:Laya.Image;
+		public level3:Laya.Image;
+		public level4:Laya.Image;
+		public level5:Laya.Image;
+		public label_ballNum:Laya.Label;
 		public btn_cannon:Laya.Image;
-		public btn_restart:Laya.Image;
-		public btn_next:Laya.Image;
+		public btn_rewardCannon:Laya.Image;
 		public btn_rewardBullet:Laya.Image;
+		public missionWin:Laya.Image;
+		public box_win:Laya.Box;
+		public mask_gamescene:Laya.Image;
+		public label_lvlPass:Laya.Label;
+		public winLabel:Laya.Image;
+		public btn_next:Laya.Image;
+		public btn_back:Laya.Image;
+		public box_countdown:Laya.Box;
+		public failCircle:Laya.Image;
+		public label_failTimer:Laya.Label;
+		public box_revive:Laya.Box;
+		public mask_revive:Laya.Image;
+		public btn_revive:Laya.Image;
+		public btn_retry:Laya.Image;
 		public box_tutorial:Laya.Box;
         constructor(){ super()}
         createChildren():void {
@@ -39,6 +57,7 @@ export module ui.home {
 		public label_highScore:Laya.Label;
 		public label_level:Laya.Label;
 		public icon_gameTitle:Laya.Image;
+		public label_version:Laya.Label;
 		public box_cannon:Laya.Box;
 		public box_cannonScene3D:Laya.Box;
 		public btn_cannonBack:Laya.Image;
