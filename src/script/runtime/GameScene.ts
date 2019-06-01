@@ -232,8 +232,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                 this.turret.transform.localRotationEuler = Const.TurretInitLocalRot.clone();
             }
             // clear timer
-            Laya.timer.clear(this, this.stageLooping);
-            Laya.timer.clear(this, this.stageFailCountDown);
+            this.clearStageTimer();
             HomeView.openInstance();
         });
         // change cannon
@@ -316,7 +315,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                 this.turret.transform.localRotationEuler = Const.TurretInitLocalRot.clone();
             }
             // clear timer
-            Laya.timer.clearAll(this);
+            this.clearStageTimer();
             HomeView.openInstance();
         });
     }
@@ -350,8 +349,15 @@ export default class GameScene extends ui.game.GameSceneUI {
         if (this.gameStage) {
             this.gameStage.destroyChildren();
             this.gameStage.destroy();
-            this.gameStage.timer.clearAll(this.gameStage);
+            this.clearStageTimer();
         }
+    }
+
+    /** 清除关卡游戏相关循环 */
+    private clearStageTimer() {
+        Laya.timer.clear(this, this.stageLooping);
+        Laya.timer.clear(this, this.stageFailCountDown);
+        this.box_countdown.visible = false;
     }
 
     /** create new stage by index */
@@ -529,26 +535,17 @@ export default class GameScene extends ui.game.GameSceneUI {
             this.box_revive.visible = false;
             // show
             this["level" + this.missionIdx].sizeGrid = "0,32,0,0";
-            let idx: number = this.currBulletNum - StageConfig.StageRaw[this.rawIdx].ball_num;
-            idx = idx < 0 ? 0 : idx;
+            let idx: number = this.currBulletNum - this.MaxBulletNum + 4;
+            idx = idx < StageConfig.StageRaw[this.rawIdx].ball_num ? 0 : idx;
             idx = idx > 4 ? 4 : idx;
             this.missionWin.skin = "res/ui/game/grade_" + idx + "_CN.png";
             this.missionWin.visible = true;
             Laya.timer.frameOnce(120, this, () => {
                 this.nextStage();
             })
-            // clear countdown
-            Laya.timer.clear(this, this.stageFailCountDown);
-            // clear stage looping
-            this.gameStage.timer.clear(this, this.stageLooping);
+            // clear stage timer
+            this.clearStageTimer();
         }
-        // // player fail: out of ammo
-        // else if (this.currBulletNum >= this.MaxBulletNum) {
-        //     console.log("player fail: out of ammo");
-        //     this.btn_restart.visible = true;
-        //     this.btn_next.visible = true;
-        //     this.gameStage.timer.clear(this, this.stageLooping);
-        // }
     }
 
     /** restart current stage */
@@ -588,7 +585,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                 this.turret.transform.localRotationEuler = Const.TurretInitLocalRot.clone();
             }
             // clear timer
-            Laya.timer.clearAll(this);
+            this.clearStageTimer();
             HomeView.openInstance();
             return;
         }
@@ -608,13 +605,13 @@ export default class GameScene extends ui.game.GameSceneUI {
     /** 关卡死亡倒计时 */
     private stageFailCountDown() {
         this.countdown++;
-        if (this.countdown >= 210) {
+        if (this.countdown >= 240) {
             // 死亡处理
-            Laya.timer.clear(this, this.stageFailCountDown);
+            this.clearStageTimer();
             this.box_countdown.visible = false;
             this.box_revive.visible = true;
         }
-        this.label_failTimer.changeText("" + Math.round(3 - (this.countdown / 70) % 3));
+        this.label_failTimer.changeText("" + Math.round(3 - (this.countdown / 80) % 3));
         // 死亡提示显示
         this.failCircle.scaleX += 0.015;
         this.failCircle.scaleY += 0.015;
