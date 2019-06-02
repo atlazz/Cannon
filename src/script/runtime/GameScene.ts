@@ -589,6 +589,8 @@ export default class GameScene extends ui.game.GameSceneUI {
             HomeView.openInstance();
             return;
         }
+        // update to user data
+        Global.gameData.stageIndex = this.stageIdx;
         this.missionIdx = 0;
         for (let i = 1; i <= 5; i++) {
             this.missionRawIdxList[i - 1] = 0;

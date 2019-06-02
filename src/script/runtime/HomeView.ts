@@ -26,8 +26,6 @@ export default class HomeView extends ui.home.HomeViewUI {
     onOpened(param?: any) {
         console.log("HomeView onOpened()");
         this.visible = true;
-        // update
-        GameScene.instance && GameScene.instance.stageIdx && (Global.gameData.stageIndex = GameScene.instance.stageIdx);
     }
 
     /**首页图标列表*/
