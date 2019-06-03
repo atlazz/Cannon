@@ -369,7 +369,7 @@
 					"enableRender":true,
 					"materials":[
 						{
-							"path":"Assets/holeinside.lmat"
+							"path":"Assets/blackholeinside.lmat"
 						}
 					]
 				},

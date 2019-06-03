@@ -92,6 +92,8 @@ export const CannonInitScale: Laya.Vector3 = new Laya.Vector3(25, 25, 25);
 export const TurretInitLocalRot: Laya.Vector3 = new Laya.Vector3(0, 0, 0);
 
 /******** bullet ********/
+// cannon ball box
+export const CannonBallBoxUrl = "res/ball_box/ball_box.lh";
 // bullet mesh model res url
 export const BulletMeshUrl = "res/bullet/bullet.lm";
 export const BulletLightningUrl = "res/bullet/lightning/lightning.lh";
@@ -100,8 +102,11 @@ export const enum BulletRewardType {
     BLACKHOLE = 1,
 };
 export const BulletRewardResUrl = {
-    1: "res/bullet/blackhole/blackhole.lh",   // BLACKHOLE
+    1: "res/bullet/blackhole/blackhole.lh", // BLACKHOLE
 };
+export const cannonEffectUrl = {
+    1: "res/cannon_effect/gunlightning.lh",  // BLACKHOLE
+}
 // init radius
 export const BulletRadius: number = 0.08;
 
