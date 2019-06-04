@@ -452,17 +452,25 @@ var MiniFileMgr=(function(){
 		(fileType===void 0)&& (fileType="");
 		(isAutoClear===void 0)&& (isAutoClear=true);
 		filePath=URL.getAdptedFilePath(filePath);
-		MiniFileMgr.fs.readFile({filePath:filePath,encoding:encoding,success:function (data){
-				if (filePath.indexOf("http://")!=-1 || filePath.indexOf("https://")!=-1){
-					if(MiniAdpter.autoCacheFile || isSaveFile){
-						MiniFileMgr.copyFile(filePath,readyUrl,callBack,encoding,isAutoClear);
-					}
+		//**修改开始 */
+		var nativeFilePath = filePath;
+		var fileInfo = MiniFileMgr.getFileInfo(filePath);
+		if(fileInfo){
+			nativeFilePath = MiniFileMgr.getFileNativePath(fileInfo.md5);
+		}
+		MiniFileMgr.fs.readFile({filePath:nativeFilePath,encoding:encoding,success:function (data){
+		// MiniFileMgr.fs.readFile({filePath:filePath,encoding:encoding,success:function (data){
+		//**修改结束 */
+			if (filePath.indexOf("http://")!=-1 || filePath.indexOf("https://")!=-1){
+				if(MiniAdpter.autoCacheFile || isSaveFile){
+					MiniFileMgr.copyFile(filePath,readyUrl,callBack,encoding,isAutoClear);
 				}
-				else
-				callBack !=null && callBack.runWith([0,data]);
-				},fail:function (data){
-				if (data)
-					callBack !=null && callBack.runWith([1,data]);
+			}
+			else
+			callBack !=null && callBack.runWith([0,data]);
+			},fail:function (data){
+			if (data)
+				callBack !=null && callBack.runWith([1,data]);
 		}});
 	}
 

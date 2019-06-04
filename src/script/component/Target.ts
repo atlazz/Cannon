@@ -121,7 +121,7 @@ export default class Target extends Laya.Script3D {
             Laya.timer.frameOnce(60, this, () => {
                 // destroy
                 this.destroy();
-                this.target.destroy();
+                this.target && this.target.destroy();
             });
         }
         // bullet
@@ -176,7 +176,7 @@ export default class Target extends Laya.Script3D {
             if (cnt++ > 15) {
                 bomb.timer.clearAll(bomb);
                 bomb.destroy();
-                this.target.destroy();
+                this.target && this.target.destroy();
                 this.destroy();
                 return;
             }
@@ -188,20 +188,8 @@ export default class Target extends Laya.Script3D {
 
     /** bullet hit handler */
     private bulletHit(bullet: Bullet) {
-        /** reward bullet */
-        if (bullet.isReward) {
-            // if (bullet.type === Const.BulletRewardType.BLACKHOLE) {
-            //     // this.target.timer.frameOnce(1, this, () => {
-            //         this.rigidbody.destroy();
-            //     // });
-            //     let toPos = bullet.bullet.transform.position.clone();
-            //     Laya.Tween.to(this.target.transform.position, {x: toPos.x, y: toPos.y, z: toPos.z - 1}, 200, Laya.Ease.linearInOut, Laya.Handler.create(this, () => {
-            //         this.target.destroy();
-            //     }));
-            // }
-        }
         /** cannon bullet */
-        else {
+        if (!bullet.isReward) {
             // Frozen
             if (bullet.type === Const.CannonType.FROZEN && this.type !== Const.TargetType.GLASS) {
                 this.setType(Const.TargetType.GLASS);
@@ -233,7 +221,7 @@ export default class Target extends Laya.Script3D {
          *  ps：物理引擎bug较多，可以来引擎呈现物理宏观效果，但尽量少依赖碰撞做需要稳定的底层处理
          */
         this.distance = Laya.Vector3.distance(this.target.transform.position, GameScene.instance.gameStage.transform.position);
-        if (this.distance < 20) {
+        if (this.distance < 15) {
             // reset win check counter
             GameScene.instance.winCheckCnt = 0;
         }

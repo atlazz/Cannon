@@ -24,64 +24,7 @@
 				1
 			]
 		},
-		"components":[
-			{
-				"type":"Animator",
-				"avatar":{
-					"path":"Assets/connan/Cannon/Cannon-Cannon-CannonAvatar.lav",
-					"linkSprites":{
-						"CannonBall1_0":[
-							"CannonBall1_0"
-						],
-						"CannonBall2_0":[
-							"CannonBall2_0"
-						],
-						"CannonBall3_0":[
-							"CannonBall3_0"
-						],
-						"CannonBall4_0":[
-							"CannonBall4_0"
-						],
-						"CannonBall5_0":[
-							"CannonBall5_0"
-						],
-						"CannonBall6_0":[
-							"CannonBall6_0"
-						],
-						"CannonBall7_0":[
-							"CannonBall7_0"
-						],
-						"CannonBall8_0":[
-							"CannonBall8_0"
-						],
-						"CannonBall9_0":[
-							"CannonBall9_0"
-						],
-						"CannonBall10_0":[
-							"CannonBall10_0"
-						],
-						"chest_wooden_0":[
-							"chest_wooden_0"
-						],
-						"chest_wooden_2_0":[
-							"chest_wooden_2_0"
-						],
-						"chest_wooden_3_0":[
-							"chest_wooden_3_0"
-						],
-						"chest_wooden_4_0":[
-							"chest_wooden_4_0"
-						],
-						"chest_wooden_5_0":[
-							"chest_wooden_5_0"
-						]
-					}
-				},
-				"layers":[],
-				"cullingMode":0,
-				"playOnWake":true
-			}
-		],
+		"components":[],
 		"child":[
 			{
 				"type":"MeshSprite3D",
@@ -106,12 +49,12 @@
 						0.05391002,
 						0.05391007
 					],
-					"meshPath":"Assets/connan/Cannon/Cannon-CannonBall1_0.lm",
+					"meshPath":"Assets/Cannon-CannonBall1_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/connan/Cannon/Cannon.lmat"
+							"path":"Assets/ball.lmat"
 						}
 					]
 				},
@@ -141,12 +84,12 @@
 						0.05391008,
 						0.05391004
 					],
-					"meshPath":"Assets/connan/Cannon/Cannon-CannonBall2_0.lm",
+					"meshPath":"Assets/Cannon-CannonBall1_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/connan/Cannon/Cannon.lmat"
+							"path":"Assets/ball.lmat"
 						}
 					]
 				},
@@ -176,12 +119,12 @@
 						0.05391008,
 						0.05391004
 					],
-					"meshPath":"Assets/connan/Cannon/Cannon-CannonBall3_0.lm",
+					"meshPath":"Assets/Cannon-CannonBall1_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/connan/Cannon/Cannon.lmat"
+							"path":"Assets/ball.lmat"
 						}
 					]
 				},
@@ -211,12 +154,12 @@
 						0.05391007,
 						0.05391008
 					],
-					"meshPath":"Assets/connan/Cannon/Cannon-CannonBall4_0.lm",
+					"meshPath":"Assets/Cannon-CannonBall1_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/connan/Cannon/Cannon.lmat"
+							"path":"Assets/ball.lmat"
 						}
 					]
 				},
@@ -246,12 +189,12 @@
 						0.05391007,
 						0.05391003
 					],
-					"meshPath":"Assets/connan/Cannon/Cannon-CannonBall5_0.lm",
+					"meshPath":"Assets/Cannon-CannonBall1_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/connan/Cannon/Cannon.lmat"
+							"path":"Assets/ball.lmat"
 						}
 					]
 				},
@@ -281,12 +224,12 @@
 						0.05391004,
 						0.05391006
 					],
-					"meshPath":"Assets/connan/Cannon/Cannon-CannonBall6_0.lm",
+					"meshPath":"Assets/Cannon-CannonBall1_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/connan/Cannon/Cannon.lmat"
+							"path":"Assets/ball.lmat"
 						}
 					]
 				},
@@ -316,12 +259,12 @@
 						0.05391005,
 						0.05391013
 					],
-					"meshPath":"Assets/connan/Cannon/Cannon-CannonBall7_0.lm",
+					"meshPath":"Assets/Cannon-CannonBall1_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/connan/Cannon/Cannon.lmat"
+							"path":"Assets/ball.lmat"
 						}
 					]
 				},
@@ -351,12 +294,12 @@
 						0.05391007,
 						0.05391006
 					],
-					"meshPath":"Assets/connan/Cannon/Cannon-CannonBall8_0.lm",
+					"meshPath":"Assets/Cannon-CannonBall1_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/connan/Cannon/Cannon.lmat"
+							"path":"Assets/ball.lmat"
 						}
 					]
 				},
@@ -386,12 +329,12 @@
 						0.05391006,
 						0.05391004
 					],
-					"meshPath":"Assets/connan/Cannon/Cannon-CannonBall9_0.lm",
+					"meshPath":"Assets/Cannon-CannonBall1_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/connan/Cannon/Cannon.lmat"
+							"path":"Assets/ball.lmat"
 						}
 					]
 				},
@@ -421,12 +364,12 @@
 						0.05391008,
 						0.05391005
 					],
-					"meshPath":"Assets/connan/Cannon/Cannon-CannonBall10_0.lm",
+					"meshPath":"Assets/Cannon-CannonBall1_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/connan/Cannon/Cannon.lmat"
+							"path":"Assets/ball.lmat"
 						}
 					]
 				},
@@ -436,7 +379,7 @@
 			{
 				"type":"MeshSprite3D",
 				"props":{
-					"name":"chest_wooden_0",
+					"name":"chest_wooden_1_0",
 					"active":true,
 					"isStatic":false,
 					"layer":0,
@@ -456,12 +399,12 @@
 						0.4000006,
 						0.4000001
 					],
-					"meshPath":"Assets/connan/Cannon/Cannon-chest_wooden_0.lm",
+					"meshPath":"Assets/Cannon-chest_wooden_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/connan/Cannon/Cannon.lmat"
+							"path":"Assets/chest_wooden.lmat"
 						}
 					]
 				},
@@ -491,12 +434,12 @@
 						0.4000006,
 						0.4000001
 					],
-					"meshPath":"Assets/connan/Cannon/Cannon-chest_wooden_2_0.lm",
+					"meshPath":"Assets/Cannon-chest_wooden_2_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/connan/Cannon/Cannon.lmat"
+							"path":"Assets/chest_wooden.lmat"
 						}
 					]
 				},
@@ -526,12 +469,12 @@
 						0.4000006,
 						0.4000001
 					],
-					"meshPath":"Assets/connan/Cannon/Cannon-chest_wooden_3_0.lm",
+					"meshPath":"Assets/Cannon-chest_wooden_3_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/connan/Cannon/Cannon.lmat"
+							"path":"Assets/chest_wooden.lmat"
 						}
 					]
 				},
@@ -561,12 +504,12 @@
 						0.4000001,
 						0.4000006
 					],
-					"meshPath":"Assets/connan/Cannon/Cannon-chest_wooden_4_0.lm",
+					"meshPath":"Assets/Cannon-chest_wooden_4_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/connan/Cannon/Cannon.lmat"
+							"path":"Assets/chest_wooden.lmat"
 						}
 					]
 				},
@@ -596,12 +539,12 @@
 						0.4000001,
 						0.4000006
 					],
-					"meshPath":"Assets/connan/Cannon/Cannon-chest_wooden_5_0.lm",
+					"meshPath":"Assets/Cannon-chest_wooden_5_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"Assets/connan/Cannon/Cannon.lmat"
+							"path":"Assets/chest_wooden.lmat"
 						}
 					]
 				},

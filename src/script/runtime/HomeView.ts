@@ -6,6 +6,7 @@ import ws from "../utils/ws.js";
 import Global from "../Global";
 import * as Ad from "../utils/Ad";
 import Navigator from "../utils/Navigator";
+import Loader from "../utils/Loader";
 
 export default class HomeView extends ui.home.HomeViewUI {
     static instance: HomeView;
@@ -26,6 +27,7 @@ export default class HomeView extends ui.home.HomeViewUI {
     onOpened(param?: any) {
         console.log("HomeView onOpened()");
         this.visible = true;
+        this.label_level.changeText("关卡：" + Global.gameData.stageIndex);
     }
 
     /**首页图标列表*/
@@ -43,10 +45,9 @@ export default class HomeView extends ui.home.HomeViewUI {
     constructor() {
         super();
         console.log("HomeView constructor()");
-        GameScene.openInstance();
         HomeView.instance = this;
         this.label_version.changeText("v" + Const.VERSION);
-        this.initCannonSelect();
+        // this.initCannonSelect();
     }
 
     private initCannonSelect() {
@@ -78,12 +79,15 @@ export default class HomeView extends ui.home.HomeViewUI {
 
     onEnable() {
         console.log("HomeView onEnable()");
-        this.bindButtons();
         if (Laya.Browser.onMiniGame) {
             this.initWeixin();
         } else {
             this.onGameDataLoaded();
         }
+        Loader.loadZip(Const.cdnUrl, "res", Laya.Handler.create(this, (res) => {
+            GameScene.openInstance();
+            this.bindButtons();
+        }));
     }
 
     /**绑定按钮 */
@@ -96,11 +100,6 @@ export default class HomeView extends ui.home.HomeViewUI {
                 Laya.Tween.to(this.btn_start, { alpha: 1, scaleX: scaleX, scaleY: scaleY }, 50, Laya.Ease.linearInOut, Laya.Handler.create(this, () => {
                     if (GameScene.instance) {
                         ws.traceEvent("Click_Startgame");
-                        // 判断机型系统
-                        this.systemName = "Android";
-                        if (Laya.Browser.onMiniGame && ws.isIOS()) {
-                            this.systemName = "IOS";
-                        }
                         // hide home view
                         this.hide();
                         // show game scene
@@ -261,8 +260,14 @@ export default class HomeView extends ui.home.HomeViewUI {
         this.isGameDataLoaded = true;
         Ad.posShowBanner(Const.BannerPos.HomeView);
 
+        /** get system name */
+        this.systemName = "Android";
+        if (Laya.Browser.onMiniGame && wx.getSystemInfoSync().system.indexOf("iOS") >= 0) {
+            this.systemName = "IOS";
+        }
         /** show */
-        this.label_highScore.visible = true;
+        // this.label_highScore.visible = true;
+        this.label_level.changeText("关卡：" + Global.gameData.stageIndex);
         this.label_level.visible = true;
         // 调整钻石及其数量位置居中
         this.icon_diamond.x = this.stage.width / 2 - (this.text_diamond.text.length * this.text_diamond.fontSize + this.text_diamond.x) / 2;

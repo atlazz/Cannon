@@ -18,6 +18,7 @@ export module ui.game {
 		public btn_cannon:Laya.Image;
 		public btn_rewardCannon:Laya.Image;
 		public btn_rewardBullet:Laya.Image;
+		public label_rewardBullet:Laya.Label;
 		public missionWin:Laya.Image;
 		public box_win:Laya.Box;
 		public mask_gamescene:Laya.Image;
@@ -64,6 +65,7 @@ export module ui.home {
 		public icon_diamond:Laya.Image;
 		public text_diamond:laya.display.Text;
 		public box_bannar:Laya.Image;
+		public label_msg:Laya.TextArea;
         constructor(){ super()}
         createChildren():void {
             super.createChildren();

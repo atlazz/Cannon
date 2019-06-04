@@ -48,7 +48,11 @@ D res/ball_box
 D res/bullet
 D res/cannon
 D res/cannon_effect
-D res/navigator
+D res/scene
+D res/stage
+D res/texture
+D res/ui
+D res/texture/navigator
 P A614D413 arrow.png
 P 9401CC40 blank.png
 P 49DC2E75 close_button.png
@@ -59,9 +63,6 @@ P 256CB3E7 more_game_button.png
 P 0D90BB27 moregame_panel.png
 P D4B739EB tips.png
 P 856FAF02 tips2.png
-D res/scene
-D res/stage
-D res/ui
 D res/ui/game
 P 7CE3FA08 ball.png
 P D5A5A3D5 blank.png
@@ -72,10 +73,10 @@ P 2EAEAB7A btn_start.png
 P 02057DA5 congratulation.png
 P 6A1BEBFC gameover.png
 P FD89EAC8 grade_0_CN.png
-P 5DEDE319 grade_1_CN.png
-P 6D261789 grade_2_CN.png
-P A8A1EBF6 grade_3_CN.png
-P 1C8FF5A1 grade_4_CN.png
+P 290CE793 grade_1_CN.png
+P 7A4E4879 grade_2_CN.png
+P DE737BFE grade_3_CN.png
+P 7C3AD98E grade_4_CN.png
 P 08A001C6 level_bg.png
 P 9720C8DF level_bg2.png
 P ADF33142 level_bg3.png

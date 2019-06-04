@@ -1,5 +1,5 @@
 /** version */
-export const VERSION = "1.0.2";
+export const VERSION = "1.0.3";
 
 /************** 后台设置参数 *******************/
 /** 分享位置 */
@@ -48,7 +48,7 @@ export const StageTexUrl: string[] = [
     // stand
     "res/stage/out/materials/mutou_06.jpg",
     // target wood
-    "res/stage/out/materials/box 13.png",
+    "res/stage/out/materials/box_13.png",
     // target TNT
     "res/stage/out/materials/TNT.png",
 ]
@@ -86,14 +86,20 @@ export const PiecesNum: number = 3;
 export const PiecesBrokenTime: number = 120;
 
 /** cannon */
-export const CannonInitPos: Laya.Vector3 = new Laya.Vector3(0, 0.04, -0.17);
+export const CannonInitPos: Laya.Vector3 = new Laya.Vector3(0, 0.04, -0.20);
 export const CannonInitRot: Laya.Vector3 = new Laya.Vector3(0, 180, 0);
 export const CannonInitScale: Laya.Vector3 = new Laya.Vector3(25, 25, 25);
 export const TurretInitLocalRot: Laya.Vector3 = new Laya.Vector3(0, 0, 0);
 
-/******** bullet ********/
 // cannon ball box
 export const CannonBallBoxUrl = "res/ball_box/ball_box.lh";
+export const CannonBallInitPos: Laya.Vector3 = new Laya.Vector3(-0.01, 0.05, -0.13);
+export const CannonBallInitScale: Laya.Vector3 = new Laya.Vector3(25, 25, 25);
+
+/******** cdn */
+export const cdnUrl: string = "https://static.miniant.cn/cannon/res.zip";
+
+/******** bullet ********/
 // bullet mesh model res url
 export const BulletMeshUrl = "res/bullet/bullet.lm";
 export const BulletLightningUrl = "res/bullet/lightning/lightning.lh";
