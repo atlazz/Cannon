@@ -44,6 +44,9 @@ let Global = {
         shares: {},
         videos: {},
         banners: {},
+        try_cannon: 1,
+        try_ball: 1,
+        revive: 1,
     },
     user: {},
     audio: {

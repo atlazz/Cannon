@@ -3,6 +3,8 @@ import * as Const from "../Const";
 import Global from "../Global";
 import Navigator from "../utils/Navigator";
 import wx from "../utils/wx";
+import ws from "../utils/ws.js";
+import * as Ad from "../utils/Ad";
 import Bullet from "../component/Bullet";
 import Target from "../component/Target";
 import Guard from "../component/Guard";
@@ -12,6 +14,9 @@ import * as StageConfig from "../StageConfig"
 
 export default class GameScene extends ui.game.GameSceneUI {
     static instance: GameScene;
+
+    private navWin: Navigator;
+    private navRevive: Navigator;
 
     /**
      * 打开该单例页面，触发onOpened
@@ -107,18 +112,13 @@ export default class GameScene extends ui.game.GameSceneUI {
 
         this.initScene3D();
 
+        this.bgIdx = 0;
         this.newBackground();
 
+        this.cannonType = Const.CannonType.DEFAULT;
         this.newCannon();
 
         this.newBallBox();
-
-        // preload texture
-        Laya.loader.load(Const.StageTexUrl);
-        // Laya.loader.load(Const.StageTexUrl, Laya.Handler.create(this, () => {
-        //     this.stageIdx = 1;
-        //     this.newStage();
-        // }));
 
         // multiple touch input disable
         this.scene3D.input.multiTouchEnabled = false;
@@ -130,6 +130,16 @@ export default class GameScene extends ui.game.GameSceneUI {
         // if (Laya.Browser.onMiniGame) {
         //     wx.setPreferredFramesPerSecond(30);
         // }
+
+        /** init navigation */
+        // win icon
+        this.navWin = new Navigator(ws);
+        this.box_winIcon.visible = true;
+        this.navWin.createHomeIcons(this.box_winIcon, this.box_winIcon, ["home_icon_1", "home_icon_2", "home_icon_3", "home_icon_4", "home_icon_5", "home_icon_6", "home_icon_7", "home_icon_8", "home_icon_9", "home_icon_10"]);
+        // revive icon
+        this.navRevive = new Navigator(ws);
+        this.box_reviveIcon.visible = true;
+        this.navRevive.createHomeIcons(this.box_reviveIcon, this.box_reviveIcon, ["home_icon_1", "home_icon_2", "home_icon_3", "home_icon_4", "home_icon_5", "home_icon_6", "home_icon_7", "home_icon_8", "home_icon_9", "home_icon_10"]);
     }
 
     onEnable() {
@@ -261,6 +271,12 @@ export default class GameScene extends ui.game.GameSceneUI {
     hideUI() {
         this.box_UI.visible = false;
         this.box_win.visible = false;
+        this.hideReviveUI();
+    }
+
+    /** hide revive ui */
+    hideReviveUI() {
+        Ad.posHideBanner(Const.BannerPos.ReviveDialog);
         this.box_revive.visible = false;
     }
 
@@ -279,6 +295,7 @@ export default class GameScene extends ui.game.GameSceneUI {
             this.clearStageTimer();
             HomeView.openInstance();
         });
+
         // change cannon
         this.btn_cannon.on(Laya.Event.CLICK, this, () => {
             this.cannonType = this.cannonType % 6 + 1;
@@ -286,6 +303,7 @@ export default class GameScene extends ui.game.GameSceneUI {
             Global.gameData.cannonType = this.cannonType;
             this.newCannon();
         });
+
         // reward bullet
         this.btn_rewardBullet.on(Laya.Event.MOUSE_DOWN, this, () => {
             if (!Laya.Browser.onMiniGame) {
@@ -300,7 +318,26 @@ export default class GameScene extends ui.game.GameSceneUI {
                 }
             }
             else {
-                Reward.instance.share({
+                // 1: video
+                (Global.config.try_ball == 1) && Reward.instance.video({
+                    pos: Const.RewardPos.Bullet,
+                    success: () => {
+                        this.isRewardBullet = true;
+                        this.bulletType = this.bulletRewardType;
+                        // cannon effect
+                        if (!this.scene3D.getChildByName("cannon_effect")) {
+                            Laya.Sprite3D.load(Const.cannonEffectUrl[1], Laya.Handler.create(this, (cannonEff) => {
+                                let cannonEffect: Laya.Sprite3D = this.scene3D.addChild(cannonEff) as Laya.Sprite3D;
+                                cannonEffect.name = "cannon_effect";
+                                console.log(cannonEffect)
+                            }));
+                        }
+                    },
+                    complete: () => {
+                    }
+                });
+                // 2: share
+                (Global.config.try_ball == 2) && Reward.instance.share({
                     pos: Const.RewardPos.Bullet,
                     success: () => {
                         this.isRewardBullet = true;
@@ -319,6 +356,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                 });
             }
         });
+
         // reward cannon
         this.btn_rewardCannon.on(Laya.Event.MOUSE_DOWN, this, () => {
             if (!Laya.Browser.onMiniGame) {
@@ -328,7 +366,20 @@ export default class GameScene extends ui.game.GameSceneUI {
                 this.newCannon();
             }
             else {
-                Reward.instance.share({
+                // 1: video
+                (Global.config.try_cannon == 1) && Reward.instance.video({
+                    pos: Const.RewardPos.Cannon,
+                    success: () => {
+                        this.isRewardCannon = true;
+                        this.cannonType = this.cannonRewardType;
+                        this.bulletType = this.cannonType;
+                        this.newCannon();
+                    },
+                    complete: () => {
+                    }
+                });
+                // 2: share
+                (Global.config.try_cannon == 2) && Reward.instance.share({
                     pos: Const.RewardPos.Cannon,
                     success: () => {
                         this.isRewardCannon = true;
@@ -341,15 +392,17 @@ export default class GameScene extends ui.game.GameSceneUI {
                 });
             }
         });
+
         // next stage
         this.btn_next.on(Laya.Event.CLICK, this, () => {
             this.nextStage();
         });
+
         // revive btn
         this.btn_revive.on(Laya.Event.MOUSE_DOWN, this, () => {
             if (!Laya.Browser.onMiniGame) {
                 this.isRevive = true;
-                this.box_revive.visible = false;
+                this.hideReviveUI();
                 this.currBulletNum -= 3;
                 this.label_ballNum.changeText("x3");
                 for (let i = 1; i <= 3; i++) {
@@ -361,11 +414,26 @@ export default class GameScene extends ui.game.GameSceneUI {
                 this.gameStage.frameLoop(1, this, this.stageLooping);
             }
             else {
-                Reward.instance.share({
+                // 1: video
+                (Global.config.try_cannon == 1) && Reward.instance.video({
                     pos: Const.RewardPos.Revive,
                     success: () => {
                         this.isRevive = true;
-                        this.box_revive.visible = false;
+                        this.hideReviveUI();
+                        this.currBulletNum -= 3;
+                        this.label_ballNum.changeText("x3");
+                        this.box_scene3D.on(Laya.Event.CLICK, this, this.onClick);
+                        this.gameStage.frameLoop(1, this, this.stageLooping);
+                    },
+                    complete: () => {
+                    }
+                });
+                // 2: share
+                (Global.config.try_cannon == 2) && Reward.instance.share({
+                    pos: Const.RewardPos.Revive,
+                    success: () => {
+                        this.isRevive = true;
+                        this.hideReviveUI();
                         this.currBulletNum -= 3;
                         this.label_ballNum.changeText("x3");
                         this.box_scene3D.on(Laya.Event.CLICK, this, this.onClick);
@@ -376,6 +444,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                 });
             }
         });
+
         // revive retry: back home
         this.btn_retry.on(Laya.Event.CLICK, this, () => {
             this.state = Const.GameState.OVER;
@@ -616,7 +685,7 @@ export default class GameScene extends ui.game.GameSceneUI {
             this.clearStageTimer();
             // hide
             this.box_countdown.visible = false;
-            this.box_revive.visible = false;
+            this.hideReviveUI();
             // show
             this["level" + this.missionIdx].sizeGrid = "0,32,0,0";
             let idx: number = this.currBulletNum - this.MaxBulletNum + 4;
@@ -653,6 +722,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         // show
         this.label_lvlPass.changeText("" + this.stageIdx);
         this.box_win.visible = true;
+        this.navWin && this.navWin.loadHomeIconInfoList();
         // update
         this.stageIdx++;
         if (this.stageIdx > Const.StageNum) {
@@ -693,7 +763,23 @@ export default class GameScene extends ui.game.GameSceneUI {
             // 死亡处理
             this.clearStageTimer();
             this.box_countdown.visible = false;
+            this.btn_retry.bottom = 150;
+            if (!Global.config.online) {
+                this.btn_retry.bottom = 230;
+            }
+            if (Laya.Browser.onMiniGame && ws.isIPhoneX()) {
+                this.btn_retry.bottom += Global.config.distance_iphonex || 0;
+            }
             this.box_revive.visible = true;
+            this.navRevive && this.navRevive.loadHomeIconInfoList();
+            // 1秒后显示banner，上跳误点
+            Laya.timer.frameOnce(60, null, () => {
+                this.btn_retry.bottom = 230;
+                if (Laya.Browser.onMiniGame && ws.isIPhoneX()) {
+                    this.btn_retry.bottom += Global.config.distance_iphonex || 0;
+                }
+                Ad.posShowBanner(Const.BannerPos.ReviveDialog);
+            });
         }
         this.label_failTimer.changeText("" + Math.floor(4 - (this.countdown / 60) % 4));
         // 死亡提示显示
@@ -782,6 +868,10 @@ export default class GameScene extends ui.game.GameSceneUI {
         ((this.ballBox.getChildByName("CannonBall" + (this.MaxBulletNum - this.currBulletNum + 1) + "_0") as Laya.MeshSprite3D).meshRenderer.material as Laya.PBRSpecularMaterial).albedoColorA = 0;
         this.label_ballNum.changeText("x" + (this.MaxBulletNum - this.currBulletNum));
 
+        // play sound
+        if (Laya.Browser.onMiniGame && Global.gameData.soundEnabled) {
+            Laya.SoundManager.playSound(Const.soundUrl);
+        }
         // vibration
         if (Laya.Browser.onMiniGame && Global.gameData.vibrationEnabled) {
             wx.vibrateShort();

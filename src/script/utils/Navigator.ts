@@ -19,6 +19,12 @@ export default class Navigator {
         this.SCALE = Laya.stage.width / 720;
     }
 
+    public loadHomeIconInfoList: Function;
+
+    public loadOverIconInfoList: Function;
+
+    public loadGuessLikeIconInfoList: Function;
+
     /**
      * 创建首页图标列（左右各5个）
      * 
@@ -124,7 +130,7 @@ export default class Navigator {
             if (iconInfo) {
                 cell.visible = true;
                 //注册点击
-                cell.on(Laya.Event.MOUSE_DOWN, this, this.onIconClick, [posList[index], iconInfo]);
+                cell.on(Laya.Event.MOUSE_DOWN, this, this.onIconClick, ["default"/** posList[index]*/, iconInfo]);
                 //图片
                 let iconImage = cell.getChildByName("iconImage") as Laya.Sprite;
                 iconImage && iconImage.loadImage(iconInfo.icon);
@@ -140,46 +146,63 @@ export default class Navigator {
 
         /**刷新首页图标*/
         let refreshHomeIcons = () => {
-            for (let i = 0; i < homeIconInfosList.length; i++) {
-                let iconInfos = homeIconInfosList[i];
-                let iconInfo = this.getRandom(iconInfos);
-                currentHomeIconInfoList[i] = iconInfo;
+            if (homeIconBox && homeIconBox.activeInHierarchy && visibleSprite && visibleSprite.visible) {
+                for (let i = 0; i < homeIconInfosList.length; i++) {
+                    let iconInfos = homeIconInfosList[i];
+                    let iconInfo = this.getRandom(iconInfos);
+                    currentHomeIconInfoList[i] = iconInfo;
+                }
+                homeIconList.array = currentHomeIconInfoList;
+                homeIconList.refresh();
             }
-            homeIconList.array = currentHomeIconInfoList;
-            homeIconList.refresh();
         }
 
         /**每隔三秒刷新一次*/
         let scheduleRefreshHomeIcons = () => {
+            homeIconBox.clearTimer(this, refreshHomeIcons);
             refreshHomeIcons();
-            homeIconBox.timerLoop(3000, this, () => {
-                if (!homeIconBox.destroyed && visibleSprite && visibleSprite.visible) {
-                    refreshHomeIcons();
-                }
-            });
+            homeIconBox.timerLoop(3000, this, refreshHomeIcons);
         }
 
         //后台获取图标信息
-        let fetchParams = [];
-        for (let pos of posList) {
-            let list = this.ws.conf.games[pos];
-            let count = list && list.length ? list.length : 1;
-            fetchParams.push({ pos, count });
-        }
-        this.ws.fetchGameAd({
-            data: fetchParams,
-            success: (res: any) => {
-                let data = res.data;
-                homeIconInfosList = [];
-                for (let pos of posList) {
-                    homeIconInfosList.push(data[pos]);
-                }
-                //当前显示图标
-                currentHomeIconInfoList = [];
-                scheduleRefreshHomeIcons();
-            },
-        });
 
+        // let fetchParams = [];
+        // for (let pos of posList) {
+        //     let list = this.ws.conf.games[pos];
+        //     let count = list && list.length ? list.length : 1;
+        //     fetchParams.push({ pos, count });
+        // }
+        // this.ws.fetchGameAd({
+        //     data: fetchParams,
+        //     success: (res: any) => {
+        //         let data = res.data;
+        //         homeIconInfosList = [];
+        //         for (let pos of posList) {
+        //             homeIconInfosList.push(data[pos]);
+        //         }
+        //         //当前显示图标
+        //         currentHomeIconInfoList = [];
+        //         scheduleRefreshHomeIcons();
+        //     },
+        // });
+        this.loadHomeIconInfoList = () => {
+            this.ws.getPromoGameAd({
+                count: posList.length,
+                success: (res: any) => {
+                    let data = res.data;
+                    homeIconInfosList = [];
+                    for (let i = 0; i < Math.min(data.length, posList.length); i++) {
+                        let info = data[i];
+                        homeIconInfosList.push([info]);
+                    }
+                    //当前显示图标
+                    currentHomeIconInfoList = [];
+                    scheduleRefreshHomeIcons();
+                },
+            });
+        }
+
+        this.loadHomeIconInfoList();
         return homeIconBox;
     }
 
@@ -316,7 +339,7 @@ export default class Navigator {
             if (iconInfo) {
                 cell.visible = true;
                 //注册点击
-                cell.on(Laya.Event.MOUSE_DOWN, this, this.onIconClick, [pos, iconInfo]);
+                cell.on(Laya.Event.MOUSE_DOWN, this, this.onIconClick, [/**"default"*/pos, iconInfo]);
                 //图片
                 let iconImage = cell.getChildByName("iconImage") as Laya.Sprite;
                 iconImage && iconImage.loadImage(iconInfo.icon);
@@ -373,6 +396,13 @@ export default class Navigator {
 
         //抽屉打开
         drawerOpenButton.on(Laya.Event.MOUSE_DOWN, this, () => {
+            // this.ws.getPromoGameAd({
+            //     count: 9,
+            //     success: (res: any) => {
+            //         drawerList.array = res.data;
+            //         drawerList.refresh();
+            //     },
+            // });
             this.ws.getGameAd({
                 pos: pos,
                 count: this.ws.conf.games[pos].length,
@@ -573,7 +603,7 @@ export default class Navigator {
             if (iconInfo) {
                 cell.visible = true;
                 //注册点击
-                cell.on(Laya.Event.MOUSE_DOWN, this, this.onIconClick, [pos, iconInfo]);
+                cell.on(Laya.Event.MOUSE_DOWN, this, this.onIconClick, [/**"default"*/pos, iconInfo]);
                 //图片
                 let iconImage = cell.getChildByName("iconImage") as Laya.Sprite;
                 iconImage && iconImage.loadImage(iconInfo.icon);
@@ -593,6 +623,13 @@ export default class Navigator {
 
         //更多游戏面板打开
         openButton.on(Laya.Event.MOUSE_DOWN, this, () => {
+            // this.ws.getPromoGameAd({
+            //     count: 9,
+            //     success: (res: any) => {
+            //         moreGameList.array = res.data;
+            //         moreGameList.refresh();
+            //     },
+            // });
             this.ws.getGameAd({
                 pos: pos,
                 count: this.ws.conf.games[pos].length,
@@ -722,7 +759,7 @@ export default class Navigator {
             if (iconInfo) {
                 cell.visible = true;
                 //注册点击
-                cell.on(Laya.Event.MOUSE_DOWN, this, this.onIconClick, [posList[index], iconInfo]);
+                cell.on(Laya.Event.MOUSE_DOWN, this, this.onIconClick, ["default"/**posList[index]*/, iconInfo]);
                 //图片
                 let iconImage = cell.getChildByName("iconImage") as Laya.Sprite;
                 iconImage && iconImage.loadImage(iconInfo.icon);
@@ -736,48 +773,63 @@ export default class Navigator {
             }
         }, [], false);
 
-
         /**刷新结束页图标*/
         let refreshOverIcons = () => {
-            for (let i = 0; i < overIconInfosList.length; i++) {
-                let iconInfos = overIconInfosList[i];
-                let iconInfo = this.getRandom(iconInfos);
-                currentOverIconInfoList[i] = iconInfo;
+            if (overIconBox && overIconBox.activeInHierarchy && visibleSprite && visibleSprite.visible) {
+                for (let i = 0; i < overIconInfosList.length; i++) {
+                    let iconInfos = overIconInfosList[i];
+                    let iconInfo = this.getRandom(iconInfos);
+                    currentOverIconInfoList[i] = iconInfo;
+                }
+                overIconList.array = currentOverIconInfoList;
+                overIconList.refresh();
             }
-            overIconList.array = currentOverIconInfoList;
-            overIconList.refresh();
         }
         /**每隔三秒刷新一次*/
         let scheduleRefreshOverIcons = () => {
+            overIconBox.clearTimer(this, refreshOverIcons);
             refreshOverIcons();
-            overIconBox.timerLoop(3000, this, () => {
-                if (!overIconBox.destroyed && visibleSprite && visibleSprite.visible) {
-                    refreshOverIcons();
-                }
-            });
+            overIconBox.timerLoop(3000, this, refreshOverIcons);
         }
 
         //后台获取图标信息
-        let fetchParams = [];
-        for (let pos of posList) {
-            let list = this.ws.conf.games[pos];
-            let count = list && list.length ? list.length : 1;
-            fetchParams.push({ pos, count });
+        // let fetchParams = [];
+        // for (let pos of posList) {
+        //     let list = this.ws.conf.games[pos];
+        //     let count = list && list.length ? list.length : 1;
+        //     fetchParams.push({ pos, count });
+        // }
+        // this.ws.fetchGameAd({
+        //     data: fetchParams,
+        //     success: (res: any) => {
+        //         let data = res.data;
+        //         overIconInfosList = [];
+        //         for (let pos of posList) {
+        //             overIconInfosList.push(data[pos]);
+        //         }
+        //         //当前显示图标
+        //         currentOverIconInfoList = [];
+        //         scheduleRefreshOverIcons();
+        //     },
+        // });
+        this.loadOverIconInfoList = () => {
+            this.ws.getPromoGameAd({
+                count: posList.length,
+                success: (res: any) => {
+                    let data = res.data;
+                    overIconInfosList = [];
+                    for (let i = 0; i < Math.min(data.length, posList.length); i++) {
+                        let info = data[i];
+                        overIconInfosList.push([info]);
+                    }
+                    //当前显示图标
+                    currentOverIconInfoList = [];
+                    scheduleRefreshOverIcons();
+                },
+            });
         }
-        this.ws.fetchGameAd({
-            data: fetchParams,
-            success: (res: any) => {
-                let data = res.data;
-                overIconInfosList = [];
-                for (let pos of posList) {
-                    overIconInfosList.push(data[pos]);
-                }
-                //当前显示图标
-                currentOverIconInfoList = [];
-                scheduleRefreshOverIcons();
-            },
-        });
 
+        this.loadOverIconInfoList();
         return overIconBox;
     }
 
@@ -804,7 +856,7 @@ export default class Navigator {
         /**猜你喜欢图标信息列表*/
         let guessLikeIconInfosList: any[] = [];
         /**当前显示猜你喜欢图标*/
-        let currentOverIconInfoList: any[] = [];
+        let currentGuessLikeIconInfoList: any[] = [];
 
         //猜你喜欢图标列根盒子
         let guessLikeIconBox = new Laya.Box();
@@ -883,7 +935,7 @@ export default class Navigator {
             if (iconInfo) {
                 cell.visible = true;
                 //注册点击
-                cell.on(Laya.Event.MOUSE_DOWN, this, this.onIconClick, [posList[index], iconInfo]);
+                cell.on(Laya.Event.MOUSE_DOWN, this, this.onIconClick, ["default"/**posList[index]*/, iconInfo]);
                 //图片
                 let iconImage = cell.getChildByName("iconImage") as Laya.Sprite;
                 iconImage && iconImage.loadImage(iconInfo.icon);
@@ -898,47 +950,62 @@ export default class Navigator {
         }, [], false);
 
         /**刷新猜你喜欢图标*/
-        let refreshOverIcons = () => {
-            for (let i = 0; i < guessLikeIconInfosList.length; i++) {
-                let iconInfos = guessLikeIconInfosList[i];
-                let iconInfo = this.getRandom(iconInfos);
-                currentOverIconInfoList[i] = iconInfo;
+        let refreshGuessLikeIcons = () => {
+            if (guessLikeIconBox && guessLikeIconBox.activeInHierarchy && visibleSprite && visibleSprite.visible) {
+                for (let i = 0; i < guessLikeIconInfosList.length; i++) {
+                    let iconInfos = guessLikeIconInfosList[i];
+                    let iconInfo = this.getRandom(iconInfos);
+                    currentGuessLikeIconInfoList[i] = iconInfo;
+                }
+                guessLikeIconList.array = currentGuessLikeIconInfoList;
+                guessLikeIconList.refresh();
             }
-            guessLikeIconList.array = currentOverIconInfoList;
-            guessLikeIconList.refresh();
         }
 
         /**每隔三秒刷新一次*/
-        let scheduleRefreshOverIcons = () => {
-            refreshOverIcons();
-            guessLikeIconBox.timerLoop(3000, this, () => {
-                if (!guessLikeIconBox.destroyed && visibleSprite && visibleSprite.visible) {
-                    refreshOverIcons();
-                }
-            });
+        let scheduleRefreshGuessLikeIcons = () => {
+            guessLikeIconBox.clearTimer(this, refreshGuessLikeIcons);
+            refreshGuessLikeIcons();
+            guessLikeIconBox.timerLoop(3000, this, refreshGuessLikeIcons);
         }
 
         //后台获取图标信息
-        let fetchParams = [];
-        for (let pos of posList) {
-            let list = this.ws.conf.games[pos];
-            let count = list && list.length ? list.length : 1;
-            fetchParams.push({ pos, count });
+        // let fetchParams = [];
+        // for (let pos of posList) {
+        //     let list = this.ws.conf.games[pos];
+        //     let count = list && list.length ? list.length : 1;
+        //     fetchParams.push({ pos, count });
+        // }
+        // this.ws.fetchGameAd({
+        //     data: fetchParams,
+        //     success: (res: any) => {
+        //         let data = res.data;
+        //         guessLikeIconInfosList = [];
+        //         for (let pos of posList) {
+        //             guessLikeIconInfosList.push(data[pos]);
+        //         }
+        //         //当前显示图标
+        //         currentOverIconInfoList = [];
+        //         scheduleRefreshOverIcons();
+        //     },
+        // });
+        this.loadGuessLikeIconInfoList = () => {
+            this.ws.getPromoGameAd({
+                count: posList.length,
+                success: (res: any) => {
+                    let data = res.data;
+                    guessLikeIconInfosList = [];
+                    for (let i = Math.max(data.length - posList.length, 0); i < data.length; i++) {
+                        let info = data[i];
+                        guessLikeIconInfosList.push([info]);
+                    }
+                    //当前显示图标
+                    currentGuessLikeIconInfoList = [];
+                    scheduleRefreshGuessLikeIcons();
+                },
+            });
         }
-        this.ws.fetchGameAd({
-            data: fetchParams,
-            success: (res: any) => {
-                let data = res.data;
-                guessLikeIconInfosList = [];
-                for (let pos of posList) {
-                    guessLikeIconInfosList.push(data[pos]);
-                }
-                //当前显示图标
-                currentOverIconInfoList = [];
-                scheduleRefreshOverIcons();
-            },
-        });
-
+        this.loadGuessLikeIconInfoList();
         return guessLikeIconBox;
     }
 
@@ -949,7 +1016,7 @@ export default class Navigator {
 
     /** 抖动一次图标 */
     private shakeOnce(delay: number, cell: Laya.Sprite) {
-        Laya.timer.once(delay, this, () => {
+        cell.timerOnce(delay, this, () => {
             Laya.Tween.to(cell, { rotation: -10 }, 100, Laya.Ease.linearNone, Laya.Handler.create(this, () => {
                 Laya.Tween.to(cell, { rotation: 10 }, 200, Laya.Ease.linearNone, Laya.Handler.create(this, () => {
                     Laya.Tween.to(cell, { rotation: -5 }, 150, Laya.Ease.linearNone, Laya.Handler.create(this, () => {
@@ -968,7 +1035,7 @@ export default class Navigator {
     /** 跳动一次图标 */
     private jumpeOnce(delay: number, cell: Laya.Sprite) {
         let initY = cell.y;
-        Laya.timer.once(delay, this, () => {
+        cell.timerOnce(delay, this, () => {
             Laya.Tween.to(cell, { rotation: -10 }, 100, Laya.Ease.linearNone, Laya.Handler.create(this, () => {
                 Laya.Tween.to(cell, { rotation: 10 }, 200, Laya.Ease.linearNone, Laya.Handler.create(this, () => {
                     Laya.Tween.to(cell, { rotation: -5 }, 150, Laya.Ease.linearNone, Laya.Handler.create(this, () => {
@@ -992,7 +1059,7 @@ export default class Navigator {
         //提示
         let tips = sprite.getChildByName("tips") as Laya.Sprite;
         if (tips) {
-            Laya.timer.once(delay, this, () => {
+            tips.timerOnce(delay, this, () => {
                 Laya.Tween.to(tips, { alpha: 0 }, 500, Laya.Ease.sineIn, Laya.Handler.create(this, () => {
                     Laya.Tween.to(tips, { alpha: 1 }, 500, Laya.Ease.sineOut, Laya.Handler.create(this, () => {
                         Laya.Tween.to(tips, { alpha: 0 }, 500, Laya.Ease.sineIn, Laya.Handler.create(this, () => {
@@ -1037,6 +1104,9 @@ export default class Navigator {
     /** 根据权重随机获取列表中的一个 */
     private getRandom<T>(list: T[], ratioProp: string = 'weight', defaultRatio: number = 0): T {
         if (list && list.length) {
+            if (list.length === 1) {
+                return list[0];
+            }
             return list[this.randomIndex(list, ratioProp, defaultRatio)];
         }
         return null;

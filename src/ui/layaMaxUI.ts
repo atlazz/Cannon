@@ -20,19 +20,21 @@ export module ui.game {
 		public btn_rewardBullet:Laya.Image;
 		public label_rewardBullet:Laya.Label;
 		public missionWin:Laya.Image;
-		public box_win:Laya.Box;
-		public mask_gamescene:Laya.Image;
-		public label_lvlPass:Laya.Label;
-		public winLabel:Laya.Image;
-		public btn_next:Laya.Image;
 		public btn_back:Laya.Image;
 		public box_countdown:Laya.Box;
 		public failCircle:Laya.Image;
 		public label_failTimer:Laya.Label;
 		public box_revive:Laya.Box;
 		public mask_revive:Laya.Image;
+		public box_reviveIcon:Laya.Box;
 		public btn_revive:Laya.Image;
 		public btn_retry:Laya.Image;
+		public box_win:Laya.Box;
+		public mask_win:Laya.Image;
+		public box_winIcon:Laya.Box;
+		public label_lvlPass:Laya.Label;
+		public winLabel:Laya.Image;
+		public btn_next:Laya.Image;
 		public box_tutorial:Laya.Box;
         constructor(){ super()}
         createChildren():void {
@@ -65,7 +67,6 @@ export module ui.home {
 		public icon_diamond:Laya.Image;
 		public text_diamond:laya.display.Text;
 		public box_bannar:Laya.Image;
-		public label_msg:Laya.TextArea;
         constructor(){ super()}
         createChildren():void {
             super.createChildren();

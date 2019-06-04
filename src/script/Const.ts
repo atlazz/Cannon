@@ -96,8 +96,11 @@ export const CannonBallBoxUrl = "res/ball_box/ball_box.lh";
 export const CannonBallInitPos: Laya.Vector3 = new Laya.Vector3(-0.01, 0.05, -0.13);
 export const CannonBallInitScale: Laya.Vector3 = new Laya.Vector3(25, 25, 25);
 
-/******** cdn */
-export const cdnUrl: string = "https://static.miniant.cn/cannon/res.zip";
+/** cdn */
+export const cdnUrl: string = "https://static.miniant.cn/cannon/res2.zip";
+
+/** sound */
+export const soundUrl: string = "res/audio/shoot.mp3";
 
 /******** bullet ********/
 // bullet mesh model res url

@@ -11,13 +11,15 @@ import Loader from "../utils/Loader";
 export default class HomeView extends ui.home.HomeViewUI {
     static instance: HomeView;
 
+    private nav: Navigator;
+
     /**
      * 打开该单例页面，触发onOpened
      * @param param  onOpened方法的传参
      */
     static openInstance(param?: any) {
         if (HomeView.instance) {
-            // Ad.posShowBanner(Const.BannerPos.HomeView);
+            Ad.posShowBanner(Const.BannerPos.HomeView);
             HomeView.instance.onOpened(param);
         } else {
             Laya.Scene.open(Const.URL_HomeView, false, param);
@@ -28,6 +30,8 @@ export default class HomeView extends ui.home.HomeViewUI {
         console.log("HomeView onOpened()");
         this.visible = true;
         this.label_level.changeText("关卡：" + Global.gameData.stageIndex);
+        // 刷新 home icon
+        this.nav && this.nav.loadHomeIconInfoList();
     }
 
     /**首页图标列表*/
@@ -46,35 +50,8 @@ export default class HomeView extends ui.home.HomeViewUI {
         super();
         console.log("HomeView constructor()");
         HomeView.instance = this;
+        GameScene.openInstance();
         this.label_version.changeText("v" + Const.VERSION);
-        // this.initCannonSelect();
-    }
-
-    private initCannonSelect() {
-        // add scene
-        this.cannonScene3D = this.box_cannonScene3D.addChild(new Laya.Scene3D()) as Laya.Scene3D;
-
-        // camera
-        let camera = this.cannonScene3D.addChild(new Laya.Camera()) as Laya.Camera;
-        camera.transform.localPosition = new Laya.Vector3(0, 0, 10);
-        camera.transform.localRotationEuler = new Laya.Vector3(-20, 0, 0);
-        // camera.clearColor = null;
-
-        // direction light
-        let directionLight = this.cannonScene3D.addChild(new Laya.DirectionLight()) as Laya.DirectionLight;
-        directionLight.transform.localPosition = Const.LightInitPos.clone();
-        directionLight.transform.localRotationEuler = Const.LightInitRotEuler.clone();
-        directionLight.color = Const.LightInitColor.clone();
-
-        // load cannon
-        Laya.Sprite3D.load(Const.CannonResUrl[1], Laya.Handler.create(this, (res) => {
-            let bullet = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(1));
-            this.cannonScene3D.addChild(bullet);
-            let cannon = this.cannonScene3D.addChild(res) as Laya.Sprite3D;
-            // cannon.transform.localPosition = new Laya.Vector3(0, 0, -3);
-            // cannon.transform.localRotationEuler = new Laya.Vector3(0, -120, 0);
-            cannon.transform.localScale = new Laya.Vector3(100, 100, 100);
-        }));
     }
 
     onEnable() {
@@ -85,8 +62,8 @@ export default class HomeView extends ui.home.HomeViewUI {
             this.onGameDataLoaded();
         }
         Loader.loadZip(Const.cdnUrl, "res", Laya.Handler.create(this, (res) => {
-            GameScene.openInstance();
             this.bindButtons();
+            // this.initCannonSelect();
         }));
     }
 
@@ -113,11 +90,18 @@ export default class HomeView extends ui.home.HomeViewUI {
         this.btn_sound.on(Laya.Event.CLICK, this, () => {
             Global.gameData.soundEnabled = !Global.gameData.soundEnabled;
             this.btn_sound.gray = !Global.gameData.soundEnabled;
+            // play sound
+            if (Laya.Browser.onMiniGame && Global.gameData.soundEnabled) {
+                Laya.SoundManager.playSound(Const.soundUrl);
+            }
         });
         // vibration control
         this.btn_vibration.on(Laya.Event.CLICK, this, () => {
             Global.gameData.vibrationEnabled = !Global.gameData.vibrationEnabled;
             this.btn_vibration.gray = !Global.gameData.vibrationEnabled;
+            if (Laya.Browser.onMiniGame && Global.gameData.vibrationEnabled) {
+                wx.vibrateShort();
+            }
         });
         // cannon select
         this.btn_cannon.on(Laya.Event.CLICK, this, () => {
@@ -151,8 +135,35 @@ export default class HomeView extends ui.home.HomeViewUI {
         // });
     }
 
+    private initCannonSelect() {
+        // add scene
+        this.cannonScene3D = this.box_cannonScene3D.addChild(new Laya.Scene3D()) as Laya.Scene3D;
+
+        // camera
+        let camera = this.cannonScene3D.addChild(new Laya.Camera()) as Laya.Camera;
+        camera.transform.localPosition = new Laya.Vector3(0, 0, 10);
+        camera.transform.localRotationEuler = new Laya.Vector3(-20, 0, 0);
+        // camera.clearColor = null;
+
+        // direction light
+        let directionLight = this.cannonScene3D.addChild(new Laya.DirectionLight()) as Laya.DirectionLight;
+        directionLight.transform.localPosition = Const.LightInitPos.clone();
+        directionLight.transform.localRotationEuler = Const.LightInitRotEuler.clone();
+        directionLight.color = Const.LightInitColor.clone();
+
+        // load cannon
+        Laya.Sprite3D.load(Const.CannonResUrl[1], Laya.Handler.create(this, (res) => {
+            let bullet = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(1));
+            this.cannonScene3D.addChild(bullet);
+            let cannon = this.cannonScene3D.addChild(res) as Laya.Sprite3D;
+            // cannon.transform.localPosition = new Laya.Vector3(0, 0, -3);
+            // cannon.transform.localRotationEuler = new Laya.Vector3(0, -120, 0);
+            cannon.transform.localScale = new Laya.Vector3(100, 100, 100);
+        }));
+    }
+
     private hide() {
-        // Ad.posHideBanner(Const.BannerPos.HomeView);
+        Ad.posHideBanner(Const.BannerPos.HomeView);
         this.visible = false;
     }
 
@@ -244,10 +255,10 @@ export default class HomeView extends ui.home.HomeViewUI {
         // this.initHomeIcons(["home_icon_1", "home_icon_2", "home_icon_3", "home_icon_4", "home_icon_5", "home_icon_6", "home_icon_7", "home_icon_8", "home_icon_9", "home_icon_10"]);
 
         /** init navigation */
-        let nav: Navigator = new Navigator(ws);
+        this.nav = new Navigator(ws);
         // home icon
         this.box_homeIcon.visible = true;
-        nav.createHomeIcons(this.box_homeIcon, this.box_homeIcon, ["home_icon_1", "home_icon_2", "home_icon_3", "home_icon_4", "home_icon_5", "home_icon_6", "home_icon_7", "home_icon_8", "home_icon_9", "home_icon_10"]);
+        this.nav.createHomeIcons(this.box_homeIcon, this.box_homeIcon, ["home_icon_1", "home_icon_2", "home_icon_3", "home_icon_4", "home_icon_5", "home_icon_6", "home_icon_7", "home_icon_8", "home_icon_9", "home_icon_10"]);
 
         this.box_drawer.visible = true;
         // this.btn_moreGameOpen.visible = true;
@@ -280,8 +291,6 @@ export default class HomeView extends ui.home.HomeViewUI {
         post && console.log('updateGameData', Global.gameData);
         Laya.Browser.onMiniGame && ws.setAllData(Global.gameData, post);
     }
-
-
 
     /**图标点击*/
     private onIconClick(pos: string, ad: any, redirect = true) {

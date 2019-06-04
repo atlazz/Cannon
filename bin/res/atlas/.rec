@@ -44,6 +44,12 @@ P 2BFF7046 vslider.png
 D res
 R 8A4998B2 bullet.lh
 R C33056AD cube_piece.lm
+D res/audio
+R 7F8C5913 blackhole.mp3
+R CF1B000B lucky.mp3
+R ED05D4DC safe.mp3
+R 6355FE9B shoot.mp3
+R 6CF63167 winner.mp3
 D res/ball_box
 D res/bullet
 D res/cannon
@@ -66,7 +72,7 @@ P 856FAF02 tips2.png
 D res/ui/game
 P 7CE3FA08 ball.png
 P D5A5A3D5 blank.png
-P C4AB25B8 btn_back.png
+P CF00C416 btn_back.png
 P 25084533 btn_cannon.png
 P EFA70995 btn_next.png
 P 2EAEAB7A btn_start.png
@@ -91,7 +97,7 @@ P 49C72002 tips_trail.png
 P FF050530 vedio.png
 D res/ui/home
 P D5A5A3D5 blank.png
-P C4AB25B8 btn_back.png
+P CF00C416 btn_back.png
 P 56218D32 btn_background.png
 P 80FEEFD7 btn_bullet.png
 P 25084533 btn_cannon.png
