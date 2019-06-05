@@ -1,6 +1,3 @@
-2019/06/05-17:53:56.793 bbc Reusing MANIFEST leveldb/MANIFEST-000001
-2019/06/05-17:53:56.793 bbc Recovering log #13
-2019/06/05-17:53:56.793 bbc Reusing old log leveldb/000013.log 
-2019/06/05-18:43:43.192 4784 Level-0 table #17: started
-2019/06/05-18:43:43.224 4784 Level-0 table #17: 8353 bytes OK
-2019/06/05-18:43:43.268 4784 Delete type=0 #13
+2019/06/05-23:11:22.704 1f50 Reusing MANIFEST leveldb/MANIFEST-000001
+2019/06/05-23:11:22.705 1f50 Recovering log #16
+2019/06/05-23:11:22.725 1f50 Reusing old log leveldb/000016.log 

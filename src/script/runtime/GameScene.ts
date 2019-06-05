@@ -475,10 +475,12 @@ export default class GameScene extends ui.game.GameSceneUI {
                 this.hideReviveUI();
                 this.currBulletNum -= 3;
                 this.label_ballNum.changeText("x3");
-                for (let i = 1; i <= 3; i++) {
-                    if (i <= this.MaxBulletNum) {
-                        ((this.ballBox.getChildByName("CannonBall" + i + "_0") as Laya.MeshSprite3D).meshRenderer.material as Laya.PBRSpecularMaterial).albedoColorA = 1;
-                    }
+                if (this.ballBox) {
+	                for (let i = 1; i <= 3; i++) {
+	                    if (i <= this.MaxBulletNum) {
+	                        ((this.ballBox.getChildByName("CannonBall" + i + "_0") as Laya.MeshSprite3D).meshRenderer.material as Laya.PBRSpecularMaterial).albedoColorA = 1;
+	                    }
+	                }
                 }
                 this.box_scene3D.on(Laya.Event.CLICK, this, this.onClick);
                 this.gameStage.frameLoop(1, this, this.stageLooping);
@@ -617,13 +619,15 @@ export default class GameScene extends ui.game.GameSceneUI {
             console.log("max ball num: " + this.MaxBulletNum);
 
             // set ball box
-            for (let i = 1; i <= 10; i++) {
-                if (i <= this.MaxBulletNum) {
-                    ((this.ballBox.getChildByName("CannonBall" + i + "_0") as Laya.MeshSprite3D).meshRenderer.material as Laya.PBRSpecularMaterial).albedoColorA = 1;
-                }
-                else {
-                    ((this.ballBox.getChildByName("CannonBall" + i + "_0") as Laya.MeshSprite3D).meshRenderer.material as Laya.PBRSpecularMaterial).albedoColorA = 0;
-                }
+            if (this.ballBox) {
+	            for (let i = 1; i <= 10; i++) {
+	                if (i <= this.MaxBulletNum) {
+	                    ((this.ballBox.getChildByName("CannonBall" + i + "_0") as Laya.MeshSprite3D).meshRenderer.material as Laya.PBRSpecularMaterial).albedoColorA = 1;
+	                }
+	                else {
+	                    ((this.ballBox.getChildByName("CannonBall" + i + "_0") as Laya.MeshSprite3D).meshRenderer.material as Laya.PBRSpecularMaterial).albedoColorA = 0;
+	                }
+	            }
             }
 
 
@@ -984,7 +988,9 @@ export default class GameScene extends ui.game.GameSceneUI {
         // 测试接口开始 <========================
         if (!HomeView.instance.isTest) {
             // 测试接口结束 <========================
-            ((this.ballBox.getChildByName("CannonBall" + (this.MaxBulletNum - this.currBulletNum + 1) + "_0") as Laya.MeshSprite3D).meshRenderer.material as Laya.PBRSpecularMaterial).albedoColorA = 0;
+            if (this.ballBox) {
+            	((this.ballBox.getChildByName("CannonBall" + (this.MaxBulletNum - this.currBulletNum + 1) + "_0") as Laya.MeshSprite3D).meshRenderer.material as Laya.PBRSpecularMaterial).albedoColorA = 0;
+            }
             // 测试接口开始 <========================
         }
         // 测试接口结束 <========================
