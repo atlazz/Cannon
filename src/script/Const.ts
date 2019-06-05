@@ -165,7 +165,7 @@ export const BulletMass = {
     0: {
         1: 20,      // DEFAULT
         2: 20,      // SHOTGUN_X2
-        3: 20,      // FROZEN
+        3: 30,      // FROZEN
         4: 20,      // REWARD SHOTGUN_X4
         5: 20,      // BOMB
         6: 100,     // LIGHTNING

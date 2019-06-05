@@ -15,7 +15,7 @@ export module ui.game {
 		public level4:Laya.Image;
 		public level5:Laya.Image;
 		public label_ballNum:Laya.Label;
-		public btn_cannon:Laya.Image;
+		public btn_cannonOpen:Laya.Image;
 		public btn_rewardCannon:Laya.Image;
 		public btn_rewardBullet:Laya.Image;
 		public label_rewardBullet:Laya.Label;
@@ -35,6 +35,15 @@ export module ui.game {
 		public label_lvlPass:Laya.Label;
 		public winLabel:Laya.Image;
 		public btn_next:Laya.Image;
+		public box_cannonSelect:Laya.Box;
+		public btn_cannonUnlock:Laya.Image;
+		public btn_cannonUnlockTry:Laya.Image;
+		public btn_cannonClose:Laya.Image;
+		public box_test:Laya.Box;
+		public btn_test_restart:Laya.Image;
+		public btn_test_next:Laya.Image;
+		public input_test_lvl:Laya.TextInput;
+		public label_test_lvl:Laya.Label;
 		public box_tutorial:Laya.Box;
         constructor(){ super()}
         createChildren():void {
@@ -50,6 +59,7 @@ export module ui.home {
 		public box_UI:Laya.Box;
 		public box_homeIcon:Laya.Box;
 		public box_drawer:Laya.Box;
+		public btn_test:Laya.Image;
 		public box_moreGame:Laya.Box;
 		public btn_background:Laya.Image;
 		public btn_bullet:Laya.Image;

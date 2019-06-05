@@ -43,6 +43,11 @@ export default class HomeView extends ui.home.HomeViewUI {
 
     private cannonScene3D: Laya.Scene3D;
 
+    // 测试接口开始 <==========================
+    public isTest: boolean = false;
+    public testStageIdx: number;
+    // 测试接口结束 <==========================
+
     /** 机型系统判断 */
     public systemName;
 
@@ -62,7 +67,9 @@ export default class HomeView extends ui.home.HomeViewUI {
             this.onGameDataLoaded();
         }
         Loader.loadZip(Const.cdnUrl, "res", Laya.Handler.create(this, (res) => {
-            this.bindButtons();
+            Laya.loader.load(Const.StageTexUrl, Laya.Handler.create(this, () => {
+                this.bindButtons();
+            }));
             // this.initCannonSelect();
         }));
     }
@@ -113,6 +120,14 @@ export default class HomeView extends ui.home.HomeViewUI {
             this.box_UI.visible = true;
             this.box_cannon.visible = false;
         });
+        // 测试接口开始 <==========================
+        this.btn_test.gray = !this.isTest;
+        this.btn_test.on(Laya.Event.CLICK, this, () => {
+            this.isTest = !this.isTest;
+            this.btn_test.gray = !this.isTest;
+            this.testStageIdx = 1;
+        });
+        // 测试接口结束 <==========================
         //抽屉打开
         // this.drawerOpenButton.on(Laya.Event.MOUSE_DOWN, this, () => {
         //     this.drawerOpenAni.play(undefined, false);

@@ -70,12 +70,17 @@ P 0D90BB27 moregame_panel.png
 P D4B739EB tips.png
 P 856FAF02 tips2.png
 D res/ui/game
+P 96CABE07 back.png
 P 7CE3FA08 ball.png
 P D5A5A3D5 blank.png
+P 2B4626AC btn_1.png
+P 2427B901 btn_2.png
 P CF00C416 btn_back.png
 P 25084533 btn_cannon.png
 P EFA70995 btn_next.png
 P 2EAEAB7A btn_start.png
+P 50E8185A Cannon_10.png
+P 10C5D2DE close.png
 P 02057DA5 congratulation.png
 P 6A1BEBFC gameover.png
 P FD89EAC8 grade_0_CN.png

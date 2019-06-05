@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":2,
-    "selecteID":34,
+    "selectedBox":34,
+    "selecteID":18,
     "searchKey":"View",
     "props":{"zOrder":1,"width":720,"top":0,"sceneWidth":720,"sceneHeight":1280,"sceneColor":"#000000","runtime":"script/runtime/HomeView.ts","right":0,"left":0,"height":1280,"bottom":0},
     "nodeParent":-1,
-    "maxID":43,
+    "maxID":45,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -68,6 +68,35 @@
                     "compId":4,
                     "child":[
                         ]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image,btn_test",
+                    "props":{"var":"btn_test","skin":"res/ui/home/btn_start.png","scaleY":1.7,"scaleX":1.7,"centerY":0,"centerX":0,"anchorY":0.5,"anchorX":0.5},
+                    "nodeParent":34,
+                    "label":"btn_test",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":43,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Text",
+                            "searchKey":"Text",
+                            "props":{"width":256,"valign":"middle","text":"测试","height":64,"fontSize":30,"font":"SimHei","color":"#ffffff","bold":true,"align":"center"},
+                            "nodeParent":43,
+                            "label":"Text",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":44,
+                            "child":[
+                                ]
+                        }],
+                    "$LOCKED":true
                 },
                 {
                     "x":30,

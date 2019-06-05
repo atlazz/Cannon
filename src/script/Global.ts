@@ -18,6 +18,10 @@ let Global = {
         stageIndex: 1,
         //当前炮台类型
         cannonType: 1,
+        cannonUnlockList: {
+            default: true,
+            frozen: false,
+        }
 
     },
     config: {
