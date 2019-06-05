@@ -2,4 +2,5 @@
    <item name="game/GameScene.scene" props="" ifExport="分离模式" aName=""/>
    <item name="home/HomeView.scene" props="" ifExport="分离模式" aName=""/>
    <item name="over/OverView.scene" props="" ifExport="分离模式" aName=""/>
+   <item name="cannonSelect/CannonSelect.scene" props="" ifExport="分离模式" aName=""/>
 </page>

@@ -51,6 +51,8 @@ let Global = {
         try_cannon: 1,
         try_ball: 1,
         revive: 1,
+        bulletRewardType: 1, // balckhole
+        cannonRewardType: 4, // shotgun x4
     },
     user: {},
     audio: {

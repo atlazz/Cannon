@@ -24,15 +24,17 @@ export const ReviveCountdown: number = 5;
 export enum GameState {
     /** 游戏开始 */
     START = 1,
+    /** 暂停 */
+    PAUSE = 2,
     /** 游戏结束 */
-    OVER = 2,
+    OVER = 3,
 }
 
 /** pages */
 export const URL_HomeView: string = "home/HomeView.scene";
 export const URL_GameScene: string = "game/GameScene.scene";
+export const URL_CannnonSelect: string = "cannonSelect/CannonSelect.scene";
 export const URL_OverView: string = "over/OverView.scene";
-export const URL_ReviveView: string = "dialog/ReviveView.scene";
 
 /** camera */
 export const CameraInitPos: Laya.Vector3 = new Laya.Vector3(0, 0.3, 0.2);
@@ -118,6 +120,27 @@ export const cannonEffectUrl = {
 }
 // init radius
 export const BulletRadius: number = 0.08;
+
+// cannon select scene
+export const CannonSelectIconBgUrl = "res/ui/cannonSelect/CannonIconBG.png";
+export const CannonSelectIconList = [
+    {index: 1, icon: "res/ui/cannonSelect/Cannon_09.png"},
+    {index: 2, icon: "res/ui/cannonSelect/Cannon_03.png"},
+    {index: 3, icon: "res/ui/cannonSelect/Cannon_10.png"},
+    // {index: 5, icon: "res/ui/cannonSelect/Cannon_08.png"},
+    {index: 6, icon: "res/ui/cannonSelect/Cannon_02.png"},
+    {index: 1, icon: "res/ui/cannonSelect/Cannon_09.png"},
+    {index: 2, icon: "res/ui/cannonSelect/Cannon_03.png"},
+    {index: 3, icon: "res/ui/cannonSelect/Cannon_10.png"},
+    // {index: 5, icon: "res/ui/cannonSelect/Cannon_08.png"},
+    {index: 6, icon: "res/ui/cannonSelect/Cannon_02.png"},
+]
+export const CannonSelectTextList = {
+    1: {name: "普通炮", feature: "普通的大炮，普通的威力，就很普通", unlockLvl: 0},
+    2: {name: "霰弹炮", feature: "普通的威力，数量x2", unlockLvl: 1},
+    3: {name: "冰雪奇缘", feature: "更强的威力，将方块变成冰块", unlockLvl: 3},
+    6: {name: "闪电风暴", feature: "威力无比，一发入魂", unlockLvl: 5},
+}
 
 export const enum CannonType {
     DEFAULT = 1,

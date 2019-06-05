@@ -10,6 +10,7 @@ import Target from "../component/Target";
 import Guard from "../component/Guard";
 import Reward from "../component/Reward";
 import HomeView from "./HomeView";
+import CannonSelect from "./CannonSelect";
 import * as StageConfig from "../StageConfig"
 
 export default class GameScene extends ui.game.GameSceneUI {
@@ -35,9 +36,14 @@ export default class GameScene extends ui.game.GameSceneUI {
         console.log("GameScene onOpened()");
         this.visible = true;
 
+        // game playing
         if (this.state === Const.GameState.START) {
+            // change cannon
+            if (!this.isRewardCannon && this.cannonType !== Global.gameData.cannonType) {
+                this.setCannon(Global.gameData.cannonType);
+            }
             this.showUI();
-            // todo: 玩家进度记录进Global
+            // reset
             this.stageIdx = Global.gameData.stageIndex;
             this.missionIdx = 1;
             for (let i = 1; i <= 5; i++) {
@@ -45,6 +51,10 @@ export default class GameScene extends ui.game.GameSceneUI {
                 this["level" + i].sizeGrid = "0, 96, 0, 0";
             }
             this.newStage();
+        }
+        // game pause: 大炮选择页面跳转回来
+        else if (this.state === Const.GameState.PAUSE) {
+            this.state = Const.GameState.START;
         }
 
         // 测试接口开始 <==========================
@@ -92,7 +102,6 @@ export default class GameScene extends ui.game.GameSceneUI {
     private recoilTime: number;
     private MaxRecoilTime: number = 8;
     public isRewardCannon: boolean = false;
-    public cannonRewardType: number = Const.CannonType.SHOTGUN_X4;
 
     /** cannon ball box */
     private ballBox: Laya.Sprite3D;
@@ -101,7 +110,6 @@ export default class GameScene extends ui.game.GameSceneUI {
     public bulletType: number = Const.CannonType.DEFAULT;
     public bulletDirection: Laya.Vector3 = new Laya.Vector3();
     public isRewardBullet: boolean = false;
-    public bulletRewardType: number = Const.BulletRewardType.BLACKHOLE;
 
     /** raycast */
     private mousePoint: Laya.Vector2 = new Laya.Vector2();
@@ -124,6 +132,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.bgIdx = 0;
         this.newBackground();
 
+        this.isRewardCannon = false;
         this.cannonType = Const.CannonType.DEFAULT;
         this.newCannon();
 
@@ -207,17 +216,17 @@ export default class GameScene extends ui.game.GameSceneUI {
             let bgAni = (this.background.getComponent(Laya.Animator) as Laya.Animator);
             bgAni && bgAni.destroy();
 
-            if (this.bgIdx === 0) {
+            if (this.background && this.bgIdx === 0) {
                 this.cloud0 = this.background.getChildByName("Scenes_02").getChildByName("cloud01") as Laya.Sprite3D;
                 this.cloud1 = this.background.getChildByName("Scenes_02").getChildByName("cloud03") as Laya.Sprite3D;
                 let plane: Laya.MeshSprite3D = this.background.getChildByName("Scenes_02").getChildByName("Plane").getChildByName("Plane_0") as Laya.MeshSprite3D;
                 plane.name = "ground";
                 let planeCollider: Laya.PhysicsCollider = plane.addComponent(Laya.PhysicsCollider);
                 planeCollider.colliderShape = new Laya.StaticPlaneColliderShape(new Laya.Vector3(0, 1, 0), 0);
-            }
 
-            // set stage listener
-            this.background.frameLoop(1, this, this.bgMoving);
+                // set stage listener
+                this.background.frameLoop(1, this, this.bgMoving);
+            }
         }));
     }
 
@@ -252,6 +261,13 @@ export default class GameScene extends ui.game.GameSceneUI {
                 }
             }
         }));
+    }
+
+    /** set cannon */
+    setCannon(type: number) {
+        this.cannonType = type;
+        this.bulletType = this.cannonType;
+        this.newCannon();
     }
 
     /** new cannon */
@@ -312,6 +328,8 @@ export default class GameScene extends ui.game.GameSceneUI {
             this.state = Const.GameState.OVER;
             this.cleanStage();
             this.hideUI();
+            // reset
+            this.isRewardCannon = false;
             // reset cannon rotation
             if (this.turret) {
                 this.turret.transform.localRotationEuler = Const.TurretInitLocalRot.clone();
@@ -323,78 +341,50 @@ export default class GameScene extends ui.game.GameSceneUI {
 
         // cannon selection open
         this.btn_cannonOpen.on(Laya.Event.CLICK, this, () => {
-            this.box_cannonSelect.visible = true;
-            if (this.stageIdx <= 1) {
-                this.btn_cannonUnlock.gray = true;
-                // cannon unlock
-                this.btn_cannonUnlock.offAll();
-            }
-            else {
-                this.btn_cannonUnlock.gray = false;
-                // cannon unlock
-                this.btn_cannonUnlock.on(Laya.Event.CLICK, this, () => {
-                    Global.gameData.cannonUnlockList["frozen"] = true;
-                    this.cannonType = Const.CannonType.FROZEN;
-                    this.bulletType = this.cannonType;
-                    this.newCannon();
-                });
-            }
-            // 测试接口开始 <==========================
-            if (HomeView.instance.isTest) {
-                this.cannonType = this.cannonType % 6 + 1;
-                this.bulletType = this.cannonType;
-                Global.gameData.cannonType = this.cannonType;
-                this.newCannon();
-            }
-            // 测试接口结束 <==========================
+            this.state = Const.GameState.PAUSE;
+            CannonSelect.openInstance();
         });
 
-        // cannon unlock try
-        this.btn_cannonUnlockTry.on(Laya.Event.CLICK, this, () => {
-            if (!Laya.Browser.onMiniGame) {
-                this.isRewardCannon = true;
-                this.cannonType = Const.CannonType.FROZEN;
-                this.bulletType = this.cannonType;
-                this.newCannon();
-            }
-            else {
-                // 1: video
-                (Global.config.try_cannon == 1) && Reward.instance.video({
-                    pos: Const.RewardPos.Cannon,
-                    success: () => {
-                        this.isRewardCannon = true;
-                        this.cannonType = Const.CannonType.FROZEN;
-                        this.bulletType = this.cannonType;
-                        this.newCannon();
-                    },
-                    complete: () => {
-                    }
-                });
-                // 2: share
-                (Global.config.try_cannon == 2) && Reward.instance.share({
-                    pos: Const.RewardPos.Cannon,
-                    success: () => {
-                        this.isRewardCannon = true;
-                        this.cannonType = Const.CannonType.FROZEN;
-                        this.bulletType = this.cannonType;
-                        this.newCannon();
-                    },
-                    complete: () => {
-                    }
-                });
-            }
-        });
+        // // cannon unlock try
+        // this.btn_cannonUnlockTry.on(Laya.Event.CLICK, this, () => {
+        //     if (!Laya.Browser.onMiniGame) {
+        //         this.isRewardCannon = true;
+        //         this.setCannon(Const.CannonType.FROZEN);
+        //     }
+        //     else {
+        //         // 1: video
+        //         (Global.config.try_cannon == 1) && Reward.instance.video({
+        //             pos: Const.RewardPos.Cannon,
+        //             success: () => {
+        //                 this.isRewardCannon = true;
+        //                 this.setCannon(Const.CannonType.FROZEN);
+        //             },
+        //             complete: () => {
+        //             }
+        //         });
+        //         // 2: share
+        //         (Global.config.try_cannon == 2) && Reward.instance.share({
+        //             pos: Const.RewardPos.Cannon,
+        //             success: () => {
+        //                 this.isRewardCannon = true;
+        //                 this.setCannon(Const.CannonType.FROZEN);
+        //             },
+        //             complete: () => {
+        //             }
+        //         });
+        //     }
+        // });
 
-        // cannon selection close
-        this.btn_cannonClose.on(Laya.Event.CLICK, this, () => {
-            this.box_cannonSelect.visible = false;
-        });
+        // // cannon selection close
+        // this.btn_cannonClose.on(Laya.Event.CLICK, this, () => {
+        //     this.box_cannonSelect.visible = false;
+        // });
 
         // reward bullet
         this.btn_rewardBullet.on(Laya.Event.MOUSE_DOWN, this, () => {
             if (!Laya.Browser.onMiniGame) {
                 this.isRewardBullet = true;
-                this.bulletType = this.bulletRewardType;
+                this.bulletType = Global.config.bulletRewardType;
                 // cannon effect
                 if (!this.scene3D.getChildByName("cannon_effect")) {
                     Laya.Sprite3D.load(Const.cannonEffectUrl[1], Laya.Handler.create(this, (cannonEff) => {
@@ -409,7 +399,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                     pos: Const.RewardPos.Bullet,
                     success: () => {
                         this.isRewardBullet = true;
-                        this.bulletType = this.bulletRewardType;
+                        this.bulletType = Global.config.bulletRewardType;
                         // cannon effect
                         if (!this.scene3D.getChildByName("cannon_effect")) {
                             Laya.Sprite3D.load(Const.cannonEffectUrl[1], Laya.Handler.create(this, (cannonEff) => {
@@ -427,7 +417,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                     pos: Const.RewardPos.Bullet,
                     success: () => {
                         this.isRewardBullet = true;
-                        this.bulletType = this.bulletRewardType;
+                        this.bulletType = Global.config.bulletRewardType;
                         // cannon effect
                         if (!this.scene3D.getChildByName("cannon_effect")) {
                             Laya.Sprite3D.load(Const.cannonEffectUrl[1], Laya.Handler.create(this, (cannonEff) => {
@@ -447,9 +437,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.btn_rewardCannon.on(Laya.Event.MOUSE_DOWN, this, () => {
             if (!Laya.Browser.onMiniGame) {
                 this.isRewardCannon = true;
-                this.cannonType = this.cannonRewardType;
-                this.bulletType = this.cannonType;
-                this.newCannon();
+                this.setCannon(Global.config.cannonRewardType);
             }
             else {
                 // 1: video
@@ -457,9 +445,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                     pos: Const.RewardPos.Cannon,
                     success: () => {
                         this.isRewardCannon = true;
-                        this.cannonType = this.cannonRewardType;
-                        this.bulletType = this.cannonType;
-                        this.newCannon();
+                        this.setCannon(Global.config.cannonRewardType);
                     },
                     complete: () => {
                     }
@@ -469,9 +455,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                     pos: Const.RewardPos.Cannon,
                     success: () => {
                         this.isRewardCannon = true;
-                        this.cannonType = this.cannonRewardType;
-                        this.bulletType = this.cannonType;
-                        this.newCannon();
+                        this.setCannon(Global.config.cannonRewardType);
                     },
                     complete: () => {
                     }
@@ -881,10 +865,9 @@ export default class GameScene extends ui.game.GameSceneUI {
             this["level" + i].sizeGrid = "0, 96, 0, 0";
         }
         // clear reward cannon
-        if (this.cannonType !== Global.gameData.cannonType) {
-            this.cannonType = Global.gameData.cannonType;
-            this.bulletType = this.cannonType;
-            this.newCannon();
+        if (this.isRewardCannon) {
+            this.setCannon(Global.gameData.cannonType);
+            this.isRewardCannon = false;
         }
     }
 
@@ -1036,14 +1019,14 @@ export default class GameScene extends ui.game.GameSceneUI {
         /** reward bullet */
         if (this.isRewardBullet) {
             // bullet effect
-            Laya.Sprite3D.load(Const.BulletRewardResUrl[this.bulletRewardType], Laya.Handler.create(this, (bulletEff) => {
+            Laya.Sprite3D.load(Const.BulletRewardResUrl[Global.config.bulletRewardType], Laya.Handler.create(this, (bulletEff) => {
                 let bullet: Laya.MeshSprite3D = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(Const.BulletRadius));
                 bullet.name = "bullet";
                 let bulletBlackHole: Laya.Sprite3D = bullet.addChild(bulletEff.clone()) as Laya.Sprite3D;
                 bulletBlackHole.name = "effect";
                 // reset bullet by type
                 let bulletScript: Bullet = bullet.addComponent(Bullet);
-                bulletScript.reset(this.bulletRewardType, true);
+                bulletScript.reset(Global.config.bulletRewardType, true);
                 // add to scene
                 this.scene3D.addChild(bullet);
 
@@ -1051,7 +1034,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                 trigger.name = "bulletTrigger";
                 // reset bullet trigger by type
                 let triggerScript: Bullet = trigger.addComponent(Bullet);
-                triggerScript.reset(this.bulletRewardType, true);
+                triggerScript.reset(Global.config.bulletRewardType, true);
                 // add to scene
                 this.scene3D.addChild(trigger);
             }));

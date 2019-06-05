@@ -3,6 +3,26 @@ import View=Laya.View;
 import Dialog=Laya.Dialog;
 import Scene=Laya.Scene;
 var REG: Function = Laya.ClassUtils.regClass;
+export module ui.cannonSelect {
+    export class CannonSelectUI extends View {
+		public box_scene3D:Laya.Box;
+		public box_UI:Laya.Box;
+		public label_name:Laya.Label;
+		public label_feature:Laya.Label;
+		public list_Icon:Laya.List;
+		public label_unlockMsg:Laya.Label;
+		public btn_select:Laya.Image;
+		public btn_unlock:Laya.Image;
+		public btn_try:Laya.Image;
+		public btn_back:Laya.Image;
+        constructor(){ super()}
+        createChildren():void {
+            super.createChildren();
+            this.loadScene("cannonSelect/CannonSelect");
+        }
+    }
+    REG("ui.cannonSelect.CannonSelectUI",CannonSelectUI);
+}
 export module ui.game {
     export class GameSceneUI extends View {
 		public box_scene3D:Laya.Sprite;
@@ -71,9 +91,6 @@ export module ui.home {
 		public label_level:Laya.Label;
 		public icon_gameTitle:Laya.Image;
 		public label_version:Laya.Label;
-		public box_cannon:Laya.Box;
-		public box_cannonScene3D:Laya.Box;
-		public btn_cannonBack:Laya.Image;
 		public icon_diamond:Laya.Image;
 		public text_diamond:laya.display.Text;
 		public box_bannar:Laya.Image;

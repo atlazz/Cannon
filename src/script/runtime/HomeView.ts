@@ -1,5 +1,6 @@
 import { ui } from "./../../ui/layaMaxUI";
 import GameScene from "./GameScene";
+import CannonSelect from "./CannonSelect";
 import * as Const from "../Const";
 import wx from "../utils/wx";
 import ws from "../utils/ws.js";
@@ -68,9 +69,9 @@ export default class HomeView extends ui.home.HomeViewUI {
         }
         Loader.loadZip(Const.cdnUrl, "res", Laya.Handler.create(this, (res) => {
             Laya.loader.load(Const.StageTexUrl, Laya.Handler.create(this, () => {
+                // CannonSelect.openInstance();
                 this.bindButtons();
             }));
-            // this.initCannonSelect();
         }));
     }
 
@@ -110,15 +111,10 @@ export default class HomeView extends ui.home.HomeViewUI {
                 wx.vibrateShort();
             }
         });
-        // cannon select
+        // jump to sence: cannon select
         this.btn_cannon.on(Laya.Event.CLICK, this, () => {
-            this.box_cannon.visible = true;
-            this.box_UI.visible = false;
-        });
-        // cannon back
-        this.btn_cannonBack.on(Laya.Event.CLICK, this, () => {
-            this.box_UI.visible = true;
-            this.box_cannon.visible = false;
+            CannonSelect.openInstance();
+            this.hide();
         });
         // 测试接口开始 <==========================
         this.btn_test.gray = !this.isTest;
@@ -148,33 +144,6 @@ export default class HomeView extends ui.home.HomeViewUI {
         //     this.moreGameCloseAni.play(undefined, false);
         //     ws.hideGameAd("game_more");
         // });
-    }
-
-    private initCannonSelect() {
-        // add scene
-        this.cannonScene3D = this.box_cannonScene3D.addChild(new Laya.Scene3D()) as Laya.Scene3D;
-
-        // camera
-        let camera = this.cannonScene3D.addChild(new Laya.Camera()) as Laya.Camera;
-        camera.transform.localPosition = new Laya.Vector3(0, 0, 10);
-        camera.transform.localRotationEuler = new Laya.Vector3(-20, 0, 0);
-        // camera.clearColor = null;
-
-        // direction light
-        let directionLight = this.cannonScene3D.addChild(new Laya.DirectionLight()) as Laya.DirectionLight;
-        directionLight.transform.localPosition = Const.LightInitPos.clone();
-        directionLight.transform.localRotationEuler = Const.LightInitRotEuler.clone();
-        directionLight.color = Const.LightInitColor.clone();
-
-        // load cannon
-        Laya.Sprite3D.load(Const.CannonResUrl[1], Laya.Handler.create(this, (res) => {
-            let bullet = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(1));
-            this.cannonScene3D.addChild(bullet);
-            let cannon = this.cannonScene3D.addChild(res) as Laya.Sprite3D;
-            // cannon.transform.localPosition = new Laya.Vector3(0, 0, -3);
-            // cannon.transform.localRotationEuler = new Laya.Vector3(0, -120, 0);
-            cannon.transform.localScale = new Laya.Vector3(100, 100, 100);
-        }));
     }
 
     private hide() {
