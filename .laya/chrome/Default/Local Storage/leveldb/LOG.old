@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-2019/06/06-15:20:18.417 2acc Reusing MANIFEST leveldb/MANIFEST-000001
-2019/06/06-15:20:18.417 2acc Recovering log #23
-2019/06/06-15:20:18.417 2acc Reusing old log leveldb/000023.log 
-=======
-2019/06/05-23:10:29.628 1e34 Reusing MANIFEST leveldb/MANIFEST-000001
-2019/06/05-23:10:29.629 1e34 Recovering log #16
-2019/06/05-23:10:29.629 1e34 Reusing old log leveldb/000016.log 
->>>>>>> 759bc607f73cf8882fbc47f40d4f532e5fc31874
+2019/06/06-18:33:53.555 3464 Reusing MANIFEST leveldb/MANIFEST-000001
+2019/06/06-18:33:53.555 3464 Recovering log #26
+2019/06/06-18:33:53.556 3464 Reusing old log leveldb/000026.log 
+2019/06/06-18:33:53.556 3464 Delete type=0 #16
