@@ -96,6 +96,7 @@ P 739C7B24 Cannon_20.png
 P A773F455 Cannon_21.png
 P AE9424FE Cannon_22.png
 P 661F9441 CannonIconBG.png
+P B0FF42B4 lock_white.png
 D res/ui/game
 P 96CABE07 back.png
 P 7CE3FA08 ball.png
@@ -137,3 +138,4 @@ P 6DDFEBB9 btn_sound.png
 P 2EAEAB7A btn_start.png
 P A1B9002F btn_vibration.png
 P 55EC4F8E icon_diamond.png
+P 4F945D2A lock.png

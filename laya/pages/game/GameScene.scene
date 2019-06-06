@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":2,
-    "selecteID":94,
+    "selectedBox":28,
+    "selecteID":107,
     "searchKey":"View",
     "props":{"width":720,"top":0,"sceneWidth":720,"sceneHeight":1280,"sceneColor":"#000000","runtime":"script/runtime/GameScene.ts","right":0,"left":0,"height":1280,"bottom":0},
     "nodeParent":-1,
-    "maxID":107,
+    "maxID":108,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -35,13 +35,14 @@
             "props":{"width":720,"visible":false,"var":"box_UI","top":0,"mouseThrough":true,"centerX":0,"bottom":0},
             "nodeParent":2,
             "label":"box_UI",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":35,
             "child":[
                 {
+                    "x":30,
                     "type":"Box",
                     "searchKey":"Box,box_level",
                     "props":{"width":480,"var":"box_level","top":120,"height":97,"centerX":0},
@@ -177,6 +178,7 @@
                         }]
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "searchKey":"Label,label_ballNum",
                     "props":{"var":"label_ballNum","text":"x10","left":80,"fontSize":50,"color":"#ffffff","centerY":470,"bold":true},
@@ -190,19 +192,35 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,btn_cannonOpen",
                     "props":{"visible":true,"var":"btn_cannonOpen","skin":"res/ui/game/btn_cannon.png","scaleY":1.5,"scaleX":1.5,"centerX":0,"bottom":50},
                     "nodeParent":35,
                     "label":"btn_cannonOpen",
-                    "isDirectory":false,
+                    "isOpen":true,
+                    "isDirectory":true,
                     "isAniNode":true,
-                    "hasChild":false,
+                    "hasChild":true,
                     "compId":28,
                     "child":[
-                        ]
+                        {
+                            "x":45,
+                            "type":"Label",
+                            "searchKey":"Label",
+                            "props":{"text":"换炮","fontSize":25,"font":"SimHei","color":"#ffffff","centerY":45,"centerX":0},
+                            "nodeParent":28,
+                            "label":"Label",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":107,
+                            "child":[
+                                ]
+                        }]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,btn_rewardCannon",
                     "props":{"var":"btn_rewardCannon","skin":"res/ui/game/RC_1.png","scaleY":1.5,"scaleX":1.5,"right":50,"centerY":330,"anchorY":0.5,"anchorX":0.5},
@@ -242,6 +260,7 @@
                         }]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,btn_rewardBullet",
                     "props":{"var":"btn_rewardBullet","skin":"res/ui/game/RB_1.png","scaleY":1.5,"scaleX":1.5,"left":50,"centerY":330,"anchorY":0.5,"anchorX":0.5},
@@ -294,6 +313,7 @@
                         }]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,missionWin",
                     "props":{"visible":false,"var":"missionWin","skin":"res/ui/game/grade_0_CN.png","scaleY":1.5,"scaleX":1.5,"centerY":-200,"centerX":0},
@@ -307,6 +327,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,btn_back",
                     "props":{"visible":true,"var":"btn_back","top":20,"skin":"res/ui/game/btn_back.png","scaleY":1.2,"scaleX":1.2,"left":20},
@@ -321,6 +342,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Box",
                     "searchKey":"Box,box_countdown",
                     "props":{"width":720,"visible":false,"var":"box_countdown","height":1280,"centerY":0,"centerX":0},
@@ -567,179 +589,6 @@
                     "isAniNode":true,
                     "hasChild":false,
                     "compId":59,
-                    "child":[
-                        ]
-                }]
-        },
-        {
-            "x":15,
-            "type":"Box",
-            "searchKey":"Box,box_cannonSelect",
-            "props":{"width":720,"visible":false,"var":"box_cannonSelect","top":0,"centerX":0,"bottom":0},
-            "nodeParent":2,
-            "label":"box_cannonSelect",
-            "isOpen":false,
-            "isDirectory":true,
-            "isAniNode":true,
-            "hasChild":true,
-            "compId":94,
-            "child":[
-                {
-                    "x":30,
-                    "type":"Image",
-                    "searchKey":"Image",
-                    "props":{"width":630,"skin":"res/ui/game/back.png","sizeGrid":"10,10,10,10","height":640,"centerY":0,"centerX":0},
-                    "nodeParent":94,
-                    "label":"Image",
-                    "isOpen":false,
-                    "isDirectory":true,
-                    "isAniNode":true,
-                    "hasChild":true,
-                    "compId":95,
-                    "child":[
-                        {
-                            "type":"Image",
-                            "searchKey":"Image",
-                            "props":{"skin":"res/ui/game/Cannon_10.png","scaleY":1.3,"scaleX":1.3,"centerY":-220,"centerX":0},
-                            "nodeParent":95,
-                            "label":"Image",
-                            "isOpen":true,
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":96,
-                            "child":[
-                                ]
-                        },
-                        {
-                            "type":"Text",
-                            "searchKey":"Text",
-                            "props":{"y":210,"width":630,"text":"新式大炮：冰雪奇缘","fontSize":45,"font":"SimHei","color":"#ffffff","bold":true,"align":"center"},
-                            "nodeParent":95,
-                            "label":"Text",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":97,
-                            "child":[
-                                ]
-                        },
-                        {
-                            "type":"Text",
-                            "searchKey":"Text",
-                            "props":{"y":280,"width":630,"text":"特性：威力增强，将方块变成冰块","fontSize":25,"font":"SimHei","bold":true,"align":"center"},
-                            "nodeParent":95,
-                            "label":"Text",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":98,
-                            "child":[
-                                ]
-                        },
-                        {
-                            "type":"Text",
-                            "searchKey":"Text",
-                            "props":{"y":315,"width":630,"text":"通关关卡10可解锁","fontSize":23,"font":"SimHei","color":"#626262","bold":true,"align":"center"},
-                            "nodeParent":95,
-                            "label":"Text",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":99,
-                            "child":[
-                                ]
-                        },
-                        {
-                            "type":"Image",
-                            "searchKey":"Image,btn_cannonUnlock",
-                            "props":{"width":750,"var":"btn_cannonUnlock","skin":"res/ui/game/btn_2.png","sizeGrid":"0,100,0,100","scaleY":0.55,"scaleX":0.55,"gray":true,"centerY":80,"centerX":0},
-                            "nodeParent":95,
-                            "label":"btn_cannonUnlock",
-                            "isOpen":true,
-                            "isDirectory":true,
-                            "isAniNode":true,
-                            "hasChild":true,
-                            "compId":100,
-                            "child":[
-                                {
-                                    "type":"Label",
-                                    "searchKey":"Label",
-                                    "props":{"text":"解锁","fontSize":110,"font":"SimHei","color":"#555555","centerY":0,"centerX":0,"bold":true},
-                                    "nodeParent":100,
-                                    "label":"Label",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":102,
-                                    "child":[
-                                        ]
-                                }]
-                        },
-                        {
-                            "type":"Image",
-                            "searchKey":"Image,btn_cannonUnlockTry",
-                            "props":{"width":750,"var":"btn_cannonUnlockTry","skin":"res/ui/game/btn_1.png","sizeGrid":"0,100,0,100","scaleY":0.55,"scaleX":0.55,"centerY":200,"centerX":0},
-                            "nodeParent":95,
-                            "label":"btn_cannonUnlockTry",
-                            "isOpen":true,
-                            "isDirectory":true,
-                            "isAniNode":true,
-                            "hasChild":true,
-                            "compId":101,
-                            "child":[
-                                {
-                                    "type":"Label",
-                                    "searchKey":"Label",
-                                    "props":{"y":0,"text":"立即试用","right":100,"fontSize":90,"font":"SimHei","color":"#ffffff","centerY":0,"bold":true},
-                                    "nodeParent":101,
-                                    "label":"Label",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":103,
-                                    "child":[
-                                        ]
-                                },
-                                {
-                                    "type":"Image",
-                                    "searchKey":"Image",
-                                    "props":{"skin":"res/ui/game/vedio.png","scaleY":3,"scaleX":3,"left":100,"centerY":0},
-                                    "nodeParent":101,
-                                    "label":"Image",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":104,
-                                    "child":[
-                                        ]
-                                }]
-                        },
-                        {
-                            "type":"Image",
-                            "searchKey":"Image,btn_cannonClose",
-                            "props":{"var":"btn_cannonClose","top":-25,"skin":"res/ui/game/close.png","scaleY":0.5,"scaleX":0.5,"right":-25},
-                            "nodeParent":95,
-                            "label":"btn_cannonClose",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":105,
-                            "child":[
-                                ]
-                        }]
-                },
-                {
-                    "x":30,
-                    "type":"List",
-                    "searchKey":"List",
-                    "props":{"width":600,"height":"100","centerX":0,"bottom":200},
-                    "nodeParent":94,
-                    "label":"List",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":106,
                     "child":[
                         ]
                 }]

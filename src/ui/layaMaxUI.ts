@@ -14,6 +14,7 @@ export module ui.cannonSelect {
 		public btn_select:Laya.Image;
 		public btn_unlock:Laya.Image;
 		public btn_try:Laya.Image;
+		public label_try:Laya.Label;
 		public btn_back:Laya.Image;
         constructor(){ super()}
         createChildren():void {
@@ -55,10 +56,6 @@ export module ui.game {
 		public label_lvlPass:Laya.Label;
 		public winLabel:Laya.Image;
 		public btn_next:Laya.Image;
-		public box_cannonSelect:Laya.Box;
-		public btn_cannonUnlock:Laya.Image;
-		public btn_cannonUnlockTry:Laya.Image;
-		public btn_cannonClose:Laya.Image;
 		public box_test:Laya.Box;
 		public btn_test_restart:Laya.Image;
 		public btn_test_next:Laya.Image;

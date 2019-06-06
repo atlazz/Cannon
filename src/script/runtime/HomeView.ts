@@ -20,7 +20,7 @@ export default class HomeView extends ui.home.HomeViewUI {
      */
     static openInstance(param?: any) {
         if (HomeView.instance) {
-            Ad.posShowBanner(Const.BannerPos.HomeView);
+            Ad.posShowBanner(Const.BannerPos.HomeView, true);
             HomeView.instance.onOpened(param);
         } else {
             Laya.Scene.open(Const.URL_HomeView, false, param);
@@ -70,6 +70,10 @@ export default class HomeView extends ui.home.HomeViewUI {
         Loader.loadZip(Const.cdnUrl, "res", Laya.Handler.create(this, (res) => {
             Laya.loader.load(Const.StageTexUrl, Laya.Handler.create(this, () => {
                 // CannonSelect.openInstance();
+                if (GameScene.instance && Global.gameData.cannonType != Const.CannonType.DEFAULT) {
+                    GameScene.instance.cannonType = Global.gameData.cannonType;
+                    GameScene.instance.newCannon();
+                }
                 this.bindButtons();
             }));
         }));
