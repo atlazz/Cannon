@@ -993,11 +993,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         // 测试接口开始 <========================
         if (!HomeView.instance.isTest) {
             // 测试接口结束 <========================
-<<<<<<< HEAD
             if (this.ballBox && (this.MaxBulletNum - this.currBulletNum + 1) <= 10) {
-=======
-            if (this.ballBox) {
->>>>>>> 452546ef9e0b2129e7c9f4ddda8ccc51150cbd79
                 ((this.ballBox.getChildByName("CannonBall" + (this.MaxBulletNum - this.currBulletNum + 1) + "_0") as Laya.MeshSprite3D).meshRenderer.material as Laya.PBRSpecularMaterial).albedoColorA = 0;
             }
             // 测试接口开始 <========================
