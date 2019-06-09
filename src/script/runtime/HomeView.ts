@@ -20,7 +20,7 @@ export default class HomeView extends ui.home.HomeViewUI {
      */
     static openInstance(param?: any) {
         if (HomeView.instance) {
-            Ad.posShowBanner(Const.BannerPos.HomeView);
+            Ad.posShowBanner(Const.BannerPos.HomeView, true);
             HomeView.instance.onOpened(param);
         } else {
             Laya.Scene.open(Const.URL_HomeView, false, param);
@@ -70,11 +70,21 @@ export default class HomeView extends ui.home.HomeViewUI {
         Loader.loadZip(Const.cdnUrl, "res", Laya.Handler.create(this, (res) => {
             Laya.loader.load(Const.StageTexUrl, Laya.Handler.create(this, () => {
                 // CannonSelect.openInstance();
-                this.bindButtons();
+                Laya.timer.frameLoop(1, this, this.onResEnable);
             }));
         }));
     }
 
+    private onResEnable() {
+        if (GameScene.instance && GameScene.instance.ballBox && GameScene.instance.cannon) {
+            if (GameScene.instance && Global.gameData.cannonType != Const.CannonType.DEFAULT) {
+                GameScene.instance.cannonType = Global.gameData.cannonType;
+                GameScene.instance.newCannon();
+            }
+            this.bindButtons();
+            Laya.timer.clear(this, this.onResEnable);
+        }
+    }
     /**绑定按钮 */
     private bindButtons() {
         // start game
@@ -83,7 +93,7 @@ export default class HomeView extends ui.home.HomeViewUI {
             let scaleY: number = this.btn_start.scaleY;
             Laya.Tween.to(this.btn_start, { alpha: 0.8, scaleX: scaleX * 0.9, scaleY: scaleY * 0.9 }, 50, Laya.Ease.linearInOut, Laya.Handler.create(this, () => {
                 Laya.Tween.to(this.btn_start, { alpha: 1, scaleX: scaleX, scaleY: scaleY }, 50, Laya.Ease.linearInOut, Laya.Handler.create(this, () => {
-                    if (GameScene.instance) {
+                    if (GameScene.instance && GameScene.instance.state != Const.GameState.START) {
                         ws.traceEvent("Click_Startgame");
                         // hide home view
                         this.hide();

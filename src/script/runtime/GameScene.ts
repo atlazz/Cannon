@@ -51,6 +51,18 @@ export default class GameScene extends ui.game.GameSceneUI {
                 this["level" + i].sizeGrid = "0, 96, 0, 0";
             }
             this.newStage();
+
+            /** init navigation: 第一次打开时 */
+            if (Laya.Browser.onMiniGame && !this.navWin) {
+                // win icon
+                this.navWin = new Navigator(ws);
+                this.box_winIcon.visible = true;
+                this.navWin.createHomeIcons(this.box_winIcon, this.box_winIcon, ["home_icon_1", "home_icon_2", "home_icon_3", "home_icon_4", "home_icon_5", "home_icon_6", "home_icon_7", "home_icon_8", "home_icon_9", "home_icon_10"]);
+                // revive icon
+                this.navRevive = new Navigator(ws);
+                this.box_reviveIcon.visible = true;
+                this.navRevive.createHomeIcons(this.box_reviveIcon, this.box_reviveIcon, ["home_icon_1", "home_icon_2", "home_icon_3", "home_icon_4", "home_icon_5", "home_icon_6", "home_icon_7", "home_icon_8", "home_icon_9", "home_icon_10"]);
+            }
         }
         // game pause: 大炮选择页面跳转回来
         else if (this.state === Const.GameState.PAUSE) {
@@ -95,7 +107,7 @@ export default class GameScene extends ui.game.GameSceneUI {
 
     /** cannon */
     public cannonType: number = Const.CannonType.DEFAULT;
-    private cannon: Laya.MeshSprite3D;
+    public cannon: Laya.MeshSprite3D;
     private turret: Laya.MeshSprite3D;
     public turretInitPos: Laya.Vector3;
     private isRecoil: boolean = false;
@@ -104,7 +116,7 @@ export default class GameScene extends ui.game.GameSceneUI {
     public isRewardCannon: boolean = false;
 
     /** cannon ball box */
-    private ballBox: Laya.Sprite3D;
+    public ballBox: Laya.Sprite3D;
 
     /** bullet */
     public bulletType: number = Const.CannonType.DEFAULT;
@@ -126,7 +138,9 @@ export default class GameScene extends ui.game.GameSceneUI {
         console.log("GameScene constructor()");
 
         GameScene.instance = this;
+    }
 
+    onAwake() {
         this.initScene3D();
 
         this.bgIdx = 0;
@@ -148,18 +162,6 @@ export default class GameScene extends ui.game.GameSceneUI {
         // if (Laya.Browser.onMiniGame) {
         //     wx.setPreferredFramesPerSecond(30);
         // }
-
-        /** init navigation */
-        if (Laya.Browser.onMiniGame) {
-            // win icon
-            this.navWin = new Navigator(ws);
-            this.box_winIcon.visible = true;
-            this.navWin.createHomeIcons(this.box_winIcon, this.box_winIcon, ["home_icon_1", "home_icon_2", "home_icon_3", "home_icon_4", "home_icon_5", "home_icon_6", "home_icon_7", "home_icon_8", "home_icon_9", "home_icon_10"]);
-            // revive icon
-            this.navRevive = new Navigator(ws);
-            this.box_reviveIcon.visible = true;
-            this.navRevive.createHomeIcons(this.box_reviveIcon, this.box_reviveIcon, ["home_icon_1", "home_icon_2", "home_icon_3", "home_icon_4", "home_icon_5", "home_icon_6", "home_icon_7", "home_icon_8", "home_icon_9", "home_icon_10"]);
-        }
     }
 
     onEnable() {
@@ -276,7 +278,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.cannon && this.cannon.destroy();
         // load new cannon
         Laya.Sprite3D.load(Const.CannonResUrl[this.cannonType], Laya.Handler.create(this, (res) => {
-            this.cannon = res;
+            this.cannon = res.clone();
             this.scene3D.addChild(this.cannon);
             this.cannon.name = "player";
 
@@ -328,11 +330,14 @@ export default class GameScene extends ui.game.GameSceneUI {
             this.state = Const.GameState.OVER;
             this.cleanStage();
             this.hideUI();
-            // reset
-            this.isRewardCannon = false;
             // reset cannon rotation
-            if (this.turret) {
+            if (this.turret && this.cannon && !this.cannon.destroyed) {
                 this.turret.transform.localRotationEuler = Const.TurretInitLocalRot.clone();
+            }
+            // clear reward cannon
+            if (this.isRewardCannon) {
+                this.setCannon(Global.gameData.cannonType);
+                this.isRewardCannon = false;
             }
             // clear timer
             this.clearStageTimer();
@@ -476,11 +481,11 @@ export default class GameScene extends ui.game.GameSceneUI {
                 this.currBulletNum -= 3;
                 this.label_ballNum.changeText("x3");
                 if (this.ballBox) {
-	                for (let i = 1; i <= 3; i++) {
-	                    if (i <= this.MaxBulletNum) {
-	                        ((this.ballBox.getChildByName("CannonBall" + i + "_0") as Laya.MeshSprite3D).meshRenderer.material as Laya.PBRSpecularMaterial).albedoColorA = 1;
-	                    }
-	                }
+                    for (let i = 1; i <= 3; i++) {
+                        if (i <= this.MaxBulletNum) {
+                            ((this.ballBox.getChildByName("CannonBall" + i + "_0") as Laya.MeshSprite3D).meshRenderer.material as Laya.PBRSpecularMaterial).albedoColorA = 1;
+                        }
+                    }
                 }
                 this.box_scene3D.on(Laya.Event.CLICK, this, this.onClick);
                 this.gameStage.frameLoop(1, this, this.stageLooping);
@@ -523,7 +528,7 @@ export default class GameScene extends ui.game.GameSceneUI {
             this.cleanStage();
             this.hideUI();
             // reset cannon rotation
-            if (this.turret) {
+            if (this.turret && this.cannon && !this.cannon.destroyed) {
                 this.turret.transform.localRotationEuler = Const.TurretInitLocalRot.clone();
             }
             // clear timer
@@ -604,7 +609,7 @@ export default class GameScene extends ui.game.GameSceneUI {
 
 
             // get raw stage index
-            let tmpStage = StageConfig.Stage[HomeView.instance.systemName][this.stageIdx][this.missionIdx];
+            let tmpStage = StageConfig.Stage[HomeView.instance.systemName][this.stageIdx > Const.StageNum ? Const.StageNum : this.stageIdx][this.missionIdx];
             this.rawIdx = this.missionRawIdxList[0];
             let tryCnt = 0;
             while (tryCnt < 20 && this.missionRawIdxList.indexOf(this.rawIdx) >= 0) {
@@ -620,14 +625,14 @@ export default class GameScene extends ui.game.GameSceneUI {
 
             // set ball box
             if (this.ballBox) {
-	            for (let i = 1; i <= 10; i++) {
-	                if (i <= this.MaxBulletNum) {
-	                    ((this.ballBox.getChildByName("CannonBall" + i + "_0") as Laya.MeshSprite3D).meshRenderer.material as Laya.PBRSpecularMaterial).albedoColorA = 1;
-	                }
-	                else {
-	                    ((this.ballBox.getChildByName("CannonBall" + i + "_0") as Laya.MeshSprite3D).meshRenderer.material as Laya.PBRSpecularMaterial).albedoColorA = 0;
-	                }
-	            }
+                for (let i = 1; i <= 10; i++) {
+                    if (i <= this.MaxBulletNum) {
+                        ((this.ballBox.getChildByName("CannonBall" + i + "_0") as Laya.MeshSprite3D).meshRenderer.material as Laya.PBRSpecularMaterial).albedoColorA = 1;
+                    }
+                    else {
+                        ((this.ballBox.getChildByName("CannonBall" + i + "_0") as Laya.MeshSprite3D).meshRenderer.material as Laya.PBRSpecularMaterial).albedoColorA = 0;
+                    }
+                }
             }
 
 
@@ -645,8 +650,8 @@ export default class GameScene extends ui.game.GameSceneUI {
         let satgeResUrl: string = Const.StageResUrl + this.rawIdx + ".lh";
         Laya.Sprite3D.load(satgeResUrl, Laya.Handler.create(this, (res) => {
             console.log("stage loaded");
-            this.gameStage = this.scene3D.addChild(res) as Laya.Sprite3D;
-            Laya.loader.clearRes(satgeResUrl);
+            this.gameStage = this.scene3D.addChild(res.clone()) as Laya.Sprite3D;
+            //Laya.loader.clearRes(satgeResUrl);
 
             // change level label
             this.label_level.changeText("" + this.stageIdx);
@@ -845,22 +850,6 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.navWin && this.navWin.loadHomeIconInfoList();
         // update
         this.stageIdx++;
-        if (this.stageIdx > Const.StageNum) {
-            console.log("通关");
-            // 通关处理
-            this.stageIdx = 1;
-            this.state = Const.GameState.OVER;
-            this.cleanStage();
-            this.hideUI();
-            // reset cannon rotation
-            if (this.turret) {
-                this.turret.transform.localRotationEuler = Const.TurretInitLocalRot.clone();
-            }
-            // clear timer
-            this.clearStageTimer();
-            HomeView.openInstance();
-            return;
-        }
         // update to user data
         Global.gameData.stageIndex = this.stageIdx;
         this.missionIdx = 0;
@@ -873,6 +862,7 @@ export default class GameScene extends ui.game.GameSceneUI {
             this.setCannon(Global.gameData.cannonType);
             this.isRewardCannon = false;
         }
+        CannonSelect.instance && (CannonSelect.instance.isReward = false);
     }
 
     /** 关卡死亡倒计时 */
@@ -892,7 +882,19 @@ export default class GameScene extends ui.game.GameSceneUI {
             this.box_revive.visible = true;
             this.navRevive && this.navRevive.loadHomeIconInfoList();
             // 1秒后显示banner，上跳误点
-            Laya.timer.frameOnce(60, null, () => {
+            this.showBanner();
+        }
+        this.label_failTimer.changeText("" + Math.floor(4 - (this.countdown / 60) % 4));
+        // 死亡提示显示
+        this.failCircle.scaleX += 0.015;
+        this.failCircle.scaleY += 0.015;
+    }
+
+    /** banner 弹出控制 */
+    private showBanner() {
+        // 1秒后显示banner，上跳误点
+        if (Math.random() <= Global.config.banner_delay_ratio) {
+            Laya.timer.frameOnce(Global.config.banner_delay * 60, null, () => {
                 this.btn_retry.bottom = 260;
                 if (Laya.Browser.onMiniGame && ws.isIPhoneX()) {
                     this.btn_retry.bottom += Global.config.distance_iphonex || 0;
@@ -900,10 +902,13 @@ export default class GameScene extends ui.game.GameSceneUI {
                 Ad.posShowBanner(Const.BannerPos.ReviveDialog);
             });
         }
-        this.label_failTimer.changeText("" + Math.floor(4 - (this.countdown / 60) % 4));
-        // 死亡提示显示
-        this.failCircle.scaleX += 0.015;
-        this.failCircle.scaleY += 0.015;
+        else {
+            this.btn_retry.bottom = 260;
+            if (Laya.Browser.onMiniGame && ws.isIPhoneX()) {
+                this.btn_retry.bottom += Global.config.distance_iphonex || 0;
+            }
+            Ad.posShowBanner(Const.BannerPos.ReviveDialog);
+        }
     }
 
     /** mouse click event: shoot a bullet */
@@ -947,7 +952,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.createBullet();
 
         // set turret transform
-        if (this.turret) {
+        if (this.turret && this.cannon && !this.cannon.destroyed) {
             this.turret.transform.localRotationEuler = Const.TurretInitLocalRot.clone();
             if (flag_turretDirection) {
                 this.turret.transform.localRotationEulerX -= this.bulletDirection.y * 90;
@@ -988,8 +993,8 @@ export default class GameScene extends ui.game.GameSceneUI {
         // 测试接口开始 <========================
         if (!HomeView.instance.isTest) {
             // 测试接口结束 <========================
-            if (this.ballBox) {
-            	((this.ballBox.getChildByName("CannonBall" + (this.MaxBulletNum - this.currBulletNum + 1) + "_0") as Laya.MeshSprite3D).meshRenderer.material as Laya.PBRSpecularMaterial).albedoColorA = 0;
+            if (this.ballBox && (this.MaxBulletNum - this.currBulletNum + 1) <= 10) {
+                ((this.ballBox.getChildByName("CannonBall" + (this.MaxBulletNum - this.currBulletNum + 1) + "_0") as Laya.MeshSprite3D).meshRenderer.material as Laya.PBRSpecularMaterial).albedoColorA = 0;
             }
             // 测试接口开始 <========================
         }

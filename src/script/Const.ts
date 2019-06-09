@@ -1,5 +1,5 @@
 /** version */
-export const VERSION = "1.0.3";
+export const VERSION = "1.0.6";
 
 /************** 后台设置参数 *******************/
 /** 分享位置 */
@@ -58,7 +58,7 @@ export const StageResUrl: string = "res/stage/out/";
 export const StageInitPos: Laya.Vector3 = new Laya.Vector3(0, 0, 0);
 export const StageInitRot: Laya.Vector3 = new Laya.Vector3(0, 180, 0);
 export const StageInitScale: Laya.Vector3 = new Laya.Vector3(20, 20, 20);
-export const StageNum: number = 10;
+export const StageNum: number = 20;
 // winning check frame
 export const MaxWinCheckTime: number = 30;
 // 屏蔽物体物理受力前等待时间
@@ -99,7 +99,7 @@ export const CannonBallInitPos: Laya.Vector3 = new Laya.Vector3(-0.01, 0.05, -0.
 export const CannonBallInitScale: Laya.Vector3 = new Laya.Vector3(25, 25, 25);
 
 /** cdn */
-export const cdnUrl: string = "https://static.miniant.cn/cannon/res2.zip";
+export const cdnUrl: string = "https://static.miniant.cn/cannon/res_v104.zip";
 
 /** sound */
 export const soundUrl: string = "res/audio/shoot.mp3";
@@ -125,21 +125,18 @@ export const BulletRadius: number = 0.08;
 export const CannonSelectIconBgUrl = "res/ui/cannonSelect/CannonIconBG.png";
 export const CannonSelectIconList = [
     {index: 1, icon: "res/ui/cannonSelect/Cannon_09.png"},
-    {index: 2, icon: "res/ui/cannonSelect/Cannon_03.png"},
     {index: 3, icon: "res/ui/cannonSelect/Cannon_10.png"},
+    {index: 2, icon: "res/ui/cannonSelect/Cannon_03.png"},
     // {index: 5, icon: "res/ui/cannonSelect/Cannon_08.png"},
     {index: 6, icon: "res/ui/cannonSelect/Cannon_02.png"},
-    {index: 1, icon: "res/ui/cannonSelect/Cannon_09.png"},
-    {index: 2, icon: "res/ui/cannonSelect/Cannon_03.png"},
-    {index: 3, icon: "res/ui/cannonSelect/Cannon_10.png"},
-    // {index: 5, icon: "res/ui/cannonSelect/Cannon_08.png"},
-    {index: 6, icon: "res/ui/cannonSelect/Cannon_02.png"},
+    {index: 4, icon: "res/ui/cannonSelect/Cannon_22.png"},
 ]
 export const CannonSelectTextList = {
     1: {name: "普通炮", feature: "普通的大炮，普通的威力，就很普通", unlockLvl: 0},
-    2: {name: "霰弹炮", feature: "普通的威力，数量x2", unlockLvl: 1},
-    3: {name: "冰雪奇缘", feature: "更强的威力，将方块变成冰块", unlockLvl: 3},
-    6: {name: "闪电风暴", feature: "威力无比，一发入魂", unlockLvl: 5},
+    3: {name: "冰雪奇缘", feature: "更强的威力，将方块变成冰块", unlockLvl: 7},
+    2: {name: "双重射击", feature: "两炮齐发，威力强大，", unlockLvl: 14},
+    6: {name: "闪电风暴", feature: "威力无比，一发入魂", unlockLvl: 999},
+    4: {name: "无敌散弹炮", feature: "终极武器，用一次爽一次", unlockLvl: 999},
 }
 
 export const enum CannonType {
