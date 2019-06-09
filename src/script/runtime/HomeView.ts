@@ -70,7 +70,15 @@ export default class HomeView extends ui.home.HomeViewUI {
         Loader.loadZip(Const.cdnUrl, "res", Laya.Handler.create(this, (res) => {
             Laya.loader.load(Const.StageTexUrl, Laya.Handler.create(this, () => {
                 // CannonSelect.openInstance();
+<<<<<<< HEAD
                 Laya.timer.frameLoop(1, this, this.onResEnable);
+=======
+                if (GameScene.instance && Global.gameData.cannonType != Const.CannonType.DEFAULT) {
+                    GameScene.instance.cannonType = Global.gameData.cannonType;
+                    GameScene.instance.newCannon();
+                }
+                this.bindButtons();
+>>>>>>> 452546ef9e0b2129e7c9f4ddda8ccc51150cbd79
             }));
         }));
     }

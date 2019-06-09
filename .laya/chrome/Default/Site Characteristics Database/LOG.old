@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 2019/06/06-18:34:02.038 cb4 Reusing MANIFEST F:\LayaProjects\cannon\.laya\chrome\Default\Site Characteristics Database/MANIFEST-000001
 2019/06/06-18:34:02.043 cb4 Recovering log #12
 2019/06/06-18:34:02.043 cb4 Reusing old log F:\LayaProjects\cannon\.laya\chrome\Default\Site Characteristics Database/000012.log 
+=======
+2019/06/06-18:33:52.423 3694 Reusing MANIFEST F:\LayaProjects\cannon\.laya\chrome\Default\Site Characteristics Database/MANIFEST-000001
+2019/06/06-18:33:52.424 3694 Recovering log #12
+2019/06/06-18:33:52.425 3694 Reusing old log F:\LayaProjects\cannon\.laya\chrome\Default\Site Characteristics Database/000012.log 
+>>>>>>> 452546ef9e0b2129e7c9f4ddda8ccc51150cbd79
