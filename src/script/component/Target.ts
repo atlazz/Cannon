@@ -22,6 +22,9 @@ export default class Target extends Laya.Script3D {
     /** 空中无碰撞计数，用于玻璃掉落碎掉 */
     private jumpCnt: number = 0;
 
+    /** 是否已经碰到地面，不参与胜利判断 */
+    private isOnGround: boolean = false;
+
     /** for win check */
     private distance: number;
 
@@ -104,20 +107,23 @@ export default class Target extends Laya.Script3D {
                 let rigid: Laya.Rigidbody3D = other.getComponent(Laya.Rigidbody3D);
                 let velocityOther = new Laya.Vector3(0, 0, 0);
                 rigid && (velocityOther = rigid.linearVelocity.clone());
-                if (Laya.Vector3.distance(velocityOther, this.rigidbody.linearVelocity) >= 10 ) {
+                if (Laya.Vector3.distance(velocityOther, this.rigidbody.linearVelocity) >= 10) {
                     this.TNTBomb();
                 }
             }
         }
-        
+
         /** 外物碰撞处理 */
         // stand or guard
         if (other.name === "stand" || other.name.indexOf("Guard") >= 0) {
             // reset win check
-            GameScene.instance.winCheckCnt = 0;
+            if (!this.isOnGround) {
+                GameScene.instance.winCheckCnt = 0;
+            }
         }
         // ground
         else if (other.name === "ground") {
+            this.isOnGround = true;
             Laya.timer.frameOnce(60, this, () => {
                 // destroy
                 this.destroy();
@@ -165,7 +171,7 @@ export default class Target extends Laya.Script3D {
         mat.albedoColor = new Laya.Vector4(1, 0.5, 0, 0.2);
         // 1帧后从场景中移除本体
         // Laya.timer.frameOnce(1, this, () => {
-            this.target.removeSelf();
+        this.target.removeSelf();
         // });
         // n帧后销毁隐形炸弹
         let cnt: number = 0;
@@ -220,10 +226,12 @@ export default class Target extends Laya.Script3D {
          *  故完善关卡胜利判断，根据物体与关卡模型中心距离判定是否掉出平台
          *  ps：物理引擎bug较多，可以来引擎呈现物理宏观效果，但尽量少依赖碰撞做需要稳定的底层处理
          */
-        this.distance = Laya.Vector3.distance(this.target.transform.position, GameScene.instance.gameStage.transform.position);
-        if (this.distance < 15) {
-            // reset win check counter
-            GameScene.instance.winCheckCnt = 0;
+        if (!this.isOnGround && this.jumpCnt <= 60) {
+            this.distance = Laya.Vector3.distance(this.target.transform.position, GameScene.instance.gameStage.transform.position);
+            if (this.distance < 15) {
+                // reset win check counter
+                GameScene.instance.winCheckCnt = 0;
+            }
         }
 
         /** physics engine bug detecting and fixing
@@ -342,7 +350,9 @@ export default class Target extends Laya.Script3D {
         // play broken sound
 
         // show pieces
-        this.effectPiecesBroken();
+        if (this.piecesList.length > 0) {
+            this.effectPiecesBroken();
+        }
         // // enlarge velocity
         // let velocity =  this.rigidbody.linearVelocity;
         // velocity.y *= 1.2;

@@ -64,7 +64,7 @@ export default class BulletScript extends Laya.Script3D {
         }
         this.effect && (this.effect.active = false);
 
-        /** set trasform */
+        /** set transform */
         this.bullet.transform.localPosition = GameScene.instance.turretInitPos.clone();
         this.bullet.transform.localRotationEuler = Const.StageInitRot.clone();
         Laya.Vector3.scale(new Laya.Vector3(1, 1, 1), Const.BulletScale[+this.isReward][this.type], this.bullet.transform.localScale);
@@ -82,7 +82,7 @@ export default class BulletScript extends Laya.Script3D {
         // velocity
         let velocity: Laya.Vector3 = GameScene.instance.bulletDirection.clone();
         Laya.Vector3.scale(velocity, Const.BulletVelocity[+this.isReward][this.type], velocity);
-        this.rigidbody.linearVelocity = velocity.clone();
+        this.rigidbody.linearVelocity = velocity;
         // gravity
         this.rigidbody.overrideGravity = Const.BulletOverrideGravity[+this.isReward][this.type];
         if (this.rigidbody.overrideGravity) {

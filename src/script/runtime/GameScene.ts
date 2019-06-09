@@ -109,7 +109,7 @@ export default class GameScene extends ui.game.GameSceneUI {
     public cannonType: number = Const.CannonType.DEFAULT;
     public cannon: Laya.MeshSprite3D;
     private turret: Laya.MeshSprite3D;
-    public turretInitPos: Laya.Vector3;
+    public turretInitPos: Laya.Vector3 = Const.CannonInitPos.clone();
     private isRecoil: boolean = false;
     private recoilTime: number;
     private MaxRecoilTime: number = 8;
@@ -255,13 +255,14 @@ export default class GameScene extends ui.game.GameSceneUI {
             let rightBallBox = this.scene3D.addChild(this.ballBox.clone()) as Laya.Sprite3D;
             for (let i = 1; i <= 10; i++) {
                 if (i <= this.MaxBulletNum) {
-                    (rightBallBox.getChildByName("CannonBall" + i + "_0") as Laya.MeshSprite3D).destroy();
-                    rightBallBox.transform.localPositionX = 0.11;
-                    rightBallBox.transform.localPositionY -= 0.0008;
-                    rightBallBox.transform.localPositionZ += 0.0012;
-                    rightBallBox.transform.localRotationEulerY = 150;
+                    var tmpChild = rightBallBox.getChildByName("CannonBall" + i + "_0") as Laya.MeshSprite3D;
+                    tmpChild && tmpChild.destroy();
                 }
             }
+            rightBallBox.transform.localPositionX = 0.11;
+            rightBallBox.transform.localPositionY -= 0.008;
+            rightBallBox.transform.localPositionZ += 0.012;
+            rightBallBox.transform.localRotationEulerY = 150;
         }));
     }
 
@@ -731,7 +732,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                     let guard: Guard = child.addComponent(Guard);
                 }
                 else {
-                    child.destroy();
+                    child && child.destroy();
                 }
             }
 

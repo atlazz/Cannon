@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":18,
-    "selecteID":47,
+    "selectedBox":34,
+    "selecteID":16,
     "searchKey":"View",
     "props":{"zOrder":1,"width":720,"top":0,"sceneWidth":720,"sceneHeight":1280,"sceneColor":"#000000","runtime":"script/runtime/HomeView.ts","right":0,"left":0,"height":1280,"bottom":0},
     "nodeParent":-1,
