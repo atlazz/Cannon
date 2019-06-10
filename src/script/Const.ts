@@ -124,6 +124,7 @@ export const BulletRadius: number = 0.08;
 // cannon select scene
 export const CannonSelectIconBgUrl = "res/ui/cannonSelect/CannonIconBG.png";
 export const CannonSelectIconList = [
+    {index: -1},    // 头部
     {index: 1, icon: "res/ui/cannonSelect/Cannon_09.png"},
     {index: 3, icon: "res/ui/cannonSelect/Cannon_10.png"},
     {index: 2, icon: "res/ui/cannonSelect/Cannon_03.png"},

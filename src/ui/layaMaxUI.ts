@@ -16,6 +16,9 @@ export module ui.cannonSelect {
 		public btn_try:Laya.Image;
 		public label_try:Laya.Label;
 		public btn_back:Laya.Image;
+		public tutorial_slide:Laya.Box;
+		public tutorial_try:Laya.Box;
+		public tutorial_back:Laya.Box;
         constructor(){ super()}
         createChildren():void {
             super.createChildren();
@@ -61,7 +64,10 @@ export module ui.game {
 		public btn_test_next:Laya.Image;
 		public input_test_lvl:Laya.TextInput;
 		public label_test_lvl:Laya.Label;
-		public box_tutorial:Laya.Box;
+		public tutorial_shoot:Laya.Box;
+		public tutorial_bulletTry:Laya.Box;
+		public tutorial_cannonTry:Laya.Box;
+		public tutorial_cannonSelect:Laya.Box;
         constructor(){ super()}
         createChildren():void {
             super.createChildren();

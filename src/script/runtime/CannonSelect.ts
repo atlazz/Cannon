@@ -34,12 +34,11 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
         } else {
             this.selectType = Global.gameData.cannonType;
         }
-        // get selected cell and unlock state list
-        for (let idx in Const.CannonSelectIconList) {
-            // selected cell
-            if (Const.CannonSelectIconList[idx]["index"] == this.selectType) {
-                let idx_real = (parseInt(idx) + this.list_Icon.cells.length - this.list_Icon.startIndex) % this.list_Icon.cells.length;
-                this.selectedCell = this.list_Icon.cells[idx_real];
+        // get selected index and unlock state list
+        for (let idx = 1; idx < Const.CannonSelectIconList.length - 1; idx++) {
+            // selected index
+            if (Const.CannonSelectIconList[idx]["index"] === this.selectType) {
+                this.list_Icon.selectedIndex = idx;
             }
             // unlock state
             this.unlockState[idx] = false;
@@ -49,9 +48,12 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
         }
         this.refreshText();
         this.refreshIcon();
-        // show cannon
-        this.selectType = Global.gameData.cannonType;
         this.newCannon();
+
+        // show tutorial
+        if (GameScene.instance.stageIdx === 2 && GameScene.instance.missionIdx === 1) {
+            this.tutorial_slide.visible = true;
+        }
     }
 
     public scene3D: Laya.Scene3D;
@@ -63,13 +65,14 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
     public isReward: boolean = false;
     public rewardType: number;
 
-    private selectedCell: Laya.Box;
-
     private btnAniFrame: number;
 
     private unlockState: boolean[] = [];
 
     private isClick: boolean;
+
+    /** 输入x坐标记录，用于左右滑动 */
+    private downMouseX: number;
 
     constructor() {
         super();
@@ -95,10 +98,9 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
     private initCannonList() {
         this.list_Icon.renderHandler = Laya.Handler.create(this, (cell: Laya.Box, index: number) => {
             let iconInfo = this.list_Icon.array[index];
-            if (iconInfo) {
+            // 去掉头部不显示，标记为 index = -1
+            if (iconInfo && iconInfo.index !== -1) {
                 cell.visible = true;
-                this.selectType = iconInfo.index;
-                cell.on(Laya.Event.CLICK, this, this.onIconClick, [cell, iconInfo]);
                 let iconBg = cell.getChildByName("iconBg") as Laya.Image;
                 if (iconBg) {
                     iconBg.skin = Const.CannonSelectIconBgUrl;
@@ -155,33 +157,27 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
         }));
     }
 
-    /** list cell icon onclick */
-    private onIconClick(cell: Laya.Box, iconInfo: any) {
-        // update
-        this.isClick = true;
-        this.selectedCell = cell;
-        this.selectType = iconInfo.index;
-        // refresh text
-        this.refreshText();
-        // change cannon
-        this.newCannon();
-    }
-
     /** refresh text */
     private refreshText() {
-        this.label_name.changeText(Const.CannonSelectTextList[this.selectType]["name"]);
-        this.label_feature.changeText(Const.CannonSelectTextList[this.selectType]["feature"]);
+        var idx: number;
+        idx = this.list_Icon.selectedIndex + 1;
+        if (idx < 1) {
+            return;
+        }
+        var cannonIdx: number = Const.CannonSelectIconList[idx].index;
+        this.label_name.changeText(Const.CannonSelectTextList[cannonIdx]["name"]);
+        this.label_feature.changeText(Const.CannonSelectTextList[cannonIdx]["feature"]);
         // 未解锁
-        if (Global.gameData.stageIndex <= Const.CannonSelectTextList[this.selectType]["unlockLvl"]) {
-            if (Const.CannonSelectTextList[this.selectType]["unlockLvl"] >= 999) {
+        if (Global.gameData.stageIndex <= Const.CannonSelectTextList[cannonIdx]["unlockLvl"]) {
+            if (Const.CannonSelectTextList[cannonIdx]["unlockLvl"] >= 999) {
                 this.label_unlockMsg.changeText("敬请期待");
             }
             else {
-                this.label_unlockMsg.changeText("完成关卡 " + (Global.gameData.stageIndex - 1) + "/" + Const.CannonSelectTextList[this.selectType]["unlockLvl"] + " 解锁");
+                this.label_unlockMsg.changeText("完成关卡 " + (Global.gameData.stageIndex - 1) + "/" + Const.CannonSelectTextList[cannonIdx]["unlockLvl"] + " 解锁");
             }
             this.btn_select.visible = false;
             this.btn_unlock.visible = true;
-            if (this.isReward && this.rewardType === this.selectType) {
+            if (this.isReward && this.rewardType === cannonIdx) {
                 this.btn_try.gray = true;
                 this.label_try.changeText("正在试用");
             }
@@ -194,7 +190,7 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
         else {
             this.label_unlockMsg.changeText("已解锁");
             // 使用状态按钮变灰
-            if (!this.isReward && this.selectType === Global.gameData.cannonType) {
+            if (!this.isReward && Global.gameData.cannonType === cannonIdx) {
                 this.btn_select.gray = true;
             }
             else {
@@ -208,30 +204,44 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
 
     /** refresh icon */
     private refreshIcon() {
-        for (let idx in this.list_Icon.cells) {
-            var iconBg: Laya.Image = this.list_Icon.cells[idx].getChildByName("iconBg") as Laya.Image;
-            if (this.list_Icon.cells[idx] == this.selectedCell) {
+        var iconBg: Laya.Image;
+        var iconLock: Laya.Image;
+        var idx: number = this.list_Icon.selectedIndex + 1;
+        if (idx < 1) {
+            return;
+        }
+        var cannonIdx: number = Const.CannonSelectIconList[idx].index;
+        for (let i = 0; i <= 2; i++) {
+            if (idx + i > 0 && idx + i < Const.CannonSelectIconList.length) {
+                iconBg = this.list_Icon.cells[i].getChildByName("iconBg") as Laya.Image;
                 if (iconBg) {
-                    iconBg.gray = false;
-                    iconBg.scaleX = 1;
-                    iconBg.scaleY = 1;
+                    if (cannonIdx === this.selectType) {
+                        iconBg.gray = false;
+                    }
+                    else {
+                        iconBg.gray = true;
+                    }
+                    // center
+                    if (i === 1) {
+                        iconBg.scaleX = 1.2;
+                        iconBg.scaleY = 1.2;
+                    }
+                    // two side
+                    else {
+                        iconBg.scaleX = 0.85;
+                        iconBg.scaleY = 0.85;
+                    }
                 }
-            }
-            else {
-                if (iconBg) {
-                    iconBg.gray = true;
-                    iconBg.scaleX = 0.85;
-                    iconBg.scaleY = 0.85;
+                iconLock = this.list_Icon.cells[i].getChildByName("lock") as Laya.Image;
+                if (iconLock) {
+                    iconLock.visible = true;
+                    if (this.unlockState[idx + i]) {
+                        iconLock && (iconLock.visible = false);
+                    }
+                    if (this.isReward && this.rewardType === cannonIdx) {
+                        iconLock && (iconLock.visible = false);
+                    }
                 }
-            }
-            var iconLock = this.list_Icon.cells[idx].getChildByName("lock") as Laya.Image;
-            let idx_real = (parseInt(idx) + this.list_Icon.startIndex) % this.list_Icon.cells.length;
-            iconLock && (iconLock.visible = true);
-            if (this.unlockState[idx_real]) {
-                iconLock && (iconLock.visible = false);
-            }
-            if (this.isReward && this.rewardType == Const.CannonSelectIconList[idx_real].index) {
-                iconLock && (iconLock.visible = false);
             }
         }
     }
@@ -264,6 +274,41 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
             }
         });
 
+        // cannon list slide
+        this.list_Icon.on(Laya.Event.MOUSE_MOVE, this, () => {
+            !this.downMouseX && (this.downMouseX = this.mouseX);
+            // 左滑
+            if (this.downMouseX - this.mouseX > 200 && this.list_Icon.selectedIndex + 1 < Const.CannonSelectIconList.length - 1) {
+                this.list_Icon.selectedIndex++;
+                this.downMouseX = this.mouseX;
+                console.log("idx", this.list_Icon.selectedIndex)
+            }
+            // 右滑
+            else if (this.downMouseX - this.mouseX < -200 && this.list_Icon.selectedIndex - 1 >= 0) {
+                this.list_Icon.selectedIndex--;
+                this.downMouseX = this.mouseX;
+                console.log("idx", this.list_Icon.selectedIndex)
+            }
+        });
+        this.list_Icon.on(Laya.Event.MOUSE_UP, this, () => {
+            if (this.downMouseX) {
+                this.list_Icon.scrollTo(this.list_Icon.selectedIndex);
+                this.refreshIcon();
+                this.refreshText();
+                // reset
+                this.downMouseX = undefined;
+            }
+        });
+        this.list_Icon.on(Laya.Event.MOUSE_OUT, this, () => {
+            if (this.downMouseX) {
+                this.list_Icon.scrollTo(this.list_Icon.selectedIndex);
+                this.refreshIcon();
+                this.refreshText();
+                // reset
+                this.downMouseX = undefined;
+            }
+        });
+
         // cannon select
         this.btn_select.on(Laya.Event.CLICK, this, () => {
             if (this.isReward || Global.gameData.cannonType != this.selectType) {
@@ -276,48 +321,39 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
         });
 
         // cannon unlock try
-        this.btn_try.on(Laya.Event.CLICK, this, () => {
+        this.btn_try.on(Laya.Event.MOUSE_DOWN, this, () => {
             if (!Laya.Browser.onMiniGame) {
-                if (!(this.isReward && this.rewardType == this.selectType)) {
-                    // update
-                    this.isReward = true;
-                    this.rewardType = this.selectType;
-                    this.btn_try.gray = true;
-                    this.label_try.changeText("正在试用");
-                    this.refreshIcon();
-                }
+                this.onClick_try();
             }
             else {
                 // 1: video
                 (Global.config.try_cannon == 1) && Reward.instance.video({
                     pos: Const.RewardPos.Cannon,
                     success: () => {
-                        if (!(this.isReward && this.rewardType == this.selectType)) {
-                            // update
-                            this.isReward = true;
-                            this.rewardType = this.selectType;
-                            this.btn_try.gray = true;
-                            this.label_try.changeText("正在试用");
-                            this.refreshIcon();
-                        }
+                        this.onClick_try();
                     },
                 });
                 // 2: share
                 (Global.config.try_cannon == 2) && Reward.instance.share({
                     pos: Const.RewardPos.Cannon,
                     success: () => {
-                        if (!(this.isReward && this.rewardType == this.selectType)) {
-                            this.refreshIcon();
-                            // update
-                            this.isReward = true;
-                            this.rewardType = this.selectType;
-                            this.btn_try.gray = true;
-                            this.label_try.changeText("正在试用");
-                        }
+                        this.onClick_try();
                     },
                 });
             }
         });
+    }
+
+    private onClick_try() {
+        if (!(this.isReward && this.rewardType == this.selectType)) {
+            this.refreshIcon();
+            // update
+            this.isReward = true;
+            this.rewardType = this.selectType;
+            this.btn_try.gray = true;
+            this.label_try.changeText("正在试用");
+            this.refreshIcon();
+        }
     }
 
     /** cannon animation loop */

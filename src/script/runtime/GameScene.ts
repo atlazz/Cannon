@@ -133,6 +133,11 @@ export default class GameScene extends ui.game.GameSceneUI {
 
     private btnAniFrame: number;
 
+    // 按钮点击处理函数
+    public onClick_cannonSelect: Function;
+    public onClick_rewardBullet: Function;
+    public onClick_rewardCannon: Function;
+
     constructor() {
         super();
         console.log("GameScene constructor()");
@@ -326,6 +331,27 @@ export default class GameScene extends ui.game.GameSceneUI {
         });
         // 测试接口结束 <==========================
 
+        // onclick handler
+        this.onClick_cannonSelect = () => {
+            this.state = Const.GameState.PAUSE;
+            CannonSelect.openInstance();
+        }
+        this.onClick_rewardBullet = () => {
+            this.isRewardBullet = true;
+            this.bulletType = Global.config.bulletRewardType;
+            // cannon effect
+            if (!this.scene3D.getChildByName("cannon_effect")) {
+                Laya.Sprite3D.load(Const.cannonEffectUrl[1], Laya.Handler.create(this, (cannonEff) => {
+                    let cannonEffect: Laya.Sprite3D = this.scene3D.addChild(cannonEff) as Laya.Sprite3D;
+                    cannonEffect.name = "cannon_effect";
+                }));
+            }
+        }
+        this.onClick_rewardCannon = () => {
+            this.isRewardCannon = true;
+            this.setCannon(Global.config.cannonRewardType);
+        }
+
         // back home
         this.btn_back.on(Laya.Event.CLICK, this, () => {
             this.state = Const.GameState.OVER;
@@ -347,73 +373,20 @@ export default class GameScene extends ui.game.GameSceneUI {
 
         // cannon selection open
         this.btn_cannonOpen.on(Laya.Event.CLICK, this, () => {
-            this.state = Const.GameState.PAUSE;
-            CannonSelect.openInstance();
+            this.onClick_cannonSelect();
         });
-
-        // // cannon unlock try
-        // this.btn_cannonUnlockTry.on(Laya.Event.CLICK, this, () => {
-        //     if (!Laya.Browser.onMiniGame) {
-        //         this.isRewardCannon = true;
-        //         this.setCannon(Const.CannonType.FROZEN);
-        //     }
-        //     else {
-        //         // 1: video
-        //         (Global.config.try_cannon == 1) && Reward.instance.video({
-        //             pos: Const.RewardPos.Cannon,
-        //             success: () => {
-        //                 this.isRewardCannon = true;
-        //                 this.setCannon(Const.CannonType.FROZEN);
-        //             },
-        //             complete: () => {
-        //             }
-        //         });
-        //         // 2: share
-        //         (Global.config.try_cannon == 2) && Reward.instance.share({
-        //             pos: Const.RewardPos.Cannon,
-        //             success: () => {
-        //                 this.isRewardCannon = true;
-        //                 this.setCannon(Const.CannonType.FROZEN);
-        //             },
-        //             complete: () => {
-        //             }
-        //         });
-        //     }
-        // });
-
-        // // cannon selection close
-        // this.btn_cannonClose.on(Laya.Event.CLICK, this, () => {
-        //     this.box_cannonSelect.visible = false;
-        // });
 
         // reward bullet
         this.btn_rewardBullet.on(Laya.Event.MOUSE_DOWN, this, () => {
             if (!Laya.Browser.onMiniGame) {
-                this.isRewardBullet = true;
-                this.bulletType = Global.config.bulletRewardType;
-                // cannon effect
-                if (!this.scene3D.getChildByName("cannon_effect")) {
-                    Laya.Sprite3D.load(Const.cannonEffectUrl[1], Laya.Handler.create(this, (cannonEff) => {
-                        let cannonEffect: Laya.Sprite3D = this.scene3D.addChild(cannonEff) as Laya.Sprite3D;
-                        cannonEffect.name = "cannon_effect";
-                    }));
-                }
+                this.onClick_rewardBullet();
             }
             else {
                 // 1: video
                 (Global.config.try_ball == 1) && Reward.instance.video({
                     pos: Const.RewardPos.Bullet,
                     success: () => {
-                        this.isRewardBullet = true;
-                        this.bulletType = Global.config.bulletRewardType;
-                        // cannon effect
-                        if (!this.scene3D.getChildByName("cannon_effect")) {
-                            Laya.Sprite3D.load(Const.cannonEffectUrl[1], Laya.Handler.create(this, (cannonEff) => {
-                                let cannonEffect: Laya.Sprite3D = this.scene3D.addChild(cannonEff) as Laya.Sprite3D;
-                                cannonEffect.name = "cannon_effect";
-                                console.log(cannonEffect)
-                            }));
-                        }
+                        this.onClick_rewardBullet();
                     },
                     complete: () => {
                     }
@@ -422,16 +395,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                 (Global.config.try_ball == 2) && Reward.instance.share({
                     pos: Const.RewardPos.Bullet,
                     success: () => {
-                        this.isRewardBullet = true;
-                        this.bulletType = Global.config.bulletRewardType;
-                        // cannon effect
-                        if (!this.scene3D.getChildByName("cannon_effect")) {
-                            Laya.Sprite3D.load(Const.cannonEffectUrl[1], Laya.Handler.create(this, (cannonEff) => {
-                                let cannonEffect: Laya.Sprite3D = this.scene3D.addChild(cannonEff) as Laya.Sprite3D;
-                                cannonEffect.name = "cannon_effect";
-                                console.log(cannonEffect)
-                            }));
-                        }
+                        this.onClick_rewardBullet();
                     },
                     complete: () => {
                     }
@@ -442,16 +406,14 @@ export default class GameScene extends ui.game.GameSceneUI {
         // reward cannon
         this.btn_rewardCannon.on(Laya.Event.MOUSE_DOWN, this, () => {
             if (!Laya.Browser.onMiniGame) {
-                this.isRewardCannon = true;
-                this.setCannon(Global.config.cannonRewardType);
+                this.onClick_rewardCannon();
             }
             else {
                 // 1: video
                 (Global.config.try_cannon == 1) && Reward.instance.video({
                     pos: Const.RewardPos.Cannon,
                     success: () => {
-                        this.isRewardCannon = true;
-                        this.setCannon(Global.config.cannonRewardType);
+                        this.onClick_rewardCannon();
                     },
                     complete: () => {
                     }
@@ -460,8 +422,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                 (Global.config.try_cannon == 2) && Reward.instance.share({
                     pos: Const.RewardPos.Cannon,
                     success: () => {
-                        this.isRewardCannon = true;
-                        this.setCannon(Global.config.cannonRewardType);
+                        this.onClick_rewardCannon();
                     },
                     complete: () => {
                     }
@@ -564,10 +525,23 @@ export default class GameScene extends ui.game.GameSceneUI {
 
     /** clean stage */
     private cleanStage() {
+        // clean game stage
         if (this.gameStage) {
             this.gameStage.destroyChildren();
             this.gameStage.destroy();
             this.clearStageTimer();
+        }
+        // clean all bullets
+        for (let idx = 0; idx < this.scene3D.numChildren; idx++) {
+            var tmpChild = this.scene3D.getChildAt(idx);
+            if (tmpChild && tmpChild.name == "bullet") {
+                if (tmpChild.getComponent(Bullet)) {
+                    tmpChild.getComponent(Bullet).recover();
+                }
+                else {
+                    tmpChild.destroy();
+                }
+            }
         }
     }
 
@@ -582,6 +556,10 @@ export default class GameScene extends ui.game.GameSceneUI {
     newStage() {
         // destroy old stage
         this.cleanStage();
+
+
+        this.btn_cannonOpen.visible = true;
+
 
         // set ui
         this.box_win.visible = false;
@@ -651,95 +629,138 @@ export default class GameScene extends ui.game.GameSceneUI {
         let satgeResUrl: string = Const.StageResUrl + this.rawIdx + ".lh";
         Laya.Sprite3D.load(satgeResUrl, Laya.Handler.create(this, (res) => {
             console.log("stage loaded");
-            this.gameStage = this.scene3D.addChild(res.clone()) as Laya.Sprite3D;
-            //Laya.loader.clearRes(satgeResUrl);
 
-            // change level label
-            this.label_level.changeText("" + this.stageIdx);
+            // 延时显示，避免与前关资源冲突
+            Laya.timer.frameOnce(15, this, () => {
+                this.gameStage = this.scene3D.addChild(res.clone()) as Laya.Sprite3D;
+                //Laya.loader.clearRes(satgeResUrl);
 
-            // transform
-            this.gameStage.transform.localPosition = Const.StageInitPos.clone();
-            this.gameStage.transform.localRotationEuler = Const.StageInitRot.clone();
-            this.gameStage.transform.localScale = Const.StageInitScale.clone();
+                // change level label
+                this.label_level.changeText("" + this.stageIdx);
 
-            // destroy animator component: 不然会约束物理碰撞效果
-            let stageAni = (this.gameStage.getComponent(Laya.Animator) as Laya.Animator);
-            stageAni && stageAni.destroy();
+                // transform
+                this.gameStage.transform.localPosition = Const.StageInitPos.clone();
+                this.gameStage.transform.localRotationEuler = Const.StageInitRot.clone();
+                this.gameStage.transform.localScale = Const.StageInitScale.clone();
 
-            let child: Laya.MeshSprite3D;
-            for (let i: number = 0; i < this.gameStage.numChildren; i++) {
-                child = this.gameStage.getChildAt(i) as Laya.MeshSprite3D;
-                // 关闭阴影
-                child.meshRenderer.castShadow = false;
-                /** target object */
-                if (child.name.search("Obstacle") >= 0) {
-                    // console.log(child.name + " to target")
-                    // add scipt
-                    let targetScript: Target = child.addComponent(Target);
-                    // set type
-                    if (child.name.search("Glass") >= 0) {
-                        targetScript.setType(Const.TargetType.GLASS);
+                // destroy animator component: 不然会约束物理碰撞效果
+                let stageAni = (this.gameStage.getComponent(Laya.Animator) as Laya.Animator);
+                stageAni && stageAni.destroy();
+
+                let child: Laya.MeshSprite3D;
+                for (let i: number = 0; i < this.gameStage.numChildren; i++) {
+                    child = this.gameStage.getChildAt(i) as Laya.MeshSprite3D;
+                    // 关闭阴影
+                    child.meshRenderer.castShadow = false;
+                    /** target object */
+                    if (child.name.search("Obstacle") >= 0) {
+                        // console.log(child.name + " to target")
+                        // add scipt
+                        let targetScript: Target = child.addComponent(Target);
+                        // set type
+                        if (child.name.search("Glass") >= 0) {
+                            targetScript.setType(Const.TargetType.GLASS);
+                        }
+                        else if (child.name.search("TNT") >= 0) {
+                            targetScript.setType(Const.TargetType.TNT);
+                        }
+                        else {
+                            targetScript.setType(Const.TargetType.DEFAULT);
+                        }
                     }
-                    else if (child.name.search("TNT") >= 0) {
-                        targetScript.setType(Const.TargetType.TNT);
+                    /** stand_box */
+                    else if (child.name.search("Cube") >= 0) {
+                        // console.log(child.name + " to stand")
+                        child.name = "stand";
+                        // add collider
+                        let collider: Laya.PhysicsCollider = child.addComponent(Laya.PhysicsCollider);
+                        let boundingBox: Laya.BoundBox = child.meshFilter.sharedMesh.boundingBox.clone();
+                        let sizeX: number = boundingBox.max.x - boundingBox.min.x;
+                        let sizeY: number = boundingBox.max.y - boundingBox.min.y;
+                        let sizeZ: number = boundingBox.max.z - boundingBox.min.z;
+                        collider.colliderShape = new Laya.BoxColliderShape(sizeX, sizeY, sizeZ);
+                        // set material
+                        Laya.Texture2D.load(Const.StageTexUrl[0], Laya.Handler.create(this, (tex) => {
+                            let mat: Laya.PBRSpecularMaterial = new Laya.PBRSpecularMaterial();
+                            // 刷新渲染模式，不然其上设置成透明渲染的物体会被遮盖
+                            mat.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
+                            mat.albedoTexture = tex;
+                            child.meshRenderer.material = mat;
+                        }));
+                    }
+                    /** stand_cylinder */
+                    else if (child.name.search("Cylinder") >= 0) {
+                        // console.log(child.name + " to stand")
+                        child.name = "stand";
+                        // add collider
+                        let collider: Laya.PhysicsCollider = child.addComponent(Laya.PhysicsCollider);
+                        let colliderShape: Laya.MeshColliderShape = new Laya.MeshColliderShape();
+                        colliderShape.mesh = child.meshFilter.sharedMesh;
+                        collider.colliderShape = colliderShape;
+                        // set material
+                        Laya.Texture2D.load(Const.StageTexUrl[0], Laya.Handler.create(this, (tex) => {
+                            let mat: Laya.PBRSpecularMaterial = new Laya.PBRSpecularMaterial();
+                            // 刷新渲染模式，不然其上设置成透明渲染的物体会被遮盖
+                            mat.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
+                            mat.albedoTexture = tex;
+                            child.meshRenderer.material = mat;
+                        }));
+                    }
+                    /** Guard */
+                    else if (child.name.search("Guard") >= 0) {
+                        // console.log(child.name + " to guard")
+                        // add script
+                        let guard: Guard = child.addComponent(Guard);
                     }
                     else {
-                        targetScript.setType(Const.TargetType.DEFAULT);
+                        child && child.destroy();
                     }
                 }
-                /** stand_box */
-                else if (child.name.search("Cube") >= 0) {
-                    // console.log(child.name + " to stand")
-                    child.name = "stand";
-                    // add collider
-                    let collider: Laya.PhysicsCollider = child.addComponent(Laya.PhysicsCollider);
-                    let boundingBox: Laya.BoundBox = child.meshFilter.sharedMesh.boundingBox.clone();
-                    let sizeX: number = boundingBox.max.x - boundingBox.min.x;
-                    let sizeY: number = boundingBox.max.y - boundingBox.min.y;
-                    let sizeZ: number = boundingBox.max.z - boundingBox.min.z;
-                    collider.colliderShape = new Laya.BoxColliderShape(sizeX, sizeY, sizeZ);
-                    // set material
-                    Laya.Texture2D.load(Const.StageTexUrl[0], Laya.Handler.create(this, (tex) => {
-                        let mat: Laya.PBRSpecularMaterial = new Laya.PBRSpecularMaterial();
-                        // 刷新渲染模式，不然其上设置成透明渲染的物体会被遮盖
-                        mat.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
-                        mat.albedoTexture = tex;
-                        child.meshRenderer.material = mat;
-                    }));
-                }
-                /** stand_cylinder */
-                else if (child.name.search("Cylinder") >= 0) {
-                    // console.log(child.name + " to stand")
-                    child.name = "stand";
-                    // add collider
-                    let collider: Laya.PhysicsCollider = child.addComponent(Laya.PhysicsCollider);
-                    let colliderShape: Laya.MeshColliderShape = new Laya.MeshColliderShape();
-                    colliderShape.mesh = child.meshFilter.sharedMesh;
-                    collider.colliderShape = colliderShape;
-                    // set material
-                    Laya.Texture2D.load(Const.StageTexUrl[0], Laya.Handler.create(this, (tex) => {
-                        let mat: Laya.PBRSpecularMaterial = new Laya.PBRSpecularMaterial();
-                        // 刷新渲染模式，不然其上设置成透明渲染的物体会被遮盖
-                        mat.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
-                        mat.albedoTexture = tex;
-                        child.meshRenderer.material = mat;
-                    }));
-                }
-                /** Guard */
-                else if (child.name.search("Guard") >= 0) {
-                    // console.log(child.name + " to guard")
-                    // add script
-                    let guard: Guard = child.addComponent(Guard);
-                }
-                else {
-                    child && child.destroy();
-                }
-            }
 
-            // set stage listener
-            this.gameStage.frameLoop(1, this, this.stageLooping);
-            // mouse click event listen: shoot a bullet
-            this.box_scene3D.on(Laya.Event.CLICK, this, this.onClick);
+                // set stage listener
+                this.gameStage.frameLoop(1, this, this.stageLooping);
+                // mouse click event listen: shoot a bullet
+                this.box_scene3D.on(Laya.Event.CLICK, this, this.onClick);
+
+                // show tutorial box
+                if (this.stageIdx === 1) {
+                    if (this.missionIdx === 1) {
+                        this.tutorial_shoot.visible = true;
+                        this.tutorial_shoot.getChildByName("inputArea").on(Laya.Event.CLICK, this, () => {
+                            this.onClick();
+                            this.tutorial_shoot.visible = false;
+                            this.tutorial_shoot.getChildByName("inputArea").offAll();
+                        });
+                    }
+                    else if (this.missionIdx === 2) {
+                        this.btn_rewardBullet.visible = true;
+                        this.tutorial_bulletTry.visible = true;
+                        this.tutorial_bulletTry.getChildByName("inputArea").on(Laya.Event.CLICK, this, () => {
+                            this.onClick_rewardBullet();
+                            this.tutorial_bulletTry.visible = false;
+                            this.tutorial_bulletTry.getChildByName("inputArea").offAll();
+                        });
+                    }
+                    else if (this.missionIdx === 4) {
+                        this.btn_rewardCannon.visible = true;
+                        this.tutorial_cannonTry.visible = true;
+                        this.tutorial_cannonTry.getChildByName("inputArea").on(Laya.Event.CLICK, this, () => {
+                            this.onClick_rewardCannon();
+                            this.tutorial_cannonTry.visible = false;
+                            this.tutorial_cannonTry.getChildByName("inputArea").offAll();
+                        });
+                    }
+                }
+                else if (this.stageIdx === 2 && this.missionIdx === 1) {
+                    this.btn_cannonOpen.visible = true;
+                    this.tutorial_cannonSelect.visible = true;
+                    this.tutorial_cannonSelect.getChildByName("inputArea").on(Laya.Event.CLICK, this, () => {
+                        this.onClick_cannonSelect();
+                        this.tutorial_cannonSelect.visible = false;
+                        this.tutorial_cannonSelect.getChildByName("inputArea").offAll();
+                    });
+                }
+            });
         }));
     }
 
@@ -994,7 +1015,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         // 测试接口开始 <========================
         if (!HomeView.instance.isTest) {
             // 测试接口结束 <========================
-            if (this.ballBox && (this.MaxBulletNum - this.currBulletNum + 1) <= 10) {
+            if (this.ballBox && (this.MaxBulletNum - this.currBulletNum + 1) >= 1 && (this.MaxBulletNum - this.currBulletNum + 1) <= 10) {
                 ((this.ballBox.getChildByName("CannonBall" + (this.MaxBulletNum - this.currBulletNum + 1) + "_0") as Laya.MeshSprite3D).meshRenderer.material as Laya.PBRSpecularMaterial).albedoColorA = 0;
             }
             // 测试接口开始 <========================

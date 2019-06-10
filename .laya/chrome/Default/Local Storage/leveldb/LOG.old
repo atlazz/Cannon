@@ -1,9 +1,15 @@
-<<<<<<< HEAD
-2019/06/09-21:02:42.737 1074 Reusing MANIFEST leveldb/MANIFEST-000001
-2019/06/09-21:02:42.738 1074 Recovering log #26
-2019/06/09-21:02:42.748 1074 Reusing old log leveldb/000026.log 
-=======
-2019/06/06-18:34:02.959 54f8 Reusing MANIFEST leveldb/MANIFEST-000001
-2019/06/06-18:34:02.960 54f8 Recovering log #26
-2019/06/06-18:34:02.960 54f8 Reusing old log leveldb/000026.log 
->>>>>>> 452546ef9e0b2129e7c9f4ddda8ccc51150cbd79
+2019/06/10-16:56:53.628 3918 Reusing MANIFEST leveldb/MANIFEST-000001
+2019/06/10-16:56:53.628 3918 Recovering log #30
+2019/06/10-16:56:53.629 3918 Reusing old log leveldb/000030.log 
+2019/06/10-16:56:59.323 1b58 Level-0 table #33: started
+2019/06/10-16:56:59.359 1b58 Level-0 table #33: 7794 bytes OK
+2019/06/10-16:56:59.384 1b58 Delete type=0 #30
+2019/06/10-16:56:59.386 20b8 Compacting 4@0 + 1@1 files
+2019/06/10-16:56:59.428 20b8 Generated table #34@0: 33 keys, 1246 bytes
+2019/06/10-16:56:59.428 20b8 Compacted 4@0 + 1@1 files => 1246 bytes
+2019/06/10-16:56:59.441 20b8 compacted to: files[ 0 1 1 0 0 0 0 ]
+2019/06/10-16:56:59.441 20b8 Delete type=2 #21
+2019/06/10-16:56:59.442 20b8 Delete type=2 #24
+2019/06/10-16:56:59.442 20b8 Delete type=2 #27
+2019/06/10-16:56:59.443 20b8 Delete type=2 #29
+2019/06/10-16:56:59.444 20b8 Delete type=2 #33

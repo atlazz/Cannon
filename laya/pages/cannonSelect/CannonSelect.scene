@@ -2,11 +2,11 @@
     "x":0,
     "type":"View",
     "selectedBox":3,
-    "selecteID":30,
+    "selecteID":15,
     "searchKey":"View",
     "props":{"zOrder":2,"top":0,"sceneWidth":720,"sceneHeight":1280,"sceneColor":"#000000","runtime":"script/runtime/CannonSelect.ts","right":0,"left":0,"bottom":0},
     "nodeParent":-1,
-    "maxID":59,
+    "maxID":75,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -73,7 +73,7 @@
                     "x":30,
                     "type":"List",
                     "searchKey":"List,list_Icon",
-                    "props":{"width":680,"var":"list_Icon","spaceX":30,"repeatY":1,"height":200,"centerY":220,"centerX":0},
+                    "props":{"width":620,"var":"list_Icon","spaceX":40,"repeatY":1,"height":200,"centerY":220,"centerX":0},
                     "nodeParent":3,
                     "label":"list_Icon",
                     "isOpen":true,
@@ -263,6 +263,221 @@
                             "child":[
                                 ]
                         }]
+                }]
+        },
+        {
+            "x":15,
+            "type":"Box",
+            "searchKey":"Box,tutorial_slide",
+            "props":{"width":720,"visible":false,"var":"tutorial_slide","top":0,"mouseThrough":true,"mouseEnabled":true,"centerX":0,"bottom":0},
+            "nodeParent":2,
+            "label":"tutorial_slide",
+            "isOpen":false,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":59,
+            "child":[
+                {
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"skin":"res/ui/cannonSelect/mask7.png","scaleY":4,"scaleX":4,"centerY":0,"centerX":0},
+                    "nodeParent":59,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":60,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Image",
+                    "searchKey":"Image,inputAreaBlock",
+                    "props":{"width":720,"scaleY":1,"scaleX":1,"name":"inputAreaBlock","mouseThrough":false,"mouseEnabled":true,"height":900,"centerY":-400,"centerX":0,"alpha":0},
+                    "nodeParent":59,
+                    "label":"inputAreaBlock",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":61,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Image",
+                    "searchKey":"Image,inputAreaBlock",
+                    "props":{"width":720,"scaleY":1,"scaleX":1,"name":"inputAreaBlock","mouseThrough":false,"mouseEnabled":true,"height":600,"centerY":550,"centerX":0,"alpha":0},
+                    "nodeParent":59,
+                    "label":"inputAreaBlock",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":74,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Label",
+                    "searchKey":"Label",
+                    "props":{"text":"向左滑动查看其他大炮","fontSize":35,"font":"SimHei","color":"#ffffff","centerY":80,"centerX":0,"bold":true,"align":"center"},
+                    "nodeParent":59,
+                    "label":"Label",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":62,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Image",
+                    "searchKey":"Image,finger",
+                    "props":{"skin":"res/ui/game/finger_only.png","scaleY":0.8,"scaleX":0.8,"right":50,"name":"finger","centerY":350},
+                    "nodeParent":59,
+                    "label":"finger",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":63,
+                    "child":[
+                        ]
+                }]
+        },
+        {
+            "x":15,
+            "type":"Box",
+            "searchKey":"Box,tutorial_try",
+            "props":{"width":720,"visible":false,"var":"tutorial_try","top":0,"mouseThrough":false,"mouseEnabled":true,"centerX":0,"bottom":0},
+            "nodeParent":2,
+            "label":"tutorial_try",
+            "isOpen":true,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":64,
+            "child":[
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"skin":"res/ui/cannonSelect/mask5.png","scaleY":4,"scaleX":4,"centerY":0,"centerX":0},
+                    "nodeParent":64,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":65,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image,inputArea",
+                    "props":{"skin":"res/ui/cannonSelect/hole.png","scaleY":1,"scaleX":1,"name":"inputArea","centerY":600,"centerX":0,"alpha":1},
+                    "nodeParent":64,
+                    "label":"inputArea",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":66,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Label",
+                    "searchKey":"Label",
+                    "props":{"text":"向左滑动查看其他大炮","fontSize":35,"font":"SimHei","color":"#ffffff","centerY":80,"centerX":0,"bold":true,"align":"center"},
+                    "nodeParent":64,
+                    "label":"Label",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":67,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image,finger",
+                    "props":{"skin":"res/ui/game/finger_only.png","scaleY":0.8,"scaleX":0.8,"name":"finger","centerY":610,"centerX":40},
+                    "nodeParent":64,
+                    "label":"finger",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":68,
+                    "child":[
+                        ]
+                }]
+        },
+        {
+            "x":15,
+            "type":"Box",
+            "searchKey":"Box,tutorial_back",
+            "props":{"width":720,"visible":false,"var":"tutorial_back","top":0,"mouseThrough":false,"mouseEnabled":true,"centerX":0,"bottom":0},
+            "nodeParent":2,
+            "label":"tutorial_back",
+            "isOpen":false,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":69,
+            "child":[
+                {
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"skin":"res/ui/cannonSelect/mask6.png","scaleY":4,"scaleX":4,"centerY":0,"centerX":0,"alpha":1},
+                    "nodeParent":69,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":70,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Image",
+                    "searchKey":"Image,inputArea",
+                    "props":{"top":10,"skin":"res/ui/cannonSelect/hole.png","scaleY":1,"scaleX":1,"name":"inputArea","left":10,"alpha":1},
+                    "nodeParent":69,
+                    "label":"inputArea",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":71,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Label",
+                    "searchKey":"Label",
+                    "props":{"text":"向左滑动查看其他大炮","left":20,"fontSize":35,"font":"SimHei","color":"#ffffff","centerY":80,"bold":true,"align":"center"},
+                    "nodeParent":69,
+                    "label":"Label",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":72,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Image",
+                    "searchKey":"Image,finger",
+                    "props":{"top":120,"skin":"res/ui/game/finger_only.png","scaleY":0.7,"scaleX":0.7,"name":"finger","left":40},
+                    "nodeParent":69,
+                    "label":"finger",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":73,
+                    "child":[
+                        ]
                 }]
         }],
     "animations":[

@@ -190,7 +190,7 @@ export default class BulletScript extends Laya.Script3D {
     }
 
     /** recover */
-    private recover() {
+    recover() {
         if (!this.isReward) {
             Laya.timer.frameOnce(1, this, () => {
                 // clean physics force
@@ -209,6 +209,7 @@ export default class BulletScript extends Laya.Script3D {
         }
         else {
             Laya.timer.frameOnce(1, this, () => {
+                this.bullet.destroy();
                 this.destroy();
             });
         }

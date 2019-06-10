@@ -1,3 +1,5 @@
+import ws from "../utils/ws.js";
+
 const wx = window["wx"];
 
 /**修改laya.wxmini.js */
@@ -81,6 +83,8 @@ class Loader {
             complete && complete.runWith(false);
             return;
         }
+
+        ws.traceEvent('loadZip_start');
 
         this.failCount = 0;
         //解压并缓存
@@ -166,6 +170,7 @@ class Loader {
                     data: JSON.stringify(Laya.MiniFileMgr.filesListObj),
                 });
                 this.log("filesListObj", Laya.MiniFileMgr.filesListObj);
+                ws.traceEvent('loadZip_succeed');
                 complete && complete.runWith(true);
             },
             fail: (res: any) => {
