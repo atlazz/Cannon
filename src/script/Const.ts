@@ -1,5 +1,5 @@
 /** version */
-export const VERSION = "1.0.6";
+export const VERSION = "1.0.7";
 
 /************** 后台设置参数 *******************/
 /** 分享位置 */
@@ -104,6 +104,9 @@ export const cdnUrl: string = "https://static.miniant.cn/cannon/res_v104.zip";
 /** sound */
 export const soundUrl: string = "res/audio/shoot.mp3";
 
+/** treasure */
+export const treasureUrl: string = "res/treasure/treasure.lh";
+
 /******** bullet ********/
 // bullet mesh model res url
 export const BulletMeshUrl = "res/bullet/bullet.lm";
@@ -131,6 +134,7 @@ export const CannonSelectIconList = [
     // {index: 5, icon: "res/ui/cannonSelect/Cannon_08.png"},
     {index: 6, icon: "res/ui/cannonSelect/Cannon_02.png"},
     {index: 4, icon: "res/ui/cannonSelect/Cannon_22.png"},
+    {index: -1},    // 尾部
 ]
 export const CannonSelectTextList = {
     1: {name: "普通炮", feature: "普通的大炮，普通的威力，就很普通", unlockLvl: 0},

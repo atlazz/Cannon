@@ -57,6 +57,8 @@ D res/cannon_effect
 D res/scene
 D res/stage
 D res/texture
+D res/treasure
+R F2D59D3A treasure.lh
 D res/ui
 D res/texture/navigator
 P A614D413 arrow.png
@@ -69,7 +71,16 @@ P 256CB3E7 more_game_button.png
 P 0D90BB27 moregame_panel.png
 P D4B739EB tips.png
 P 856FAF02 tips2.png
+D res/treasure/Assets
+P D9B69EB8 chest_simple.jpg
+R 3450CA61 Treasure-BOX_0.lm
+R 300A6308 Treasure-Object001_0.lm
+R A8621D1F Treasure-Object002_0.lm
+R D11D2099 Treasure-Treasure-TreasureAvatar.lav
+R 43F680ED Treasure.lmat
 D res/ui/cannonSelect
+P 63FA5A3C arrowleft.png
+P 117727DD arrowright.png
 P 2B4626AC btn_1.png
 P 2427B901 btn_2.png
 P CF00C416 btn_back.png
@@ -97,10 +108,10 @@ P A773F455 Cannon_21.png
 P AE9424FE Cannon_22.png
 P 661F9441 CannonIconBG.png
 P 9282DE08 hole.png
-P B0FF42B4 lock_white.png
-P C710B73D mask5.png
-P 228DC1A2 mask6.png
-P 4EFCB95D mask7.png
+P F5222D91 lock.png
+P A10AE1CE mask4.png
+P D2A6AE9A mask6.png
+P 60B050B0 mask7.png
 D res/ui/game
 P 96CABE07 back.png
 P B9891AAE backhome_bg.png
@@ -130,7 +141,7 @@ P 5B182FE2 level_bg4.png
 P F22007E0 level_bg_total.png
 P 21A79376 mask1.png
 P 144F4AD4 mask2.png
-P 0D12DBA8 mask3.png
+P 6A322FC9 mask3.png
 P A10AE1CE mask4.png
 P 322C8853 RB_1.png
 P 1200E537 RC_1.png

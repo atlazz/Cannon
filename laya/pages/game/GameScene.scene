@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":35,
-    "selecteID":33,
+    "selectedBox":138,
+    "selecteID":142,
     "searchKey":"View",
     "props":{"width":720,"top":0,"sceneWidth":720,"sceneHeight":1280,"sceneColor":"#000000","runtime":"script/runtime/GameScene.ts","right":0,"left":0,"height":1280,"bottom":0},
     "nodeParent":-1,
-    "maxID":148,
+    "maxID":156,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -35,14 +35,13 @@
             "props":{"width":720,"visible":false,"var":"box_UI","top":0,"mouseThrough":true,"centerX":0,"bottom":0},
             "nodeParent":2,
             "label":"box_UI",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":35,
             "child":[
                 {
-                    "x":30,
                     "type":"Box",
                     "searchKey":"Box,box_level",
                     "props":{"width":480,"var":"box_level","top":120,"height":97,"centerX":0},
@@ -178,7 +177,6 @@
                         }]
                 },
                 {
-                    "x":30,
                     "type":"Label",
                     "searchKey":"Label,label_ballNum",
                     "props":{"var":"label_ballNum","text":"x10","left":80,"fontSize":50,"color":"#ffffff","centerY":470,"bold":true},
@@ -192,7 +190,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,btn_cannonOpen",
                     "props":{"visible":false,"var":"btn_cannonOpen","skin":"res/ui/game/btn_cannon.png","scaleY":1.5,"scaleX":1.5,"centerX":0,"bottom":50},
@@ -219,7 +216,6 @@
                         }]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,btn_rewardCannon",
                     "props":{"visible":false,"var":"btn_rewardCannon","skin":"res/ui/game/RC_1.png","scaleY":1.5,"scaleX":1.5,"right":50,"centerY":330,"anchorY":0.5,"anchorX":0.5},
@@ -259,7 +255,6 @@
                         }]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,btn_rewardBullet",
                     "props":{"visible":false,"var":"btn_rewardBullet","skin":"res/ui/game/RB_1.png","scaleY":1.5,"scaleX":1.5,"left":50,"centerY":330,"anchorY":0.5,"anchorX":0.5},
@@ -312,7 +307,6 @@
                         }]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,missionWin",
                     "props":{"visible":false,"var":"missionWin","skin":"res/ui/game/grade_0_CN.png","scaleY":1.5,"scaleX":1.5,"centerY":-200,"centerX":0},
@@ -326,7 +320,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,btn_back",
                     "props":{"visible":true,"var":"btn_back","top":20,"skin":"res/ui/game/btn_back.png","scaleY":1.2,"scaleX":1.2,"left":20},
@@ -341,7 +334,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Box",
                     "searchKey":"Box,box_countdown",
                     "props":{"width":720,"visible":false,"var":"box_countdown","height":1280,"centerY":0,"centerX":0},
@@ -507,13 +499,14 @@
             "props":{"width":720,"visible":false,"var":"box_win","top":0,"centerX":0,"bottom":0},
             "nodeParent":2,
             "label":"box_win",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":58,
             "child":[
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,mask_win",
                     "props":{"width":720,"var":"mask_win","skin":"res/ui/game/blank.png","sizeGrid":"1,1,1,1","height":1700,"centerY":0,"centerX":0},
@@ -527,6 +520,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Box",
                     "searchKey":"Box,box_winIcon",
                     "props":{"var":"box_winIcon","centerY":0,"centerX":0},
@@ -540,6 +534,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image",
                     "props":{"skin":"res/ui/game/stage_pass.png","centerY":-40,"centerX":0},
@@ -552,6 +547,7 @@
                     "compId":60,
                     "child":[
                         {
+                            "x":45,
                             "type":"Label",
                             "searchKey":"Label,label_lvlPass",
                             "props":{"y":-5,"x":120,"width":100,"var":"label_lvlPass","valign":"middle","text":"1","height":60,"fontSize":60,"color":"#ffffff","bold":true,"align":"left"},
@@ -566,6 +562,7 @@
                         }]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,winLabel",
                     "props":{"var":"winLabel","skin":"res/ui/game/congratulation.png","centerY":-480,"centerX":0},
@@ -579,11 +576,12 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
-                    "searchKey":"Image,btn_next",
-                    "props":{"var":"btn_next","skin":"res/ui/game/btn_next.png","scaleY":1,"scaleX":1,"centerX":0,"bottom":220},
+                    "searchKey":"Image,btn_win_next",
+                    "props":{"var":"btn_win_next","skin":"res/ui/game/btn_next.png","scaleY":1,"scaleX":1,"centerX":0,"bottom":220},
                     "nodeParent":58,
-                    "label":"btn_next",
+                    "label":"btn_win_next",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
@@ -686,6 +684,104 @@
         },
         {
             "x":15,
+            "type":"Image",
+            "searchKey":"Image,backCheck",
+            "props":{"width":580,"visible":false,"var":"backCheck","skin":"res/ui/game/backhome_bg.png","sizeGrid":"10,10,10,10","height":380,"centerY":0,"centerX":0},
+            "nodeParent":2,
+            "label":"backCheck",
+            "isOpen":true,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":149,
+            "child":[
+                {
+                    "x":30,
+                    "type":"Label",
+                    "searchKey":"Label",
+                    "props":{"valign":"middle","top":30,"text":"是否返回主界面？","fontSize":57,"font":"SimHei","color":"#ff8603","centerX":0,"bold":true,"align":"center"},
+                    "nodeParent":149,
+                    "label":"Label",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":151,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Label",
+                    "searchKey":"Label",
+                    "props":{"valign":"middle","top":160,"text":"现在退出将会丢失当前关卡进度","fontSize":32,"font":"SimHei","color":"#ff8603","centerX":0,"bold":true,"align":"center"},
+                    "nodeParent":149,
+                    "label":"Label",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":152,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image,btn_backReturn",
+                    "props":{"var":"btn_backReturn","skin":"res/ui/game/btn_1.png","scaleY":0.5,"scaleX":0.5,"left":70,"bottom":-40},
+                    "nodeParent":149,
+                    "label":"btn_backReturn",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":150,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Label",
+                            "searchKey":"Label",
+                            "props":{"text":"留下","fontSize":120,"font":"SimHei","color":"#ffffff","centerY":0,"centerX":0,"bold":true},
+                            "nodeParent":150,
+                            "label":"Label",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":153,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image,btn_backExit",
+                    "props":{"y":0,"var":"btn_backExit","skin":"res/ui/game/btn_2.png","scaleY":0.5,"scaleX":0.5,"right":70,"bottom":-40},
+                    "nodeParent":149,
+                    "label":"btn_backExit",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":154,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Label",
+                            "searchKey":"Label",
+                            "props":{"text":"退出","fontSize":120,"font":"SimHei","color":"#ffffff","centerY":0,"centerX":0,"bold":true},
+                            "nodeParent":154,
+                            "label":"Label",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":155,
+                            "child":[
+                                ]
+                        }]
+                }]
+        },
+        {
+            "x":15,
             "type":"Box",
             "searchKey":"Box,tutorial_shoot",
             "props":{"width":720,"visible":false,"var":"tutorial_shoot","top":0,"mouseThrough":false,"mouseEnabled":true,"centerX":0,"bottom":0},
@@ -744,13 +840,14 @@
             "props":{"width":720,"visible":false,"var":"tutorial_bulletTry","top":0,"mouseThrough":false,"mouseEnabled":true,"centerX":0,"bottom":0},
             "nodeParent":2,
             "label":"tutorial_bulletTry",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":125,
             "child":[
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image",
                     "props":{"skin":"res/ui/game/mask2.png","scaleY":4,"scaleX":4,"centerY":0,"centerX":0},
@@ -764,9 +861,10 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,inputArea",
-                    "props":{"skin":"res/ui/game/hole.png","name":"inputArea","centerY":355,"centerX":-250,"alpha":0},
+                    "props":{"skin":"res/ui/game/hole.png","name":"inputArea","left":50,"centerY":330,"alpha":0},
                     "nodeParent":125,
                     "label":"inputArea",
                     "isDirectory":false,
@@ -777,6 +875,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "searchKey":"Label",
                     "props":{"text":"点击试用一发强力炮弹","fontSize":30,"font":"SimHei","color":"#ffffff","centerY":355,"centerX":0,"bold":true,"align":"center"},
@@ -790,9 +889,10 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,finger",
-                    "props":{"skin":"res/ui/game/finger_only.png","scaleY":0.8,"scaleX":0.8,"name":"finger","centerY":500,"centerX":-250},
+                    "props":{"skin":"res/ui/game/finger_only.png","scaleY":0.8,"scaleX":0.8,"name":"finger","centerY":480,"centerX":-250},
                     "nodeParent":125,
                     "label":"finger",
                     "isDirectory":false,
@@ -810,13 +910,14 @@
             "props":{"width":720,"visible":false,"var":"tutorial_cannonTry","top":0,"mouseThrough":false,"mouseEnabled":true,"centerX":0,"bottom":0},
             "nodeParent":2,
             "label":"tutorial_cannonTry",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":138,
             "child":[
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image",
                     "props":{"skin":"res/ui/game/mask3.png","scaleY":4,"scaleX":4,"centerY":0,"centerX":0},
@@ -830,9 +931,10 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,inputArea",
-                    "props":{"skin":"res/ui/game/hole.png","name":"inputArea","centerY":355,"centerX":250,"alpha":0},
+                    "props":{"skin":"res/ui/game/hole.png","right":50,"name":"inputArea","centerY":330,"alpha":0},
                     "nodeParent":138,
                     "label":"inputArea",
                     "isDirectory":false,
@@ -843,9 +945,10 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "searchKey":"Label",
-                    "props":{"text":"点击试用至尊大炮，持续到本大关结束哦","fontSize":30,"font":"SimHei","color":"#ffffff","centerY":250,"centerX":0,"bold":true,"align":"center"},
+                    "props":{"text":"点击试用至尊大炮，持续到本大关结束哦","fontSize":30,"font":"SimHei","color":"#ffffff","centerY":230,"centerX":0,"bold":true,"align":"center"},
                     "nodeParent":138,
                     "label":"Label",
                     "isDirectory":false,
@@ -856,9 +959,10 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,finger",
-                    "props":{"skin":"res/ui/game/finger_only.png","scaleY":0.8,"scaleX":0.8,"name":"finger","centerY":500,"centerX":250},
+                    "props":{"skin":"res/ui/game/finger_only.png","scaleY":0.8,"scaleX":0.8,"name":"finger","centerY":480,"centerX":270},
                     "nodeParent":138,
                     "label":"finger",
                     "isDirectory":false,

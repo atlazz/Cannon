@@ -354,6 +354,13 @@ export default class GameScene extends ui.game.GameSceneUI {
 
         // back home
         this.btn_back.on(Laya.Event.CLICK, this, () => {
+            this.backCheck.visible = true;
+        });
+        this.btn_backReturn.on(Laya.Event.CLICK, this, () => {
+            this.backCheck.visible = false;
+        });
+        this.btn_backExit.on(Laya.Event.CLICK, this, () => {
+            this.backCheck.visible = false;
             this.state = Const.GameState.OVER;
             this.cleanStage();
             this.hideUI();
@@ -431,7 +438,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         });
 
         // next stage
-        this.btn_next.on(Laya.Event.CLICK, this, () => {
+        this.btn_win_next.on(Laya.Event.CLICK, this, () => {
             this.nextStage();
         });
 
@@ -549,6 +556,7 @@ export default class GameScene extends ui.game.GameSceneUI {
     private clearStageTimer() {
         Laya.timer.clear(this, this.stageLooping);
         Laya.timer.clear(this, this.stageFailCountDown);
+        Laya.timer.clear(this, this.nextStage);
         this.box_countdown.visible = false;
     }
 
@@ -556,11 +564,7 @@ export default class GameScene extends ui.game.GameSceneUI {
     newStage() {
         // destroy old stage
         this.cleanStage();
-
-
-        this.btn_cannonOpen.visible = true;
-
-
+        
         // set ui
         this.box_win.visible = false;
         this.missionWin.visible = false;
@@ -724,7 +728,9 @@ export default class GameScene extends ui.game.GameSceneUI {
 
                 // show tutorial box
                 if (this.stageIdx === 1) {
-                    if (this.missionIdx === 1) {
+                    if (this.missionIdx === 1 && Global.gameData.tutorialStep === 0) {
+                        // update
+                        Global.gameData.tutorialStep = 1;
                         this.tutorial_shoot.visible = true;
                         this.tutorial_shoot.getChildByName("inputArea").on(Laya.Event.CLICK, this, () => {
                             this.onClick();
@@ -732,31 +738,58 @@ export default class GameScene extends ui.game.GameSceneUI {
                             this.tutorial_shoot.getChildByName("inputArea").offAll();
                         });
                     }
-                    else if (this.missionIdx === 2) {
+                    else if (this.missionIdx === 2 && Global.gameData.tutorialStep === 1) {
+                        Global.gameData.tutorialStep = 2;
                         this.btn_rewardBullet.visible = true;
                         this.tutorial_bulletTry.visible = true;
+                        var finger: Laya.Image = this.tutorial_bulletTry.getChildByName("finger") as Laya.Image;
+                        finger.timer.frameLoop(1, finger, () => {
+                            finger.centerY -= 1;
+                            if (finger.centerY <= 450) {
+                                finger.centerY = 480;
+                            }
+                        });
                         this.tutorial_bulletTry.getChildByName("inputArea").on(Laya.Event.CLICK, this, () => {
                             this.onClick_rewardBullet();
                             this.tutorial_bulletTry.visible = false;
+                            Laya.timer.clearAll(this.tutorial_bulletTry.getChildByName("finger"));
                             this.tutorial_bulletTry.getChildByName("inputArea").offAll();
                         });
                     }
-                    else if (this.missionIdx === 4) {
+                    else if (this.missionIdx === 4 && Global.gameData.tutorialStep === 2) {
+                        Global.gameData.tutorialStep = 3;
                         this.btn_rewardCannon.visible = true;
                         this.tutorial_cannonTry.visible = true;
+                        var finger: Laya.Image = this.tutorial_cannonTry.getChildByName("finger") as Laya.Image;
+                        finger.timer.frameLoop(1, finger, () => {
+                            finger.centerY -= 1;
+                            if (finger.centerY <= 450) {
+                                finger.centerY = 480;
+                            }
+                        });
                         this.tutorial_cannonTry.getChildByName("inputArea").on(Laya.Event.CLICK, this, () => {
                             this.onClick_rewardCannon();
                             this.tutorial_cannonTry.visible = false;
+                            Laya.timer.clearAll(this.tutorial_cannonTry.getChildByName("finger"));
                             this.tutorial_cannonTry.getChildByName("inputArea").offAll();
                         });
                     }
                 }
-                else if (this.stageIdx === 2 && this.missionIdx === 1) {
+                else if (this.stageIdx === 2 && this.missionIdx === 1 && Global.gameData.tutorialStep === 3) {
+                    Global.gameData.tutorialStep = 4;
                     this.btn_cannonOpen.visible = true;
                     this.tutorial_cannonSelect.visible = true;
+                    var finger: Laya.Image = this.tutorial_cannonSelect.getChildByName("finger") as Laya.Image;
+                    finger.timer.frameLoop(1, finger, () => {
+                        finger.bottom += 0.5;
+                        if (finger.bottom >= 20) {
+                            finger.bottom = 5;
+                        }
+                    });
                     this.tutorial_cannonSelect.getChildByName("inputArea").on(Laya.Event.CLICK, this, () => {
                         this.onClick_cannonSelect();
                         this.tutorial_cannonSelect.visible = false;
+                        Laya.timer.clearAll(this.tutorial_cannonSelect.getChildByName("finger"));
                         this.tutorial_cannonSelect.getChildByName("inputArea").offAll();
                     });
                 }
@@ -840,9 +873,8 @@ export default class GameScene extends ui.game.GameSceneUI {
             idx = idx > 4 ? 4 : idx;
             this.missionWin.skin = "res/ui/game/grade_" + idx + "_CN.png";
             this.missionWin.visible = true;
-            Laya.timer.frameOnce(90, this, () => {
-                this.nextStage();
-            })
+            // open next stage
+            Laya.timer.frameOnce(90, this, this.nextStage);
         }
     }
 
@@ -915,7 +947,7 @@ export default class GameScene extends ui.game.GameSceneUI {
     /** banner 弹出控制 */
     private showBanner() {
         // 1秒后显示banner，上跳误点
-        if (Math.random() <= Global.config.banner_delay_ratio) {
+        if (!Global.config.deny_banner && Math.random() <= Global.config.banner_delay_ratio) {
             Laya.timer.frameOnce(Global.config.banner_delay * 60, null, () => {
                 this.btn_retry.bottom = 260;
                 if (Laya.Browser.onMiniGame && ws.isIPhoneX()) {

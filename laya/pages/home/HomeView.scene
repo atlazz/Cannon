@@ -2,11 +2,11 @@
     "x":0,
     "type":"View",
     "selectedBox":34,
-    "selecteID":16,
+    "selecteID":18,
     "searchKey":"View",
     "props":{"zOrder":1,"width":720,"top":0,"sceneWidth":720,"sceneHeight":1280,"sceneColor":"#000000","runtime":"script/runtime/HomeView.ts","right":0,"left":0,"height":1280,"bottom":0},
     "nodeParent":-1,
-    "maxID":48,
+    "maxID":49,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -172,16 +172,29 @@
                     "x":30,
                     "type":"Image",
                     "searchKey":"Image,btn_cannon",
-                    "props":{"visible":true,"var":"btn_cannon","skin":"res/ui/home/btn_cannon.png","scaleY":2,"scaleX":2,"left":140,"bottom":300,"anchorY":0.5,"anchorX":0.5},
+                    "props":{"visible":true,"var":"btn_cannon","skin":"res/ui/home/btn_cannon.png","scaleY":2,"scaleX":2,"left":140,"bottom":300,"anchorY":0.5,"anchorX":0.5,"alpha":1},
                     "nodeParent":34,
                     "label":"btn_cannon",
                     "isOpen":true,
-                    "isDirectory":false,
+                    "isDirectory":true,
                     "isAniNode":true,
-                    "hasChild":false,
+                    "hasChild":true,
                     "compId":18,
                     "child":[
-                        ]
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "searchKey":"Image,lock",
+                            "props":{"y":0,"x":0,"visible":false,"skin":"res/ui/home/lock.png","name":"lock"},
+                            "nodeParent":18,
+                            "label":"lock",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":48,
+                            "child":[
+                                ]
+                        }]
                 },
                 {
                     "x":30,

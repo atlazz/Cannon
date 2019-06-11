@@ -33,6 +33,8 @@ export default class HomeView extends ui.home.HomeViewUI {
         this.label_level.changeText("关卡：" + Global.gameData.stageIndex);
         // 刷新 home icon
         this.nav && this.nav.loadHomeIconInfoList();
+        // unlock icon
+        this.refreshUnlock();
     }
 
     /**首页图标列表*/
@@ -81,6 +83,7 @@ export default class HomeView extends ui.home.HomeViewUI {
                 GameScene.instance.cannonType = Global.gameData.cannonType;
                 GameScene.instance.newCannon();
             }
+            this.refreshUnlock();
             this.bindButtons();
             Laya.timer.clear(this, this.onResEnable);
         }
@@ -122,10 +125,8 @@ export default class HomeView extends ui.home.HomeViewUI {
             }
         });
         // jump to sence: cannon select
-        this.btn_cannon.on(Laya.Event.CLICK, this, () => {
-            CannonSelect.openInstance();
-            this.hide();
-        });
+        this.btn_cannon.on(Laya.Event.CLICK, this, this.onclick_cannon);
+
         // 测试接口开始 <==========================
         this.btn_test.gray = !this.isTest;
         this.btn_test.on(Laya.Event.CLICK, this, () => {
@@ -154,6 +155,11 @@ export default class HomeView extends ui.home.HomeViewUI {
         //     this.moreGameCloseAni.play(undefined, false);
         //     ws.hideGameAd("game_more");
         // });
+    }
+
+    private onclick_cannon() {
+        CannonSelect.openInstance();
+        this.hide();
     }
 
     private hide() {
@@ -265,6 +271,9 @@ export default class HomeView extends ui.home.HomeViewUI {
         this.isGameDataLoaded = true;
         Ad.posShowBanner(Const.BannerPos.HomeView);
 
+        /** unlock icon */
+        this.refreshUnlock();
+
         /** get system name */
         this.systemName = "Android";
         if (Laya.Browser.onMiniGame && wx.getSystemInfoSync().system.indexOf("iOS") >= 0) {
@@ -289,6 +298,35 @@ export default class HomeView extends ui.home.HomeViewUI {
     /**图标点击*/
     private onIconClick(pos: string, ad: any, redirect = true) {
         ws.tapGameAd({ pos, ad, redirect, });
+    }
+
+    private refreshUnlock() {
+        // unlock icon
+        if (Global.gameData.tutorialStep < 5 || (Global.gameData.stageIndex === 1 && Global.gameData.tutorialStep === 5)) {
+            Global.gameData.tutorialStep = 0;
+            this.btn_cannon.alpha = 0.7;
+            var lock: Laya.Image = this.btn_cannon.getChildByName("lock") as Laya.Image;
+            lock && (lock.visible = true);
+            this.btn_cannon.off(Laya.Event.CLICK, this, this.onclick_cannon);
+        }
+        if (Global.gameData.tutorialStep >= 5 || Global.gameData.stageIndex > 2) {
+            Global.gameData.tutorialStep = 5;
+            this.btn_cannon.alpha = 1;
+            var lock: Laya.Image = this.btn_cannon.getChildByName("lock") as Laya.Image;
+            lock && (lock.visible = false);
+            this.btn_cannon.on(Laya.Event.CLICK, this, this.onclick_cannon);
+        }
+        if (GameScene.instance) {
+            if (Global.gameData.tutorialStep >= 2) {
+                GameScene.instance.btn_rewardBullet.visible = true;
+            }
+            if (Global.gameData.tutorialStep >= 3) {
+                GameScene.instance.btn_rewardCannon.visible = true;
+            }
+            if (Global.gameData.tutorialStep >= 4) {
+                GameScene.instance.btn_cannonOpen.visible = true;
+            }
+        }
     }
 
     // /**抽屉图标*/

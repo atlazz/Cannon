@@ -10,6 +10,8 @@ export module ui.cannonSelect {
 		public label_name:Laya.Label;
 		public label_feature:Laya.Label;
 		public list_Icon:Laya.List;
+		public arrowLeft:Laya.Image;
+		public arrowRight:Laya.Image;
 		public label_unlockMsg:Laya.Label;
 		public btn_select:Laya.Image;
 		public btn_unlock:Laya.Image;
@@ -58,12 +60,15 @@ export module ui.game {
 		public box_winIcon:Laya.Box;
 		public label_lvlPass:Laya.Label;
 		public winLabel:Laya.Image;
-		public btn_next:Laya.Image;
+		public btn_win_next:Laya.Image;
 		public box_test:Laya.Box;
 		public btn_test_restart:Laya.Image;
 		public btn_test_next:Laya.Image;
 		public input_test_lvl:Laya.TextInput;
 		public label_test_lvl:Laya.Label;
+		public backCheck:Laya.Image;
+		public btn_backReturn:Laya.Image;
+		public btn_backExit:Laya.Image;
 		public tutorial_shoot:Laya.Box;
 		public tutorial_bulletTry:Laya.Box;
 		public tutorial_cannonTry:Laya.Box;

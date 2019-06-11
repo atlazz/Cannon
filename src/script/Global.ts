@@ -21,7 +21,9 @@ let Global = {
         cannonUnlockList: {
             default: true,
             frozen: false,
-        }
+        },
+        // 新手引导环节索引
+        tutorialStep: 5,
 
     },
     config: {
@@ -41,6 +43,7 @@ let Global = {
         banner_delay: 1, //banner延迟弹出时间
         banner_delay_ratio: 0.8, //banner延迟弹出概率
         banner_delay_ratio1: 0.8, //banner1延迟弹出概率, 复活页
+        deny_banner: false,
         share_fail: "'操作失败，请换个群'",
         distance_iphonex: 50,
         banner_click_time: 2,
