@@ -110,6 +110,14 @@ export default class BulletScript extends Laya.Script3D {
     }
 
     private triggerHandler(other: Laya.PhysicsComponent) {
+        /** 宝箱处理 */
+        if (other.owner.name === "top" || other.owner.name === "bottom") {
+            if (GameScene.instance.treasureHitState === 0) {
+                GameScene.instance.treasureHitState = 1;
+            }
+            GameScene.instance.treasureHitCnt++;
+            this.destroy();
+        }
         /** reward bullet */
         if (this.isReward) {
             /** black hole */

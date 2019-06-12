@@ -21,7 +21,7 @@
 		"textures":[
 			{
 				"name":"albedoTexture",
-				"path":"color_01.jpg",
+				"path":"color_01.png",
 				"constructParams":[
 					128,
 					128,

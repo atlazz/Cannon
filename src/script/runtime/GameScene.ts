@@ -45,7 +45,7 @@ export default class GameScene extends ui.game.GameSceneUI {
             this.showUI();
             // reset
             this.stageIdx = Global.gameData.stageIndex;
-            this.missionIdx = 1;
+            this.missionIdx = 1;        // <==== TODO: reset to 1
             for (let i = 1; i <= 5; i++) {
                 this.missionRawIdxList[i - 1] = 0;
                 this["level" + i].sizeGrid = "0, 96, 0, 0";
@@ -100,10 +100,19 @@ export default class GameScene extends ui.game.GameSceneUI {
     public missionRawIdxList: number[] = [0, 0, 0, 0, 0];
     public MaxBulletNum: number = 100;
     public currBulletNum: number = 0;
-    public winCheckCnt: number = 0;
     public isStageStart: boolean = false;
     public countdown: number;
     public isRevive: boolean;
+
+    public winCheckCnt: number = 0;
+    public flag_missionWin: boolean = false;
+
+    /** treasure */
+    public treasureHitCnt: number = 0;
+    public treasereMaxHitCnt: number = 10;
+    public treasureFrameCnt: number = 0;
+    public treasereMaxFrameCnt: number = 90;
+    public treasureHitState: number = 0;
 
     /** cannon */
     public cannonType: number = Const.CannonType.DEFAULT;
@@ -389,10 +398,12 @@ export default class GameScene extends ui.game.GameSceneUI {
                 this.onClick_rewardBullet();
             }
             else {
+                console.log("reward bullet onclick");
                 // 1: video
                 (Global.config.try_ball == 1) && Reward.instance.video({
                     pos: Const.RewardPos.Bullet,
                     success: () => {
+                        console.log("reward bullet video onclick");
                         this.onClick_rewardBullet();
                     },
                     complete: () => {
@@ -402,6 +413,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                 (Global.config.try_ball == 2) && Reward.instance.share({
                     pos: Const.RewardPos.Bullet,
                     success: () => {
+                        console.log("reward bullet share onclick");
                         this.onClick_rewardBullet();
                     },
                     complete: () => {
@@ -562,13 +574,20 @@ export default class GameScene extends ui.game.GameSceneUI {
 
     /** create new stage by index */
     newStage() {
+        // invalid check
+        if (this.missionIdx < 1 || this.missionIdx > 6) {
+            return;
+        }
+
         // destroy old stage
         this.cleanStage();
-        
+
         // set ui
         this.box_win.visible = false;
         this.missionWin.visible = false;
-        this["level" + this.missionIdx].sizeGrid = "0,64,0,0";
+        if (this.missionIdx >= 1 && this.missionIdx <= 5) {
+            this["level" + this.missionIdx].sizeGrid = "0,64,0,0";
+        }
 
         // reset
         this.isRewardBullet = false;
@@ -576,6 +595,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.isRevive = false;
         this.currBulletNum = 0;
         this.winCheckCnt = 0;
+        this.flag_missionWin = false;
         this.isStageStart = false;
         this.isRecoil = false;
         this.recoilTime = this.MaxRecoilTime;
@@ -590,30 +610,44 @@ export default class GameScene extends ui.game.GameSceneUI {
         if (!HomeView.instance.isTest) {
             // 测试接口结束 <========================
 
+            // 常规关卡
+            if (this.missionIdx >= 1 && this.missionIdx <= 5) {
+                // get raw stage index
+                let tmpStage = StageConfig.Stage[HomeView.instance.systemName][this.stageIdx > Const.StageNum ? Const.StageNum : this.stageIdx][this.missionIdx];
+                this.rawIdx = this.missionRawIdxList[0];
+                let tryCnt = 0;
+                while (tryCnt < 20 && this.missionRawIdxList.indexOf(this.rawIdx) >= 0) {
+                    this.rawIdx = Math.round(Math.random() * (tmpStage.max - tmpStage.min)) + tmpStage.min;
+                    tryCnt++;
+                }
+                this.missionRawIdxList[this.missionIdx - 1] = this.rawIdx;
+                this.MaxBulletNum = tmpStage.ball_add + StageConfig.StageRaw[this.rawIdx].ball_num;
+                this.label_ballNum.changeText("x" + this.MaxBulletNum);
 
-            // get raw stage index
-            let tmpStage = StageConfig.Stage[HomeView.instance.systemName][this.stageIdx > Const.StageNum ? Const.StageNum : this.stageIdx][this.missionIdx];
-            this.rawIdx = this.missionRawIdxList[0];
-            let tryCnt = 0;
-            while (tryCnt < 20 && this.missionRawIdxList.indexOf(this.rawIdx) >= 0) {
-                this.rawIdx = Math.round(Math.random() * (tmpStage.max - tmpStage.min)) + tmpStage.min;
-                tryCnt++;
-            }
-            this.missionRawIdxList[this.missionIdx - 1] = this.rawIdx;
-            this.MaxBulletNum = tmpStage.ball_add + StageConfig.StageRaw[this.rawIdx].ball_num;
-            this.label_ballNum.changeText("x" + this.MaxBulletNum);
+                console.log("stage: " + this.stageIdx + "\tmission: " + this.missionIdx + "\traw stage index: " + this.rawIdx);
+                console.log("max ball num: " + this.MaxBulletNum);
 
-            console.log("stage: " + this.stageIdx + "\tmission: " + this.missionIdx + "\traw stage index: " + this.rawIdx);
-            console.log("max ball num: " + this.MaxBulletNum);
-
-            // set ball box
-            if (this.ballBox) {
-                for (let i = 1; i <= 10; i++) {
-                    if (i <= this.MaxBulletNum) {
-                        ((this.ballBox.getChildByName("CannonBall" + i + "_0") as Laya.MeshSprite3D).meshRenderer.material as Laya.PBRSpecularMaterial).albedoColorA = 1;
+                // set ball box
+                if (this.ballBox) {
+                    for (let i = 1; i <= 10; i++) {
+                        if (i <= this.MaxBulletNum) {
+                            ((this.ballBox.getChildByName("CannonBall" + i + "_0") as Laya.MeshSprite3D).meshRenderer.material as Laya.PBRSpecularMaterial).albedoColorA = 1;
+                        }
+                        else {
+                            ((this.ballBox.getChildByName("CannonBall" + i + "_0") as Laya.MeshSprite3D).meshRenderer.material as Laya.PBRSpecularMaterial).albedoColorA = 0;
+                        }
                     }
-                    else {
-                        ((this.ballBox.getChildByName("CannonBall" + i + "_0") as Laya.MeshSprite3D).meshRenderer.material as Laya.PBRSpecularMaterial).albedoColorA = 0;
+                }
+            }
+            // 大关卡后宝箱奖励
+            else {
+                // 无限炮弹
+                this.MaxBulletNum = 999;
+                this.label_ballNum.changeText("无限");
+                // show all balls in box
+                if (this.ballBox) {
+                    for (let i = 1; i <= 10; i++) {
+                        ((this.ballBox.getChildByName("CannonBall" + i + "_0") as Laya.MeshSprite3D).meshRenderer.material as Laya.PBRSpecularMaterial).albedoColorA = 1;
                     }
                 }
             }
@@ -630,7 +664,15 @@ export default class GameScene extends ui.game.GameSceneUI {
 
 
         // load stage
-        let satgeResUrl: string = Const.StageResUrl + this.rawIdx + ".lh";
+        let satgeResUrl: string;
+        /** 常规关卡 */
+        if (this.missionIdx >= 1 && this.missionIdx <= 5) {
+            satgeResUrl = Const.StageResUrl + this.rawIdx + ".lh";
+        }
+        /** 宝箱关卡 */
+        else {
+            satgeResUrl = Const.treasureUrl;
+        }
         Laya.Sprite3D.load(satgeResUrl, Laya.Handler.create(this, (res) => {
             console.log("stage loaded");
 
@@ -651,74 +693,92 @@ export default class GameScene extends ui.game.GameSceneUI {
                 let stageAni = (this.gameStage.getComponent(Laya.Animator) as Laya.Animator);
                 stageAni && stageAni.destroy();
 
-                let child: Laya.MeshSprite3D;
-                for (let i: number = 0; i < this.gameStage.numChildren; i++) {
-                    child = this.gameStage.getChildAt(i) as Laya.MeshSprite3D;
-                    // 关闭阴影
-                    child.meshRenderer.castShadow = false;
-                    /** target object */
-                    if (child.name.search("Obstacle") >= 0) {
-                        // console.log(child.name + " to target")
-                        // add scipt
-                        let targetScript: Target = child.addComponent(Target);
-                        // set type
-                        if (child.name.search("Glass") >= 0) {
-                            targetScript.setType(Const.TargetType.GLASS);
+                /** 常规关卡 */
+                if (this.missionIdx >= 1 && this.missionIdx <= 5) {
+                    let child: Laya.MeshSprite3D;
+                    for (let i: number = 0; i < this.gameStage.numChildren; i++) {
+                        child = this.gameStage.getChildAt(i) as Laya.MeshSprite3D;
+                        // 关闭阴影
+                        child.meshRenderer.castShadow = false;
+                        /** target object */
+                        if (child.name.search("Obstacle") >= 0) {
+                            // console.log(child.name + " to target")
+                            // add scipt
+                            let targetScript: Target = child.addComponent(Target);
+                            // set type
+                            if (child.name.search("Glass") >= 0) {
+                                targetScript.setType(Const.TargetType.GLASS);
+                            }
+                            else if (child.name.search("TNT") >= 0) {
+                                targetScript.setType(Const.TargetType.TNT);
+                            }
+                            else {
+                                targetScript.setType(Const.TargetType.DEFAULT);
+                            }
                         }
-                        else if (child.name.search("TNT") >= 0) {
-                            targetScript.setType(Const.TargetType.TNT);
+                        /** stand_box */
+                        else if (child.name.search("Cube") >= 0) {
+                            // console.log(child.name + " to stand")
+                            child.name = "stand";
+                            // add collider
+                            let collider: Laya.PhysicsCollider = child.addComponent(Laya.PhysicsCollider);
+                            let boundingBox: Laya.BoundBox = child.meshFilter.sharedMesh.boundingBox.clone();
+                            let sizeX: number = boundingBox.max.x - boundingBox.min.x;
+                            let sizeY: number = boundingBox.max.y - boundingBox.min.y;
+                            let sizeZ: number = boundingBox.max.z - boundingBox.min.z;
+                            collider.colliderShape = new Laya.BoxColliderShape(sizeX, sizeY, sizeZ);
+                            // set material
+                            Laya.Texture2D.load(Const.StageTexUrl[0], Laya.Handler.create(this, (tex) => {
+                                let mat: Laya.PBRSpecularMaterial = new Laya.PBRSpecularMaterial();
+                                // 刷新渲染模式，不然其上设置成透明渲染的物体会被遮盖
+                                mat.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
+                                mat.albedoTexture = tex;
+                                child.meshRenderer.material = mat;
+                            }));
+                        }
+                        /** stand_cylinder */
+                        else if (child.name.search("Cylinder") >= 0) {
+                            // console.log(child.name + " to stand")
+                            child.name = "stand";
+                            // add collider
+                            let collider: Laya.PhysicsCollider = child.addComponent(Laya.PhysicsCollider);
+                            let colliderShape: Laya.MeshColliderShape = new Laya.MeshColliderShape();
+                            colliderShape.mesh = child.meshFilter.sharedMesh;
+                            collider.colliderShape = colliderShape;
+                            // set material
+                            Laya.Texture2D.load(Const.StageTexUrl[0], Laya.Handler.create(this, (tex) => {
+                                let mat: Laya.PBRSpecularMaterial = new Laya.PBRSpecularMaterial();
+                                // 刷新渲染模式，不然其上设置成透明渲染的物体会被遮盖
+                                mat.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
+                                mat.albedoTexture = tex;
+                                child.meshRenderer.material = mat;
+                            }));
+                        }
+                        /** Guard */
+                        else if (child.name.search("Guard") >= 0) {
+                            // console.log(child.name + " to guard")
+                            // add script
+                            let guard: Guard = child.addComponent(Guard);
                         }
                         else {
-                            targetScript.setType(Const.TargetType.DEFAULT);
+                            child && child.destroy();
                         }
                     }
-                    /** stand_box */
-                    else if (child.name.search("Cube") >= 0) {
-                        // console.log(child.name + " to stand")
-                        child.name = "stand";
-                        // add collider
-                        let collider: Laya.PhysicsCollider = child.addComponent(Laya.PhysicsCollider);
-                        let boundingBox: Laya.BoundBox = child.meshFilter.sharedMesh.boundingBox.clone();
-                        let sizeX: number = boundingBox.max.x - boundingBox.min.x;
-                        let sizeY: number = boundingBox.max.y - boundingBox.min.y;
-                        let sizeZ: number = boundingBox.max.z - boundingBox.min.z;
-                        collider.colliderShape = new Laya.BoxColliderShape(sizeX, sizeY, sizeZ);
-                        // set material
-                        Laya.Texture2D.load(Const.StageTexUrl[0], Laya.Handler.create(this, (tex) => {
-                            let mat: Laya.PBRSpecularMaterial = new Laya.PBRSpecularMaterial();
-                            // 刷新渲染模式，不然其上设置成透明渲染的物体会被遮盖
-                            mat.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
-                            mat.albedoTexture = tex;
-                            child.meshRenderer.material = mat;
-                        }));
-                    }
-                    /** stand_cylinder */
-                    else if (child.name.search("Cylinder") >= 0) {
-                        // console.log(child.name + " to stand")
-                        child.name = "stand";
-                        // add collider
-                        let collider: Laya.PhysicsCollider = child.addComponent(Laya.PhysicsCollider);
-                        let colliderShape: Laya.MeshColliderShape = new Laya.MeshColliderShape();
-                        colliderShape.mesh = child.meshFilter.sharedMesh;
-                        collider.colliderShape = colliderShape;
-                        // set material
-                        Laya.Texture2D.load(Const.StageTexUrl[0], Laya.Handler.create(this, (tex) => {
-                            let mat: Laya.PBRSpecularMaterial = new Laya.PBRSpecularMaterial();
-                            // 刷新渲染模式，不然其上设置成透明渲染的物体会被遮盖
-                            mat.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
-                            mat.albedoTexture = tex;
-                            child.meshRenderer.material = mat;
-                        }));
-                    }
-                    /** Guard */
-                    else if (child.name.search("Guard") >= 0) {
-                        // console.log(child.name + " to guard")
-                        // add script
-                        let guard: Guard = child.addComponent(Guard);
-                    }
-                    else {
-                        child && child.destroy();
-                    }
+                }
+                /** 宝箱关卡 */
+                else {
+                    this.gameStage.name = "treasure";
+
+                    // reset
+                    this.treasureHitCnt = 0;
+                    this.treasureFrameCnt = 0;
+                    this.treasureHitState = 0;
+
+                    // 加载宝石
+                    // Laya.Sprite3D.load(Const.currencyUrl, Laya.Handler.create(this, (res) => {
+                    // }));
+
+                    // 延时误点
                 }
 
                 // set stage listener
@@ -726,7 +786,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                 // mouse click event listen: shoot a bullet
                 this.box_scene3D.on(Laya.Event.CLICK, this, this.onClick);
 
-                // show tutorial box
+                /** 新手引导, show tutorial box */
                 if (this.stageIdx === 1) {
                     if (this.missionIdx === 1 && Global.gameData.tutorialStep === 0) {
                         // update
@@ -807,7 +867,14 @@ export default class GameScene extends ui.game.GameSceneUI {
             // 测试接口结束 <==========================
 
             /** win check */
-            this.winCheck();
+            // 常规关卡
+            if (this.missionIdx >= 1 && this.missionIdx <= 5) {
+                this.winCheck();
+            }
+            // 宝箱关卡
+            else {
+                this.winCheck_treasure();
+            }
 
             // 测试接口开始 <==========================
         }
@@ -841,6 +908,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         // player win
         if (this.winCheckCnt++ >= Const.MaxWinCheckTime) {
             console.log("player win");
+            this.flag_missionWin = true;
             // off listener
             this.box_scene3D.off(Laya.Event.CLICK, this, this.onClick);
             // clear stage timer
@@ -859,6 +927,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         // player win
         if (this.winCheckCnt++ >= Const.MaxWinCheckTime) {
             console.log("player win");
+            this.flag_missionWin = true;
             // off listener
             this.box_scene3D.off(Laya.Event.CLICK, this, this.onClick);
             // clear stage timer
@@ -866,6 +935,7 @@ export default class GameScene extends ui.game.GameSceneUI {
             // hide
             this.box_countdown.visible = false;
             this.hideReviveUI();
+
             // show
             this["level" + this.missionIdx].sizeGrid = "0,32,0,0";
             let idx: number = this.currBulletNum - this.MaxBulletNum + 4;
@@ -873,8 +943,141 @@ export default class GameScene extends ui.game.GameSceneUI {
             idx = idx > 4 ? 4 : idx;
             this.missionWin.skin = "res/ui/game/grade_" + idx + "_CN.png";
             this.missionWin.visible = true;
+
+            // win label animation play
+            var frameCnt_missionWin: number = 0;
+            this.missionWin.centerY = 30;
+            this.missionWin.scaleX = 1.5;
+            this.missionWin.scaleY = 1.5;
+            this.missionWin.timer.frameLoop(1, this.missionWin, () => {
+                frameCnt_missionWin++;
+                if (frameCnt_missionWin <= 13) {
+                    this.missionWin.scaleX += 0.15;
+                    this.missionWin.scaleY += 0.15;
+                    this.missionWin.centerY -= 3;
+                }
+                else if (frameCnt_missionWin <= 40) {
+                    this.missionWin.scaleX -= 0.07;
+                    this.missionWin.scaleY -= 0.07;
+                    this.missionWin.centerY -= 10;
+                }
+                else {
+                    // clear mission win animation
+                    Laya.timer.clearAll(this.missionWin);
+                }
+            });
             // open next stage
             Laya.timer.frameOnce(90, this, this.nextStage);
+        }
+    }
+
+    /** treasure win check */
+    private winCheck_treasure() {
+        this.treasureFrameCnt++;
+        // player win
+        if (this.treasureFrameCnt >= this.treasereMaxFrameCnt && this.treasureHitCnt >= this.treasereMaxHitCnt) {
+            this.flag_missionWin = true;
+            // off listener
+            this.box_scene3D.off(Laya.Event.CLICK, this, this.onClick);
+            // clear stage timer
+            this.clearStageTimer();
+            // hide
+            this.box_countdown.visible = false;
+            this.hideReviveUI();
+
+            // 清除上一轮动画
+            Laya.timer.clearAll(this.gameStage);
+            Laya.timer.frameOnce(1, this.gameStage, () => {
+                // 宝箱抖动动画
+                var flag_treasureTweenLeft: boolean = false;
+                Laya.timer.frameLoop(1, this.gameStage, () => {
+                    if (!flag_treasureTweenLeft) {
+                        this.gameStage.transform.localRotationEulerZ += 4;
+                        this.gameStage.transform.localPositionX += 0.03;
+                    }
+                    else {
+                        this.gameStage.transform.localRotationEulerZ -= 4;
+                        this.gameStage.transform.localPositionX -= 0.03;
+                    }
+                    // change direction
+                    if (!flag_treasureTweenLeft && this.gameStage.transform.localRotationEulerZ > 12) {
+                        flag_treasureTweenLeft = true;
+                    }
+                    else if (flag_treasureTweenLeft && this.gameStage.transform.localRotationEulerZ < -12) {
+                        flag_treasureTweenLeft = false;
+                    }
+                });
+                // 宝箱盖子打开动画
+                Laya.timer.frameOnce(40, this.gameStage, () => {
+                    this.gameStage.transform.localRotationEulerZ = 0;
+                    this.gameStage.transform.localPositionX = 0;
+                    // 清除上一轮动画
+                    Laya.timer.clearAll(this.gameStage);
+                    // 锁击飞
+                    var lockRigid: Laya.Rigidbody3D = this.gameStage.getChildByName("lock").getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D;
+                    lockRigid.isKinematic = false;
+                    Laya.timer.frameOnce(1, this, () => {
+                        lockRigid.angularVelocity = new Laya.Vector3(Math.random() * 5, Math.random() * 5, Math.random() * 5);
+                        lockRigid.linearVelocity = new Laya.Vector3((Math.random() - 0.5) * 2, Math.random() * 3, Math.random() * 0.1);
+                    });
+                    var tmpCnt: number = 0;
+                    Laya.timer.frameLoop(1, this.gameStage, () => {
+                        tmpCnt++;
+                        // 翻盖
+                        var treasureTop: Laya.MeshSprite3D = this.gameStage.getChildByName("top") as Laya.MeshSprite3D;
+                        var treasureBottom: Laya.MeshSprite3D = this.gameStage.getChildByName("bottom") as Laya.MeshSprite3D;
+                        if (treasureTop.transform.localRotationEulerX > -100) {
+                            treasureTop.transform.localRotationEulerX -= 5;
+                        }
+                        // 宝箱整体
+                        if (tmpCnt <= 20) {
+                            this.gameStage.transform.localPositionY -= 0.005;
+                            treasureTop.transform.localRotationEulerY -= 0.5;
+                            treasureBottom.transform.localRotationEulerY -= 0.5;
+                        }
+                        else if (tmpCnt <= 25) {
+                            this.gameStage.transform.localPositionY += 0.2;
+                            treasureTop.transform.localRotationEulerY += 2;
+                            treasureBottom.transform.localRotationEulerY += 2;
+                        }
+                        else if (tmpCnt <= 35) {
+                            this.gameStage.transform.localPositionY -= 0.1;
+                        }
+                        else {
+                            Laya.timer.clearAll(this.gameStage);
+                            // open next stage
+                            Laya.timer.frameOnce(90, this, this.nextStage);
+                        }
+                    });
+                });
+            });
+        }
+        // not win yet
+        else {
+            // 击中动画
+            if (this.treasureHitState === 1) {
+                this.treasureHitState = 2;
+                var tmpCntHit: number = 0;
+                Laya.timer.frameLoop(1, this.gameStage, () => {
+                    tmpCntHit++;
+                    if (tmpCntHit <= 2) {
+                        this.gameStage.transform.localRotationEulerZ += 4;
+                        this.gameStage.transform.localPositionX += 0.03;
+                    }
+                    else if (tmpCntHit <= 6) {
+                        this.gameStage.transform.localRotationEulerZ -= 4;
+                        this.gameStage.transform.localPositionX -= 0.03;
+                    }
+                    else if (tmpCntHit <= 8) {
+                        this.gameStage.transform.localRotationEulerZ += 4;
+                        this.gameStage.transform.localPositionX += 0.03;
+                    }
+                    else {
+                        this.treasureHitState = 0;
+                        Laya.timer.clearAll(this.gameStage);
+                    }
+                });
+            }
         }
     }
 
@@ -885,8 +1088,11 @@ export default class GameScene extends ui.game.GameSceneUI {
 
     /** start next stage */
     nextStage() {
+        // clear mission win animation
+        Laya.timer.clearAll(this.missionWin);
+        // next
         this.missionIdx++;
-        if (this.missionIdx > 5) {
+        if (this.missionIdx > 5) {  // 宝箱开启，设置为6
             this.passStage();
         }
         else {
@@ -1043,16 +1249,19 @@ export default class GameScene extends ui.game.GameSceneUI {
     private createBullet() {
         // update counter
         this.currBulletNum++;
-        this.label_ballNum.changeText("x" + (this.MaxBulletNum - this.currBulletNum));
-        // 测试接口开始 <========================
-        if (!HomeView.instance.isTest) {
-            // 测试接口结束 <========================
-            if (this.ballBox && (this.MaxBulletNum - this.currBulletNum + 1) >= 1 && (this.MaxBulletNum - this.currBulletNum + 1) <= 10) {
-                ((this.ballBox.getChildByName("CannonBall" + (this.MaxBulletNum - this.currBulletNum + 1) + "_0") as Laya.MeshSprite3D).meshRenderer.material as Laya.PBRSpecularMaterial).albedoColorA = 0;
-            }
+        /** 常规关卡 */
+        if (this.missionIdx >= 1 && this.missionIdx <= 5) {
+            this.label_ballNum.changeText("x" + (this.MaxBulletNum - this.currBulletNum));
             // 测试接口开始 <========================
+            if (!HomeView.instance.isTest) {
+                // 测试接口结束 <========================
+                if (this.ballBox && (this.MaxBulletNum - this.currBulletNum + 1) >= 1 && (this.MaxBulletNum - this.currBulletNum + 1) <= 10) {
+                    ((this.ballBox.getChildByName("CannonBall" + (this.MaxBulletNum - this.currBulletNum + 1) + "_0") as Laya.MeshSprite3D).meshRenderer.material as Laya.PBRSpecularMaterial).albedoColorA = 0;
+                }
+                // 测试接口开始 <========================
+            }
+            // 测试接口结束 <========================
         }
-        // 测试接口结束 <========================
 
         // play sound
         if (Laya.Browser.onMiniGame && Global.gameData.soundEnabled) {
@@ -1064,7 +1273,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         }
 
         // 炮弹用尽，死亡倒计时
-        if (this.currBulletNum >= this.MaxBulletNum) {
+        if (this.currBulletNum >= this.MaxBulletNum && !this.flag_missionWin) {
             this.box_scene3D.off(Laya.Event.CLICK, this, this.onClick);
             Laya.timer.frameOnce(30, this, () => {
                 this.box_countdown.visible = true;
@@ -1077,7 +1286,9 @@ export default class GameScene extends ui.game.GameSceneUI {
                 else {
                     this.btn_revive.visible = true;
                 }
-                Laya.timer.frameLoop(1, this, this.stageFailCountDown);
+                if (!this.flag_missionWin) {
+                    Laya.timer.frameLoop(1, this, this.stageFailCountDown);
+                }
             });
         }
 

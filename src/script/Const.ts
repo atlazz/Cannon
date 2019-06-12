@@ -50,7 +50,7 @@ export const StageTexUrl: string[] = [
     // stand
     "res/stage/out/materials/mutou_06.jpg",
     // target wood
-    "res/stage/out/materials/box_13.png",
+    "res/stage/out/materials/stack_texture.jpg",
     // target TNT
     "res/stage/out/materials/TNT.png",
 ]
@@ -99,13 +99,14 @@ export const CannonBallInitPos: Laya.Vector3 = new Laya.Vector3(-0.01, 0.05, -0.
 export const CannonBallInitScale: Laya.Vector3 = new Laya.Vector3(25, 25, 25);
 
 /** cdn */
-export const cdnUrl: string = "https://static.miniant.cn/cannon/res_v104.zip";
+export const cdnUrl: string = "https://static.miniant.cn/cannon/res_v107.zip";
 
 /** sound */
 export const soundUrl: string = "res/audio/shoot.mp3";
 
 /** treasure */
 export const treasureUrl: string = "res/treasure/treasure.lh";
+// export const currencyUrl: string = "res/treasure/treasure.lh";
 
 /******** bullet ********/
 // bullet mesh model res url

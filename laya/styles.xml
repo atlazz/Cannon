@@ -74,4 +74,7 @@
    <item name="res/cannon_box" type="" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
    <item name="res/ball_box" type="" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
    <item name="res/ui/game/mask1.png" type="Sprite" compress="0" pack="0" quality="80" props="" picType="0" scale="0"/>
+   <item name="res/treasure" type="" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="res/currency" type="" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="res/currency/Assets/currency.jpg" type="Sprite" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
 </res>

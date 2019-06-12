@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":138,
-    "selecteID":142,
+    "selectedBox":35,
+    "selecteID":66,
     "searchKey":"View",
     "props":{"width":720,"top":0,"sceneWidth":720,"sceneHeight":1280,"sceneColor":"#000000","runtime":"script/runtime/GameScene.ts","right":0,"left":0,"height":1280,"bottom":0},
     "nodeParent":-1,
@@ -35,13 +35,14 @@
             "props":{"width":720,"visible":false,"var":"box_UI","top":0,"mouseThrough":true,"centerX":0,"bottom":0},
             "nodeParent":2,
             "label":"box_UI",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":35,
             "child":[
                 {
+                    "x":30,
                     "type":"Box",
                     "searchKey":"Box,box_level",
                     "props":{"width":480,"var":"box_level","top":120,"height":97,"centerX":0},
@@ -177,6 +178,7 @@
                         }]
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "searchKey":"Label,label_ballNum",
                     "props":{"var":"label_ballNum","text":"x10","left":80,"fontSize":50,"color":"#ffffff","centerY":470,"bold":true},
@@ -190,6 +192,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,btn_cannonOpen",
                     "props":{"visible":false,"var":"btn_cannonOpen","skin":"res/ui/game/btn_cannon.png","scaleY":1.5,"scaleX":1.5,"centerX":0,"bottom":50},
@@ -216,6 +219,7 @@
                         }]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,btn_rewardCannon",
                     "props":{"visible":false,"var":"btn_rewardCannon","skin":"res/ui/game/RC_1.png","scaleY":1.5,"scaleX":1.5,"right":50,"centerY":330,"anchorY":0.5,"anchorX":0.5},
@@ -255,6 +259,7 @@
                         }]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,btn_rewardBullet",
                     "props":{"visible":false,"var":"btn_rewardBullet","skin":"res/ui/game/RB_1.png","scaleY":1.5,"scaleX":1.5,"left":50,"centerY":330,"anchorY":0.5,"anchorX":0.5},
@@ -307,9 +312,10 @@
                         }]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,missionWin",
-                    "props":{"visible":false,"var":"missionWin","skin":"res/ui/game/grade_0_CN.png","scaleY":1.5,"scaleX":1.5,"centerY":-200,"centerX":0},
+                    "props":{"visible":false,"var":"missionWin","skin":"res/ui/game/grade_0_CN.png","scaleY":1.5,"scaleX":1.5,"centerY":-200,"centerX":0,"anchorY":0.5,"anchorX":0.5},
                     "nodeParent":35,
                     "label":"missionWin",
                     "isDirectory":false,
@@ -320,6 +326,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,btn_back",
                     "props":{"visible":true,"var":"btn_back","top":20,"skin":"res/ui/game/btn_back.png","scaleY":1.2,"scaleX":1.2,"left":20},
@@ -334,6 +341,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Box",
                     "searchKey":"Box,box_countdown",
                     "props":{"width":720,"visible":false,"var":"box_countdown","height":1280,"centerY":0,"centerX":0},
