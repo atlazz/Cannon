@@ -512,6 +512,11 @@ export default class GameScene extends ui.game.GameSceneUI {
             if (this.turret && this.cannon && !this.cannon.destroyed) {
                 this.turret.transform.localRotationEuler = Const.TurretInitLocalRot.clone();
             }
+            // clear reward cannon
+            if (this.isRewardCannon) {
+                this.setCannon(Global.gameData.cannonType);
+                this.isRewardCannon = false;
+            }
             // clear timer
             this.clearStageTimer();
             HomeView.openInstance();
