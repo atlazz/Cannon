@@ -88,10 +88,15 @@ export default class BulletScript extends Laya.Script3D {
         if (this.rigidbody.overrideGravity) {
             this.rigidbody.gravity = new Laya.Vector3(0, 0, 0);
         }
+        
+        this.rigidbody.canCollideWith = 1;
+        this.rigidbody.collisionGroup = 4;
 
         // bullet trigger handle
         if (this.bullet.name === "bulletTrigger") {
             this.rigidbody.isTrigger = true;
+            // 避免子弹以及隐形子弹碰撞检测
+            this.rigidbody.collisionGroup = 5;
             // quick moving detecion
             this.rigidbody.ccdMotionThreshold = 0.0001;
             // 半径越小越精准
@@ -104,20 +109,23 @@ export default class BulletScript extends Laya.Script3D {
             this.recover();
         }
     }
-
-    onTriggerEnter(other: Laya.PhysicsComponent): void {
-        this.triggerHandler(other);
-    }
-
-    private triggerHandler(other: Laya.PhysicsComponent) {
+    
+    onCollisionEnter(collision: Laya.Collision) {
         /** 宝箱处理 */
-        if (other.owner.name === "top" || other.owner.name === "bottom") {
+        if (collision.other.owner.name === "bottom" || collision.other.owner.name === "top") {
             if (GameScene.instance.treasureHitState === 0) {
                 GameScene.instance.treasureHitState = 1;
             }
             GameScene.instance.treasureHitCnt++;
             this.destroy();
         }
+    }
+
+    onTriggerEnter(other: Laya.PhysicsComponent): void {
+        this.triggerHandler(other);
+    }
+
+    private triggerHandler(other: Laya.PhysicsComponent) {
         /** reward bullet */
         if (this.isReward) {
             /** black hole */

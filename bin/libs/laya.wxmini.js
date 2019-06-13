@@ -454,11 +454,13 @@ var MiniFileMgr=(function(){
 		filePath=URL.getAdptedFilePath(filePath);
 		//**修改开始 */
 		var nativeFilePath = filePath;
-		var fileInfo = MiniFileMgr.getFileInfo(filePath);
-		if(fileInfo){
-			nativeFilePath = MiniFileMgr.getFileNativePath(fileInfo.md5);
+		if (filePath.indexOf("http://") == -1 && filePath.indexOf("https://") == -1) {
+			var fileInfo = MiniFileMgr.getFileInfo(filePath);
+			if (fileInfo) {
+				nativeFilePath = MiniFileMgr.getFileNativePath(fileInfo.md5);
+			}
 		}
-		MiniFileMgr.fs.readFile({filePath:nativeFilePath,encoding:encoding,success:function (data){
+		MiniFileMgr.fs.readFile({filePath: nativeFilePath, encoding: encoding, success: function (data) {
 		// MiniFileMgr.fs.readFile({filePath:filePath,encoding:encoding,success:function (data){
 		//**修改结束 */
 			if (filePath.indexOf("http://")!=-1 || filePath.indexOf("https://")!=-1){

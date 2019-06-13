@@ -3,7 +3,7 @@
 	"data":{
 		"type":"Sprite3D",
 		"props":{
-			"name":"Cannon_11",
+			"name":"CanonDefault_Anti",
 			"active":true,
 			"isStatic":false,
 			"layer":0,
@@ -29,7 +29,7 @@
 			{
 				"type":"MeshSprite3D",
 				"props":{
-					"name":"Base_0",
+					"name":"base_0",
 					"active":true,
 					"isStatic":false,
 					"layer":0,
@@ -39,22 +39,92 @@
 						0
 					],
 					"rotation":[
-						0,
-						0,
-						0,
-						-1
+						0.7071067,
+						-3.090862E-08,
+						3.090862E-08,
+						-0.7071068
 					],
 					"scale":[
-						1,
-						1,
-						1
+						21.1806,
+						21.18058,
+						14.12039
 					],
-					"meshPath":"lightning/Cannon_11-Base_0.lm",
+					"meshPath":"default/CanonDefault-base_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"lightning/cannon_lightning.lmat"
+							"path":"default/CanonDefault.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"base_02_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0,
+						0,
+						0
+					],
+					"rotation":[
+						0.7071067,
+						-3.090862E-08,
+						3.090862E-08,
+						-0.7071068
+					],
+					"scale":[
+						14.1204,
+						14.12039,
+						14.12039
+					],
+					"meshPath":"default/CanonDefault-base_02_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"default/CanonDefault.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"panel_01_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0,
+						0,
+						0
+					],
+					"rotation":[
+						0.7071067,
+						-3.090862E-08,
+						3.090862E-08,
+						-0.7071068
+					],
+					"scale":[
+						14.1204,
+						14.12039,
+						14.12039
+					],
+					"meshPath":"default/CanonDefault-panel_01_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"default/CanonDefault.lmat"
 						}
 					]
 				},
@@ -69,27 +139,27 @@
 					"isStatic":false,
 					"layer":0,
 					"position":[
-						0,
-						0.00156027,
-						0.0002982557
+						2.296065E-10,
+						0.002626392,
+						-0.000308
 					],
 					"rotation":[
-						0,
-						0,
-						0,
-						-1
+						0.8402806,
+						-3.725292E-08,
+						2.970774E-08,
+						-0.5421518
 					],
 					"scale":[
-						1,
-						1,
-						1
+						15.53244,
+						15.53242,
+						15.53242
 					],
-					"meshPath":"lightning/Cannon_11-Turret_0.lm",
+					"meshPath":"lightning/CanonNerf-mesh_0.lm",
 					"enableRender":true,
 					"materials":[
 						{
 							"type":"Laya.BlinnPhongMaterial",
-							"path":"lightning/cannon_lightning.lmat"
+							"path":"lightning/special_skin_nerf.lmat"
 						}
 					]
 				},

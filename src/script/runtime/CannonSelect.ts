@@ -188,9 +188,11 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
         if (!this.unlockState[idx]) {
             if (Const.CannonSelectTextList[cannonIdx]["unlockLvl"] >= 999) {
                 this.label_unlockMsg.changeText("敬请期待");
+                this.btn_try.visible = false;
             }
             else {
                 this.label_unlockMsg.changeText("完成关卡 " + (Global.gameData.stageIndex - 1) + "/" + Const.CannonSelectTextList[cannonIdx]["unlockLvl"] + " 解锁");
+                this.btn_try.visible = true;
             }
             this.btn_select.visible = false;
             this.btn_unlock.visible = true;
@@ -202,7 +204,6 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
                 this.btn_try.gray = false;
                 this.label_try.changeText("免费试用");
             }
-            this.btn_try.visible = true;
         }
         else {
             this.label_unlockMsg.changeText("已解锁");
@@ -449,7 +450,7 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
 
         /** cannon select */
         this.btn_select.on(Laya.Event.CLICK, this, () => {
-            if (this.isReward || Global.gameData.cannonType !== this.selectType) {
+            if (this.isReward || Global.gameData.cannonType !== Const.CannonSelectIconList[this.list_Icon.selectedIndex].index) {
                 // update
                 this.isClick = true;
                 this.btn_select.gray = true;
@@ -467,12 +468,25 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
             }
             else {
                 // 1: video
-                (Global.config.try_cannon == 1) && Reward.instance.video({
-                    pos: Const.RewardPos.Cannon,
-                    success: () => {
-                        this.onClick_try();
-                    },
-                });
+                if (Global.config.revive == 1) {
+                    // 未超过每天视频观看次数
+                    if (!Reward.instance.isOverVideo()) {
+                        Reward.instance.video({
+                            pos: Const.RewardPos.Cannon,
+                            success: () => {
+                                this.onClick_try();
+                            },
+                        });
+                    }
+                    else {
+                        Reward.instance.share({
+                            pos: Const.RewardPos.Cannon,
+                            success: () => {
+                                this.onClick_try();
+                            },
+                        });
+                    }
+                }
                 // 2: share
                 (Global.config.try_cannon == 2) && Reward.instance.share({
                     pos: Const.RewardPos.Cannon,

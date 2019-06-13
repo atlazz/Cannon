@@ -119,6 +119,7 @@ export default class GameScene extends ui.game.GameSceneUI {
     public cannon: Laya.MeshSprite3D;
     private turret: Laya.MeshSprite3D;
     public turretInitPos: Laya.Vector3 = Const.CannonInitPos.clone();
+    public turretInitRot: Laya.Vector3;
     private isRecoil: boolean = false;
     private recoilTime: number;
     private MaxRecoilTime: number = 8;
@@ -295,7 +296,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         Laya.Sprite3D.load(Const.CannonResUrl[this.cannonType], Laya.Handler.create(this, (res) => {
             this.cannon = res.clone();
             this.scene3D.addChild(this.cannon);
-            this.cannon.name = "player";
+            // this.cannon.name = "player";
 
             this.cannon.transform.localPosition = Const.CannonInitPos.clone();
             this.cannon.transform.localRotationEuler = Const.CannonInitRot.clone();
@@ -303,6 +304,7 @@ export default class GameScene extends ui.game.GameSceneUI {
 
             this.turret = this.cannon.getChildByName("Turret_0") as Laya.MeshSprite3D;
             this.turretInitPos = this.turret.transform.position.clone();
+            this.turretInitRot = this.turret.transform.localRotationEuler.clone();
         }));
     }
 
@@ -375,7 +377,7 @@ export default class GameScene extends ui.game.GameSceneUI {
             this.hideUI();
             // reset cannon rotation
             if (this.turret && this.cannon && !this.cannon.destroyed) {
-                this.turret.transform.localRotationEuler = Const.TurretInitLocalRot.clone();
+                this.turret.transform.localRotationEuler = this.turretInitRot.clone();
             }
             // clear reward cannon
             if (this.isRewardCannon) {
@@ -400,15 +402,31 @@ export default class GameScene extends ui.game.GameSceneUI {
             else {
                 console.log("reward bullet onclick");
                 // 1: video
-                (Global.config.try_ball == 1) && Reward.instance.video({
-                    pos: Const.RewardPos.Bullet,
-                    success: () => {
-                        console.log("reward bullet video onclick");
-                        this.onClick_rewardBullet();
-                    },
-                    complete: () => {
+                if (Global.config.try_ball == 1) {
+                    // 未超过每天视频观看次数
+                    if (!Reward.instance.isOverVideo()) {
+                        Reward.instance.video({
+                            pos: Const.RewardPos.Bullet,
+                            success: () => {
+                                console.log("reward bullet video onclick");
+                                this.onClick_rewardBullet();
+                            },
+                            complete: () => {
+                            }
+                        });
                     }
-                });
+                    else {
+                        Reward.instance.share({
+                            pos: Const.RewardPos.Bullet,
+                            success: () => {
+                                console.log("reward bullet share onclick");
+                                this.onClick_rewardBullet();
+                            },
+                            complete: () => {
+                            }
+                        });
+                    }
+                }
                 // 2: share
                 (Global.config.try_ball == 2) && Reward.instance.share({
                     pos: Const.RewardPos.Bullet,
@@ -429,14 +447,29 @@ export default class GameScene extends ui.game.GameSceneUI {
             }
             else {
                 // 1: video
-                (Global.config.try_cannon == 1) && Reward.instance.video({
-                    pos: Const.RewardPos.Cannon,
-                    success: () => {
-                        this.onClick_rewardCannon();
-                    },
-                    complete: () => {
+                if (Global.config.try_cannon == 1) {
+                    // 未超过每天视频观看次数
+                    if (!Reward.instance.isOverVideo()) {
+                        Reward.instance.video({
+                            pos: Const.RewardPos.Cannon,
+                            success: () => {
+                                this.onClick_rewardCannon();
+                            },
+                            complete: () => {
+                            }
+                        });
                     }
-                });
+                    else {
+                        Reward.instance.share({
+                            pos: Const.RewardPos.Cannon,
+                            success: () => {
+                                this.onClick_rewardCannon();
+                            },
+                            complete: () => {
+                            }
+                        });
+                    }
+                }
                 // 2: share
                 (Global.config.try_cannon == 2) && Reward.instance.share({
                     pos: Const.RewardPos.Cannon,
@@ -473,21 +506,41 @@ export default class GameScene extends ui.game.GameSceneUI {
             }
             else {
                 // 1: video
-                (Global.config.try_cannon == 1) && Reward.instance.video({
-                    pos: Const.RewardPos.Revive,
-                    success: () => {
-                        this.isRevive = true;
-                        this.hideReviveUI();
-                        this.currBulletNum -= 3;
-                        this.label_ballNum.changeText("x3");
-                        this.box_scene3D.on(Laya.Event.CLICK, this, this.onClick);
-                        this.gameStage.frameLoop(1, this, this.stageLooping);
-                    },
-                    complete: () => {
+                if (Global.config.revive == 1) {
+                    // 未超过每天视频观看次数
+                    if (!Reward.instance.isOverVideo()) {
+                        Reward.instance.video({
+                            pos: Const.RewardPos.Revive,
+                            success: () => {
+                                this.isRevive = true;
+                                this.hideReviveUI();
+                                this.currBulletNum -= 3;
+                                this.label_ballNum.changeText("x3");
+                                this.box_scene3D.on(Laya.Event.CLICK, this, this.onClick);
+                                this.gameStage.frameLoop(1, this, this.stageLooping);
+                            },
+                            complete: () => {
+                            }
+                        });
                     }
-                });
+                    else {
+                        Reward.instance.share({
+                            pos: Const.RewardPos.Revive,
+                            success: () => {
+                                this.isRevive = true;
+                                this.hideReviveUI();
+                                this.currBulletNum -= 3;
+                                this.label_ballNum.changeText("x3");
+                                this.box_scene3D.on(Laya.Event.CLICK, this, this.onClick);
+                                this.gameStage.frameLoop(1, this, this.stageLooping);
+                            },
+                            complete: () => {
+                            }
+                        });
+                    }
+                }
                 // 2: share
-                (Global.config.try_cannon == 2) && Reward.instance.share({
+                (Global.config.revive == 2) && Reward.instance.share({
                     pos: Const.RewardPos.Revive,
                     success: () => {
                         this.isRevive = true;
@@ -510,7 +563,7 @@ export default class GameScene extends ui.game.GameSceneUI {
             this.hideUI();
             // reset cannon rotation
             if (this.turret && this.cannon && !this.cannon.destroyed) {
-                this.turret.transform.localRotationEuler = Const.TurretInitLocalRot.clone();
+                this.turret.transform.localRotationEuler = this.turretInitRot.clone();
             }
             // clear reward cannon
             if (this.isRewardCannon) {
@@ -607,7 +660,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.bulletType = this.cannonType;
         // reset turret rotation
         if (this.cannon && !this.cannon.destroyed && this.turret) {
-            this.turret.transform.localRotationEuler = Const.TurretInitLocalRot.clone();
+            this.turret.transform.localRotationEuler = this.turretInitRot.clone();
         }
 
 
@@ -773,15 +826,12 @@ export default class GameScene extends ui.game.GameSceneUI {
                 /** 宝箱关卡 */
                 else {
                     this.gameStage.name = "treasure";
+                    this.gameStage.transform.localPositionZ += 0.3;
 
                     // reset
                     this.treasureHitCnt = 0;
                     this.treasureFrameCnt = 0;
                     this.treasureHitState = 0;
-
-                    // 加载宝石
-                    // Laya.Sprite3D.load(Const.currencyUrl, Laya.Handler.create(this, (res) => {
-                    // }));
 
                     // 延时误点
                 }
@@ -1018,35 +1068,52 @@ export default class GameScene extends ui.game.GameSceneUI {
                     this.gameStage.transform.localPositionX = 0;
                     // 清除上一轮动画
                     Laya.timer.clearAll(this.gameStage);
-                    // 锁击飞
-                    var lockRigid: Laya.Rigidbody3D = this.gameStage.getChildByName("lock").getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D;
-                    lockRigid.isKinematic = false;
-                    Laya.timer.frameOnce(1, this, () => {
-                        lockRigid.angularVelocity = new Laya.Vector3(Math.random() * 5, Math.random() * 5, Math.random() * 5);
-                        lockRigid.linearVelocity = new Laya.Vector3((Math.random() - 0.5) * 2, Math.random() * 3, Math.random() * 0.1);
-                    });
                     var tmpCnt: number = 0;
+                    var posScaleX: number = 0.001;
+                    var posScaleZ: number = -0.002;
+                    var rotScaleX: number = 30;
+                    var rotScaleZ: number = 30;
+                    var treasureTop: Laya.MeshSprite3D = this.gameStage.getChildByName("top") as Laya.MeshSprite3D;
+                    var treasureBottom: Laya.MeshSprite3D = this.gameStage.getChildByName("bottom") as Laya.MeshSprite3D;
+                    var treasureLock: Laya.MeshSprite3D = this.gameStage.getChildByName("lock") as Laya.MeshSprite3D;
+                    // 锁解开
+                    treasureLock.transform.localRotationEulerX -= 45;
                     Laya.timer.frameLoop(1, this.gameStage, () => {
                         tmpCnt++;
                         // 翻盖
-                        var treasureTop: Laya.MeshSprite3D = this.gameStage.getChildByName("top") as Laya.MeshSprite3D;
-                        var treasureBottom: Laya.MeshSprite3D = this.gameStage.getChildByName("bottom") as Laya.MeshSprite3D;
                         if (treasureTop.transform.localRotationEulerX > -100) {
                             treasureTop.transform.localRotationEulerX -= 5;
                         }
                         // 宝箱整体
                         if (tmpCnt <= 20) {
                             this.gameStage.transform.localPositionY -= 0.005;
-                            treasureTop.transform.localRotationEulerY -= 0.5;
-                            treasureBottom.transform.localRotationEulerY -= 0.5;
                         }
-                        else if (tmpCnt <= 25) {
-                            this.gameStage.transform.localPositionY += 0.2;
-                            treasureTop.transform.localRotationEulerY += 2;
-                            treasureBottom.transform.localRotationEulerY += 2;
-                        }
-                        else if (tmpCnt <= 35) {
-                            this.gameStage.transform.localPositionY -= 0.1;
+                        else if (tmpCnt <= 60) {
+                            if (tmpCnt <= 25) {
+                                this.gameStage.transform.localPositionY += 0.2;
+                            } else if (tmpCnt <= 35) {
+                                this.gameStage.transform.localPositionY -= 0.1;
+                            }
+                            for (let i = 1; i <= 9; i++) {
+                                var tmp = this.gameStage.getChildByName("currency_" + i) as Laya.MeshSprite3D;
+                                if (tmp) {
+                                    if (tmpCnt <= 25) {
+                                        tmp.transform.localPositionY += 0.003;
+                                    } else if (tmpCnt <= 35) {
+                                        tmp.transform.localPositionY += 0.002 + 0.1 / 50;
+                                    } else if (tmpCnt <= 40) {
+                                        tmp.transform.localPositionY -= 0.001;
+                                    } else if (tmpCnt <= 45) {
+                                        tmp.transform.localPositionY -= 0.002;
+                                    } else if (tmpCnt <= 60) {
+                                        tmp.transform.localPositionY -= 0.003;
+                                    }
+                                    tmp.transform.localPositionX += Const.treasureAngleX[i] * posScaleX;
+                                    tmp.transform.localPositionZ += Const.treasureAngleZ[i] * posScaleZ;
+                                    tmp.transform.localRotationEulerX += Const.treasureAngleX[i] * rotScaleX;
+                                    tmp.transform.localRotationEulerZ += Const.treasureAngleZ[i] * rotScaleZ;
+                                }
+                            }
                         }
                         else {
                             Laya.timer.clearAll(this.gameStage);
@@ -1218,9 +1285,14 @@ export default class GameScene extends ui.game.GameSceneUI {
 
         // set turret transform
         if (this.turret && this.cannon && !this.cannon.destroyed) {
-            this.turret.transform.localRotationEuler = Const.TurretInitLocalRot.clone();
+            this.turret.transform.localRotationEuler = this.turretInitRot.clone();
             if (flag_turretDirection) {
-                this.turret.transform.localRotationEulerX -= this.bulletDirection.y * 90;
+                if (this.cannon.name.indexOf("Anti") === -1) {
+                    this.turret.transform.localRotationEulerX -= this.bulletDirection.y * 90;
+                }
+                else {
+                    this.turret.transform.localRotationEulerX += this.bulletDirection.y * 90;
+                }
                 this.turret.transform.localRotationEulerY -= this.bulletDirection.x * 90;
             }
         }

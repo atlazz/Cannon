@@ -1,5 +1,3 @@
-import ws from "../utils/ws.js";
-
 const wx = window["wx"];
 
 /**修改laya.wxmini.js */
@@ -12,10 +10,12 @@ const wx = window["wx"];
 // 	filePath=URL.getAdptedFilePath(filePath);
 // 	//**修改开始 */
 // 	var nativeFilePath = filePath;
-// 	var fileInfo = MiniFileMgr.getFileInfo(filePath);
-// 	if(fileInfo){
-// 		nativeFilePath = MiniFileMgr.getFileNativePath(fileInfo.md5);
-// 	}
+//  if(filePath.indexOf("http://") == -1 && filePath.indexOf("https://") == -1){
+//     var fileInfo = MiniFileMgr.getFileInfo(filePath);
+//     if(fileInfo){
+//         nativeFilePath = MiniFileMgr.getFileNativePath(fileInfo.md5);
+//     }
+//  }
 // 	MiniFileMgr.fs.readFile({filePath:nativeFilePath,encoding:encoding,success:function (data){
 // 	//**修改结束 */
 // 			if (filePath.indexOf("http://")!=-1 || filePath.indexOf("https://")!=-1){
@@ -83,8 +83,6 @@ class Loader {
             complete && complete.runWith(false);
             return;
         }
-
-        ws.traceEvent('loadZip_start');
 
         this.failCount = 0;
         //解压并缓存
@@ -163,14 +161,7 @@ class Loader {
                     }
                     Laya.MiniFileMgr.filesListObj[readyUrl] = { md5: readyUrl, readyUrl: readyUrl, size: fileSize, times: Laya.Browser.now(), encoding: encoding };
                 }
-                //文件信息写入文件系统
-                wx.getFileSystemManager().writeFile({
-                    filePath: Laya.MiniFileMgr.fileNativeDir + "/" + Laya.MiniFileMgr.fileListName,
-                    encoding: 'utf8',
-                    data: JSON.stringify(Laya.MiniFileMgr.filesListObj),
-                });
-                this.log("filesListObj", Laya.MiniFileMgr.filesListObj);
-                ws.traceEvent('loadZip_succeed');
+                this.saveFileListObj();
                 complete && complete.runWith(true);
             },
             fail: (res: any) => {
@@ -184,8 +175,10 @@ class Loader {
                 //不能访问则创建文件夹
                 try {
                     wx.getFileSystemManager().accessSync(zipBaseDir);
-                    //清除zip包的文件夹
+                    //清除zip包的文件夹下的文件
                     this.cleanDir(zipBaseDir, excludeZipFileNames);
+                    //清除zip解压文件路径rootDir文件夹下的文件
+                    this.cleanDir(unzipFileDir + rootDir);
                 } catch (e) {
                     this.log("mkdir", zipBaseDir);
                     wx.getFileSystemManager().mkdir({ dirPath: zipBaseDir });
@@ -220,6 +213,7 @@ class Loader {
         } catch (e) {
             this.log("cleanDir stat fail");
         }
+        //遍历文件状态
         for (let filePath in statMap) {
             if (excludeFileNames && excludeFileNames.length) {
                 let readyUrl = filePath.replace(dirPath + "/", "");
@@ -238,6 +232,34 @@ class Loader {
                 },
             });
         }
+        //如果文件夹路径是laya本地缓存路径，从文件列表filesListObj里删除
+        if ((dirPath + "/").indexOf(Laya.MiniFileMgr.getFileNativePath("")) === 0) {
+            let fileListChangeFlag = false;
+            //相对文件夹
+            let dir = (dirPath + "/").replace(Laya.MiniFileMgr.getFileNativePath(""), "");
+            this.log("cleanDir: ", dir);
+            for (let readyUrl in Laya.MiniFileMgr.filesListObj) {
+                if (readyUrl.indexOf(dir) === 0) {
+                    fileListChangeFlag = true;
+                    let fileInfo = Laya.MiniFileMgr.filesListObj[readyUrl];
+                    Laya.MiniFileMgr.filesListObj['fileUsedSize'] = parseInt(Laya.MiniFileMgr.filesListObj['fileUsedSize']) - (parseInt(fileInfo.size) || 0);
+                    delete Laya.MiniFileMgr.filesListObj[readyUrl];
+                }
+            }
+            if (fileListChangeFlag && dir) {
+                this.saveFileListObj();
+            }
+        }
+    }
+
+    /**文件信息列表写入文件系统*/
+    private saveFileListObj() {
+        wx.getFileSystemManager().writeFile({
+            filePath: Laya.MiniFileMgr.fileNativeDir + "/" + Laya.MiniFileMgr.fileListName,
+            encoding: 'utf8',
+            data: JSON.stringify(Laya.MiniFileMgr.filesListObj),
+        });
+        this.log("filesListObj", Laya.MiniFileMgr.filesListObj);
     }
 
     /**从url解析出文件的字符编码*/

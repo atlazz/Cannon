@@ -1,6 +1,23 @@
 import GameConfig from "./GameConfig";
+import wx from "./script/utils/wx";
 class Main {
 	constructor() {
+		//强制更新
+		if (Laya.Browser.onMiniGame) {
+			const updateManager = wx.getUpdateManager();
+			updateManager.onUpdateReady(() => {
+				wx.showModal({
+					title: '更新提示',
+					content: '新版本已经准备好，是否重启应用？',
+					success: (res) => {
+						if (res.confirm) {
+							updateManager.applyUpdate();
+						}
+					}
+				});
+			});
+		}
+
 		//根据IDE设置初始化引擎		
 		if (window["Laya3D"]) Laya3D.init(GameConfig.width, GameConfig.height);
 		else Laya.init(GameConfig.width, GameConfig.height, Laya["WebGL"]);
@@ -19,9 +36,9 @@ class Main {
 
 		//激活资源版本控制，version.json由IDE发布功能自动生成，如果没有也不影响后续流程
 		Laya.ResourceVersion.enable("version.json", Laya.Handler.create(this, this.onVersionLoaded), Laya.ResourceVersion.FILENAME_VERSION);
-		
+
 		//重设高度
-        Laya.stage.height = Math.round(GameConfig.width * Laya.Browser.height / Laya.Browser.width);
+		        Laya.stage.height = Math.round(GameConfig.width * Laya.Browser.height / Laya.Browser.width);
 	}
 
 	onVersionLoaded(): void {

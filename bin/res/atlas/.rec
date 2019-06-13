@@ -54,13 +54,11 @@ D res/ball_box
 D res/bullet
 D res/cannon
 D res/cannon_effect
-D res/currency
 D res/scene
 D res/stage
 D res/texture
 D res/treasure
 D res/ui
-R A41E3D13 pngquant.exe
 D res/texture/navigator
 P A614D413 arrow.png
 P 9401CC40 blank.png
@@ -78,11 +76,13 @@ P 4B57CD19 arrowright.png
 P 38E87631 btn_1.png
 P D578AE50 btn_2.png
 P F2298BDD btn_back.png
-P A4534FA8 Cannon_02.png
 P 2B09EBBF Cannon_03.png
-P C7A6C439 Cannon_09.png
 P 38F5B28F Cannon_10.png
 P AC19B5A9 Cannon_22.png
+P 96C5C0C2 cannon_default.png
+P 639B4F5A cannon_dragon.png
+P 1A99265A cannon_light.png
+P 4354773D cannon_lion.png
 P 2CCA4907 CannonIconBG.png
 P 5817EDDC hole.png
 P C1BB43B9 lock.png

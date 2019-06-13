@@ -1,5 +1,5 @@
 /** version */
-export const VERSION = "1.0.7";
+export const VERSION = "1.0.8";
 
 /************** 后台设置参数 *******************/
 /** 分享位置 */
@@ -99,14 +99,15 @@ export const CannonBallInitPos: Laya.Vector3 = new Laya.Vector3(-0.01, 0.05, -0.
 export const CannonBallInitScale: Laya.Vector3 = new Laya.Vector3(25, 25, 25);
 
 /** cdn */
-export const cdnUrl: string = "https://static.miniant.cn/cannon/res_v107.zip";
+export const cdnUrl: string = "https://static.miniant.cn/cannon/res_v108.zip";
 
 /** sound */
 export const soundUrl: string = "res/audio/shoot.mp3";
 
 /** treasure */
 export const treasureUrl: string = "res/treasure/treasure.lh";
-// export const currencyUrl: string = "res/treasure/treasure.lh";
+export const treasureAngleX: number[] = [-1.6, -1.4, -0.8, 0.1, 0.6, 1.2, 1, -0.8, -0.45];
+export const treasureAngleZ: number[] = [0, 0.2, 0.5, 0.6, 0.3, 0.2, 0.1, 0, 0.8];
 
 /******** bullet ********/
 // bullet mesh model res url
@@ -129,19 +130,22 @@ export const BulletRadius: number = 0.08;
 export const CannonSelectIconBgUrl = "res/ui/cannonSelect/CannonIconBG.png";
 export const CannonSelectIconList = [
     {index: -1},    // 头部
-    {index: 1, icon: "res/ui/cannonSelect/Cannon_09.png"},
+    {index: 1, icon: "res/ui/cannonSelect/cannon_default.png"},
     {index: 3, icon: "res/ui/cannonSelect/Cannon_10.png"},
+    {index: 7, icon: "res/ui/cannonSelect/cannon_dragon.png"},
     {index: 2, icon: "res/ui/cannonSelect/Cannon_03.png"},
-    // {index: 5, icon: "res/ui/cannonSelect/Cannon_08.png"},
-    {index: 6, icon: "res/ui/cannonSelect/Cannon_02.png"},
+    {index: 6, icon: "res/ui/cannonSelect/cannon_light.png"},
+    {index: 5, icon: "res/ui/cannonSelect/cannon_lion.png"},
     {index: 4, icon: "res/ui/cannonSelect/Cannon_22.png"},
     {index: -1},    // 尾部
 ]
 export const CannonSelectTextList = {
     1: {name: "普通炮", feature: "普通的大炮，普通的威力，就很普通", unlockLvl: 0},
-    3: {name: "冰雪奇缘", feature: "更强的威力，将方块变成冰块", unlockLvl: 7},
-    2: {name: "双重射击", feature: "两炮齐发，威力强大，", unlockLvl: 14},
-    6: {name: "闪电风暴", feature: "威力无比，一发入魂", unlockLvl: 999},
+    3: {name: "冰雪奇缘", feature: "更强的威力，将方块变成冰块", unlockLvl: 5},
+    7: {name: "龙门大炮", feature: "威力超强，拥有它，你就是龙的传人", unlockLvl: 10},
+    2: {name: "双重射击", feature: "两炮齐发，威力强大", unlockLvl: 15},
+    6: {name: "闪电风暴", feature: "威力无比，一发入魂", unlockLvl: 20},
+    5: {name: "黄金狮子头", feature: "河东狮吼，十分暴躁", unlockLvl: 999},
     4: {name: "无敌散弹炮", feature: "终极武器，用一次爽一次", unlockLvl: 999},
 }
 
@@ -152,22 +156,25 @@ export const enum CannonType {
     SHOTGUN_X4 = 4,
     BOMB = 5,
     LIGHTNING = 6,
+    DRAGON = 7,
 }
 export const CannonResUrl = {
     1: "res/cannon/Cannon_Default.lh",      // DEFAULT
     2: "res/cannon/Cannon_ShotgunX2.lh",    // SHOTGUN_X2
     3: "res/cannon/Cannon_Frozen.lh",       // FROZEN
     4: "res/cannon/Cannon_Reward.lh",       // SHOTGUN_X4
-    5: "res/cannon/Cannon_Bomb.lh",         // BOMB
+    5: "res/cannon/Cannon_Lion.lh",         // LION(BOMB)
     6: "res/cannon/Cannon_Lightning.lh",    // LIGHTNING
+    7: "res/cannon/Cannon_Dragon.lh",       // DRAGON
 };
 export const BulletTextureUrl = {
-    1: "res/bullet/ball_texture/normal.jpg",    // DEFAULT
+    1: "res/bullet/ball_texture/ball_default.jpg",    // DEFAULT
     2: "res/bullet/ball_texture/shotgun.jpg",   // SHOTGUN_X2
     3: "res/bullet/ball_texture/ice.jpg",       // FROZEN
     4: "res/bullet/ball_texture/shotgun.jpg",   // SHOTGUN_X4
     5: "res/bullet/ball_texture/boom.jpg",      // BOMB
     6: "res/bullet/ball_texture/lightning.jpg", // LIGHTNING
+    7: "res/bullet/ball_texture/ball_default.jpg", // LIGHTNING
 }
 // scale
 export const BulletScale = {
@@ -179,6 +186,7 @@ export const BulletScale = {
         4: 1,       // REWARD SHOTGUN_X4
         5: 1,       // BOMB
         6: 1,       // LIGHTNING
+        7: 1,       // DRAGON
     },
     /** reward bullet */
     1: {
@@ -195,6 +203,7 @@ export const BulletMass = {
         4: 20,      // REWARD SHOTGUN_X4
         5: 20,      // BOMB
         6: 100,     // LIGHTNING
+        7: 35,      // DRAGON
     },
     /** reward bullet */
     1: {
@@ -211,6 +220,7 @@ export const BulletVelocity = {
         4: 30,      // REWARD SHOTGUN_X4
         5: 30,      // BOMB
         6: 30,      // LIGHTNING
+        7: 30,      // LIGHTNING
     },
     /** reward bullet */
     1: {
@@ -227,6 +237,7 @@ export const BulletTrigger = {
         4: false,      // REWARD SHOTGUN_X4
         5: false,      // BOMB
         6: false,      // LIGHTNING
+        7: false,      // DRAGON
     },
     /** reward bullet */
     1: {
@@ -243,6 +254,7 @@ export const BulletOverrideGravity = {
         4: false,      // REWARD SHOTGUN_X4
         5: false,      // BOMB
         6: false,      // LIGHTNING
+        7: false,      // DRAGON
     },
     /** reward bullet */
     1: {
