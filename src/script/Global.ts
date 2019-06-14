@@ -56,6 +56,7 @@ let Global = {
         revive: 1,
         bulletRewardType: 1, // balckhole
         cannonRewardType: 4, // shotgun x4
+        hasTreasure: true,  // 宝箱是否开启
     },
     user: {},
     audio: {

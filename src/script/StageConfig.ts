@@ -136,27 +136,27 @@ export const Stage = {
 			1: {
 				min: 1,
 				max: 1,
-				ball_add: 6,
+				ball_add: 10,
 			},
 			2: {
 				min: 2,
 				max: 2,
-				ball_add: 5,
+				ball_add: 8,
 			},
 			3: {
 				min: 3,
 				max: 3,
-				ball_add: 5,
+				ball_add: 8,
 			},
 			4: {
 				min: 4,
 				max: 4,
-				ball_add: 5,
+				ball_add: 8,
 			},
 			5: {
 				min: 5,
 				max: 5,
-				ball_add: 5,
+				ball_add: 6,
 			},
 		},
 		// stage
@@ -165,27 +165,27 @@ export const Stage = {
 			1: {
 				min: 6,
 				max: 6,
-				ball_add: 3,
+				ball_add: 6,
 			},
 			2: {
 				min: 7,
 				max: 7,
-				ball_add: 3,
+				ball_add: 5,
 			},
 			3: {
 				min: 8,
 				max: 8,
-				ball_add: 3,
+				ball_add: 5,
 			},
 			4: {
 				min: 9,
 				max: 9,
-				ball_add: 3,
+				ball_add: 5,
 			},
 			5: {
 				min: 10,
 				max: 10,
-				ball_add: 2,
+				ball_add: 4,
 			},
 		},
 		// stage
@@ -194,22 +194,22 @@ export const Stage = {
 			1: {
 				min: 11,
 				max: 11,
-				ball_add: 2,
+				ball_add: 5,
 			},
 			2: {
 				min: 12,
 				max: 12,
-				ball_add: 2,
+				ball_add: 5,
 			},
 			3: {
 				min: 13,
 				max: 13,
-				ball_add: 2,
+				ball_add: 4,
 			},
 			4: {
 				min: 14,
 				max: 14,
-				ball_add: 2,
+				ball_add: 4,
 			},
 			5: {
 				min: 15,
@@ -223,27 +223,27 @@ export const Stage = {
 			1: {
 				min: 1,
 				max: 19,
-				ball_add: 2,
+				ball_add: 4,
 			},
 			2: {
 				min: 1,
 				max: 19,
-				ball_add: 2,
+				ball_add: 4,
 			},
 			3: {
 				min: 1,
 				max: 19,
-				ball_add: 2,
+				ball_add: 3,
 			},
 			4: {
 				min: 1,
 				max: 19,
-				ball_add: 2,
+				ball_add: 3,
 			},
 			5: {
 				min: 20,
 				max: 20,
-				ball_add: 1,
+				ball_add: 2,
 			},
 		},
 		// stage
@@ -252,27 +252,27 @@ export const Stage = {
 			1: {
 				min: 1,
 				max: 24,
-				ball_add: 2,
+				ball_add: 3,
 			},
 			2: {
 				min: 1,
 				max: 24,
-				ball_add: 2,
+				ball_add: 3,
 			},
 			3: {
 				min: 1,
 				max: 24,
-				ball_add: 2,
+				ball_add: 3,
 			},
 			4: {
 				min: 1,
 				max: 24,
-				ball_add: 2,
+				ball_add: 3,
 			},
 			5: {
 				min: 25,
 				max: 25,
-				ball_add: 1,
+				ball_add: 2,
 			},
 		},
 		// stage
@@ -281,22 +281,22 @@ export const Stage = {
 			1: {
 				min: 5,
 				max: 29,
-				ball_add: 2,
+				ball_add: 3,
 			},
 			2: {
 				min: 5,
 				max: 29,
-				ball_add: 2,
+				ball_add: 3,
 			},
 			3: {
 				min: 5,
 				max: 29,
-				ball_add: 2,
+				ball_add: 3,
 			},
 			4: {
 				min: 5,
 				max: 29,
-				ball_add: 2,
+				ball_add: 3,
 			},
 			5: {
 				min: 30,
@@ -368,22 +368,22 @@ export const Stage = {
 			1: {
 				min: 5,
 				max: 44,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			2: {
 				min: 5,
 				max: 44,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			3: {
 				min: 5,
 				max: 44,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			4: {
 				min: 5,
 				max: 44,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			5: {
 				min: 45,
@@ -397,22 +397,22 @@ export const Stage = {
 			1: {
 				min: 5,
 				max: 48,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			2: {
 				min: 5,
 				max: 48,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			3: {
 				min: 5,
 				max: 48,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			4: {
 				min: 5,
 				max: 48,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			5: {
 				min: 49,
@@ -426,27 +426,27 @@ export const Stage = {
 			1: {
 				min: 5,
 				max: 48,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			2: {
 				min: 5,
 				max: 48,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			3: {
 				min: 5,
 				max: 48,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			4: {
 				min: 5,
 				max: 48,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			5: {
 				min: 50,
 				max: 50,
-				ball_add: 0,
+				ball_add: 1,
 			},
 		},
 		// stage
@@ -455,27 +455,27 @@ export const Stage = {
 			1: {
 				min: 5,
 				max: 48,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			2: {
 				min: 5,
 				max: 48,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			3: {
 				min: 5,
 				max: 48,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			4: {
 				min: 5,
 				max: 48,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			5: {
 				min: 51,
 				max: 51,
-				ball_add: 0,
+				ball_add: 1,
 			},
 		},
 		// stage
@@ -484,27 +484,27 @@ export const Stage = {
 			1: {
 				min: 5,
 				max: 48,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			2: {
 				min: 5,
 				max: 48,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			3: {
 				min: 5,
 				max: 48,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			4: {
 				min: 5,
 				max: 48,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			5: {
 				min: 52,
 				max: 52,
-				ball_add: 0,
+				ball_add: 1,
 			},
 		},
 		// stage
@@ -513,27 +513,27 @@ export const Stage = {
 			1: {
 				min: 5,
 				max: 48,
-				ball_add: 0,
+				ball_add: 2,
 			},
 			2: {
 				min: 5,
 				max: 48,
-				ball_add: 0,
+				ball_add: 2,
 			},
 			3: {
 				min: 5,
 				max: 48,
-				ball_add: 0,
+				ball_add: 2,
 			},
 			4: {
 				min: 5,
 				max: 48,
-				ball_add: 0,
+				ball_add: 2,
 			},
 			5: {
 				min: 53,
 				max: 53,
-				ball_add: 0,
+				ball_add: 1,
 			},
 		},
 		// stage
@@ -542,22 +542,22 @@ export const Stage = {
 			1: {
 				min: 5,
 				max: 48,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			2: {
 				min: 5,
 				max: 48,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			3: {
 				min: 5,
 				max: 48,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			4: {
 				min: 5,
 				max: 48,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			5: {
 				min: 54,
@@ -571,22 +571,22 @@ export const Stage = {
 			1: {
 				min: 10,
 				max: 48,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			2: {
 				min: 10,
 				max: 48,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			3: {
 				min: 10,
 				max: 48,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			4: {
 				min: 10,
 				max: 48,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			5: {
 				min: 55,
@@ -600,22 +600,22 @@ export const Stage = {
 			1: {
 				min: 10,
 				max: 48,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			2: {
 				min: 10,
 				max: 48,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			3: {
 				min: 10,
 				max: 48,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			4: {
 				min: 10,
 				max: 48,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			5: {
 				min: 56,
@@ -629,22 +629,22 @@ export const Stage = {
 			1: {
 				min: 10,
 				max: 48,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			2: {
 				min: 10,
 				max: 48,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			3: {
 				min: 10,
 				max: 48,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			4: {
 				min: 10,
 				max: 48,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			5: {
 				min: 57,
@@ -658,22 +658,22 @@ export const Stage = {
 			1: {
 				min: 10,
 				max: 48,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			2: {
 				min: 10,
 				max: 48,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			3: {
 				min: 10,
 				max: 48,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			4: {
 				min: 10,
 				max: 48,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			5: {
 				min: 58,
@@ -719,27 +719,27 @@ export const Stage = {
 			1: {
 				min: 1,
 				max: 1,
-				ball_add: 6,
+				ball_add: 10,
 			},
 			2: {
 				min: 2,
 				max: 2,
-				ball_add: 5,
+				ball_add: 8,
 			},
 			3: {
 				min: 3,
 				max: 3,
-				ball_add: 5,
+				ball_add: 8,
 			},
 			4: {
 				min: 4,
 				max: 4,
-				ball_add: 5,
+				ball_add: 8,
 			},
 			5: {
 				min: 5,
 				max: 5,
-				ball_add: 5,
+				ball_add: 6,
 			},
 		},
 		// stage
@@ -748,27 +748,27 @@ export const Stage = {
 			1: {
 				min: 6,
 				max: 6,
-				ball_add: 3,
+				ball_add: 6,
 			},
 			2: {
 				min: 7,
 				max: 7,
-				ball_add: 3,
+				ball_add: 5,
 			},
 			3: {
 				min: 8,
 				max: 8,
-				ball_add: 3,
+				ball_add: 5,
 			},
 			4: {
 				min: 9,
 				max: 9,
-				ball_add: 3,
+				ball_add: 5,
 			},
 			5: {
 				min: 10,
 				max: 10,
-				ball_add: 2,
+				ball_add: 4,
 			},
 		},
 		// stage
@@ -777,22 +777,22 @@ export const Stage = {
 			1: {
 				min: 11,
 				max: 11,
-				ball_add: 2,
+				ball_add: 5,
 			},
 			2: {
 				min: 12,
 				max: 12,
-				ball_add: 2,
+				ball_add: 5,
 			},
 			3: {
 				min: 13,
 				max: 13,
-				ball_add: 2,
+				ball_add: 4,
 			},
 			4: {
 				min: 14,
 				max: 14,
-				ball_add: 2,
+				ball_add: 4,
 			},
 			5: {
 				min: 15,
@@ -806,27 +806,27 @@ export const Stage = {
 			1: {
 				min: 1,
 				max: 19,
-				ball_add: 2,
+				ball_add: 4,
 			},
 			2: {
 				min: 1,
 				max: 19,
-				ball_add: 2,
+				ball_add: 4,
 			},
 			3: {
 				min: 1,
 				max: 19,
-				ball_add: 2,
+				ball_add: 3,
 			},
 			4: {
 				min: 1,
 				max: 19,
-				ball_add: 2,
+				ball_add: 3,
 			},
 			5: {
 				min: 20,
 				max: 20,
-				ball_add: 1,
+				ball_add: 2,
 			},
 		},
 		// stage
@@ -835,27 +835,27 @@ export const Stage = {
 			1: {
 				min: 1,
 				max: 24,
-				ball_add: 2,
+				ball_add: 3,
 			},
 			2: {
 				min: 1,
 				max: 24,
-				ball_add: 2,
+				ball_add: 3,
 			},
 			3: {
 				min: 1,
 				max: 24,
-				ball_add: 2,
+				ball_add: 3,
 			},
 			4: {
 				min: 1,
 				max: 24,
-				ball_add: 2,
+				ball_add: 3,
 			},
 			5: {
 				min: 25,
 				max: 25,
-				ball_add: 1,
+				ball_add: 2,
 			},
 		},
 		// stage
@@ -864,22 +864,22 @@ export const Stage = {
 			1: {
 				min: 5,
 				max: 29,
-				ball_add: 2,
+				ball_add: 3,
 			},
 			2: {
 				min: 5,
 				max: 29,
-				ball_add: 2,
+				ball_add: 3,
 			},
 			3: {
 				min: 5,
 				max: 29,
-				ball_add: 2,
+				ball_add: 3,
 			},
 			4: {
 				min: 5,
 				max: 29,
-				ball_add: 2,
+				ball_add: 3,
 			},
 			5: {
 				min: 30,
@@ -951,22 +951,22 @@ export const Stage = {
 			1: {
 				min: 10,
 				max: 44,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			2: {
 				min: 10,
 				max: 44,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			3: {
 				min: 10,
 				max: 44,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			4: {
 				min: 10,
 				max: 44,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			5: {
 				min: 45,
@@ -980,22 +980,22 @@ export const Stage = {
 			1: {
 				min: 10,
 				max: 49,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			2: {
 				min: 10,
 				max: 49,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			3: {
 				min: 10,
 				max: 49,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			4: {
 				min: 10,
 				max: 49,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			5: {
 				min: 50,
@@ -1009,27 +1009,27 @@ export const Stage = {
 			1: {
 				min: 10,
 				max: 54,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			2: {
 				min: 10,
 				max: 54,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			3: {
 				min: 10,
 				max: 54,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			4: {
 				min: 10,
 				max: 54,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			5: {
 				min: 55,
 				max: 55,
-				ball_add: 0,
+				ball_add: 1,
 			},
 		},
 		// stage
@@ -1038,27 +1038,27 @@ export const Stage = {
 			1: {
 				min: 10,
 				max: 54,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			2: {
 				min: 10,
 				max: 54,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			3: {
 				min: 10,
 				max: 54,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			4: {
 				min: 10,
 				max: 54,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			5: {
 				min: 35,
 				max: 58,
-				ball_add: 0,
+				ball_add: 1,
 			},
 		},
 		// stage
@@ -1067,27 +1067,27 @@ export const Stage = {
 			1: {
 				min: 10,
 				max: 54,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			2: {
 				min: 10,
 				max: 54,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			3: {
 				min: 10,
 				max: 54,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			4: {
 				min: 10,
 				max: 54,
-				ball_add: 1,
+				ball_add: 2,
 			},
 			5: {
 				min: 35,
 				max: 58,
-				ball_add: 0,
+				ball_add: 1,
 			},
 		},
 		// stage
@@ -1096,27 +1096,27 @@ export const Stage = {
 			1: {
 				min: 10,
 				max: 54,
-				ball_add: 0,
+				ball_add: 2,
 			},
 			2: {
 				min: 10,
 				max: 54,
-				ball_add: 0,
+				ball_add: 2,
 			},
 			3: {
 				min: 10,
 				max: 54,
-				ball_add: 0,
+				ball_add: 2,
 			},
 			4: {
 				min: 10,
 				max: 54,
-				ball_add: 0,
+				ball_add: 2,
 			},
 			5: {
 				min: 35,
 				max: 58,
-				ball_add: 0,
+				ball_add: 1,
 			},
 		},
 		// stage
@@ -1125,22 +1125,22 @@ export const Stage = {
 			1: {
 				min: 10,
 				max: 54,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			2: {
 				min: 10,
 				max: 54,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			3: {
 				min: 10,
 				max: 54,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			4: {
 				min: 10,
 				max: 54,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			5: {
 				min: 35,
@@ -1154,22 +1154,22 @@ export const Stage = {
 			1: {
 				min: 10,
 				max: 54,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			2: {
 				min: 10,
 				max: 54,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			3: {
 				min: 10,
 				max: 54,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			4: {
 				min: 10,
 				max: 54,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			5: {
 				min: 35,
@@ -1183,22 +1183,22 @@ export const Stage = {
 			1: {
 				min: 10,
 				max: 54,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			2: {
 				min: 10,
 				max: 54,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			3: {
 				min: 10,
 				max: 54,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			4: {
 				min: 10,
 				max: 54,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			5: {
 				min: 35,
@@ -1212,22 +1212,22 @@ export const Stage = {
 			1: {
 				min: 10,
 				max: 54,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			2: {
 				min: 10,
 				max: 54,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			3: {
 				min: 10,
 				max: 54,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			4: {
 				min: 10,
 				max: 54,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			5: {
 				min: 35,
@@ -1241,22 +1241,22 @@ export const Stage = {
 			1: {
 				min: 10,
 				max: 54,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			2: {
 				min: 10,
 				max: 54,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			3: {
 				min: 10,
 				max: 54,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			4: {
 				min: 10,
 				max: 54,
-				ball_add: 0,
+				ball_add: 1,
 			},
 			5: {
 				min: 35,

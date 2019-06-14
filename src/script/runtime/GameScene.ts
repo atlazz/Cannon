@@ -411,6 +411,17 @@ export default class GameScene extends ui.game.GameSceneUI {
                                 console.log("reward bullet video onclick");
                                 this.onClick_rewardBullet();
                             },
+                            fail: () => {
+                                Reward.instance.share({
+                                    pos: Const.RewardPos.Bullet,
+                                    success: () => {
+                                        console.log("reward bullet share onclick");
+                                        this.onClick_rewardBullet();
+                                    },
+                                    complete: () => {
+                                    }
+                                });
+                            },
                             complete: () => {
                             }
                         });
@@ -454,6 +465,16 @@ export default class GameScene extends ui.game.GameSceneUI {
                             pos: Const.RewardPos.Cannon,
                             success: () => {
                                 this.onClick_rewardCannon();
+                            },
+                            fail: () => {
+                                Reward.instance.share({
+                                    pos: Const.RewardPos.Cannon,
+                                    success: () => {
+                                        this.onClick_rewardCannon();
+                                    },
+                                    complete: () => {
+                                    }
+                                });
                             },
                             complete: () => {
                             }
@@ -518,6 +539,21 @@ export default class GameScene extends ui.game.GameSceneUI {
                                 this.label_ballNum.changeText("x3");
                                 this.box_scene3D.on(Laya.Event.CLICK, this, this.onClick);
                                 this.gameStage.frameLoop(1, this, this.stageLooping);
+                            },
+                            fail: () => {
+                                Reward.instance.share({
+                                    pos: Const.RewardPos.Revive,
+                                    success: () => {
+                                        this.isRevive = true;
+                                        this.hideReviveUI();
+                                        this.currBulletNum -= 3;
+                                        this.label_ballNum.changeText("x3");
+                                        this.box_scene3D.on(Laya.Event.CLICK, this, this.onClick);
+                                        this.gameStage.frameLoop(1, this, this.stageLooping);
+                                    },
+                                    complete: () => {
+                                    }
+                                });
                             },
                             complete: () => {
                             }
@@ -732,11 +768,16 @@ export default class GameScene extends ui.game.GameSceneUI {
             satgeResUrl = Const.treasureUrl;
         }
         Laya.Sprite3D.load(satgeResUrl, Laya.Handler.create(this, (res) => {
-            console.log("stage loaded");
+            console.log("load_stage");
+            ws.traceEvent("load_stage");
 
+            if (this.scene3D.getChildByName("gameStage")) {
+                this.scene3D.getChildByName("gameStage").destroy();
+            }
             // 延时显示，避免与前关资源冲突
             Laya.timer.frameOnce(15, this, () => {
                 this.gameStage = this.scene3D.addChild(res.clone()) as Laya.Sprite3D;
+                this.gameStage.name = "gameStage";
                 //Laya.loader.clearRes(satgeResUrl);
 
                 // change level label
@@ -848,6 +889,8 @@ export default class GameScene extends ui.game.GameSceneUI {
                         Global.gameData.tutorialStep = 1;
                         this.tutorial_shoot.visible = true;
                         this.tutorial_shoot.getChildByName("inputArea").on(Laya.Event.CLICK, this, () => {
+                            console.log("newplayer_1")
+                            ws.traceEvent("newplayer_1");
                             this.onClick();
                             this.tutorial_shoot.visible = false;
                             this.tutorial_shoot.getChildByName("inputArea").offAll();
@@ -865,6 +908,8 @@ export default class GameScene extends ui.game.GameSceneUI {
                             }
                         });
                         this.tutorial_bulletTry.getChildByName("inputArea").on(Laya.Event.CLICK, this, () => {
+                            console.log("newplayer_2")
+                            ws.traceEvent("newplayer_2");
                             this.onClick_rewardBullet();
                             this.tutorial_bulletTry.visible = false;
                             Laya.timer.clearAll(this.tutorial_bulletTry.getChildByName("finger"));
@@ -883,6 +928,8 @@ export default class GameScene extends ui.game.GameSceneUI {
                             }
                         });
                         this.tutorial_cannonTry.getChildByName("inputArea").on(Laya.Event.CLICK, this, () => {
+                            console.log("newplayer_3")
+                            ws.traceEvent("newplayer_3");
                             this.onClick_rewardCannon();
                             this.tutorial_cannonTry.visible = false;
                             Laya.timer.clearAll(this.tutorial_cannonTry.getChildByName("finger"));
@@ -902,6 +949,8 @@ export default class GameScene extends ui.game.GameSceneUI {
                         }
                     });
                     this.tutorial_cannonSelect.getChildByName("inputArea").on(Laya.Event.CLICK, this, () => {
+                        console.log("newplayer_4")
+                        ws.traceEvent("newplayer_4");
                         this.onClick_cannonSelect();
                         this.tutorial_cannonSelect.visible = false;
                         Laya.timer.clearAll(this.tutorial_cannonSelect.getChildByName("finger"));
@@ -1164,7 +1213,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         Laya.timer.clearAll(this.missionWin);
         // next
         this.missionIdx++;
-        if (this.missionIdx > 5) {  // 宝箱开启，设置为6
+        if (this.missionIdx > 5 + (Global.config.hasTreasure ? 1 : 0)) {  // 宝箱开启，设置为6
             this.passStage();
         }
         else {
@@ -1174,6 +1223,15 @@ export default class GameScene extends ui.game.GameSceneUI {
 
     /** 大关卡过关处理 */
     private passStage() {
+        console.log("pass_stage" + this.stageIdx);
+        ws.traceEvent("pass_stage" + this.stageIdx);
+        // clean all bullets
+        for (let i = 0; i < this.scene3D.numChildren; i++) {
+            var tmpSceneChild = this.scene3D.getChildAt(i);
+            if (tmpSceneChild.name === "bullet" || tmpSceneChild.name === "bulletTrigger") {
+                tmpSceneChild.destroy();
+            }
+        }
         // hide
         this.missionWin.visible = false;
         // show

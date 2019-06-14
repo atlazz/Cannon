@@ -313,6 +313,10 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
         /** cannon list slide */
         // mouse down: start slide
         this.list_Icon.on(Laya.Event.MOUSE_DOWN, this, () => {
+            if (GameScene.instance.stageIdx === 2 && GameScene.instance.missionIdx === 1 && Global.gameData.tutorialStep === 5) {
+                console.log("newplayer_5")
+                ws.traceEvent("newplayer_5");
+            }
             this.downMouseX = this.mouseX;
             this.downFlag = true;
             this.startIdx = this.list_Icon.startIndex;
@@ -476,6 +480,14 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
                             success: () => {
                                 this.onClick_try();
                             },
+                            fail: () => {
+                                Reward.instance.share({
+                                    pos: Const.RewardPos.Cannon,
+                                    success: () => {
+                                        this.onClick_try();
+                                    },
+                                });
+                            }
                         });
                     }
                     else {
@@ -550,6 +562,8 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
             }
         });
         this.tutorial_try.getChildByName("inputArea").on(Laya.Event.CLICK, this, () => {
+            console.log("newplayer_6")
+            ws.traceEvent("newplayer_6");
             this.onClick_try();
             this.tutorial_try.visible = false;
             this.tutorial_try.getChildByName("inputArea").offAll();
@@ -564,6 +578,8 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
                 }
             });
             this.tutorial_back.getChildByName("inputArea").on(Laya.Event.CLICK, this, () => {
+                console.log("newplayer_7")
+                ws.traceEvent("newplayer_7");
                 this.onClick_back();
                 this.tutorial_back.visible = false;
                 this.tutorial_back.getChildByName("inputArea").offAll();

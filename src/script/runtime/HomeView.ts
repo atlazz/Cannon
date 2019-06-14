@@ -97,7 +97,8 @@ export default class HomeView extends ui.home.HomeViewUI {
             Laya.Tween.to(this.btn_start, { alpha: 0.8, scaleX: scaleX * 0.9, scaleY: scaleY * 0.9 }, 50, Laya.Ease.linearInOut, Laya.Handler.create(this, () => {
                 Laya.Tween.to(this.btn_start, { alpha: 1, scaleX: scaleX, scaleY: scaleY }, 50, Laya.Ease.linearInOut, Laya.Handler.create(this, () => {
                     if (GameScene.instance && GameScene.instance.state != Const.GameState.START) {
-                        ws.traceEvent("Click_Startgame");
+                        console.log("click_startgame")
+                        ws.traceEvent("click_startgame");
                         // hide home view
                         this.hide();
                         // show game scene
@@ -195,7 +196,6 @@ export default class HomeView extends ui.home.HomeViewUI {
 
     /**登录ws后台*/
     private loginWs() {
-        ws.traceEvent('WS_LOGINING');
         wx.showLoading({ title: '登录中', mask: true });
         ws.onLoginComplete(this.onLoginComplete.bind(this));
         ws.login();
@@ -204,7 +204,8 @@ export default class HomeView extends ui.home.HomeViewUI {
     /**登录ws后台完成*/
     private onLoginComplete(res, gameData) {
         if (ws.getLoginStatus() === 'success') {
-            ws.traceEvent('WS_LOGINED');
+            console.log("login_succeed")
+            ws.traceEvent('login_succeed');
             wx.hideLoading();
             console.log('ws.conf', ws.conf); // 通用配置
             console.log('ws.user', ws.user); // 用户信息
@@ -212,7 +213,8 @@ export default class HomeView extends ui.home.HomeViewUI {
             this.loadConfig();
             this.loadGameData(gameData);
         } else if (ws.getLoginStatus() === 'fail') {
-            ws.traceEvent('WS_LOGIN_FAIL');
+            console.log("login_failed")
+            ws.traceEvent('login_failed');
             wx.hideLoading();
             wx.showModal({
                 title: '登陆失败',
@@ -304,16 +306,13 @@ export default class HomeView extends ui.home.HomeViewUI {
         // unlock icon
         if (Global.gameData.tutorialStep < 5 || (Global.gameData.stageIndex === 1 && Global.gameData.tutorialStep === 5)) {
             Global.gameData.tutorialStep = 0;
-            this.btn_cannon.alpha = 0.7;
-            var lock: Laya.Image = this.btn_cannon.getChildByName("lock") as Laya.Image;
-            lock && (lock.visible = true);
+            this.lock_cannon.visible = true;
+            this.btn_cannon.visible = false;
             this.btn_cannon.off(Laya.Event.CLICK, this, this.onclick_cannon);
         }
         if (Global.gameData.tutorialStep >= 5 || Global.gameData.stageIndex > 2) {
-            Global.gameData.tutorialStep = 5;
-            this.btn_cannon.alpha = 1;
-            var lock: Laya.Image = this.btn_cannon.getChildByName("lock") as Laya.Image;
-            lock && (lock.visible = false);
+            this.lock_cannon.visible = false;
+            this.btn_cannon.visible = true;
             this.btn_cannon.on(Laya.Event.CLICK, this, this.onclick_cannon);
         }
         if (GameScene.instance) {

@@ -89,8 +89,11 @@ export module ui.home {
 		public box_drawer:Laya.Box;
 		public btn_test:Laya.Image;
 		public box_moreGame:Laya.Box;
+		public lock_background:Laya.Image;
 		public btn_background:Laya.Image;
+		public lock_bullet:Laya.Image;
 		public btn_bullet:Laya.Image;
+		public lock_cannon:Laya.Image;
 		public btn_cannon:Laya.Image;
 		public btn_sound:Laya.Image;
 		public btn_start:Laya.Image;
