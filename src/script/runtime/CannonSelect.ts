@@ -52,7 +52,7 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
         this.updateUI();
 
         // show tutorial
-        if (GameScene.instance.stageIdx === 2 && GameScene.instance.missionIdx === 1 && Global.gameData.tutorialStep === 4) {
+        if (GameScene.instance && GameScene.instance.stageIdx === 2 && GameScene.instance.missionIdx === 1 && Global.gameData.tutorialStep === 4) {
             Global.gameData.tutorialStep = 5;
             this.tutorial_slide.visible = true;
             var finger: Laya.Image = this.tutorial_slide.getChildByName("finger") as Laya.Image;
@@ -313,7 +313,7 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
         /** cannon list slide */
         // mouse down: start slide
         this.list_Icon.on(Laya.Event.MOUSE_DOWN, this, () => {
-            if (GameScene.instance.stageIdx === 2 && GameScene.instance.missionIdx === 1 && Global.gameData.tutorialStep === 5) {
+            if (GameScene.instance && GameScene.instance.stageIdx === 2 && GameScene.instance.missionIdx === 1 && Global.gameData.tutorialStep === 5) {
                 console.log("newplayer_5")
                 ws.traceEvent("newplayer_5");
             }

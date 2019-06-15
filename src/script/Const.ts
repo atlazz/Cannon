@@ -6,7 +6,6 @@ export const VERSION = "1.0.9";
 export const RewardPos = {
     Cannon: 'try_cannon',
     Bullet: 'try_ball',
-    OverShare: 'OverShare',
     Revive: 'revive',
 }
 /** Banner广告位置 */
