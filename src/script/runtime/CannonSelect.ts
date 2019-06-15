@@ -27,6 +27,7 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
     onOpened(param?: any) {
         console.log("CannonSelect onOpened()");
         this.visible = true;
+        this.mouseEnabled = true;
         this.isClick = false;
         // set selected type at first time open
         if (!this.selectType || !GameScene.instance.isRewardCannon) {
@@ -478,6 +479,7 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
                 if (Global.config.revive == 1) {
                     // 未超过每天视频观看次数
                     if (!Reward.instance.isOverVideo()) {
+                        this.mouseEnabled = false;
                         Reward.instance.video({
                             pos: Const.RewardPos.Cannon,
                             success: () => {
@@ -490,6 +492,9 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
                                         this.onClick_try();
                                     },
                                 });
+                            },
+                            complete: () => {
+                                this.mouseEnabled = true;
                             }
                         });
                     }
@@ -519,6 +524,7 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
     private onClick_back() {
         // clear animation
         this.box_scene3D.timer.clear(this, this.cannonAniLoop);
+        this.mouseEnabled = false;
         this.visible = false;
 
         // change cannon

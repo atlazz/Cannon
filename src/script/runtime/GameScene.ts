@@ -35,6 +35,7 @@ export default class GameScene extends ui.game.GameSceneUI {
     onOpened(param?: any) {
         console.log("GameScene onOpened()");
         this.visible = true;
+        this.mouseEnabled = true;
 
         // game playing
         if (this.state === Const.GameState.START) {
@@ -296,11 +297,9 @@ export default class GameScene extends ui.game.GameSceneUI {
         Laya.Sprite3D.load(Const.CannonResUrl[this.cannonType], Laya.Handler.create(this, (res) => {
             // destroy old
             this.cannon && this.cannon.destroy();
-            this.scene3D.removeChildByName("cannon");
             // add new
             this.cannon = res.clone();
             this.scene3D.addChild(this.cannon);
-            this.cannon.name = "cannon";
 
             this.cannon.transform.localPosition = Const.CannonInitPos.clone();
             this.cannon.transform.localRotationEuler = Const.CannonInitRot.clone();
@@ -349,6 +348,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         // onclick handler
         this.onClick_cannonSelect = () => {
             this.state = Const.GameState.PAUSE;
+            this.mouseEnabled = false;
             CannonSelect.openInstance();
         }
         this.onClick_rewardBullet = () => {
@@ -379,6 +379,8 @@ export default class GameScene extends ui.game.GameSceneUI {
             this.state = Const.GameState.OVER;
             this.cleanStage();
             this.hideUI();
+            this.visible = false;
+            this.mouseEnabled = false;
             // reset cannon rotation
             if (this.turret && this.cannon && !this.cannon.destroyed) {
                 this.turret.transform.localRotationEuler = this.turretInitRot.clone();
@@ -409,6 +411,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                 if (Global.config.try_ball == 1) {
                     // 未超过每天视频观看次数
                     if (!Reward.instance.isOverVideo()) {
+                        this.mouseEnabled = false;
                         Reward.instance.video({
                             pos: Const.RewardPos.Bullet,
                             success: () => {
@@ -427,6 +430,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                                 });
                             },
                             complete: () => {
+                                this.mouseEnabled = true;
                             }
                         });
                     }
@@ -465,6 +469,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                 if (Global.config.try_cannon == 1) {
                     // 未超过每天视频观看次数
                     if (!Reward.instance.isOverVideo()) {
+                        this.mouseEnabled = false;
                         Reward.instance.video({
                             pos: Const.RewardPos.Cannon,
                             success: () => {
@@ -481,6 +486,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                                 });
                             },
                             complete: () => {
+                                this.mouseEnabled = true;
                             }
                         });
                     }
@@ -534,6 +540,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                 if (Global.config.revive == 1) {
                     // 未超过每天视频观看次数
                     if (!Reward.instance.isOverVideo()) {
+                        this.mouseEnabled = false;
                         Reward.instance.video({
                             pos: Const.RewardPos.Revive,
                             success: () => {
@@ -560,6 +567,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                                 });
                             },
                             complete: () => {
+                                this.mouseEnabled = true;
                             }
                         });
                     }
@@ -612,6 +620,8 @@ export default class GameScene extends ui.game.GameSceneUI {
             }
             // clear timer
             this.clearStageTimer();
+            this.visible = false;
+            this.mouseEnabled = false;
             HomeView.openInstance();
         });
     }
