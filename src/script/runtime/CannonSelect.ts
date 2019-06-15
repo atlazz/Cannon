@@ -157,12 +157,15 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
         // clear animation
         this.box_scene3D.timer.clear(this, this.cannonAniLoop);
         // destroy old cannon
-        this.cannon && this.cannon.removeSelf() && this.cannon.destroy();
+        this.cannon && this.cannon.destroy();
         // load new cannon
         Laya.Sprite3D.load(Const.CannonResUrl[Const.CannonSelectIconList[this.list_Icon.selectedIndex].index], Laya.Handler.create(this, (res) => {
+            // destroy old
+            this.cannon && this.cannon.destroy();
+            this.scene3D.removeChildByName("cannon");
+            // add new
             this.cannon = res.clone();
             this.cannon.name = "cannon";
-            this.scene3D.removeChildByName("cannon");
             this.scene3D.addChild(this.cannon);
 
             this.cannon.transform.localPosition = new Laya.Vector3(0, -0.23, -0.5);

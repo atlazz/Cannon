@@ -294,9 +294,13 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.cannon && this.cannon.destroy();
         // load new cannon
         Laya.Sprite3D.load(Const.CannonResUrl[this.cannonType], Laya.Handler.create(this, (res) => {
+            // destroy old
+            this.cannon && this.cannon.destroy();
+            this.scene3D.removeChildByName("cannon");
+            // add new
             this.cannon = res.clone();
             this.scene3D.addChild(this.cannon);
-            // this.cannon.name = "player";
+            this.cannon.name = "cannon";
 
             this.cannon.transform.localPosition = Const.CannonInitPos.clone();
             this.cannon.transform.localRotationEuler = Const.CannonInitRot.clone();
