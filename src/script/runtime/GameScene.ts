@@ -349,6 +349,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.onClick_cannonSelect = () => {
             this.state = Const.GameState.PAUSE;
             this.mouseEnabled = false;
+            this.visible = false;
             CannonSelect.openInstance();
         }
         this.onClick_rewardBullet = () => {
