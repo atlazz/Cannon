@@ -349,7 +349,6 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.onClick_cannonSelect = () => {
             this.state = Const.GameState.PAUSE;
             this.mouseEnabled = false;
-            this.visible = false;
             CannonSelect.openInstance();
         }
         this.onClick_rewardBullet = () => {
@@ -380,7 +379,6 @@ export default class GameScene extends ui.game.GameSceneUI {
             this.state = Const.GameState.OVER;
             this.cleanStage();
             this.hideUI();
-            this.visible = false;
             this.mouseEnabled = false;
             // reset cannon rotation
             if (this.turret && this.cannon && !this.cannon.destroyed) {
@@ -621,7 +619,6 @@ export default class GameScene extends ui.game.GameSceneUI {
             }
             // clear timer
             this.clearStageTimer();
-            this.visible = false;
             this.mouseEnabled = false;
             HomeView.openInstance();
         });
