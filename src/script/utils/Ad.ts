@@ -57,6 +57,14 @@ export const posShowVideo = (pos: string, onErrorCallback: Function, onCloseCall
             fail: (res) => {
                 hasVideo = false;
                 console.log('NO VIDEO AD');
+                console.log("error res: ", res);
+                ws.traceEvent("errVideoCnt_" + Global.gameData.videoCount);
+                if (res && res.errMsg) {
+                    ws.traceEvent("errCode_" + res.errCode);
+                    console.log("errCode: " + res.errCode);
+                    console.log("errMsg: " + res.errMsg);
+                }
+                onErrorCallback && onErrorCallback();
             }
         });
     } else {

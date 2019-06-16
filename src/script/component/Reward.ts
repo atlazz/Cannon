@@ -111,17 +111,20 @@ export default class Reward extends Laya.Script {
             return;
         }
 
-        Ad.posShowVideo(pos, () => {
+        Ad.posShowVideo(pos, /**onErrorCallback*/() => {
             console.log('今日视频已看完');
             fail && fail();
             complete && complete();
-        }, (res) => {
+        }, /**onCloseCallback*/(res) => {
             if ((res && res.isEnded) || res === undefined) {
                 Global.gameData.videoCount++;
                 Global.gameData.lastVideoTimestamp = Date.now();
                 success && success();
             } else {
-                fail && fail();
+                // 未看完关闭视频，不算视频获取播放失败
+                if (!(res && !res.isEnded)) {
+                    fail && fail();
+                }
             }
             complete && complete();
         });
