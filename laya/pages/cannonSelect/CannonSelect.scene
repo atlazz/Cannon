@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":3,
-    "selecteID":45,
+    "selectedBox":77,
+    "selecteID":78,
     "searchKey":"View",
     "props":{"zOrder":2,"top":0,"sceneWidth":720,"sceneHeight":1280,"sceneColor":"#000000","runtime":"script/runtime/CannonSelect.ts","right":0,"left":0,"bottom":0},
     "nodeParent":-1,
-    "maxID":77,
+    "maxID":80,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -171,7 +171,7 @@
                     "x":30,
                     "type":"Label",
                     "searchKey":"Label,label_unlockMsg",
-                    "props":{"width":500,"visible":true,"var":"label_unlockMsg","text":"完成关卡 0/5 解锁","fontSize":30,"font":"SimHei","color":"#ffffff","centerX":0,"bottom":250,"align":"center"},
+                    "props":{"width":500,"visible":true,"var":"label_unlockMsg","text":"完成关卡 0/5 自动解锁","fontSize":30,"font":"SimHei","color":"#ffffff","centerX":0,"bottom":250,"align":"center"},
                     "nodeParent":3,
                     "label":"label_unlockMsg",
                     "isDirectory":false,
@@ -216,18 +216,34 @@
                     "props":{"width":700,"visible":false,"var":"btn_unlock","skin":"res/ui/cannonSelect/btn_2.png","sizeGrid":"0,100,0,100","scaleY":0.5,"scaleX":0.5,"gray":true,"centerX":0,"bottom":150},
                     "nodeParent":3,
                     "label":"btn_unlock",
-                    "isOpen":false,
+                    "isOpen":true,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":42,
                     "child":[
                         {
-                            "type":"Label",
-                            "searchKey":"Label",
-                            "props":{"valign":"middle","text":"未解锁","fontSize":100,"font":"SimHei","color":"#ffffff","centerY":0,"centerX":0,"bold":true,"align":"center"},
+                            "x":45,
+                            "type":"Image",
+                            "searchKey":"Image,icon_unlockDiamond",
+                            "props":{"var":"icon_unlockDiamond","skin":"res/ui/cannonSelect/icon_diamond.png","scaleY":2,"scaleX":2,"left":50,"centerY":0},
                             "nodeParent":42,
-                            "label":"Label",
+                            "label":"icon_unlockDiamond",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":79,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "x":45,
+                            "type":"Label",
+                            "searchKey":"Label,label_unlockDiamond",
+                            "props":{"var":"label_unlockDiamond","valign":"middle","text":"未解锁","fontSize":90,"font":"SimHei","color":"#ffffff","centerY":0,"centerX":0,"bold":true,"align":"center"},
+                            "nodeParent":42,
+                            "label":"label_unlockDiamond",
+                            "isOpen":true,
                             "isDirectory":false,
                             "isAniNode":true,
                             "hasChild":false,
@@ -291,6 +307,34 @@
                             "child":[
                                 ]
                         }]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image,icon_diamond",
+                    "props":{"var":"icon_diamond","top":50,"skin":"res/ui/cannonSelect/icon_diamond.png","scaleY":0.8,"scaleX":0.8,"centerX":-50},
+                    "nodeParent":3,
+                    "label":"icon_diamond",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":77,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Text",
+                            "searchKey":"Text,text_diamond",
+                            "props":{"y":4,"x":80,"var":"text_diamond","valign":"middle","text":"0","fontSize":45,"color":"#ffffff","bold":false,"align":"center"},
+                            "nodeParent":77,
+                            "label":"text_diamond",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":78,
+                            "child":[
+                                ]
+                        }]
                 }]
         },
         {
@@ -300,13 +344,14 @@
             "props":{"width":720,"visible":false,"var":"tutorial_slide","top":0,"mouseThrough":true,"mouseEnabled":true,"centerX":0,"bottom":0},
             "nodeParent":2,
             "label":"tutorial_slide",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":59,
             "child":[
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image",
                     "props":{"skin":"res/ui/cannonSelect/mask7.png","scaleY":4,"scaleX":4,"centerY":0,"centerX":0},
@@ -320,6 +365,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,inputAreaBlock",
                     "props":{"width":720,"top":0,"scaleY":1,"scaleX":1,"name":"inputAreaBlock","mouseThrough":false,"mouseEnabled":true,"height":500,"centerX":0,"alpha":0},
@@ -333,6 +379,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,inputAreaBlock",
                     "props":{"width":720,"scaleY":1,"scaleX":1,"name":"inputAreaBlock","mouseThrough":false,"mouseEnabled":true,"height":250,"centerX":0,"bottom":0,"alpha":0},
@@ -346,6 +393,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Label",
                     "searchKey":"Label",
                     "props":{"text":"向左滑动查看其他大炮","fontSize":35,"font":"SimHei","color":"#ffffff","centerY":80,"centerX":0,"bold":true,"align":"center"},
@@ -359,9 +407,10 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,finger",
-                    "props":{"skin":"res/ui/game/finger_only.png","scaleY":0.8,"scaleX":0.8,"right":50,"name":"finger","centerY":350},
+                    "props":{"skin":"res/ui/cannonSelect/finger_only.png","scaleY":0.8,"scaleX":0.8,"right":50,"name":"finger","centerY":350},
                     "nodeParent":59,
                     "label":"finger",
                     "isDirectory":false,
@@ -431,7 +480,7 @@
                     "x":30,
                     "type":"Image",
                     "searchKey":"Image,finger",
-                    "props":{"skin":"res/ui/game/finger_only.png","scaleY":0.8,"scaleX":0.8,"name":"finger","centerX":40,"bottom":10},
+                    "props":{"skin":"res/ui/cannonSelect/finger_only.png","scaleY":0.8,"scaleX":0.8,"name":"finger","centerX":40,"bottom":10},
                     "nodeParent":64,
                     "label":"finger",
                     "isDirectory":false,
@@ -501,7 +550,7 @@
                     "x":30,
                     "type":"Image",
                     "searchKey":"Image,finger",
-                    "props":{"top":120,"skin":"res/ui/game/finger_only.png","scaleY":0.7,"scaleX":0.7,"name":"finger","left":40},
+                    "props":{"top":120,"skin":"res/ui/cannonSelect/finger_only.png","scaleY":0.7,"scaleX":0.7,"name":"finger","left":40},
                     "nodeParent":69,
                     "label":"finger",
                     "isDirectory":false,

@@ -15,9 +15,13 @@ export module ui.cannonSelect {
 		public label_unlockMsg:Laya.Label;
 		public btn_select:Laya.Image;
 		public btn_unlock:Laya.Image;
+		public icon_unlockDiamond:Laya.Image;
+		public label_unlockDiamond:Laya.Label;
 		public btn_try:Laya.Image;
 		public label_try:Laya.Label;
 		public btn_back:Laya.Image;
+		public icon_diamond:Laya.Image;
+		public text_diamond:laya.display.Text;
 		public tutorial_slide:Laya.Box;
 		public tutorial_try:Laya.Box;
 		public tutorial_back:Laya.Box;
@@ -50,22 +54,27 @@ export module ui.game {
 		public box_countdown:Laya.Box;
 		public failCircle:Laya.Image;
 		public label_failTimer:Laya.Label;
+		public icon_diamond:Laya.Image;
+		public text_diamond:laya.display.Text;
 		public box_revive:Laya.Box;
 		public mask_revive:Laya.Image;
 		public box_reviveIcon:Laya.Box;
 		public btn_revive:Laya.Image;
 		public btn_retry:Laya.Image;
-		public box_win:Laya.Box;
-		public mask_win:Laya.Image;
-		public box_winIcon:Laya.Box;
-		public label_lvlPass:Laya.Label;
-		public winLabel:Laya.Image;
-		public btn_win_next:Laya.Image;
 		public box_test:Laya.Box;
 		public btn_test_restart:Laya.Image;
 		public btn_test_next:Laya.Image;
 		public input_test_lvl:Laya.TextInput;
 		public label_test_lvl:Laya.Label;
+		public box_treasureAD:Laya.Box;
+		public btn_treasureGetExtra:Laya.Image;
+		public label_extraDiamond:Laya.Label;
+		public box_passStage:Laya.Box;
+		public box_winIcon:Laya.Box;
+		public btn_passStagex3:Laya.Image;
+		public btn_passStage:Laya.Image;
+		public label_winDiamond:Laya.Label;
+		public label_stage:Laya.Label;
 		public backCheck:Laya.Image;
 		public btn_backReturn:Laya.Image;
 		public btn_backExit:Laya.Image;
@@ -73,6 +82,8 @@ export module ui.game {
 		public tutorial_bulletTry:Laya.Box;
 		public tutorial_cannonTry:Laya.Box;
 		public tutorial_cannonSelect:Laya.Box;
+		public tutorial_treasure:Laya.Box;
+		public label_treasureTitle:Laya.Label;
         constructor(){ super()}
         createChildren():void {
             super.createChildren();

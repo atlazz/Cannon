@@ -59,7 +59,6 @@ D res/stage
 D res/texture
 D res/treasure
 D res/ui
-R A41E3D13 pngquant.exe
 D res/texture/navigator
 P A614D413 arrow.png
 P 9401CC40 blank.png
@@ -77,34 +76,17 @@ P 4B57CD19 arrowright.png
 P 38E87631 btn_1.png
 P D578AE50 btn_2.png
 P 15E766F5 btn_back.png
-P E35E8160 Cannon_01.png
-P 55DD83DF Cannon_02.png
 P 8825BEDA Cannon_03.png
-P 660A183B Cannon_04.png
-P 04DEDE49 Cannon_05.png
-P B1540B41 Cannon_06.png
-P 7746CE9E Cannon_07.png
-P E85F0917 Cannon_08.png
-P 830FBD25 Cannon_09.png
 P 7E457FF2 Cannon_10.png
-P 452EE7B8 Cannon_11.png
-P DF3BA2F7 Cannon_12.png
-P 14839720 Cannon_13.png
-P 4C5FD43E Cannon_14.png
-P AEB5BBD0 Cannon_15.png
-P CB96A3F7 Cannon_16.png
-P DAD41F3F Cannon_17.png
-P 66178CF9 Cannon_18.png
-P 7DB76420 Cannon_19.png
-P F74FEAC7 Cannon_20.png
-P A3340F60 Cannon_21.png
 P C20B4194 Cannon_22.png
 P F8CE5B20 cannon_default.png
 P C285C5AB cannon_dragon.png
 P 4135307A cannon_light.png
 P 68ACE411 cannon_lion.png
 P 3E8E1261 CannonIconBG.png
+P 6317D814 finger_only.png
 P 5817EDDC hole.png
+P 023FDB83 icon_diamond.png
 P C1BB43B9 lock.png
 P 6A84FB5F lock_white.png
 P C1699706 mask4.png
@@ -123,14 +105,19 @@ P 2EAEAB7A btn_start.png
 P 16DBC8BC close.png
 P 02057DA5 congratulation.png
 P 75B522A2 exit.png
+P 8AE784AD extra_diamond.png
 P 6317D814 finger_only.png
 P 6A1BEBFC gameover.png
+P 1EF8D0C6 getprice.png
+P 1DC449A9 ggongratulation.png
+P EB70EF5E gongratulation.png
 P FD89EAC8 grade_0_CN.png
 P 290CE793 grade_1_CN.png
 P 7A4E4879 grade_2_CN.png
 P DE737BFE grade_3_CN.png
 P 7C3AD98E grade_4_CN.png
 P 5817EDDC hole.png
+P 023FDB83 icon_diamond.png
 P 367DEC17 level_bg.png
 P 955807D1 level_bg2.png
 P DBFDDA85 level_bg3.png
@@ -140,15 +127,19 @@ P EC3B9ED9 mask1.png
 P 8E358BA3 mask2.png
 P ACB00D60 mask3.png
 P C1699706 mask4.png
+P 680B22F5 normal_reward.png
 P 81433A8A RB_1.png
-P 322C8853 RB_1_backup.png
 P 52807226 RC_1.png
 P 061742C0 retry.png
 P AB97389C scene_lock_masking.png
+P EA9C6C38 stage.png
 P 8B29F8D4 stage_pass.png
 P 7E324F84 stay.png
+P 6B6ADCFD tecxt_getprice.png
+P DF8A91E2 text_diamond.png
 P 49C72002 tips_trail.png
 P FF050530 vedio.png
+P F62F5BEC x.png
 D res/ui/home
 P D5A5A3D5 blank.png
 P 07D7D307 btn.png

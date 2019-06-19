@@ -28,6 +28,7 @@ for(var rowId in sheet_stageAndroid['data']){
     data_stage += "\t\t\t\t" + "min: " + sheet_stageAndroid['data'][rowId][2] + ",\n";
     data_stage += "\t\t\t\t" + "max: " + sheet_stageAndroid['data'][rowId][3] + ",\n";
     data_stage += "\t\t\t\t" + "ball_add: " + sheet_stageAndroid['data'][rowId][4] + ",\n";
+    data_stage += "\t\t\t\t" + "reward: " + sheet_stageAndroid['data'][rowId][5] + ",\n";
     data_stage += "\t\t\t},\n";
     if ((rowId - 2) % 5 == 4) {
         data_stage += "\t\t},\n";
@@ -48,6 +49,7 @@ for(var rowId in sheet_stageIOS['data']){
     data_stage += "\t\t\t\t" + "min: " + sheet_stageIOS['data'][rowId][2] + ",\n";
     data_stage += "\t\t\t\t" + "max: " + sheet_stageIOS['data'][rowId][3] + ",\n";
     data_stage += "\t\t\t\t" + "ball_add: " + sheet_stageIOS['data'][rowId][4] + ",\n";
+    data_stage += "\t\t\t\t" + "reward: " + sheet_stageIOS['data'][rowId][5] + ",\n";
     data_stage += "\t\t\t},\n";
     if ((rowId - 2) % 5 == 4) {
         data_stage += "\t\t},\n";
@@ -79,7 +81,7 @@ for(var rowId in sheet_map['data']){
 data_map += "},\n";
 data_map += "}\n\n";
 
-//=============== 2: Stage Raw ===============
+//=============== 3: Stage Raw ===============
 var sheet_stageRaw = sheets[3];
 var data_raw = "/** 原始关卡参数配置 */\nexport const StageRaw = {\n\t// raw stage index\n";
 for(var rowId in sheet_stageRaw['data']){
@@ -96,9 +98,20 @@ for(var rowId in sheet_stageRaw['data']){
 }
 data_raw += "}\n\n";
 
+//=============== 4: Stage Reward ===============
+var sheet_stageReward = sheets[4];
+var data_reward = "/** 大关卡钻石奖励配置 */\nexport const StageReward = {\n\t// stage index\n";
+for(var rowId in sheet_stageReward['data']){
+    if (rowId < 2) {
+        continue;
+    }
+    data_reward += "\t" + (rowId - 1) + ": " + sheet_stageReward['data'][rowId][1] + ",\n";
+}
+data_reward += "}\n\n";
+
 
 // write data
-var data = data_map + data_stage + data_raw;
+var data = data_map + data_stage + data_raw + data_reward;
 var fileName = "StageConfig.ts";
 fs.writeFile(fileName, data, (err) => {
     if (err) throw err;

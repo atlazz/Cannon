@@ -20,7 +20,9 @@ export default class HomeView extends ui.home.HomeViewUI {
      */
     static openInstance(param?: any) {
         if (HomeView.instance) {
-            Ad.posShowBanner(Const.BannerPos.HomeView, true);
+            Ad.randomlyGetBanner();
+            Ad.showBanner(true);
+            // Ad.posShowBanner(Const.BannerPos.HomeView, true);
             HomeView.instance.onOpened(param);
         } else {
             Laya.Scene.open(Const.URL_HomeView, false, param);
@@ -35,6 +37,10 @@ export default class HomeView extends ui.home.HomeViewUI {
         this.nav && this.nav.loadHomeIconInfoList();
         // unlock icon
         this.refreshUnlock();
+        // refresh diamond
+        this.text_diamond.changeText("" + Global.gameData.diamond);
+        this.icon_diamond.centerX = 0 - (this.text_diamond.text.length * this.text_diamond.fontSize + this.text_diamond.x) * this.icon_diamond.scaleX / 2;
+        this.icon_diamond.visible = true;
     }
 
     /**首页图标列表*/
@@ -164,7 +170,8 @@ export default class HomeView extends ui.home.HomeViewUI {
     }
 
     private hide() {
-        Ad.posHideBanner(Const.BannerPos.HomeView);
+        Ad.hideBanner();
+        // Ad.posHideBanner(Const.BannerPos.HomeView);
         this.visible = false;
     }
 
@@ -271,7 +278,9 @@ export default class HomeView extends ui.home.HomeViewUI {
     private onGameDataLoaded() {
         console.log('onGameDataLoaded', Global.gameData);
         this.isGameDataLoaded = true;
-        Ad.posShowBanner(Const.BannerPos.HomeView);
+        Ad.randomlyGetBanner();
+        Ad.showBanner(true);
+        // Ad.posShowBanner(Const.BannerPos.HomeView);
 
         /** unlock icon */
         this.refreshUnlock();
@@ -281,12 +290,13 @@ export default class HomeView extends ui.home.HomeViewUI {
         if (Laya.Browser.onMiniGame && wx.getSystemInfoSync().system.indexOf("iOS") >= 0) {
             this.systemName = "IOS";
         }
+        console.log(this.systemName)
         /** show */
         // this.label_highScore.visible = true;
         this.label_level.changeText("关卡：" + Global.gameData.stageIndex);
         this.label_level.visible = true;
         // 调整钻石及其数量位置居中
-        this.icon_diamond.x = this.stage.width / 2 - (this.text_diamond.text.length * this.text_diamond.fontSize + this.text_diamond.x) / 2;
+        this.text_diamond.changeText("" + Global.gameData.diamond);
         this.icon_diamond.visible = true;
     }
 
@@ -304,27 +314,16 @@ export default class HomeView extends ui.home.HomeViewUI {
 
     private refreshUnlock() {
         // unlock icon
-        if (Global.gameData.tutorialStep < 5 || (Global.gameData.stageIndex === 1 && Global.gameData.tutorialStep === 5)) {
+        if (Global.gameData.tutorialStep < 6 || (Global.gameData.stageIndex === 1 && Global.gameData.tutorialStep === 6)) {
             Global.gameData.tutorialStep = 0;
             this.lock_cannon.visible = true;
             this.btn_cannon.visible = false;
             this.btn_cannon.off(Laya.Event.CLICK, this, this.onclick_cannon);
         }
-        if (Global.gameData.tutorialStep >= 5 || Global.gameData.stageIndex > 2) {
+        if (Global.gameData.tutorialStep >= 6 || Global.gameData.stageIndex > 2) {
             this.lock_cannon.visible = false;
             this.btn_cannon.visible = true;
             this.btn_cannon.on(Laya.Event.CLICK, this, this.onclick_cannon);
-        }
-        if (GameScene.instance) {
-            if (Global.gameData.tutorialStep >= 2) {
-                GameScene.instance.btn_rewardBullet.visible = true;
-            }
-            if (Global.gameData.tutorialStep >= 3) {
-                GameScene.instance.btn_rewardCannon.visible = true;
-            }
-            if (Global.gameData.tutorialStep >= 4) {
-                GameScene.instance.btn_cannonOpen.visible = true;
-            }
         }
     }
 

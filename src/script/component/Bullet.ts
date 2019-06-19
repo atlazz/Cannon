@@ -9,7 +9,7 @@ export default class BulletScript extends Laya.Script3D {
     public material: Laya.PBRSpecularMaterial;
     public effect: Laya.Sprite3D;
 
-    public isReward: boolean;
+    public isReward: boolean = false;
     public type: number;
 
     private lifetime: number;
@@ -113,9 +113,17 @@ export default class BulletScript extends Laya.Script3D {
     onCollisionEnter(collision: Laya.Collision) {
         /** 宝箱处理 */
         if (collision.other.owner.name === "bottom" || collision.other.owner.name === "top") {
+            if (!GameScene.instance) return;
+            // 超时直接胜利
+            if (GameScene.instance.treasureFrameCnt >= 400) {
+                GameScene.instance.treasureHitCnt = GameScene.instance.treasereMaxHitCnt;
+            }
+            // 击中宝箱处理
             if (GameScene.instance.treasureHitState === 0) {
                 GameScene.instance.treasureHitState = 1;
             }
+            GameScene.instance.isTreasureMoveStart = true;
+            GameScene.instance.isTreasureHit = true;
             GameScene.instance.treasureHitCnt++;
             this.destroy();
         }

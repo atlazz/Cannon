@@ -195,7 +195,7 @@ export default class Target extends Laya.Script3D {
     /** bullet hit handler */
     private bulletHit(bullet: Bullet) {
         /** cannon bullet */
-        if (!bullet.isReward) {
+        if (bullet && !bullet.isReward) {
             // Frozen
             if (bullet.type === Const.CannonType.FROZEN && this.type !== Const.TargetType.GLASS) {
                 this.setType(Const.TargetType.GLASS);

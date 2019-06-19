@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":37,
-    "selecteID":38,
+    "selectedBox":181,
+    "selecteID":182,
     "searchKey":"View",
     "props":{"width":720,"top":0,"sceneWidth":720,"sceneHeight":1280,"sceneColor":"#000000","runtime":"script/runtime/GameScene.ts","right":0,"left":0,"height":1280,"bottom":0},
     "nodeParent":-1,
-    "maxID":158,
+    "maxID":189,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -48,14 +48,13 @@
                     "props":{"width":480,"var":"box_level","top":120,"height":97,"centerX":0},
                     "nodeParent":35,
                     "label":"box_level",
-                    "isOpen":true,
+                    "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":36,
                     "child":[
                         {
-                            "x":45,
                             "type":"Image",
                             "searchKey":"Image",
                             "props":{"skin":"res/ui/game/level_bg.png","scaleY":1.5,"scaleX":1.5,"left":0,"centerY":0},
@@ -68,7 +67,6 @@
                             "compId":37,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Label",
                                     "searchKey":"Label,label_level",
                                     "props":{"width":64,"var":"label_level","valign":"middle","text":"0","fontSize":40,"color":"#cc5e20","centerY":-1,"centerX":-1,"bold":true,"align":"center"},
@@ -83,7 +81,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"Image",
                             "searchKey":"Image",
                             "props":{"skin":"res/ui/game/level_bg4.png","scaleY":1.5,"scaleX":1.5,"right":0,"centerY":0},
@@ -98,7 +95,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Image",
                             "searchKey":"Image,level1",
                             "props":{"width":32,"var":"level1","skin":"res/ui/game/level_bg_total.png","sizeGrid":"0,96,0,0","scaleY":1.5,"scaleX":1.5,"left":111,"height":32,"centerY":0},
@@ -113,7 +109,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Image",
                             "searchKey":"Image,level2",
                             "props":{"width":32,"var":"level2","skin":"res/ui/game/level_bg_total.png","sizeGrid":"0,96,0,0","scaleY":1.5,"scaleX":1.5,"left":164,"height":32,"centerY":0},
@@ -128,7 +123,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Image",
                             "searchKey":"Image,level3",
                             "props":{"width":32,"var":"level3","skin":"res/ui/game/level_bg_total.png","sizeGrid":"0,96,0,0","scaleY":1.5,"scaleX":1.5,"height":32,"centerY":0,"centerX":0},
@@ -143,7 +137,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Image",
                             "searchKey":"Image,level4",
                             "props":{"width":32,"var":"level4","skin":"res/ui/game/level_bg_total.png","sizeGrid":"0,96,0,0","scaleY":1.5,"scaleX":1.5,"right":164,"height":32,"centerY":0},
@@ -158,7 +151,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Image",
                             "searchKey":"Image,level5",
                             "props":{"width":32,"var":"level5","skin":"res/ui/game/level_bg_total.png","sizeGrid":"0,96,0,0","scaleY":1.5,"scaleX":1.5,"right":111,"height":32,"centerY":0},
@@ -172,7 +164,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Text",
                             "searchKey":"Text",
                             "props":{"y":-10,"width":480,"valign":"middle","text":"关卡","fontSize":30,"font":"SimHei","color":"#ffffff","bold":true,"align":"center"},
@@ -207,14 +198,13 @@
                     "props":{"visible":false,"var":"btn_cannonOpen","skin":"res/ui/game/btn_cannon.png","scaleY":1.5,"scaleX":1.5,"centerX":0,"bottom":50},
                     "nodeParent":35,
                     "label":"btn_cannonOpen",
-                    "isOpen":true,
+                    "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":28,
                     "child":[
                         {
-                            "x":45,
                             "type":"Label",
                             "searchKey":"Label",
                             "props":{"text":"换炮","fontSize":25,"font":"SimHei","color":"#ffffff","centerY":45,"centerX":0},
@@ -390,6 +380,34 @@
                             "child":[
                                 ]
                         }]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image,icon_diamond",
+                    "props":{"y":0,"var":"icon_diamond","top":50,"skin":"res/ui/game/icon_diamond.png","scaleY":0.8,"scaleX":0.8,"centerX":-50},
+                    "nodeParent":35,
+                    "label":"icon_diamond",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":181,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Text",
+                            "searchKey":"Text,text_diamond",
+                            "props":{"y":4,"x":80,"var":"text_diamond","valign":"middle","text":"0","fontSize":45,"color":"#ffffff","bold":false,"align":"center"},
+                            "nodeParent":181,
+                            "label":"text_diamond",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":182,
+                            "child":[
+                                ]
+                        }]
                 }]
         },
         {
@@ -408,7 +426,7 @@
                 {
                     "type":"Image",
                     "searchKey":"Image,mask_revive",
-                    "props":{"width":720,"var":"mask_revive","skin":"res/ui/game/blank.png","sizeGrid":"1,1,1,1","height":1700,"centerY":0,"centerX":0},
+                    "props":{"width":720,"var":"mask_revive","top":0,"skin":"res/ui/game/blank.png","sizeGrid":"1,1,1,1","centerX":0,"bottom":0},
                     "nodeParent":69,
                     "label":"mask_revive",
                     "isDirectory":false,
@@ -447,7 +465,7 @@
                 {
                     "type":"Image",
                     "searchKey":"Image,btn_revive",
-                    "props":{"var":"btn_revive","skin":"res/ui/game/btn_start.png","scaleY":1.5,"scaleX":1.5,"centerY":250,"centerX":0},
+                    "props":{"var":"btn_revive","skin":"res/ui/game/btn_start.png","scaleY":1.5,"scaleX":1.5,"centerY":200,"centerX":0},
                     "nodeParent":69,
                     "label":"btn_revive",
                     "isOpen":true,
@@ -499,7 +517,7 @@
                 {
                     "type":"Image",
                     "searchKey":"Image,btn_retry",
-                    "props":{"var":"btn_retry","skin":"res/ui/game/retry.png","centerX":0,"bottom":150},
+                    "props":{"var":"btn_retry","skin":"res/ui/game/retry.png","centerX":0,"bottom":280},
                     "nodeParent":69,
                     "label":"btn_retry",
                     "isDirectory":false,
@@ -513,115 +531,17 @@
         {
             "x":15,
             "type":"Box",
-            "searchKey":"Box,box_win",
-            "props":{"width":720,"visible":false,"var":"box_win","top":0,"centerX":0,"bottom":0},
-            "nodeParent":2,
-            "label":"box_win",
-            "isOpen":true,
-            "isDirectory":true,
-            "isAniNode":true,
-            "hasChild":true,
-            "compId":58,
-            "child":[
-                {
-                    "x":30,
-                    "type":"Image",
-                    "searchKey":"Image,mask_win",
-                    "props":{"width":720,"var":"mask_win","skin":"res/ui/game/blank.png","sizeGrid":"1,1,1,1","height":1700,"centerY":0,"centerX":0},
-                    "nodeParent":58,
-                    "label":"mask_win",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":57,
-                    "child":[
-                        ]
-                },
-                {
-                    "x":30,
-                    "type":"Box",
-                    "searchKey":"Box,box_winIcon",
-                    "props":{"var":"box_winIcon","centerY":0,"centerX":0},
-                    "nodeParent":58,
-                    "label":"box_winIcon",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":83,
-                    "child":[
-                        ]
-                },
-                {
-                    "x":30,
-                    "type":"Image",
-                    "searchKey":"Image",
-                    "props":{"skin":"res/ui/game/stage_pass.png","centerY":-40,"centerX":0},
-                    "nodeParent":58,
-                    "label":"Image",
-                    "isOpen":false,
-                    "isDirectory":true,
-                    "isAniNode":true,
-                    "hasChild":true,
-                    "compId":60,
-                    "child":[
-                        {
-                            "type":"Label",
-                            "searchKey":"Label,label_lvlPass",
-                            "props":{"y":-5,"x":120,"width":100,"var":"label_lvlPass","valign":"middle","text":"1","height":60,"fontSize":60,"color":"#ffffff","bold":true,"align":"left"},
-                            "nodeParent":60,
-                            "label":"label_lvlPass",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":62,
-                            "child":[
-                                ]
-                        }]
-                },
-                {
-                    "x":30,
-                    "type":"Image",
-                    "searchKey":"Image,winLabel",
-                    "props":{"var":"winLabel","skin":"res/ui/game/congratulation.png","centerY":-480,"centerX":0},
-                    "nodeParent":58,
-                    "label":"winLabel",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":63,
-                    "child":[
-                        ]
-                },
-                {
-                    "x":30,
-                    "type":"Image",
-                    "searchKey":"Image,btn_win_next",
-                    "props":{"var":"btn_win_next","skin":"res/ui/game/btn_next.png","scaleY":1,"scaleX":1,"centerX":0,"bottom":220},
-                    "nodeParent":58,
-                    "label":"btn_win_next",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":59,
-                    "child":[
-                        ]
-                }]
-        },
-        {
-            "x":15,
-            "type":"Box",
             "searchKey":"Box,box_test",
             "props":{"width":720,"visible":false,"var":"box_test","top":0,"mouseThrough":true,"centerX":0,"bottom":0},
             "nodeParent":2,
             "label":"box_test",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":85,
             "child":[
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,btn_test_restart",
                     "props":{"var":"btn_test_restart","skin":"res/ui/game/btn.png","scaleY":0.8,"scaleX":1.5,"centerX":-150,"bottom":100},
@@ -636,7 +556,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Text",
                     "searchKey":"Text",
                     "props":{"y":1100,"x":124,"width":178,"valign":"middle","text":"restart","height":65,"fontSize":40,"bold":true,"align":"center"},
@@ -650,7 +569,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,btn_test_next",
                     "props":{"y":0,"var":"btn_test_next","skin":"res/ui/game/btn.png","scaleY":0.8,"scaleX":1.5,"centerX":150,"bottom":100},
@@ -665,7 +583,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Text",
                     "searchKey":"Text",
                     "props":{"y":1100,"x":443,"width":134,"valign":"middle","text":"next","height":65,"fontSize":40,"bold":true,"align":"center"},
@@ -679,7 +596,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"TextInput",
                     "searchKey":"TextInput,input_test_lvl",
                     "props":{"width":130,"var":"input_test_lvl","skin":"comp/textinput.png","prompt":"跳转关卡：","height":30,"fontSize":20,"font":"SimHei","centerX":150,"bottom":200,"bold":false},
@@ -693,7 +609,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Label",
                     "searchKey":"Label,label_test_lvl",
                     "props":{"var":"label_test_lvl","top":200,"text":"关卡：","fontSize":60,"font":"SimHei","color":"#000000","centerX":0,"bold":true},
@@ -709,19 +624,318 @@
         },
         {
             "x":15,
+            "type":"Box",
+            "searchKey":"Box,box_treasureAD",
+            "props":{"width":720,"visible":false,"var":"box_treasureAD","top":0,"centerX":0,"bottom":0},
+            "nodeParent":2,
+            "label":"box_treasureAD",
+            "isOpen":false,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":158,
+            "child":[
+                {
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"width":720,"top":0,"skin":"res/ui/game/blank.png","sizeGrid":"1,1,1,1","centerX":0,"bottom":0},
+                    "nodeParent":158,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":167,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"skin":"res/ui/game/gongratulation.png","centerY":-350,"centerX":0},
+                    "nodeParent":158,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":160,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Image",
+                    "searchKey":"Image,btn_treasureGetExtra",
+                    "props":{"width":270,"var":"btn_treasureGetExtra","skin":"res/ui/game/btn.png","sizeGrid":"0,10,0,10","centerY":20,"centerX":0},
+                    "nodeParent":158,
+                    "label":"btn_treasureGetExtra",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":161,
+                    "child":[
+                        {
+                            "type":"Image",
+                            "searchKey":"Image",
+                            "props":{"skin":"res/ui/game/getprice.png","centerY":0,"centerX":0},
+                            "nodeParent":161,
+                            "label":"Image",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":162,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"skin":"res/ui/game/extra_diamond.png","centerY":-200,"centerX":0},
+                    "nodeParent":158,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":163,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"skin":"res/ui/game/icon_diamond.png","centerY":-120,"centerX":-80},
+                    "nodeParent":158,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":164,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"skin":"res/ui/game/x.png","centerY":-120,"centerX":-10},
+                    "nodeParent":158,
+                    "label":"Image",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":165,
+                    "child":[
+                        {
+                            "type":"Label",
+                            "searchKey":"Label,label_extraDiamond",
+                            "props":{"width":200,"var":"label_extraDiamond","valign":"middle","text":"0","fontSize":60,"color":"#ffffff","centerY":-2,"centerX":130,"bold":true,"align":"left"},
+                            "nodeParent":165,
+                            "label":"label_extraDiamond",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":166,
+                            "child":[
+                                ]
+                        }]
+                }]
+        },
+        {
+            "x":15,
+            "type":"Box",
+            "searchKey":"Box,box_passStage",
+            "props":{"width":720,"visible":false,"var":"box_passStage","top":0,"centerX":0,"bottom":0},
+            "nodeParent":2,
+            "label":"box_passStage",
+            "isOpen":true,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":168,
+            "child":[
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"width":720,"top":0,"skin":"res/ui/game/blank.png","sizeGrid":"1,1,1,1","centerX":0,"bottom":0},
+                    "nodeParent":168,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":169,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Box",
+                    "searchKey":"Box,box_winIcon",
+                    "props":{"var":"box_winIcon","centerY":0,"centerX":0},
+                    "nodeParent":168,
+                    "label":"box_winIcon",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":180,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"top":100,"skin":"res/ui/game/ggongratulation.png","centerX":0},
+                    "nodeParent":168,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":170,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image,btn_passStagex3",
+                    "props":{"width":270,"var":"btn_passStagex3","skin":"res/ui/game/btn.png","sizeGrid":"0,10,0,10","centerX":0,"bottom":400},
+                    "nodeParent":168,
+                    "label":"btn_passStagex3",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":171,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "searchKey":"Image",
+                            "props":{"skin":"res/ui/game/tecxt_getprice.png","centerY":0,"centerX":0},
+                            "nodeParent":171,
+                            "label":"Image",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":172,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image,btn_passStage",
+                    "props":{"var":"btn_passStage","skin":"res/ui/game/normal_reward.png","centerX":0,"bottom":300},
+                    "nodeParent":168,
+                    "label":"btn_passStage",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":179,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"skin":"res/ui/game/text_diamond.png","centerY":0,"centerX":0},
+                    "nodeParent":168,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":173,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"skin":"res/ui/game/icon_diamond.png","centerY":80,"centerX":-80},
+                    "nodeParent":168,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":174,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"skin":"res/ui/game/x.png","centerY":80,"centerX":-10},
+                    "nodeParent":168,
+                    "label":"Image",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":175,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Label",
+                            "searchKey":"Label,label_winDiamond",
+                            "props":{"width":200,"var":"label_winDiamond","valign":"middle","text":"0","fontSize":60,"color":"#ffffff","centerY":-2,"centerX":130,"bold":true,"align":"left"},
+                            "nodeParent":175,
+                            "label":"label_winDiamond",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":176,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"skin":"res/ui/game/stage.png","centerY":-250,"centerX":0},
+                    "nodeParent":168,
+                    "label":"Image",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":177,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Label",
+                            "searchKey":"Label,label_stage",
+                            "props":{"width":200,"var":"label_stage","valign":"middle","text":"1","fontSize":80,"color":"#ffffff","centerY":0,"centerX":0,"bold":true,"align":"center"},
+                            "nodeParent":177,
+                            "label":"label_stage",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":178,
+                            "child":[
+                                ]
+                        }]
+                }]
+        },
+        {
+            "x":15,
             "type":"Image",
             "searchKey":"Image,backCheck",
             "props":{"width":580,"visible":false,"var":"backCheck","skin":"res/ui/game/backhome_bg.png","sizeGrid":"10,10,10,10","height":400,"centerY":0,"centerX":0},
             "nodeParent":2,
             "label":"backCheck",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":149,
             "child":[
                 {
-                    "x":30,
                     "type":"Label",
                     "searchKey":"Label",
                     "props":{"valign":"middle","top":40,"text":"是否返回主界面？","fontSize":60,"font":"SimHei","color":"#ff8603","centerX":20,"bold":true,"align":"center"},
@@ -735,7 +949,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Label",
                     "searchKey":"Label",
                     "props":{"valign":"middle","top":170,"text":"现在退出将丢失当前关卡进度","fontSize":40,"font":"SimHei","color":"#ff8603","centerX":0,"bold":true,"align":"center"},
@@ -749,7 +962,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,btn_backReturn",
                     "props":{"var":"btn_backReturn","skin":"res/ui/game/btn.png","scaleY":0.9,"scaleX":2,"right":40,"bottom":20},
@@ -762,7 +974,6 @@
                     "compId":150,
                     "child":[
                         {
-                            "x":45,
                             "type":"Image",
                             "searchKey":"Image",
                             "props":{"skin":"res/ui/game/stay.png","scaleY":1.1,"scaleX":0.5,"centerY":-3,"centerX":0},
@@ -777,7 +988,6 @@
                         }]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,btn_backExit",
                     "props":{"var":"btn_backExit","skin":"res/ui/game/btn.png","scaleY":0.9,"scaleX":2,"left":40,"bottom":20},
@@ -790,7 +1000,6 @@
                     "compId":154,
                     "child":[
                         {
-                            "x":45,
                             "type":"Image",
                             "searchKey":"Image",
                             "props":{"y":0,"x":0,"skin":"res/ui/game/exit.png","scaleY":1.1,"scaleX":0.5,"centerY":-3,"centerX":0},
@@ -865,14 +1074,13 @@
             "props":{"width":720,"visible":false,"var":"tutorial_bulletTry","top":0,"mouseThrough":false,"mouseEnabled":true,"centerX":0,"bottom":0},
             "nodeParent":2,
             "label":"tutorial_bulletTry",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":125,
             "child":[
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image",
                     "props":{"skin":"res/ui/game/mask2.png","scaleY":4,"scaleX":4,"centerY":0,"centerX":0},
@@ -886,7 +1094,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,inputArea",
                     "props":{"skin":"res/ui/game/hole.png","name":"inputArea","left":50,"centerY":330,"alpha":0},
@@ -900,7 +1107,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Label",
                     "searchKey":"Label",
                     "props":{"text":"点击试用一发强力炮弹","fontSize":30,"font":"SimHei","color":"#ffffff","centerY":355,"centerX":0,"bold":true,"align":"center"},
@@ -914,7 +1120,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,finger",
                     "props":{"skin":"res/ui/game/finger_only.png","scaleY":0.8,"scaleX":0.8,"name":"finger","centerY":480,"centerX":-250},
@@ -935,14 +1140,13 @@
             "props":{"width":720,"visible":false,"var":"tutorial_cannonTry","top":0,"mouseThrough":false,"mouseEnabled":true,"centerX":0,"bottom":0},
             "nodeParent":2,
             "label":"tutorial_cannonTry",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":138,
             "child":[
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image",
                     "props":{"skin":"res/ui/game/mask3.png","scaleY":4,"scaleX":4,"centerY":0,"centerX":0},
@@ -956,7 +1160,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,inputArea",
                     "props":{"skin":"res/ui/game/hole.png","right":50,"name":"inputArea","centerY":330,"alpha":0},
@@ -970,7 +1173,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Label",
                     "searchKey":"Label",
                     "props":{"text":"点击试用至尊大炮，持续到本大关结束哦","fontSize":30,"font":"SimHei","color":"#ffffff","centerY":230,"centerX":0,"bold":true,"align":"center"},
@@ -984,7 +1186,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,finger",
                     "props":{"skin":"res/ui/game/finger_only.png","scaleY":0.8,"scaleX":0.8,"name":"finger","centerY":480,"centerX":270},
@@ -1005,14 +1206,13 @@
             "props":{"width":720,"visible":false,"var":"tutorial_cannonSelect","top":0,"mouseThrough":false,"mouseEnabled":true,"centerX":0,"bottom":0},
             "nodeParent":2,
             "label":"tutorial_cannonSelect",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":143,
             "child":[
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image",
                     "props":{"skin":"res/ui/game/mask4.png","scaleY":4,"scaleX":4,"centerX":0,"bottom":0},
@@ -1026,7 +1226,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,inputArea",
                     "props":{"skin":"res/ui/game/hole.png","name":"inputArea","centerX":0,"bottom":28,"alpha":0},
@@ -1040,7 +1239,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Label",
                     "searchKey":"Label",
                     "props":{"text":"点击切换其他大炮","fontSize":30,"font":"SimHei","color":"#ffffff","centerY":420,"centerX":0,"bold":true,"align":"center"},
@@ -1054,7 +1252,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,finger",
                     "props":{"skin":"res/ui/game/finger_only.png","scaleY":0.8,"scaleX":0.8,"name":"finger","centerX":40,"bottom":5},
@@ -1064,6 +1261,92 @@
                     "isAniNode":true,
                     "hasChild":false,
                     "compId":147,
+                    "child":[
+                        ]
+                }]
+        },
+        {
+            "x":15,
+            "type":"Box",
+            "searchKey":"Box,tutorial_treasure",
+            "props":{"width":720,"visible":false,"var":"tutorial_treasure","top":0,"mouseThrough":false,"mouseEnabled":true,"centerX":0,"bottom":0},
+            "nodeParent":2,
+            "label":"tutorial_treasure",
+            "isOpen":true,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":183,
+            "child":[
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"skin":"res/ui/game/mask1.png","scaleY":4,"scaleX":4,"centerY":0,"centerX":0},
+                    "nodeParent":183,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":184,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image,inputArea",
+                    "props":{"skin":"res/ui/game/hole.png","scaleY":3,"scaleX":3,"name":"inputArea","centerY":80,"centerX":0,"alpha":0},
+                    "nodeParent":183,
+                    "label":"inputArea",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":185,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Label",
+                    "searchKey":"Label,label_treasureTitle",
+                    "props":{"x":289,"var":"label_treasureTitle","text":"发现宝箱","fontSize":65,"font":"SimHei","color":"#ffffff","centerY":-430,"centerX":0,"bold":true,"align":"center"},
+                    "nodeParent":183,
+                    "label":"label_treasureTitle",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":188,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Label",
+                    "searchKey":"Label",
+                    "props":{"x":199,"text":"猛戳宝箱","fontSize":35,"font":"SimHei","color":"#ffffff","centerY":-250,"centerX":0,"bold":true,"align":"center"},
+                    "nodeParent":183,
+                    "label":"Label",
+                    "isOpen":true,
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":187,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Label",
+                    "searchKey":"Label",
+                    "props":{"text":"打碎获得大量宝石！","fontSize":35,"font":"SimHei","color":"#ffffff","centerY":-200,"centerX":20,"bold":true,"align":"center"},
+                    "nodeParent":183,
+                    "label":"Label",
+                    "isOpen":true,
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":186,
                     "child":[
                         ]
                 }]

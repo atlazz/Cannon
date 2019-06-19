@@ -26,7 +26,6 @@ export default class GameScene extends ui.game.GameSceneUI {
     static openInstance(param?: any) {
         if (GameScene.instance) {
             GameScene.instance.onOpened(param);
-            // GameScene.instance.showTutorial();
         } else {
             Laya.Scene.open(Const.URL_GameScene, false, param);
         }
@@ -36,6 +35,10 @@ export default class GameScene extends ui.game.GameSceneUI {
         console.log("GameScene onOpened()");
         this.visible = true;
         this.mouseEnabled = true;
+
+        // 调整钻石及其数量位置居中
+        this.text_diamond.changeText("" + Global.gameData.diamond);
+        this.icon_diamond.visible = true;
 
         // game playing
         if (this.state === Const.GameState.START) {
@@ -114,6 +117,10 @@ export default class GameScene extends ui.game.GameSceneUI {
     public treasureFrameCnt: number = 0;
     public treasereMaxFrameCnt: number = 90;
     public treasureHitState: number = 0;
+    public isTreasureHit: boolean = false;
+    public isTreasureMoveStart: boolean = false;
+    public isTreasureAdOpen: boolean = false;
+    public isTreasureBannerShow: boolean = false;
 
     /** cannon */
     public cannonType: number = Const.CannonType.DEFAULT;
@@ -319,13 +326,13 @@ export default class GameScene extends ui.game.GameSceneUI {
     /** hide game ui */
     hideUI() {
         this.box_UI.visible = false;
-        this.box_win.visible = false;
+        this.box_passStage.visible = false;
         this.hideReviveUI();
     }
 
     /** hide revive ui */
     hideReviveUI() {
-        Ad.posHideBanner(Const.BannerPos.ReviveDialog);
+        Ad.hideBanner();
         this.box_revive.visible = false;
     }
 
@@ -513,8 +520,104 @@ export default class GameScene extends ui.game.GameSceneUI {
         });
 
         // next stage
-        this.btn_win_next.on(Laya.Event.CLICK, this, () => {
+        this.btn_passStage.on(Laya.Event.CLICK, this, () => {
+            // add diamond
+            Global.gameData.diamond += StageConfig.StageReward[this.stageIdx - 1];
+            this.text_diamond.changeText("" + Global.gameData.diamond);
+            // hide
+            Ad.hideBanner();
+            this.box_passStage.visible = false;
+            // next
             this.nextStage();
+        });
+
+        // next stage: diamond x3
+        this.btn_passStagex3.on(Laya.Event.CLICK, this, () => {
+            if (!Laya.Browser.onMiniGame) {
+                // add diamond
+                Global.gameData.diamond += StageConfig.StageReward[this.stageIdx - 1] * 3;
+                this.text_diamond.changeText("" + Global.gameData.diamond);
+                // hide
+                Ad.hideBanner();
+                this.box_passStage.visible = false;
+                // next
+                this.nextStage();
+            }
+            else {
+                // 1: video
+                if (Global.config.reward_triple == 1) {
+                    // 未超过每天视频观看次数
+                    if (!Reward.instance.isOverVideo()) {
+                        this.mouseEnabled = false;
+                        Reward.instance.video({
+                            pos: Const.RewardPos.Treasure,
+                            success: () => {
+                                // add diamond
+                                Global.gameData.diamond += StageConfig.StageReward[this.stageIdx - 1] * 3;
+                                this.text_diamond.changeText("" + Global.gameData.diamond);
+                                // hide
+                                Ad.hideBanner();
+                                this.box_passStage.visible = false;
+                                // next
+                                this.nextStage();
+                            },
+                            fail: () => {
+                                Reward.instance.share({
+                                    pos: Const.RewardPos.Treasure,
+                                    success: () => {
+                                        // add diamond
+                                        Global.gameData.diamond += StageConfig.StageReward[this.stageIdx - 1] * 3;
+                                        this.text_diamond.changeText("" + Global.gameData.diamond);
+                                        // hide
+                                        Ad.hideBanner();
+                                        this.box_passStage.visible = false;
+                                        // next
+                                        this.nextStage();
+                                    },
+                                    complete: () => {
+                                    }
+                                });
+                            },
+                            complete: () => {
+                                this.mouseEnabled = true;
+                            }
+                        });
+                    }
+                    else {
+                        Reward.instance.share({
+                            pos: Const.RewardPos.Treasure,
+                            success: () => {
+                                // add diamond
+                                Global.gameData.diamond += StageConfig.StageReward[this.stageIdx - 1] * 3;
+                                this.text_diamond.changeText("" + Global.gameData.diamond);
+                                // hide
+                                Ad.hideBanner();
+                                this.box_passStage.visible = false;
+                                // next
+                                this.nextStage();
+                            },
+                            complete: () => {
+                            }
+                        });
+                    }
+                }
+                // 2: share
+                (Global.config.revive == 2) && Reward.instance.share({
+                    pos: Const.RewardPos.Revive,
+                    success: () => {
+                        // add diamond
+                        Global.gameData.diamond += StageConfig.StageReward[this.stageIdx - 1] * 3;
+                        this.text_diamond.changeText("" + Global.gameData.diamond);
+                        // hide
+                        Ad.hideBanner();
+                        this.box_passStage.visible = false;
+                        // next
+                        this.nextStage();
+                    },
+                    complete: () => {
+                    }
+                });
+            }
         });
 
         // revive btn
@@ -622,6 +725,16 @@ export default class GameScene extends ui.game.GameSceneUI {
             this.mouseEnabled = false;
             HomeView.openInstance();
         });
+
+        // treasure ad close
+        this.btn_treasureGetExtra.on(Laya.Event.CLICK, this, () => {
+            // add diamond
+            Global.gameData.diamond += StageConfig.StageReward[this.stageIdx];
+            this.text_diamond.changeText("" + Global.gameData.diamond);
+            // hide
+            Ad.hideBanner();
+            this.box_treasureAD.visible = false;
+        });
     }
 
     /** reward btn ani */
@@ -685,11 +798,21 @@ export default class GameScene extends ui.game.GameSceneUI {
             return;
         }
 
+        // preload banner for treasure stage
+        if (this.missionIdx === 6) {
+            this.isTreasureBannerShow = false;
+            // 宝箱banner是否显示, 显示则预创建
+            if (!Global.config.deny_banner && Math.random() < Global.config.banner_show_treasure) {
+                this.isTreasureBannerShow = true;
+                Ad.randomlyGetBanner();
+            }
+        }
+
         // destroy old stage
         this.cleanStage();
 
         // set ui
-        this.box_win.visible = false;
+        this.box_passStage.visible = false;
         this.missionWin.visible = false;
         if (this.missionIdx >= 1 && this.missionIdx <= 5) {
             this["level" + this.missionIdx].sizeGrid = "0,64,0,0";
@@ -723,7 +846,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                 this.rawIdx = this.missionRawIdxList[0];
                 let tryCnt = 0;
                 while (tryCnt < 20 && this.missionRawIdxList.indexOf(this.rawIdx) >= 0) {
-                    this.rawIdx = Math.round(Math.random() * (tmpStage.max - tmpStage.min)) + tmpStage.min;
+                    this.rawIdx = StageConfig.Map[HomeView.instance.systemName][Math.round(Math.random() * (tmpStage.max - tmpStage.min)) + tmpStage.min];
                     tryCnt++;
                 }
                 this.missionRawIdxList[this.missionIdx - 1] = this.rawIdx;
@@ -885,8 +1008,70 @@ export default class GameScene extends ui.game.GameSceneUI {
                     this.treasureHitCnt = 0;
                     this.treasureFrameCnt = 0;
                     this.treasureHitState = 0;
+                    this.isTreasureAdOpen = false;
+                    this.isTreasureHit = false;
+                    this.isTreasureMoveStart = false;
 
-                    // 延时误点
+                    // 宝箱动画循环
+                    var isMoveUp: boolean = Math.random() < 0.6;
+                    var moveFrameCnt: number = -1;
+                    var MaxMoveFrameCnt: number = 60;
+                    var tmpCntHit: number = 0;
+                    Laya.timer.frameLoop(1, this.gameStage, () => {
+                        if (this.isTreasureMoveStart) {
+                            // 上下移动
+                            moveFrameCnt++;
+                            if (moveFrameCnt <= MaxMoveFrameCnt) {
+                                if (isMoveUp) {
+                                    this.gameStage.transform.localPositionY += 0.01;
+                                } else {
+                                    this.gameStage.transform.localPositionY -= 0.01;
+                                }
+                            }
+                            else {
+                                moveFrameCnt = 0;
+                                // 非第一个周期
+                                MaxMoveFrameCnt = 120;
+                                // 第一次下落最低点显示广告弹窗-宝箱暴击
+                                if (this.isTreasureBannerShow && !this.isTreasureAdOpen && !isMoveUp) {
+                                    this.label_extraDiamond.changeText("" + StageConfig.StageReward[this.stageIdx]);
+                                    this.box_treasureAD.visible = true;
+                                    this.isTreasureAdOpen = true;
+                                    // var offsetY_treasureBanner = -120;
+                                    console.log(this.btn_treasureGetExtra.height)
+                                    var top_treasureBanner = this.btn_treasureGetExtra.centerY + this.btn_treasureGetExtra.height / 2 + Laya.stage.height / 2 + 100;
+                                    if (Laya.Browser.onMiniGame && ws.isIPhoneX()) {
+                                        top_treasureBanner += 40;
+                                    }
+                                    Ad.showBanner(false, top_treasureBanner);
+                                    console.log("t_banner_show");
+                                    ws.traceEvent("t_banner_show");
+                                }
+                                isMoveUp = !isMoveUp;
+                            }
+                            // 击中动画
+                            if (this.isTreasureHit) {
+                                tmpCntHit++;
+                                if (tmpCntHit <= 2) {
+                                    this.gameStage.transform.localRotationEulerZ += 4;
+                                    this.gameStage.transform.localPositionX += 0.03;
+                                }
+                                else if (tmpCntHit <= 6) {
+                                    this.gameStage.transform.localRotationEulerZ -= 4;
+                                    this.gameStage.transform.localPositionX -= 0.03;
+                                }
+                                else if (tmpCntHit <= 8) {
+                                    this.gameStage.transform.localRotationEulerZ += 4;
+                                    this.gameStage.transform.localPositionX += 0.03;
+                                }
+                                else {
+                                    // reset
+                                    this.isTreasureHit = false;
+                                    tmpCntHit = 0;
+                                }
+                            }
+                        }
+                    });
                 }
 
                 // set stage listener
@@ -930,6 +1115,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                     }
                     else if (this.missionIdx === 4 && Global.gameData.tutorialStep === 2) {
                         Global.gameData.tutorialStep = 3;
+                        this.btn_rewardBullet.visible = true;
                         this.btn_rewardCannon.visible = true;
                         this.tutorial_cannonTry.visible = true;
                         var finger: Laya.Image = this.tutorial_cannonTry.getChildByName("finger") as Laya.Image;
@@ -948,9 +1134,21 @@ export default class GameScene extends ui.game.GameSceneUI {
                             this.tutorial_cannonTry.getChildByName("inputArea").offAll();
                         });
                     }
+                    else if (this.missionIdx === 6 && Global.gameData.tutorialStep === 3) {
+                        // update
+                        Global.gameData.tutorialStep = 4;
+                        this.tutorial_treasure.visible = true;
+                        this.tutorial_treasure.getChildByName("inputArea").on(Laya.Event.CLICK, this, () => {
+                            console.log("newplayer_4")
+                            ws.traceEvent("newplayer_4");
+                            this.onClick();
+                            this.tutorial_treasure.visible = false;
+                            this.tutorial_treasure.getChildByName("inputArea").offAll();
+                        });
+                    }
                 }
-                else if (this.stageIdx === 2 && this.missionIdx === 1 && Global.gameData.tutorialStep === 3) {
-                    Global.gameData.tutorialStep = 4;
+                else if (this.stageIdx === 2 && this.missionIdx === 1 && Global.gameData.tutorialStep === 4) {
+                    Global.gameData.tutorialStep = 5;
                     this.btn_cannonOpen.visible = true;
                     this.tutorial_cannonSelect.visible = true;
                     var finger: Laya.Image = this.tutorial_cannonSelect.getChildByName("finger") as Laya.Image;
@@ -961,13 +1159,34 @@ export default class GameScene extends ui.game.GameSceneUI {
                         }
                     });
                     this.tutorial_cannonSelect.getChildByName("inputArea").on(Laya.Event.CLICK, this, () => {
-                        console.log("newplayer_4")
-                        ws.traceEvent("newplayer_4");
+                        console.log("newplayer_5")
+                        ws.traceEvent("newplayer_5");
                         this.onClick_cannonSelect();
                         this.tutorial_cannonSelect.visible = false;
                         Laya.timer.clearAll(this.tutorial_cannonSelect.getChildByName("finger"));
                         this.tutorial_cannonSelect.getChildByName("inputArea").offAll();
                     });
+                }
+
+                // show button
+                if (Global.gameData.stageIndex > 1 && this.missionIdx >= 1 && this.missionIdx <= 5) {
+                    this.btn_rewardCannon.visible = true;
+                    this.btn_rewardBullet.visible = true;
+                    this.btn_cannonOpen.visible = true;
+                }
+                else if (Global.gameData.stageIndex === 1) {
+                    if (Global.gameData.tutorialStep >= 2) {
+                        this.btn_rewardBullet.visible = true;
+                    }
+                    if (Global.gameData.tutorialStep >= 3) {
+                        this.btn_rewardBullet.visible = true;
+                        this.btn_rewardCannon.visible = true;
+                    }
+                }
+                else {
+                    this.btn_rewardCannon.visible = false;
+                    this.btn_rewardBullet.visible = false;
+                    this.btn_cannonOpen.visible = false;
                 }
             });
         }));
@@ -975,46 +1194,49 @@ export default class GameScene extends ui.game.GameSceneUI {
 
     /** game stage looping */
     private stageLooping() {
-        // 测试接口开始 <==========================
-        if (HomeView.instance.isTest) {
-            this.testWinCheck();
-        }
-        else {
+        // 游戏中，非停留在大炮选择页
+        if (this.state === Const.GameState.START) {
+            // 测试接口开始 <==========================
+            if (HomeView.instance.isTest) {
+                this.testWinCheck();
+            }
+            else {
+                // 测试接口结束 <==========================
+
+                /** win check */
+                // 常规关卡
+                if (this.missionIdx >= 1 && this.missionIdx <= 5) {
+                    this.winCheck();
+                }
+                // 宝箱关卡
+                else {
+                    this.winCheck_treasure();
+                }
+
+                // 测试接口开始 <==========================
+            }
             // 测试接口结束 <==========================
 
-            /** win check */
-            // 常规关卡
-            if (this.missionIdx >= 1 && this.missionIdx <= 5) {
-                this.winCheck();
-            }
-            // 宝箱关卡
-            else {
-                this.winCheck_treasure();
-            }
-
-            // 测试接口开始 <==========================
-        }
-        // 测试接口结束 <==========================
-
-        /** cannon recoil playing */
-        if (this.isRecoil && this.cannon) {
-            if (this.recoilTime < this.MaxRecoilTime) {
-                if (this.recoilTime < this.MaxRecoilTime / 4) {
-                    this.cannon.transform.localPositionX += this.bulletDirection.x * 0.01;
-                    this.cannon.transform.localPositionY += this.bulletDirection.y * 0.01;
-                    this.cannon.transform.localPositionZ += this.bulletDirection.z * 0.01;
+            /** cannon recoil playing */
+            if (this.isRecoil && this.cannon) {
+                if (this.recoilTime < this.MaxRecoilTime) {
+                    if (this.recoilTime < this.MaxRecoilTime / 4) {
+                        this.cannon.transform.localPositionX += this.bulletDirection.x * 0.01;
+                        this.cannon.transform.localPositionY += this.bulletDirection.y * 0.01;
+                        this.cannon.transform.localPositionZ += this.bulletDirection.z * 0.01;
+                    }
+                    else {
+                        this.cannon.transform.localPositionX -= this.bulletDirection.x * 0.006;
+                        this.cannon.transform.localPositionY -= this.bulletDirection.y * 0.006;
+                        this.cannon.transform.localPositionZ -= this.bulletDirection.z * 0.006;
+                    }
+                    this.recoilTime++;
                 }
                 else {
-                    this.cannon.transform.localPositionX -= this.bulletDirection.x * 0.006;
-                    this.cannon.transform.localPositionY -= this.bulletDirection.y * 0.006;
-                    this.cannon.transform.localPositionZ -= this.bulletDirection.z * 0.006;
+                    this.cannon.transform.position = Const.CannonInitPos.clone();
+                    this.isRecoil = false;
+                    this.recoilTime = this.MaxRecoilTime;
                 }
-                this.recoilTime++;
-            }
-            else {
-                this.cannon.transform.position = Const.CannonInitPos.clone();
-                this.isRecoil = false;
-                this.recoilTime = this.MaxRecoilTime;
             }
         }
     }
@@ -1080,6 +1302,11 @@ export default class GameScene extends ui.game.GameSceneUI {
                 else {
                     // clear mission win animation
                     Laya.timer.clearAll(this.missionWin);
+                    // add diamond
+                    var diamondAdd: number = StageConfig.Stage[HomeView.instance.systemName][this.stageIdx > Const.StageNum ? Const.StageNum : this.stageIdx][this.missionIdx].reward;
+                    diamondAdd -= Math.round(diamondAdd / 2 / 4 * idx);
+                    Global.gameData.diamond += diamondAdd;
+                    this.text_diamond.changeText("" + Global.gameData.diamond);
                 }
             });
             // open next stage
@@ -1091,7 +1318,7 @@ export default class GameScene extends ui.game.GameSceneUI {
     private winCheck_treasure() {
         this.treasureFrameCnt++;
         // player win
-        if (this.treasureFrameCnt >= this.treasereMaxFrameCnt && this.treasureHitCnt >= this.treasereMaxHitCnt) {
+        if (this.treasureFrameCnt >= this.treasereMaxFrameCnt && this.treasureHitCnt >= this.treasereMaxHitCnt && !this.box_treasureAD.visible) {
             this.flag_missionWin = true;
             // off listener
             this.box_scene3D.off(Laya.Event.CLICK, this, this.onClick);
@@ -1100,6 +1327,9 @@ export default class GameScene extends ui.game.GameSceneUI {
             // hide
             this.box_countdown.visible = false;
             this.hideReviveUI();
+
+            // reset
+            this.gameStage.transform.localPositionY = 0;
 
             // 清除上一轮动画
             Laya.timer.clearAll(this.gameStage);
@@ -1185,33 +1415,6 @@ export default class GameScene extends ui.game.GameSceneUI {
                 });
             });
         }
-        // not win yet
-        else {
-            // 击中动画
-            if (this.treasureHitState === 1) {
-                this.treasureHitState = 2;
-                var tmpCntHit: number = 0;
-                Laya.timer.frameLoop(1, this.gameStage, () => {
-                    tmpCntHit++;
-                    if (tmpCntHit <= 2) {
-                        this.gameStage.transform.localRotationEulerZ += 4;
-                        this.gameStage.transform.localPositionX += 0.03;
-                    }
-                    else if (tmpCntHit <= 6) {
-                        this.gameStage.transform.localRotationEulerZ -= 4;
-                        this.gameStage.transform.localPositionX -= 0.03;
-                    }
-                    else if (tmpCntHit <= 8) {
-                        this.gameStage.transform.localRotationEulerZ += 4;
-                        this.gameStage.transform.localPositionX += 0.03;
-                    }
-                    else {
-                        this.treasureHitState = 0;
-                        Laya.timer.clearAll(this.gameStage);
-                    }
-                });
-            }
-        }
     }
 
     /** restart current stage */
@@ -1236,7 +1439,12 @@ export default class GameScene extends ui.game.GameSceneUI {
     /** 大关卡过关处理 */
     private passStage() {
         console.log("pass_stage" + this.stageIdx);
-        ws.traceEvent("pass_stage" + this.stageIdx);
+        if (this.stageIdx <= 10) {
+            ws.traceEvent("pass_stage" + this.stageIdx);
+        }
+        else {
+            ws.traceEvent("pass_stage10");
+        }
         // clean all bullets
         for (let i = 0; i < this.scene3D.numChildren; i++) {
             var tmpSceneChild = this.scene3D.getChildAt(i);
@@ -1247,8 +1455,10 @@ export default class GameScene extends ui.game.GameSceneUI {
         // hide
         this.missionWin.visible = false;
         // show
-        this.label_lvlPass.changeText("" + this.stageIdx);
-        this.box_win.visible = true;
+        this.label_stage.changeText("" + this.stageIdx);
+        this.label_winDiamond.changeText("" + StageConfig.StageReward[this.stageIdx]);
+        this.box_passStage.visible = true;
+        this.showBanner(this.btn_passStage, Global.config.banner_delay_pass, true);
         this.navWin && this.navWin.loadHomeIconInfoList();
         // update
         this.stageIdx++;
@@ -1269,47 +1479,51 @@ export default class GameScene extends ui.game.GameSceneUI {
 
     /** 关卡死亡倒计时 */
     private stageFailCountDown() {
-        this.countdown++;
-        if (this.countdown >= 240) {
-            // 死亡处理
-            this.clearStageTimer();
-            this.box_countdown.visible = false;
-            this.btn_retry.bottom = 150;
-            if (!Global.config.online) {
-                this.btn_retry.bottom = 260;
-            }
-            if (Laya.Browser.onMiniGame && ws.isIPhoneX()) {
-                this.btn_retry.bottom += Global.config.distance_iphonex || 0;
-            }
-            this.box_revive.visible = true;
-            this.navRevive && this.navRevive.loadHomeIconInfoList();
-            // 1秒后显示banner，上跳误点
-            this.showBanner();
-        }
-        this.label_failTimer.changeText("" + Math.floor(4 - (this.countdown / 60) % 4));
-        // 死亡提示显示
-        this.failCircle.scaleX += 0.015;
-        this.failCircle.scaleY += 0.015;
-    }
-
-    /** banner 弹出控制 */
-    private showBanner() {
-        // 1秒后显示banner，上跳误点
-        if (!Global.config.deny_banner && Math.random() <= Global.config.banner_delay_ratio) {
-            Laya.timer.frameOnce(Global.config.banner_delay * 60, null, () => {
-                this.btn_retry.bottom = 260;
+        // 游戏中，非停留在大炮选择页
+        if (this.state === Const.GameState.START) {
+            this.countdown++;
+            if (this.countdown >= 240) {
+                // 死亡处理
+                this.clearStageTimer();
+                this.box_countdown.visible = false;
+                this.btn_retry.bottom = 150;
+                if (!Global.config.online) {
+                    this.btn_retry.bottom = 260;
+                }
                 if (Laya.Browser.onMiniGame && ws.isIPhoneX()) {
                     this.btn_retry.bottom += Global.config.distance_iphonex || 0;
                 }
-                Ad.posShowBanner(Const.BannerPos.ReviveDialog);
+                this.box_revive.visible = true;
+                this.navRevive && this.navRevive.loadHomeIconInfoList();
+                // 1秒后显示banner，上跳误点
+                this.showBanner(this.btn_retry, Global.config.banner_delay_ratio, true);
+            }
+            this.label_failTimer.changeText("" + Math.floor(4 - (this.countdown / 60) % 4));
+            // 死亡提示显示
+            this.failCircle.scaleX += 0.015;
+            this.failCircle.scaleY += 0.015;
+        }
+    }
+
+    /** banner 弹出控制 */
+    private showBanner(btn: Laya.Image, delay_ratio: number, isMini: boolean = false) {
+        // 1秒后显示banner，上跳误点
+        if (!Global.config.deny_banner && Math.random() < delay_ratio) {
+            btn.bottom = 150;
+            Laya.timer.frameOnce(Global.config.banner_delay * 60, null, () => {
+                btn.bottom = 260;
+                if (Laya.Browser.onMiniGame && ws.isIPhoneX()) {
+                    btn.bottom += Global.config.distance_iphonex || 0;
+                }
+                Ad.showBanner(isMini);
             });
         }
         else {
-            this.btn_retry.bottom = 260;
+            btn.bottom = 260;
             if (Laya.Browser.onMiniGame && ws.isIPhoneX()) {
-                this.btn_retry.bottom += Global.config.distance_iphonex || 0;
+                btn.bottom += Global.config.distance_iphonex || 0;
             }
-            Ad.posShowBanner(Const.BannerPos.ReviveDialog);
+            Ad.showBanner(isMini);
         }
     }
 
@@ -1521,7 +1735,13 @@ export default class GameScene extends ui.game.GameSceneUI {
         if (bullet) {
             // reset bullet by type
             let bulletScript: Bullet = bullet.getComponent(Bullet);
-            bulletScript.reset(this.bulletType);
+            if (bulletScript) {
+                bulletScript.reset(this.bulletType);
+            }
+            else {
+                bulletScript = bullet.addComponent(Bullet);
+                bulletScript.reset(this.bulletType);
+            }
             // set position offset
             bullet.transform.localPositionX += offsetX;
             bullet.transform.localPositionY += offsetY;
@@ -1550,7 +1770,13 @@ export default class GameScene extends ui.game.GameSceneUI {
         if (trigger) {
             // reset bullet trigger by type
             let triggerScript: Bullet = trigger.getComponent(Bullet);
-            triggerScript.reset(this.bulletType);
+            if (triggerScript) {
+                triggerScript.reset(this.bulletType);
+            }
+            else {
+                triggerScript = bullet.addComponent(Bullet);
+                triggerScript.reset(this.bulletType);
+            }
             // set position offset
             trigger.transform.localPositionX += offsetX;
             trigger.transform.localPositionY += offsetY;

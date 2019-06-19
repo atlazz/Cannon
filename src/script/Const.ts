@@ -1,5 +1,5 @@
 /** version */
-export const VERSION = "1.1.0";
+export const VERSION = "1.1.3";
 
 /************** 后台设置参数 *******************/
 /** 分享位置 */
@@ -7,13 +7,13 @@ export const RewardPos = {
     Cannon: 'try_cannon',
     Bullet: 'try_ball',
     Revive: 'revive',
+    Treasure: 'reward_triple',
 }
 /** Banner广告位置 */
 export const BannerPos = {
     HomeView: 'HomeView',
-    GameScene: 'HomeView',
-    OverView: 'HomeView',
-    ReviveDialog: 'HomeView',
+    StagePass: 'missionpass',
+    Revive: 'revive',
 }
 /** 复活倒数秒数 */
 export const ReviveCountdown: number = 5;
@@ -98,7 +98,7 @@ export const CannonBallInitPos: Laya.Vector3 = new Laya.Vector3(-0.01, 0.05, -0.
 export const CannonBallInitScale: Laya.Vector3 = new Laya.Vector3(25, 25, 25);
 
 /** cdn */
-export const cdnUrl: string = "https://static.miniant.cn/cannon/res_v108.zip";
+export const cdnUrl: string = "https://coolant.miniant.cn/cannon/res_v111.zip";
 
 /** sound */
 export const soundUrl: string = "res/audio/shoot.mp3";
@@ -139,13 +139,13 @@ export const CannonSelectIconList = [
     {index: -1},    // 尾部
 ]
 export const CannonSelectTextList = {
-    1: {name: "普通炮", feature: "普通的大炮，普通的威力，就很普通", unlockLvl: 0},
-    3: {name: "冰雪奇缘", feature: "更强的威力，将方块变成冰块", unlockLvl: 5},
-    7: {name: "龙门大炮", feature: "威力超强，拥有它，你就是龙的传人", unlockLvl: 10},
-    2: {name: "双重射击", feature: "两炮齐发，威力强大", unlockLvl: 15},
-    6: {name: "闪电风暴", feature: "威力无比，一发入魂", unlockLvl: 20},
-    5: {name: "黄金狮子头", feature: "河东狮吼，十分暴躁", unlockLvl: 999},
-    4: {name: "无敌散弹炮", feature: "终极武器，用一次爽一次", unlockLvl: 999},
+    1: {name: "普通炮", feature: "普通的大炮，普通的威力，就很普通", unlockLvl: 0, unlockDiamond: 0},
+    3: {name: "冰雪奇缘", feature: "更强的威力，将方块变成冰块", unlockLvl: 5, unlockDiamond: 1350},
+    7: {name: "龙门大炮", feature: "威力超强，拥有它，你就是龙的传人", unlockLvl: 11, unlockDiamond: 3500},
+    2: {name: "双重射击", feature: "两炮齐发，威力强大", unlockLvl: 17, unlockDiamond: 7500},
+    6: {name: "闪电风暴", feature: "威力无比，一发入魂", unlockLvl: 23, unlockDiamond: 10500},
+    5: {name: "黄金狮子头", feature: "河东狮吼，十分暴躁", unlockLvl: 999, unlockDiamond: 13500},
+    4: {name: "无敌散弹炮", feature: "终极武器，用一次爽一次", unlockLvl: 999, unlockDiamond: 999999},
 }
 
 export const enum CannonType {
@@ -198,10 +198,10 @@ export const BulletMass = {
     0: {
         1: 20,      // DEFAULT
         2: 20,      // SHOTGUN_X2
-        3: 30,      // FROZEN
+        3: 25,      // FROZEN
         4: 20,      // REWARD SHOTGUN_X4
         5: 20,      // BOMB
-        6: 100,     // LIGHTNING
+        6: 60,      // LIGHTNING
         7: 35,      // DRAGON
     },
     /** reward bullet */

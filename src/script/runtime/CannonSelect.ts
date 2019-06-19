@@ -30,19 +30,23 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
         this.mouseEnabled = true;
         this.isClick = false;
         // set selected type at first time open
-        if (!this.selectType || !GameScene.instance.isRewardCannon) {
+        if (!this.selectType || !(GameScene.instance && GameScene.instance.isRewardCannon)) {
             this.selectType = Global.gameData.cannonType;
         }
         // 游戏页激励大炮，非该页面选择出来，该页面同步
-        else if (!this.isReward && GameScene.instance.isRewardCannon) {
-            this.selectType = Global.config.cannonRewardType;
+        else if ((GameScene.instance && GameScene.instance.isRewardCannon) || this.isReward) {
+            this.selectType = GameScene.instance.cannonType;
+            this.isReward = true;
         }
         // get selected index and unlock state list
         for (let idx = 1; idx <= Const.CannonSelectIconList.length - 2; idx++) {
             // unlock state
-            this.unlockState[idx] = false;
-            if (Global.gameData.stageIndex > Const.CannonSelectTextList[Const.CannonSelectIconList[idx].index]["unlockLvl"]) {
-                this.unlockState[idx] = true;
+            // 没有数据
+            if (!Global.gameData.cannonUnlockState[Const.CannonSelectIconList[idx].index]) {
+                Global.gameData.cannonUnlockState[Const.CannonSelectIconList[idx].index] = false;
+                if (Global.gameData.stageIndex > Const.CannonSelectTextList[Const.CannonSelectIconList[idx].index]["unlockLvl"]) {
+                    Global.gameData.cannonUnlockState[Const.CannonSelectIconList[idx].index] = true;
+                }
             }
             // selected index
             if (Const.CannonSelectIconList[idx]["index"] === this.selectType) {
@@ -53,8 +57,7 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
         this.updateUI();
 
         // show tutorial
-        if (GameScene.instance && GameScene.instance.stageIdx === 2 && GameScene.instance.missionIdx === 1 && Global.gameData.tutorialStep === 4) {
-            Global.gameData.tutorialStep = 5;
+        if (GameScene.instance && GameScene.instance.stageIdx === 2 && GameScene.instance.missionIdx === 1 && Global.gameData.tutorialStep === 5) {
             this.tutorial_slide.visible = true;
             var finger: Laya.Image = this.tutorial_slide.getChildByName("finger") as Laya.Image;
             finger.timer.frameLoop(1, finger, () => {
@@ -66,6 +69,10 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
                 }
             });
         }
+
+        // refresh diamond
+        this.text_diamond.changeText("" + Global.gameData.diamond);
+        this.icon_diamond.visible = true;
     }
 
     public scene3D: Laya.Scene3D;
@@ -77,8 +84,6 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
     public isReward: boolean = false;
 
     private btnAniFrame: number;
-
-    private unlockState: boolean[] = [];
 
     private isClick: boolean;
 
@@ -189,17 +194,18 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
         this.label_name.changeText(Const.CannonSelectTextList[cannonIdx]["name"]);
         this.label_feature.changeText(Const.CannonSelectTextList[cannonIdx]["feature"]);
         // 未解锁
-        if (!this.unlockState[idx]) {
+        if (!Global.gameData.cannonUnlockState[cannonIdx]) {
             if (Const.CannonSelectTextList[cannonIdx]["unlockLvl"] >= 999) {
                 this.label_unlockMsg.changeText("敬请期待");
                 this.btn_try.visible = false;
             }
             else {
-                this.label_unlockMsg.changeText("完成关卡 " + (Global.gameData.stageIndex - 1) + "/" + Const.CannonSelectTextList[cannonIdx]["unlockLvl"] + " 解锁");
+                this.label_unlockMsg.changeText("完成关卡 " + (Global.gameData.stageIndex - 1) + "/" + Const.CannonSelectTextList[cannonIdx]["unlockLvl"] + " 自动解锁");
                 this.btn_try.visible = true;
             }
             this.btn_select.visible = false;
             this.btn_unlock.visible = true;
+            // 试用状态
             if (this.isReward && this.selectType === cannonIdx) {
                 this.btn_try.gray = true;
                 this.label_try.changeText("正在试用");
@@ -207,6 +213,14 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
             else {
                 this.btn_try.gray = false;
                 this.label_try.changeText("免费试用");
+            }
+            // 钻石解锁信息
+            this.icon_unlockDiamond.visible = true;
+            this.label_unlockDiamond.changeText(Const.CannonSelectTextList[cannonIdx]["unlockDiamond"] + "解锁");
+            if (Global.gameData.diamond >= Const.CannonSelectTextList[cannonIdx]["unlockDiamond"]) {
+                this.btn_unlock.gray = false;
+            } else {
+                this.btn_unlock.gray = true;
             }
         }
         else {
@@ -290,7 +304,7 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
             iconLock = this.list_Icon.cells[i].getChildByName("lock") as Laya.Image;
             if (iconLock) {
                 iconLock.visible = true;
-                if (this.unlockState[idx + i - 1]) {
+                if (Global.gameData.cannonUnlockState[Const.CannonSelectIconList[idx + i - 1].index]) {
                     iconLock && (iconLock.visible = false);
                 }
                 if (this.isReward && this.selectType === cannonIdx) {
@@ -318,8 +332,9 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
         // mouse down: start slide
         this.list_Icon.on(Laya.Event.MOUSE_DOWN, this, () => {
             if (GameScene.instance && GameScene.instance.stageIdx === 2 && GameScene.instance.missionIdx === 1 && Global.gameData.tutorialStep === 5) {
-                console.log("newplayer_5")
-                ws.traceEvent("newplayer_5");
+                Global.gameData.tutorialStep = 6;
+                console.log("newplayer_6")
+                ws.traceEvent("newplayer_6");
             }
             this.downMouseX = this.mouseX;
             this.downFlag = true;
@@ -469,6 +484,18 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
             }
         });
 
+        /** diamond unlock */
+        this.btn_unlock.on(Laya.Event.CLICK, this, () => {
+            var tmpIdx = Const.CannonSelectIconList[this.list_Icon.selectedIndex].index;
+            // 未解锁 & 钻石可解锁
+            if (!Global.gameData.cannonUnlockState[tmpIdx] && Global.gameData.diamond >= Const.CannonSelectTextList[tmpIdx]["unlockDiamond"]) {
+                Global.gameData.diamond -= Const.CannonSelectTextList[tmpIdx]["unlockDiamond"];
+                Global.gameData.cannonUnlockState[tmpIdx] = true;
+                this.refreshText();
+                this.refreshIcon();
+            }
+        });
+
         /** cannon reward try */
         this.btn_try.on(Laya.Event.MOUSE_DOWN, this, () => {
             if (!Laya.Browser.onMiniGame) {
@@ -571,8 +598,8 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
             }
         });
         this.tutorial_try.getChildByName("inputArea").on(Laya.Event.CLICK, this, () => {
-            console.log("newplayer_6")
-            ws.traceEvent("newplayer_6");
+            console.log("newplayer_7")
+            ws.traceEvent("newplayer_7");
             this.onClick_try();
             this.tutorial_try.visible = false;
             this.tutorial_try.getChildByName("inputArea").offAll();
@@ -587,8 +614,8 @@ export default class CannonSelect extends ui.cannonSelect.CannonSelectUI {
                 }
             });
             this.tutorial_back.getChildByName("inputArea").on(Laya.Event.CLICK, this, () => {
-                console.log("newplayer_7")
-                ws.traceEvent("newplayer_7");
+                console.log("newplayer_8")
+                ws.traceEvent("newplayer_8");
                 this.onClick_back();
                 this.tutorial_back.visible = false;
                 this.tutorial_back.getChildByName("inputArea").offAll();
