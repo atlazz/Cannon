@@ -39,7 +39,6 @@ export default class HomeView extends ui.home.HomeViewUI {
         this.refreshUnlock();
         // refresh diamond
         this.text_diamond.changeText("" + Global.gameData.diamond);
-        this.icon_diamond.centerX = 0 - (this.text_diamond.text.length * this.text_diamond.fontSize + this.text_diamond.x) * this.icon_diamond.scaleX / 2;
         this.icon_diamond.visible = true;
     }
 
