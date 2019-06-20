@@ -203,7 +203,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.camera = this.scene3D.addChild(new Laya.Camera()) as Laya.Camera;
         this.camera.transform.localPosition = Const.CameraInitPos.clone();
         this.camera.transform.localRotationEuler = Const.CameraInitRotEuler.clone();
-        this.camera.clearColor = null;
+        // this.camera.clearColor = null;
         // 调整fov，适配屏幕分辨率
         let num = 720 / 1280;
         let num2 = Laya.Browser.width / Laya.Browser.height;
