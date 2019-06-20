@@ -38,7 +38,7 @@ export const randomlyGetBanner = () => {
     // randomly select
     currBannerIdx = Math.ceil(Math.random() * Global.config.banner_number);
     // check counter
-    if (bannerCnt[currBannerIdx] >= 2) {
+    if (bannerCnt[currBannerIdx] >= Global.config.show_number) {
         // recreate
         banners[currBannerIdx] && banners[currBannerIdx].destroy();
         banners[currBannerIdx] = wxCreatBanner(bannerUid[currBannerIdx]);
@@ -70,6 +70,7 @@ export const wxCreatBanner = (uid: string): any => {
 
 export const setStyle = (banner, isMini: boolean, bannerTop: number) => {
     if (!Laya.Browser.onMiniGame) return;
+    if (!banner) return;
     let systemInfo = wx.getSystemInfoSync();
     let screenHeight = systemInfo.screenHeight;
     let screenWidth = systemInfo.screenWidth;

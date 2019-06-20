@@ -120,7 +120,6 @@ export default class GameScene extends ui.game.GameSceneUI {
     public isTreasureHit: boolean = false;
     public isTreasureMoveStart: boolean = false;
     public isTreasureAdOpen: boolean = false;
-    public isTreasureBannerShow: boolean = false;
 
     /** cannon */
     public cannonType: number = Const.CannonType.DEFAULT;
@@ -800,12 +799,8 @@ export default class GameScene extends ui.game.GameSceneUI {
 
         // preload banner for treasure stage
         if (this.missionIdx === 6) {
-            this.isTreasureBannerShow = false;
-            // 宝箱banner是否显示, 显示则预创建
-            if (!Global.config.deny_banner && Math.random() < Global.config.banner_show_treasure) {
-                this.isTreasureBannerShow = true;
-                Ad.randomlyGetBanner();
-            }
+            // 宝箱banner预创建
+            Ad.randomlyGetBanner();
         }
 
         // destroy old stage
@@ -1033,19 +1028,22 @@ export default class GameScene extends ui.game.GameSceneUI {
                                 // 非第一个周期
                                 MaxMoveFrameCnt = 120;
                                 // 第一次下落最低点显示广告弹窗-宝箱暴击
-                                if (this.isTreasureBannerShow && !this.isTreasureAdOpen && !isMoveUp) {
-                                    this.label_extraDiamond.changeText("" + StageConfig.StageReward[this.stageIdx]);
-                                    this.box_treasureAD.visible = true;
-                                    this.isTreasureAdOpen = true;
-                                    // var offsetY_treasureBanner = -120;
-                                    console.log(this.btn_treasureGetExtra.height)
-                                    var top_treasureBanner = this.btn_treasureGetExtra.centerY + this.btn_treasureGetExtra.height / 2 + Laya.stage.height / 2 + 100;
-                                    if (Laya.Browser.onMiniGame && ws.isIPhoneX()) {
-                                        top_treasureBanner += 40;
+                                if (!this.isTreasureAdOpen && !isMoveUp) {
+                                    // 宝箱banner是否显示
+                                    if (!Global.config.deny_banner && Math.random() < Global.config.banner_show_treasure) {
+                                        this.label_extraDiamond.changeText("" + StageConfig.StageReward[this.stageIdx]);
+                                        this.box_treasureAD.visible = true;
+                                        this.isTreasureAdOpen = true;
+                                        // var offsetY_treasureBanner = -120;
+                                        console.log(this.btn_treasureGetExtra.height)
+                                        var top_treasureBanner = this.btn_treasureGetExtra.centerY + this.btn_treasureGetExtra.height / 2 + Laya.stage.height / 2 + 100;
+                                        if (Laya.Browser.onMiniGame && ws.isIPhoneX()) {
+                                            top_treasureBanner += 40;
+                                        }
+                                        Ad.showBanner(false, top_treasureBanner);
+                                        console.log("t_banner_show");
+                                        ws.traceEvent("t_banner_show");
                                     }
-                                    Ad.showBanner(false, top_treasureBanner);
-                                    console.log("t_banner_show");
-                                    ws.traceEvent("t_banner_show");
                                 }
                                 isMoveUp = !isMoveUp;
                             }

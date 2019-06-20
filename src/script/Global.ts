@@ -63,6 +63,7 @@ let Global = {
         banner_number: 0, // banner个数
         banner_delay_pass: 1, // 通关页banner误点概率
         banner_show_treasure: 1, // 宝箱banner显示概率
+        show_number: 2, // banner刷新触发次数
     },
     user: {},
     audio: {
