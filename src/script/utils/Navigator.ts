@@ -1,3 +1,5 @@
+import GameScene from "../runtime/GameScene";
+
 /**
  * 使用例子：
  * let navigator = new Navigator(ws);
@@ -20,6 +22,8 @@ export default class Navigator {
     }
 
     public loadHomeIconInfoList: Function;
+
+    public loadGameIconInfoList: Function;
 
     public loadOverIconInfoList: Function;
 
@@ -161,7 +165,7 @@ export default class Navigator {
         let scheduleRefreshHomeIcons = () => {
             homeIconBox.clearTimer(this, refreshHomeIcons);
             refreshHomeIcons();
-            homeIconBox.timerLoop(3000, this, refreshHomeIcons);
+            homeIconBox.timer.frameLoop(180, this, refreshHomeIcons);
         }
 
         //后台获取图标信息
@@ -204,6 +208,50 @@ export default class Navigator {
 
         this.loadHomeIconInfoList();
         return homeIconBox;
+    }
+
+
+    /**
+     * 创建游戏页图标（H型）
+     * 
+     * @param posList 位置列表
+     * 
+     * @return 返回首页图标根节点
+     */
+    public createGameIcons() {
+        if (!Laya.Browser.onMiniGame) {
+            return;
+        }
+
+        if (!GameScene.instance) {
+            return;
+        }
+
+        //后台获取图标信息
+        this.ws.getPromoGameAd({
+            count: 10,
+            success: (res: any) => {
+                let data = res.data;
+                console.log("game icon fetched: ", data)
+                for (let i = 0; i < Math.min(data.length, 10); i++) {
+                    let iconImg = GameScene.instance.box_gameIcon.getChildAt(i) as Laya.Image;
+                    if (data[i] && iconImg) {
+                        iconImg.visible = true;
+                        //注册点击
+                        iconImg.on(Laya.Event.MOUSE_DOWN, this, this.onIconClick, ["default"/** posList[index]*/, data[i]]);
+                        //图片
+                        iconImg.loadImage(data[i].icon);
+                        //名称
+                        let titleLabel = iconImg.getChildByName("iconTitle") as Laya.Label;
+                        titleLabel && titleLabel.changeText(data[i].title);
+                        //抖动
+                        this.shakeOnce(Math.random() * 1000, iconImg);
+                    } else {
+                        iconImg.visible = false;
+                    }
+                }
+            },
+        });
     }
 
     /**

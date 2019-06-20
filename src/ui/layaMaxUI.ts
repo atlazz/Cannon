@@ -36,6 +36,17 @@ export module ui.cannonSelect {
 export module ui.game {
     export class GameSceneUI extends View {
 		public box_scene3D:Laya.Sprite;
+		public box_gameIcon:Laya.Box;
+		public icon1:Laya.Image;
+		public icon2:Laya.Image;
+		public icon3:Laya.Image;
+		public icon4:Laya.Image;
+		public icon5:Laya.Image;
+		public icon6:Laya.Image;
+		public icon7:Laya.Image;
+		public icon8:Laya.Image;
+		public icon9:Laya.Image;
+		public icon10:Laya.Image;
 		public box_UI:Laya.Box;
 		public box_level:Laya.Box;
 		public label_level:Laya.Label;

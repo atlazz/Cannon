@@ -16,6 +16,7 @@ import * as StageConfig from "../StageConfig"
 export default class GameScene extends ui.game.GameSceneUI {
     static instance: GameScene;
 
+    private navGame: Navigator;
     private navWin: Navigator;
     private navRevive: Navigator;
 
@@ -39,6 +40,11 @@ export default class GameScene extends ui.game.GameSceneUI {
         // 调整钻石及其数量位置居中
         this.text_diamond.changeText("" + Global.gameData.diamond);
         this.icon_diamond.visible = true;
+
+        /** init navigation game icon: 第一次打开时 */
+        if (Laya.Browser.onMiniGame && !this.navGame) {
+            this.navGame = new Navigator(ws);
+        }
 
         // game playing
         if (this.state === Const.GameState.START) {
@@ -326,6 +332,7 @@ export default class GameScene extends ui.game.GameSceneUI {
     hideUI() {
         this.box_UI.visible = false;
         this.box_passStage.visible = false;
+        this.box_gameIcon.visible = false;
         this.hideReviveUI();
     }
 
@@ -797,10 +804,17 @@ export default class GameScene extends ui.game.GameSceneUI {
             return;
         }
 
-        // preload banner for treasure stage
+        // 宝箱关卡广告：preload banner for treasure stage
         if (this.missionIdx === 6) {
             // 宝箱banner预创建
             Ad.randomlyGetBanner();
+            // this.box_gameIcon.visible = false;
+            this.box_gameIcon.visible = true;
+        }
+        // 常规关卡icon广告
+        else if (this.missionIdx >= 1 && this.missionIdx <= 5) {
+            this.navGame && this.navGame.createGameIcons();
+            this.box_gameIcon.visible = true;
         }
 
         // destroy old stage
@@ -1452,6 +1466,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         }
         // hide
         this.missionWin.visible = false;
+        this.box_gameIcon.visible = false;
         // show
         this.label_stage.changeText("" + this.stageIdx);
         this.label_winDiamond.changeText("" + StageConfig.StageReward[this.stageIdx]);
