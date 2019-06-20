@@ -96,13 +96,13 @@ export const setStyle = (banner, isMini: boolean, bannerTop: number) => {
 export const showBanner = (isMini: boolean = false, bannerTop: number = -1) => {
     if (!Laya.Browser.onMiniGame) return;
     setStyle(banners[currBannerIdx], isMini, bannerTop);
-    banners[currBannerIdx].show();
+    banners[currBannerIdx] && banners[currBannerIdx].show();
     console.log("show banner uid: ", currBannerIdx, "bannerAD: ", banners[currBannerIdx])
 }
 
 export const hideBanner = () => {
     if (!Laya.Browser.onMiniGame) return;
-    banners[currBannerIdx].hide();
+    banners[currBannerIdx] && banners[currBannerIdx].hide();
 }
 
 
