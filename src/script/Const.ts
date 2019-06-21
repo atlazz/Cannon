@@ -1,5 +1,5 @@
 /** version */
-export const VERSION = "1.1.5";
+export const VERSION = "1.1.6";
 
 /************** 后台设置参数 *******************/
 /** 分享位置 */
@@ -15,8 +15,6 @@ export const BannerPos = {
     StagePass: 'missionpass',
     Revive: 'revive',
 }
-/** 复活倒数秒数 */
-export const ReviveCountdown: number = 5;
 
 /************** 游戏控制参数 **************/
 /** 游戏运行状态 */

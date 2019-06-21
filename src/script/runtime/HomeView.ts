@@ -104,6 +104,7 @@ export default class HomeView extends ui.home.HomeViewUI {
                     if (GameScene.instance && GameScene.instance.state != Const.GameState.START) {
                         console.log("click_startgame")
                         ws.traceEvent("click_startgame");
+                        // wx.aldSendEvent("click_startgame");
                         // hide home view
                         this.hide();
                         // show game scene

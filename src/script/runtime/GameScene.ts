@@ -804,6 +804,13 @@ export default class GameScene extends ui.game.GameSceneUI {
             return;
         }
 
+        // // ald 关卡埋点
+        // wx.aldStage.onStart({
+        //     stageId: this.stageIdx + "." + this.missionIdx, //关卡ID， 必须是1 || 2 || 1.1 || 12.2 格式  该字段必传
+        //     stageName: "第" + this.stageIdx + "大关-第" + this.missionIdx + "小关",//关卡名称，该字段必传
+        //     userId: "123456" //用户ID
+        // })
+
         // 宝箱关卡广告：preload banner for treasure stage
         if (this.missionIdx === 6) {
             // 宝箱banner预创建
