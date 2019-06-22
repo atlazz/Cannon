@@ -82,13 +82,9 @@ export default class GameScene extends ui.game.GameSceneUI {
         // 测试接口开始 <==========================
         if (HomeView.instance.isTest) {
             this.box_test.visible = true;
-            this.reTimes = 1;
-            this.MaxReTimes = 1;
-            Laya.Stat.show();
         }
         else {
             this.box_test.visible = false;
-            Laya.Stat.hide();
         }
         // 测试接口结束 <==========================
     }
@@ -155,9 +151,6 @@ export default class GameScene extends ui.game.GameSceneUI {
     private ray: Laya.Ray = new Laya.Ray(new Laya.Vector3(0, 0, 0), new Laya.Vector3(0, 0, 0));
     private hitResult: Laya.HitResult = new Laya.HitResult();
 
-    /** glass pieces list */
-    public piecesList: Laya.MeshSprite3D[] = [];
-
     /** game state */
     public state: number = 0;
 
@@ -167,11 +160,6 @@ export default class GameScene extends ui.game.GameSceneUI {
     public onClick_cannonSelect: Function;
     public onClick_rewardBullet: Function;
     public onClick_rewardCannon: Function;
-
-    // 测试接口开始 <==========================
-    public reTimes: number = 1;
-    public MaxReTimes: number = 1;
-    // 测试接口结束 <==========================
 
     constructor() {
         super();
@@ -363,23 +351,9 @@ export default class GameScene extends ui.game.GameSceneUI {
                 HomeView.instance.testStageIdx = parseInt(this.input_test_lvl.text);
                 this.input_test_lvl.text = "";
             }
-            this.reTimes = 1;
-            this.MaxReTimes = 1;
-            this.btn_test_restart.visible = false;
-            this.btn_test_next.visible = false;
             this.newStage();
         });
         this.btn_test_restart.on(Laya.Event.CLICK, this, () => {
-            if (this.input_test_reTimes.text) {
-                this.MaxReTimes = parseInt(this.input_test_reTimes.text);
-                this.input_test_lvl.text = "";
-            }
-            else {
-                this.MaxReTimes = 1;
-            }
-            this.reTimes = 1;
-            this.btn_test_restart.visible = false;
-            this.btn_test_next.visible = false;
             this.newStage();
         });
         // 测试接口结束 <==========================
@@ -797,10 +771,9 @@ export default class GameScene extends ui.game.GameSceneUI {
     private cleanStage() {
         // clean game stage
         if (this.gameStage) {
+            this.gameStage.destroyChildren();
             this.gameStage.destroy();
-            this.gameStage.removeSelf();
             this.clearStageTimer();
-            Laya.Browser.onMiniGame && wx.triggerGC && wx.triggerGC();  // todo: 微信触发js垃圾回收
         }
         // clean all bullets
         for (let idx = 0; idx < this.scene3D.numChildren; idx++) {
@@ -813,12 +786,6 @@ export default class GameScene extends ui.game.GameSceneUI {
                     tmpChild.destroy();
                 }
             }
-        }
-        // clean all glass pieces
-        while (this.piecesList && this.piecesList.length !== 0) {
-            var tmpPiece = this.piecesList.pop();
-            tmpPiece.destroy();
-            tmpPiece.removeSelf();
         }
     }
 
@@ -844,27 +811,18 @@ export default class GameScene extends ui.game.GameSceneUI {
         //     userId: "123456" //用户ID
         // })
 
-
-        // 测试接口开始 <========================
-        if (!HomeView.instance.isTest) {
-            // 测试接口结束 <========================
-
-            // 宝箱关卡广告：preload banner for treasure stage
-            if (this.missionIdx === 6) {
-                // 宝箱banner预创建
-                Ad.randomlyGetBanner();
-                // this.box_gameIcon.visible = false;
-                this.box_gameIcon.visible = true;
-            }
-            // 常规关卡icon广告
-            else if (this.missionIdx >= 1 && this.missionIdx <= 5) {
-                this.navGame && this.navGame.createGameIcons();
-                this.box_gameIcon.visible = true;
-            }
-
-        // 测试接口开始 <========================
+        // 宝箱关卡广告：preload banner for treasure stage
+        if (this.missionIdx === 6) {
+            // 宝箱banner预创建
+            Ad.randomlyGetBanner();
+            // this.box_gameIcon.visible = false;
+            this.box_gameIcon.visible = true;
         }
-        // 测试接口结束 <========================
+        // 常规关卡icon广告
+        else if (this.missionIdx >= 1 && this.missionIdx <= 5) {
+            this.navGame && this.navGame.createGameIcons();
+            this.box_gameIcon.visible = true;
+        }
 
         // destroy old stage
         this.cleanStage();
@@ -968,7 +926,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                 this.scene3D.getChildByName("gameStage").destroy();
             }
             // 延时显示，避免与前关资源冲突
-            Laya.timer.frameOnce(15, this, () => {  // todo: for test, 15 chang to 60
+            Laya.timer.frameOnce(15, this, () => {
                 this.gameStage = this.scene3D.addChild(res.clone()) as Laya.Sprite3D;
                 this.gameStage.name = "gameStage";
                 //Laya.loader.clearRes(satgeResUrl);
@@ -1134,32 +1092,6 @@ export default class GameScene extends ui.game.GameSceneUI {
                         }
                     });
                 }
-
-
-                // 测试接口开始 <========================
-                if (HomeView.instance.isTest) {
-                    // 重来次数
-                    this.label_test_reTimes.changeText("reTimes：" + this.reTimes + "/" + this.MaxReTimes);
-                    this.label_test_objs.changeText("objNum：" + this.gameStage.numChildren);
-                    this.reTimes++;
-                    if (this.reTimes <= this.MaxReTimes) {
-                        Laya.timer.frameOnce(10, this, () => {
-                            // off listener
-                            this.box_scene3D.off(Laya.Event.CLICK, this, this.onClick);
-                            // clear stage timer
-                            this.clearStageTimer();
-                            this.newStage();
-                        });
-                        return;
-                    }
-                    else {
-                        this.btn_test_restart.visible = true;
-                        this.btn_test_next.visible = true;
-                    }
-                }
-                // 测试接口结束 <========================
-
-
 
                 // set stage listener
                 this.gameStage.frameLoop(1, this, this.stageLooping);
