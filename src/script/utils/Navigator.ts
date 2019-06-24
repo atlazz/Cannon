@@ -232,7 +232,7 @@ export default class Navigator {
             count: 10,
             success: (res: any) => {
                 let data = res.data;
-                console.log("game icon fetched: ", data)
+                // console.log("game icon fetched: ", data)
                 for (let i = 0; i < Math.min(data.length, 10); i++) {
                     let iconImg = GameScene.instance.box_gameIcon.getChildAt(i) as Laya.Image;
                     if (data[i] && iconImg) {

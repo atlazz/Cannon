@@ -122,7 +122,7 @@ export default class BulletScript extends Laya.Script3D {
             if (!GameScene.instance) return;
             // 超时直接胜利
             if (GameScene.instance.treasureFrameCnt >= 400) {
-                // GameScene.instance.treasureHitCnt = GameScene.instance.treasereMaxHitCnt;
+                GameScene.instance.treasureHitCnt = GameScene.instance.treasereMaxHitCnt;
             }
             // 击中宝箱处理
             if (GameScene.instance.treasureHitState === 0) {
