@@ -29,6 +29,8 @@ export default class Navigator {
 
     public loadGuessLikeIconInfoList: Function;
 
+    private iconData: any[] = [];
+
     /**
      * 创建首页图标列（左右各5个）
      * 
@@ -232,6 +234,7 @@ export default class Navigator {
             count: 10,
             success: (res: any) => {
                 let data = res.data;
+                this.iconData = res.data;
                 // console.log("game icon fetched: ", data)
                 for (let i = 0; i < Math.min(data.length, 10); i++) {
                     let iconImg = GameScene.instance.box_gameIcon.getChildAt(i) as Laya.Image;
@@ -252,6 +255,41 @@ export default class Navigator {
                 }
             },
         });
+    }
+
+    /**
+     * 随机触发icon点击事件
+     * 
+     * @param success 成功回调函数: 确认跳转
+     * @param fail 失败回调函数
+     */
+    public randomIconTap(pos: string, success: Function, fail: Function) {
+        // 已有icon数据
+        if (this.iconData && this.iconData.length != 0) { 
+            this.ws.tapGameAd({
+                pos: pos,
+                ad: this.iconData[Math.floor(Math.random() * this.iconData.length)],
+                redirect: true,
+                success: success,
+                fail: fail
+            });
+        }
+        // 没有数据，重新后台抓取
+        else {
+            this.ws.getPromoGameAd({
+                count: 10,
+                success: (res: any) => {
+                    this.iconData = res.data;
+                    this.ws.tapGameAd({
+                        pos: pos,
+                        ad: this.iconData[Math.floor(Math.random() * this.iconData.length)],
+                        redirect: true,
+                        success: success,
+                        fail: fail
+                    });
+                },
+            });
+        }
     }
 
     /**

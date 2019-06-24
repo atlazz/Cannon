@@ -1,5 +1,5 @@
 /** version */
-export const VERSION = "1.1.8";
+export const VERSION = "1.1.9";
 
 /************** 后台设置参数 *******************/
 /** 分享位置 */
@@ -96,7 +96,7 @@ export const CannonBallInitPos: Laya.Vector3 = new Laya.Vector3(-0.01, 0.05, -0.
 export const CannonBallInitScale: Laya.Vector3 = new Laya.Vector3(25, 25, 25);
 
 /** cdn */
-export const cdnUrl: string = "https://coolant.miniant.cn/cannon/res_v111.zip";
+export const cdnUrl: string = "https://coolant.miniant.cn/cannon/res_v119.zip";
 
 /** sound */
 export const soundUrl: string = "res/audio/shoot.mp3";

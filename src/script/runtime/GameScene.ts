@@ -123,9 +123,9 @@ export default class GameScene extends ui.game.GameSceneUI {
 
     /** treasure */
     public treasureHitCnt: number = 0;
-    public treasereMaxHitCnt: number = 10;
+    public treasereMaxHitCnt: number = 20;
     public treasureFrameCnt: number = 0;
-    public treasereMaxFrameCnt: number = 180;
+    public treasereMaxFrameCnt: number = 90;
     public treasureHitState: number = 0;
     public isTreasureHit: boolean = false;
     public isTreasureMoveStart: boolean = false;
@@ -167,6 +167,7 @@ export default class GameScene extends ui.game.GameSceneUI {
     public onClick_cannonSelect: Function;
     public onClick_rewardBullet: Function;
     public onClick_rewardCannon: Function;
+    // public onClick_rewardTemplate: Function;
 
     // 测试接口开始 <==========================
     public reTimes: number = 1;
@@ -354,6 +355,100 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.box_revive.visible = false;
     }
 
+    onClick_rewardTemplate(rewardType: number, rewardPos: string, rewardSuccess: Function) {
+        if (!Laya.Browser.onMiniGame) {
+            rewardSuccess();
+        }
+        else {
+            // 1: video
+            if (rewardType == 1) {
+                // 未超过每天视频观看次数
+                if (!Reward.instance.isOverVideo()) {
+                    this.mouseEnabled = false;
+                    Reward.instance.video({
+                        pos: rewardPos,
+                        success: () => {
+                            console.log("video succeed:", rewardType, rewardPos);
+                            rewardSuccess();
+                        },
+                        fail: () => {
+                            console.log("video failed:", rewardType, rewardPos);
+                            Reward.instance.share({
+                                pos: rewardPos,
+                                success: () => {
+                                    console.log("share succeed:", rewardType, rewardPos);
+                                    rewardSuccess();
+                                },
+                            });
+                        },
+                        complete: () => {
+                            this.mouseEnabled = true;
+                        }
+                    });
+                }
+                else {
+                    Reward.instance.share({
+                        pos: rewardPos,
+                        success: () => {
+                            console.log("share succeed:", rewardType, rewardPos);
+                            rewardSuccess();
+                        },
+                    });
+                }
+            }
+            // 2: share
+            else if (rewardType == 2) {
+                Reward.instance.share({
+                    pos: rewardPos,
+                    success: () => {
+                        console.log("share succeed:", rewardType, rewardPos);
+                        rewardSuccess();
+                    },
+                });
+            }
+            // 3: jump to other minigame
+            else if (rewardType == 3) {
+                this.navWin.randomIconTap("default", /**success*/() => {
+                    rewardSuccess();
+                }, /**fail*/() => {
+                    // 跳转失败播放视频
+                    if (!Reward.instance.isOverVideo()) {
+                        this.mouseEnabled = false;
+                        Reward.instance.video({
+                            pos: rewardPos,
+                            success: () => {
+                                console.log("video succeed:", rewardType, rewardPos);
+                                rewardSuccess();
+                            },
+                            fail: () => {
+                                console.log("video failed:", rewardType, rewardPos);
+                                Reward.instance.share({
+                                    pos: rewardPos,
+                                    success: () => {
+                                        console.log("share succeed:", rewardType, rewardPos);
+                                        rewardSuccess();
+                                    },
+                                });
+                            },
+                            complete: () => {
+                                this.mouseEnabled = true;
+                            }
+                        });
+                    }
+                    else {
+                        Reward.instance.share({
+                            pos: rewardPos,
+                            success: () => {
+                                console.log("share succeed:", rewardType, rewardPos);
+                                rewardSuccess();
+                            },
+                        });
+                    }
+                })
+            }
+        }
+    }
+
     /** bind button */
     private bindButtons() {
         // 测试接口开始 <==========================
@@ -439,117 +534,10 @@ export default class GameScene extends ui.game.GameSceneUI {
         });
 
         // reward bullet
-        this.btn_rewardBullet.on(Laya.Event.MOUSE_DOWN, this, () => {
-            if (!Laya.Browser.onMiniGame) {
-                this.onClick_rewardBullet();
-            }
-            else {
-                console.log("reward bullet onclick");
-                // 1: video
-                if (Global.config.try_ball == 1) {
-                    // 未超过每天视频观看次数
-                    if (!Reward.instance.isOverVideo()) {
-                        this.mouseEnabled = false;
-                        Reward.instance.video({
-                            pos: Const.RewardPos.Bullet,
-                            success: () => {
-                                console.log("reward bullet video onclick");
-                                this.onClick_rewardBullet();
-                            },
-                            fail: () => {
-                                Reward.instance.share({
-                                    pos: Const.RewardPos.Bullet,
-                                    success: () => {
-                                        console.log("reward bullet share onclick");
-                                        this.onClick_rewardBullet();
-                                    },
-                                    complete: () => {
-                                    }
-                                });
-                            },
-                            complete: () => {
-                                this.mouseEnabled = true;
-                            }
-                        });
-                    }
-                    else {
-                        Reward.instance.share({
-                            pos: Const.RewardPos.Bullet,
-                            success: () => {
-                                console.log("reward bullet share onclick");
-                                this.onClick_rewardBullet();
-                            },
-                            complete: () => {
-                            }
-                        });
-                    }
-                }
-                // 2: share
-                (Global.config.try_ball == 2) && Reward.instance.share({
-                    pos: Const.RewardPos.Bullet,
-                    success: () => {
-                        console.log("reward bullet share onclick");
-                        this.onClick_rewardBullet();
-                    },
-                    complete: () => {
-                    }
-                });
-            }
-        });
+        this.btn_rewardBullet.on(Laya.Event.MOUSE_DOWN, this, this.onClick_rewardTemplate, [Global.config.try_ball, Const.RewardPos.Bullet, this.onClick_rewardBullet]);
 
         // reward cannon
-        this.btn_rewardCannon.on(Laya.Event.MOUSE_DOWN, this, () => {
-            if (!Laya.Browser.onMiniGame) {
-                this.onClick_rewardCannon();
-            }
-            else {
-                // 1: video
-                if (Global.config.try_cannon == 1) {
-                    // 未超过每天视频观看次数
-                    if (!Reward.instance.isOverVideo()) {
-                        this.mouseEnabled = false;
-                        Reward.instance.video({
-                            pos: Const.RewardPos.Cannon,
-                            success: () => {
-                                this.onClick_rewardCannon();
-                            },
-                            fail: () => {
-                                Reward.instance.share({
-                                    pos: Const.RewardPos.Cannon,
-                                    success: () => {
-                                        this.onClick_rewardCannon();
-                                    },
-                                    complete: () => {
-                                    }
-                                });
-                            },
-                            complete: () => {
-                                this.mouseEnabled = true;
-                            }
-                        });
-                    }
-                    else {
-                        Reward.instance.share({
-                            pos: Const.RewardPos.Cannon,
-                            success: () => {
-                                this.onClick_rewardCannon();
-                            },
-                            complete: () => {
-                            }
-                        });
-                    }
-                }
-                // 2: share
-                (Global.config.try_cannon == 2) && Reward.instance.share({
-                    pos: Const.RewardPos.Cannon,
-                    success: () => {
-                        this.onClick_rewardCannon();
-                    },
-                    complete: () => {
-                    }
-                });
-            }
-        });
+        this.btn_rewardCannon.on(Laya.Event.MOUSE_DOWN, this, this.onClick_rewardTemplate, [Global.config.try_cannon, Const.RewardPos.Cannon, this.onClick_rewardCannon]);
 
         // next stage
         this.btn_passStage.on(Laya.Event.CLICK, this, () => {
@@ -563,180 +551,34 @@ export default class GameScene extends ui.game.GameSceneUI {
             this.nextStage();
         });
 
-        // next stage: diamond x3
-        this.btn_passStagex3.on(Laya.Event.CLICK, this, () => {
-            if (!Laya.Browser.onMiniGame) {
-                // add diamond
-                Global.gameData.diamond += StageConfig.StageReward[this.stageIdx - 1] * 3;
-                this.text_diamond.changeText("" + Global.gameData.diamond);
-                // hide
-                Ad.hideBanner();
-                this.box_passStage.visible = false;
-                // next
-                this.nextStage();
-            }
-            else {
-                // 1: video
-                if (Global.config.reward_triple == 1) {
-                    // 未超过每天视频观看次数
-                    if (!Reward.instance.isOverVideo()) {
-                        this.mouseEnabled = false;
-                        Reward.instance.video({
-                            pos: Const.RewardPos.Treasure,
-                            success: () => {
-                                // add diamond
-                                Global.gameData.diamond += StageConfig.StageReward[this.stageIdx - 1] * 3;
-                                this.text_diamond.changeText("" + Global.gameData.diamond);
-                                // hide
-                                Ad.hideBanner();
-                                this.box_passStage.visible = false;
-                                // next
-                                this.nextStage();
-                            },
-                            fail: () => {
-                                Reward.instance.share({
-                                    pos: Const.RewardPos.Treasure,
-                                    success: () => {
-                                        // add diamond
-                                        Global.gameData.diamond += StageConfig.StageReward[this.stageIdx - 1] * 3;
-                                        this.text_diamond.changeText("" + Global.gameData.diamond);
-                                        // hide
-                                        Ad.hideBanner();
-                                        this.box_passStage.visible = false;
-                                        // next
-                                        this.nextStage();
-                                    },
-                                    complete: () => {
-                                    }
-                                });
-                            },
-                            complete: () => {
-                                this.mouseEnabled = true;
-                            }
-                        });
-                    }
-                    else {
-                        Reward.instance.share({
-                            pos: Const.RewardPos.Treasure,
-                            success: () => {
-                                // add diamond
-                                Global.gameData.diamond += StageConfig.StageReward[this.stageIdx - 1] * 3;
-                                this.text_diamond.changeText("" + Global.gameData.diamond);
-                                // hide
-                                Ad.hideBanner();
-                                this.box_passStage.visible = false;
-                                // next
-                                this.nextStage();
-                            },
-                            complete: () => {
-                            }
-                        });
-                    }
-                }
-                // 2: share
-                (Global.config.revive == 2) && Reward.instance.share({
-                    pos: Const.RewardPos.Revive,
-                    success: () => {
-                        // add diamond
-                        Global.gameData.diamond += StageConfig.StageReward[this.stageIdx - 1] * 3;
-                        this.text_diamond.changeText("" + Global.gameData.diamond);
-                        // hide
-                        Ad.hideBanner();
-                        this.box_passStage.visible = false;
-                        // next
-                        this.nextStage();
-                    },
-                    complete: () => {
-                    }
-                });
-            }
-        });
+        // reward next stage: diamond x3
+        this.btn_passStagex3.on(Laya.Event.MOUSE_DOWN, this, this.onClick_rewardTemplate, [Global.config.reward_triple, Const.RewardPos.Treasure, () => {
+            // add diamond
+            Global.gameData.diamond += StageConfig.StageReward[this.stageIdx - 1] * 3;
+            this.text_diamond.changeText("" + Global.gameData.diamond);
+            // hide
+            Ad.hideBanner();
+            this.box_passStage.visible = false;
+            // next
+            this.nextStage();
+        }]);
 
-        // revive btn
-        this.btn_revive.on(Laya.Event.MOUSE_DOWN, this, () => {
-            if (!Laya.Browser.onMiniGame) {
-                this.isRevive = true;
-                this.hideReviveUI();
-                this.currBulletNum -= 3;
-                this.label_ballNum.changeText("x3");
-                if (this.ballBox) {
-                    for (let i = 1; i <= 3; i++) {
-                        if (i <= this.MaxBulletNum) {
-                            ((this.ballBox.getChildByName("CannonBall" + i + "_0") as Laya.MeshSprite3D).meshRenderer.material as Laya.PBRSpecularMaterial).albedoColorA = 1;
-                        }
+        // reward revive btn
+        this.btn_revive.on(Laya.Event.MOUSE_DOWN, this, this.onClick_rewardTemplate, [Global.config.revive, Const.RewardPos.Revive, () => {
+            this.isRevive = true;
+            this.hideReviveUI();
+            this.currBulletNum -= 3;
+            this.label_ballNum.changeText("x3");
+            if (this.ballBox) {
+                for (let i = 1; i <= 3; i++) {
+                    if (i <= this.MaxBulletNum) {
+                        ((this.ballBox.getChildByName("CannonBall" + i + "_0") as Laya.MeshSprite3D).meshRenderer.material as Laya.PBRSpecularMaterial).albedoColorA = 1;
                     }
                 }
-                this.box_scene3D.on(Laya.Event.CLICK, this, this.onClick);
-                this.gameStage.frameLoop(1, this, this.stageLooping);
             }
-            else {
-                // 1: video
-                if (Global.config.revive == 1) {
-                    // 未超过每天视频观看次数
-                    if (!Reward.instance.isOverVideo()) {
-                        this.mouseEnabled = false;
-                        Reward.instance.video({
-                            pos: Const.RewardPos.Revive,
-                            success: () => {
-                                this.isRevive = true;
-                                this.hideReviveUI();
-                                this.currBulletNum -= 3;
-                                this.label_ballNum.changeText("x3");
-                                this.box_scene3D.on(Laya.Event.CLICK, this, this.onClick);
-                                this.gameStage.frameLoop(1, this, this.stageLooping);
-                            },
-                            fail: () => {
-                                Reward.instance.share({
-                                    pos: Const.RewardPos.Revive,
-                                    success: () => {
-                                        this.isRevive = true;
-                                        this.hideReviveUI();
-                                        this.currBulletNum -= 3;
-                                        this.label_ballNum.changeText("x3");
-                                        this.box_scene3D.on(Laya.Event.CLICK, this, this.onClick);
-                                        this.gameStage.frameLoop(1, this, this.stageLooping);
-                                    },
-                                    complete: () => {
-                                    }
-                                });
-                            },
-                            complete: () => {
-                                this.mouseEnabled = true;
-                            }
-                        });
-                    }
-                    else {
-                        Reward.instance.share({
-                            pos: Const.RewardPos.Revive,
-                            success: () => {
-                                this.isRevive = true;
-                                this.hideReviveUI();
-                                this.currBulletNum -= 3;
-                                this.label_ballNum.changeText("x3");
-                                this.box_scene3D.on(Laya.Event.CLICK, this, this.onClick);
-                                this.gameStage.frameLoop(1, this, this.stageLooping);
-                            },
-                            complete: () => {
-                            }
-                        });
-                    }
-                }
-                // 2: share
-                (Global.config.revive == 2) && Reward.instance.share({
-                    pos: Const.RewardPos.Revive,
-                    success: () => {
-                        this.isRevive = true;
-                        this.hideReviveUI();
-                        this.currBulletNum -= 3;
-                        this.label_ballNum.changeText("x3");
-                        this.box_scene3D.on(Laya.Event.CLICK, this, this.onClick);
-                        this.gameStage.frameLoop(1, this, this.stageLooping);
-                    },
-                    complete: () => {
-                    }
-                });
-            }
-        });
+            this.box_scene3D.on(Laya.Event.CLICK, this, this.onClick);
+            this.gameStage.frameLoop(1, this, this.stageLooping);
+        }]);
 
         // revive retry: back home
         this.btn_retry.on(Laya.Event.CLICK, this, () => {
@@ -852,7 +694,7 @@ export default class GameScene extends ui.game.GameSceneUI {
             // 宝箱关卡广告：preload banner for treasure stage
             if (this.missionIdx === 6) {
                 // 宝箱banner预创建
-                Ad.randomlyGetBanner();
+                Ad.randomlyGetBanner("treasure");
                 // this.box_gameIcon.visible = false;
                 this.box_gameIcon.visible = true;
             }

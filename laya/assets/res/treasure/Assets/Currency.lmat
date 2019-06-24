@@ -6,23 +6,20 @@
 		"renderStates":[
 			{
 				"cull":2,
-				"blend":0,
-				"srcBlend":1,
-				"dstBlend":0,
-				"depthWrite":true,
+				"blend":1,
+				"srcBlend":770,
+				"dstBlend":771,
+				"depthWrite":false,
 				"depthTest":515
 			}
 		],
+		"enableVertexColor":false,
 		"alphaTest":false,
 		"alphaTestValue":0.5,
-		"renderQueue":2000,
-		"metallic":0,
-		"smoothness":0,
-		"smoothnessTextureScale":1,
-		"smoothnessSource":0,
-		"normalTextureScale":1,
-		"parallaxTextureScale":0.02,
-		"occlusionTextureStrength":1,
+		"renderQueue":3000,
+		"albedoIntensity":1,
+		"enableLighting":true,
+		"shininess":0.078125,
 		"textures":[
 			{
 				"name":"albedoTexture",
@@ -52,21 +49,20 @@
 				]
 			},
 			{
-				"name":"albedoColor",
+				"name":"specularColor",
 				"value":[
-					1,
-					0.145098,
-					0.9529412,
-					1
+					0.5,
+					0.5,
+					0.5
 				]
 			},
 			{
-				"name":"emissionColor",
+				"name":"albedoColor",
 				"value":[
-					0,
-					0,
-					0,
-					0
+					1,
+					0.1839623,
+					0.7648367,
+					0.6431373
 				]
 			}
 		],

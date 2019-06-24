@@ -20,7 +20,7 @@ export default class HomeView extends ui.home.HomeViewUI {
      */
     static openInstance(param?: any) {
         if (HomeView.instance) {
-            Ad.randomlyGetBanner();
+            Ad.randomlyGetBanner("home");
             Ad.showBanner(true);
             // Ad.posShowBanner(Const.BannerPos.HomeView, true);
             HomeView.instance.onOpened(param);
@@ -281,7 +281,7 @@ export default class HomeView extends ui.home.HomeViewUI {
     private onGameDataLoaded() {
         console.log('onGameDataLoaded', Global.gameData);
         this.isGameDataLoaded = true;
-        Ad.randomlyGetBanner();
+        Ad.randomlyGetBanner("home");
         Ad.showBanner(true);
         // Ad.posShowBanner(Const.BannerPos.HomeView);
 

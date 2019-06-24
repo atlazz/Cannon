@@ -81,7 +81,7 @@ export default class Reward extends Laya.Script {
         }
 
         if (!this.isOnline() || !this.allowShare(pos)) {
-            console.log('今日视频已看完');
+            console.log('share not allowed');
             fail && fail();
             complete && complete();
             return;

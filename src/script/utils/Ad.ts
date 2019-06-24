@@ -9,14 +9,11 @@ let clickBannerCount: number = 0;
 
 let banners = {};   // list of banner obj
 let bannerUid = {};   // list of unit id
-let bannerCnt = {};
+let bannerCnt_home = {};
+let bannerCnt_treasure = {};
 let currBannerIdx: number;
-let banner1;
-let banner2;
-let banner1Cnt: number = 0;
-let banner2Cnt: number = 0;
 
-export const randomlyGetBanner = () => {
+export const randomlyGetBanner = (pos: string) => {
     if (!Laya.Browser.onMiniGame) return;
     // 低版本SDK，无此方法返回
     if (!wx.createBannerAd) return;
@@ -27,7 +24,8 @@ export const randomlyGetBanner = () => {
             console.log("init uid: ", i, bannerUid[i])
             banners[i] = wxCreatBanner(bannerUid[i]);
             console.log("init bannerAD: ", i, banners[i])
-            bannerCnt[i] = 0;
+            bannerCnt_home[i] = 0;
+            bannerCnt_treasure[i] = 0;
 
             // onError, 不写上不给show...
             banners[i].onError((errMsg) => {
@@ -37,15 +35,31 @@ export const randomlyGetBanner = () => {
     }
     // randomly select
     currBannerIdx = Math.ceil(Math.random() * Global.config.banner_number);
-    // check counter
-    if (bannerCnt[currBannerIdx] >= Global.config.show_number) {
-        // recreate
-        banners[currBannerIdx] && banners[currBannerIdx].destroy();
-        banners[currBannerIdx] = wxCreatBanner(bannerUid[currBannerIdx]);
-        bannerCnt[currBannerIdx] = 0;
+    
+    /** 首页 */
+    if (pos == "home") {
+        // check counter
+        if (bannerCnt_home[currBannerIdx] >= Global.config.show_number) {
+            // recreate
+            banners[currBannerIdx] && banners[currBannerIdx].destroy();
+            banners[currBannerIdx] = wxCreatBanner(bannerUid[currBannerIdx]);
+            bannerCnt_home[currBannerIdx] = 0;
+        }
+        // update counter
+        bannerCnt_home[currBannerIdx]++;
     }
-    // update counter
-    bannerCnt[currBannerIdx]++;
+    /** 宝箱页 */
+    else if (pos == "treasure") {
+        // check counter
+        if (bannerCnt_treasure[currBannerIdx] >= Global.config.show_number_t) {
+            // recreate
+            banners[currBannerIdx] && banners[currBannerIdx].destroy();
+            banners[currBannerIdx] = wxCreatBanner(bannerUid[currBannerIdx]);
+            bannerCnt_treasure[currBannerIdx] = 0;
+        }
+        // update counter
+        bannerCnt_treasure[currBannerIdx]++;
+    }
 }
 
 export const wxCreatBanner = (uid: string): any => {
