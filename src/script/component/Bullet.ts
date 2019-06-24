@@ -104,19 +104,25 @@ export default class BulletScript extends Laya.Script3D {
         }
     }
 
-    onCollisionExit(collision: Laya.Collision) {
+    onTriggerEnter(other: Laya.PhysicsComponent): void {
+        // console.log("onTriggerEnter", this.bullet.name)
+        this.triggerHandler(other);
+    }
+
+    onTriggerExit(other: Laya.PhysicsComponent): void {
+        // console.log("onTriggerExit", this.bullet.name)
         if (this.bullet.name === "bulletTrigger") {
             this.recover();
         }
     }
-    
-    onCollisionEnter(collision: Laya.Collision) {
+
+    private triggerHandler(other: Laya.PhysicsComponent) {
         /** 宝箱处理 */
-        if (collision.other.owner.name === "bottom" || collision.other.owner.name === "top") {
+        if (other.owner.name === "bottom") {
             if (!GameScene.instance) return;
             // 超时直接胜利
             if (GameScene.instance.treasureFrameCnt >= 400) {
-                GameScene.instance.treasureHitCnt = GameScene.instance.treasereMaxHitCnt;
+                // GameScene.instance.treasureHitCnt = GameScene.instance.treasereMaxHitCnt;
             }
             // 击中宝箱处理
             if (GameScene.instance.treasureHitState === 0) {
@@ -125,15 +131,8 @@ export default class BulletScript extends Laya.Script3D {
             GameScene.instance.isTreasureMoveStart = true;
             GameScene.instance.isTreasureHit = true;
             GameScene.instance.treasureHitCnt++;
-            this.destroy();
+            this.recover();
         }
-    }
-
-    onTriggerEnter(other: Laya.PhysicsComponent): void {
-        this.triggerHandler(other);
-    }
-
-    private triggerHandler(other: Laya.PhysicsComponent) {
         /** reward bullet */
         if (this.isReward) {
             /** black hole */

@@ -65,6 +65,9 @@ export default class HomeView extends ui.home.HomeViewUI {
         HomeView.instance = this;
         GameScene.openInstance();
         this.label_version.changeText("v" + Const.VERSION);
+
+        // // todo: delete it
+        // this.btn_test.visible = true;
     }
 
     onEnable() {
@@ -139,7 +142,7 @@ export default class HomeView extends ui.home.HomeViewUI {
         this.btn_test.on(Laya.Event.CLICK, this, () => {
             this.isTest = !this.isTest;
             this.btn_test.gray = !this.isTest;
-            this.testStageIdx = 1;
+            this.testStageIdx = 40;
         });
         // 测试接口结束 <==========================
         //抽屉打开

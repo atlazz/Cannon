@@ -38,7 +38,7 @@ class Main {
 		Laya.ResourceVersion.enable("version.json", Laya.Handler.create(this, this.onVersionLoaded), Laya.ResourceVersion.FILENAME_VERSION);
 
 		//重设高度
-		        Laya.stage.height = Math.round(GameConfig.width * Laya.Browser.height / Laya.Browser.width);
+		Laya.stage.height = Math.round(GameConfig.width * Laya.Browser.height / Laya.Browser.width);
 	}
 
 	onVersionLoaded(): void {

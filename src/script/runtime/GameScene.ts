@@ -125,7 +125,7 @@ export default class GameScene extends ui.game.GameSceneUI {
     public treasureHitCnt: number = 0;
     public treasereMaxHitCnt: number = 10;
     public treasureFrameCnt: number = 0;
-    public treasereMaxFrameCnt: number = 90;
+    public treasereMaxFrameCnt: number = 180;
     public treasureHitState: number = 0;
     public isTreasureHit: boolean = false;
     public isTreasureMoveStart: boolean = false;
@@ -862,7 +862,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                 this.box_gameIcon.visible = true;
             }
 
-        // 测试接口开始 <========================
+            // 测试接口开始 <========================
         }
         // 测试接口结束 <========================
 
@@ -1098,7 +1098,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                                         this.box_treasureAD.visible = true;
                                         this.isTreasureAdOpen = true;
                                         // var offsetY_treasureBanner = -120;
-                                        console.log(this.btn_treasureGetExtra.height)
+                                        // console.log(this.btn_treasureGetExtra.height)
                                         var top_treasureBanner = this.btn_treasureGetExtra.centerY + this.btn_treasureGetExtra.height / 2 + Laya.stage.height / 2 + 100;
                                         if (Laya.Browser.onMiniGame && ws.isIPhoneX()) {
                                             top_treasureBanner += 40;
@@ -1152,6 +1152,19 @@ export default class GameScene extends ui.game.GameSceneUI {
                         });
                         return;
                     }
+                    // else if (!this.btn_test_restart.visible) {
+                    //     // test next stage
+                    //     Laya.timer.frameOnce(10, this, () => {
+                    //         HomeView.instance.testStageIdx++;
+                    //         this.reTimes = 0;
+                    //         // off listener
+                    //         this.box_scene3D.off(Laya.Event.CLICK, this, this.onClick);
+                    //         // clear stage timer
+                    //         this.clearStageTimer();
+                    //         this.newStage();
+                    //     });
+                    //     return;
+                    // }
                     else {
                         this.btn_test_restart.visible = true;
                         this.btn_test_next.visible = true;
