@@ -96,6 +96,90 @@ export default class HomeView extends ui.home.HomeViewUI {
             Laya.timer.clear(this, this.onResEnable);
         }
     }
+
+    /**刷新getDiamond弹窗状态：手势指引&按钮动画二择 */
+    private refresh_getDiamond() {
+        // 启动判断场景值（来源我的小程序：1104），获取钻石奖励
+        if (Global.gameData.getDiamond == 2) {
+            // hide
+            this.finger_getDiamond.visible = false;
+            Laya.timer.clearAll(this.finger_getDiamond);
+            // show
+            this.btn_getDiamondYes.gray = false;
+            // off animation
+            Laya.timer.clearAll(this.btn_getDiamondYes);
+            // play animation
+            Laya.timer.frameLoop(1, this.btn_getDiamondYes, () => {
+                this.btn_getDiamondYes.scaleX += 0.005;
+                this.btn_getDiamondYes.scaleY += 0.005;
+                if (this.btn_getDiamondYes.scaleX >= 1.1) {
+                    this.btn_getDiamondYes.scaleX = 1;
+                    this.btn_getDiamondYes.scaleY = 1;
+                }
+            });
+            // listen
+            this.btn_getDiamondYes.on(Laya.Event.MOUSE_DOWN, this, () => {
+                // refresh
+                Global.gameData.diamond += 2000;
+                this.text_diamond.changeText("" + Global.gameData.diamond);
+                Global.gameData.getDiamond = 3;
+                // off listener
+                this.btn_getDiamond.offAll();
+                this.btn_getDiamondYes.offAll();
+                this.btn_getDiamondExit.offAll();
+                // off animation
+                Laya.timer.clearAll(this.btn_getDiamondYes);
+                // hide
+                this.box_getDiamond.visible = false;
+                this.btn_getDiamond.visible = false;
+                this.finger_getDiamond.visible = false;
+            });
+        }
+        // 未达成获取资格
+        else {
+            this.btn_getDiamondYes.gray = true;
+            this.finger_getDiamond.visible = true;
+            // off
+            Laya.timer.clearAll(this.finger_getDiamond);
+            Laya.timer.clearAll(this.btn_getDiamondYes);
+            // 手势指引动画开启
+            Laya.timer.frameLoop(1, this.finger_getDiamond, () => {
+                this.finger_getDiamond.right -= 2;
+                if (this.finger_getDiamond.right <= 160) {
+                    this.finger_getDiamond.right = 220;
+                }
+            });
+        }
+    }
+    /**解锁getDiamond按钮 */
+    private bindButton_getDiamond() {
+        // 未曾领取钻石
+        if (Global.gameData.getDiamond !== 3) {
+            // 如果弹窗已打开，刷新
+            this.box_getDiamond.visible && this.refresh_getDiamond();
+            // 监听首页获取钻石按钮
+            this.btn_getDiamond.visible = true;
+            this.btn_getDiamond.on(Laya.Event.MOUSE_DOWN, this, () => {
+                // show
+                this.box_getDiamond.visible = true;
+                this.refresh_getDiamond();
+            });
+            // 获取钻石弹窗退出按钮
+            this.btn_getDiamondExit.on(Laya.Event.MOUSE_DOWN, this, () => {
+                this.box_getDiamond.visible = false;
+                this.finger_getDiamond.visible = false;
+                // off animation
+                Laya.timer.clearAll(this.finger_getDiamond);
+                Laya.timer.clearAll(this.btn_getDiamondYes);
+            });
+        }
+        else {
+            this.box_getDiamond.visible = false;
+            this.btn_getDiamond.visible = false;
+            this.finger_getDiamond.visible = false;
+        }
+    }
+
     /**绑定按钮 */
     private bindButtons() {
         // start game
@@ -261,10 +345,16 @@ export default class HomeView extends ui.home.HomeViewUI {
             this.updateGameData(true);
         });
         //刷新当前广告banner
-        ws.onShow(() => {
-            Ad.refreshCurrentBanner();
+        ws.onShow((res) => {
+            Ad.randomlyGetBanner("home");
+            Ad.showBanner(true);
+            // console.log("onShow scene", res.scene)
+            // 未曾领取钻石，判断来源场景值是否1104（我的小程序）
+            if (Global.gameData.getDiamond != 3 && res.scene == "1104") {
+                Global.gameData.getDiamond = 2;
+            }
+            this.bindButton_getDiamond();
         });
-        // this.initHomeIcons(["home_icon_1", "home_icon_2", "home_icon_3", "home_icon_4", "home_icon_5", "home_icon_6", "home_icon_7", "home_icon_8", "home_icon_9", "home_icon_10"]);
 
         /** init navigation */
         this.nav = new Navigator(ws);
@@ -287,6 +377,12 @@ export default class HomeView extends ui.home.HomeViewUI {
 
         /** unlock icon */
         this.refreshUnlock();
+
+        /** show get diamond btn */
+        if (Global.gameData.getDiamond != 3 && wx.getLaunchOptionsSync && wx.getLaunchOptionsSync().scene == "1104") {
+            Global.gameData.getDiamond = 2;
+        }
+        this.bindButton_getDiamond();
 
         /** get system name */
         this.systemName = "Android";

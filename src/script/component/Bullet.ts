@@ -84,10 +84,12 @@ export default class BulletScript extends Laya.Script3D {
         Laya.Vector3.scale(velocity, Const.BulletVelocity[+this.isReward][this.type], velocity);
         this.rigidbody.linearVelocity = velocity;
         // gravity
-        this.rigidbody.overrideGravity = Const.BulletOverrideGravity[+this.isReward][this.type];
-        if (this.rigidbody.overrideGravity) {
-            this.rigidbody.gravity = new Laya.Vector3(0, 0, 0);
-        }
+        // this.rigidbody.overrideGravity = Const.BulletOverrideGravity[+this.isReward][this.type];
+        // if (this.rigidbody.overrideGravity) {
+        //     this.rigidbody.gravity = new Laya.Vector3(0, 0, 0);
+        // }
+        this.rigidbody.overrideGravity = true;
+        this.rigidbody.gravity = new Laya.Vector3(0, -Const.BulletOverrideGravity[+this.isReward][this.type], 0);
         
         this.rigidbody.canCollideWith = 1;
         this.rigidbody.collisionGroup = 4;

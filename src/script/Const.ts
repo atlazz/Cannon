@@ -245,16 +245,16 @@ export const BulletTrigger = {
 export const BulletOverrideGravity = {
     /** cannon bullet */
     0: {
-        1: false,      // DEFAULT
-        2: false,      // SHOTGUN_X2
-        3: false,      // FROZEN
-        4: false,      // REWARD SHOTGUN_X4
-        5: false,      // BOMB
-        6: false,      // LIGHTNING
-        7: false,      // DRAGON
+        1: 8,      // DEFAULT
+        2: 8,      // SHOTGUN_X2
+        3: 8,      // FROZEN
+        4: 8,      // REWARD SHOTGUN_X4
+        5: 8,      // BOMB
+        6: 8,      // LIGHTNING
+        7: 8,      // DRAGON
     },
     /** reward bullet */
     1: {
-        1: true,       // BLACKHOLE
+        1: 0,       // BLACKHOLE
     }
 }

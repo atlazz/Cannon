@@ -100,7 +100,6 @@ export const setStyle = (banner, isMini: boolean, bannerTop: number) => {
         top = bannerTop / Laya.stage.height * screenHeight;
     }
     let left = (screenWidth - adWidth) / 2;
-    console.log("isMini: ", isMini, "top: ", top)
     banner.style.left = left;
     banner.style.top = top;
     banner.style.width = adWidth;

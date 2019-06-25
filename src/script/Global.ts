@@ -25,6 +25,8 @@ let Global = {
         //新手引导环节索引
         tutorialStep: 6,
         videoErr: {},
+        //领取钻石状态（1初始默认，2曾经从小程序打开有领取资格，3已领取钻石）
+        getDiamond: 1,
 
     },
     config: {

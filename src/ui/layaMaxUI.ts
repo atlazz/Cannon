@@ -122,11 +122,16 @@ export module ui.home {
 		public btn_cannon:Laya.Image;
 		public btn_sound:Laya.Image;
 		public btn_start:Laya.Image;
+		public btn_getDiamond:Laya.Image;
 		public btn_vibration:Laya.Image;
 		public label_highScore:Laya.Label;
 		public label_level:Laya.Label;
 		public icon_gameTitle:Laya.Image;
 		public label_version:Laya.Label;
+		public box_getDiamond:Laya.Image;
+		public btn_getDiamondYes:Laya.Image;
+		public btn_getDiamondExit:Laya.Image;
+		public finger_getDiamond:Laya.Image;
 		public icon_diamond:Laya.Image;
 		public text_diamond:laya.display.Text;
 		public box_bannar:Laya.Image;
