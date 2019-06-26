@@ -1,32 +1,30 @@
 {
 	"version":"LAYAMATERIAL:02",
 	"props":{
-		"type":"Laya.BlinnPhongMaterial",
+		"type":"Laya.UnlitMaterial",
 		"name":"Currency",
 		"renderStates":[
 			{
 				"cull":2,
-				"blend":1,
-				"srcBlend":770,
-				"dstBlend":771,
-				"depthWrite":false,
+				"blend":0,
+				"srcBlend":1,
+				"dstBlend":0,
+				"depthWrite":true,
 				"depthTest":515
 			}
 		],
 		"enableVertexColor":false,
 		"alphaTest":false,
 		"alphaTestValue":0.5,
-		"renderQueue":3000,
+		"renderQueue":2000,
 		"albedoIntensity":1,
-		"enableLighting":true,
-		"shininess":0.078125,
 		"textures":[
 			{
 				"name":"albedoTexture",
 				"path":"currency.jpg",
 				"constructParams":[
-					512,
-					512,
+					1024,
+					1024,
 					0,
 					true
 				],
@@ -49,20 +47,12 @@
 				]
 			},
 			{
-				"name":"specularColor",
-				"value":[
-					0.5,
-					0.5,
-					0.5
-				]
-			},
-			{
 				"name":"albedoColor",
 				"value":[
 					1,
-					0.1839623,
-					0.7648367,
-					0.6431373
+					1,
+					1,
+					1
 				]
 			}
 		],
