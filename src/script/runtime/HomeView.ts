@@ -353,8 +353,8 @@ export default class HomeView extends ui.home.HomeViewUI {
         });
         //刷新当前广告banner
         ws.onShow((res) => {
-            Ad.randomlyGetBanner("home");
-            Ad.showBanner(true);
+            // Ad.randomlyGetBanner("home");
+            // Ad.showBanner(true);
             // console.log("onShow scene", res.scene)
             // 未曾领取钻石，判断来源场景值是否1104（我的小程序）
             if (Global.gameData.getDiamond != 3 && res.scene == "1104") {

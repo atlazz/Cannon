@@ -808,6 +808,9 @@ export default class GameScene extends ui.game.GameSceneUI {
                 this.gameStage.name = "gameStage";
                 //Laya.loader.clearRes(satgeResUrl);
 
+                // hide: 避免banner加载过程中，用户手快点击事件，导致banner hide 在 show 之前
+                Ad.hideBanner();
+
                 // change level label
                 this.label_level.changeText("" + this.stageIdx);
 

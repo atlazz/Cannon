@@ -35,7 +35,7 @@ export const randomlyGetBanner = (pos: string) => {
     }
     // randomly select
     currBannerIdx = Math.ceil(Math.random() * Global.config.banner_number);
-    
+
     /** 首页 */
     if (pos == "home") {
         // check counter
@@ -115,7 +115,10 @@ export const showBanner = (isMini: boolean = false, bannerTop: number = -1) => {
 
 export const hideBanner = () => {
     if (!Laya.Browser.onMiniGame) return;
-    banners[currBannerIdx] && banners[currBannerIdx].hide();
+    for (let i = 1; i <= Object.keys(banners).length; i++) {
+        banners[i] && banners[i].hide();
+    }
+    // banners[currBannerIdx] && banners[currBannerIdx].hide();
 }
 
 
