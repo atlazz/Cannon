@@ -276,7 +276,7 @@ export default class GameScene extends ui.game.GameSceneUI {
     /** new cannon ball box */
     private newBallBox() {
         Laya.Sprite3D.load(Const.CannonBallBoxUrl, Laya.Handler.create(this, (res) => {
-            this.ballBox = this.scene3D.addChild(res) as Laya.Sprite3D;
+            this.ballBox = this.scene3D.addChild(res.clone()) as Laya.Sprite3D;
             this.ballBox.name = "ball_box";
             this.ballBox.transform.localPosition = Const.CannonBallInitPos.clone();
             this.ballBox.transform.localRotationEuler = Const.CannonInitRot.clone();
@@ -331,8 +331,10 @@ export default class GameScene extends ui.game.GameSceneUI {
             this.cannon.transform.localScale = Const.CannonInitScale.clone();
 
             this.turret = this.cannon.getChildByName("Turret_0") as Laya.MeshSprite3D;
-            this.turretInitPos = this.turret.transform.position.clone();
-            this.turretInitRot = this.turret.transform.localRotationEuler.clone();
+            if (this.turret) {
+                this.turretInitPos = this.turret.transform.position.clone();
+                this.turretInitRot = this.turret.transform.localRotationEuler.clone();
+            }
         }));
     }
 
@@ -515,7 +517,7 @@ export default class GameScene extends ui.game.GameSceneUI {
             this.hideUI();
             this.mouseEnabled = false;
             // reset cannon rotation
-            if (this.turret && this.cannon && !this.cannon.destroyed) {
+            if (this.turret && this.cannon && !this.cannon.destroyed && this.turretInitRot) {
                 this.turret.transform.localRotationEuler = this.turretInitRot.clone();
             }
             // clear reward cannon
@@ -586,7 +588,7 @@ export default class GameScene extends ui.game.GameSceneUI {
             this.cleanStage();
             this.hideUI();
             // reset cannon rotation
-            if (this.turret && this.cannon && !this.cannon.destroyed) {
+            if (this.turret && this.cannon && !this.cannon.destroyed && this.turretInitRot) {
                 this.turret.transform.localRotationEuler = this.turretInitRot.clone();
             }
             // clear reward cannon
@@ -723,7 +725,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.recoilTime = this.MaxRecoilTime;
         this.bulletType = this.cannonType;
         // reset turret rotation
-        if (this.cannon && !this.cannon.destroyed && this.turret) {
+        if (this.cannon && !this.cannon.destroyed && this.turret && this.turretInitRot) {
             this.turret.transform.localRotationEuler = this.turretInitRot.clone();
         }
 
@@ -1509,7 +1511,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.createBullet();
 
         // set turret transform
-        if (this.turret && this.cannon && !this.cannon.destroyed) {
+        if (this.turret && this.cannon && !this.cannon.destroyed && this.turretInitRot) {
             this.turret.transform.localRotationEuler = this.turretInitRot.clone();
             if (flag_turretDirection) {
                 if (this.cannon.name.indexOf("Anti") === -1) {
@@ -1644,8 +1646,8 @@ export default class GameScene extends ui.game.GameSceneUI {
                     Laya.Mesh.load(Const.BulletMeshUrl, Laya.Handler.create(this, (mesh) => {
                         let bullet: Laya.MeshSprite3D = new Laya.MeshSprite3D(mesh);
                         bullet.name = "bullet";
-                        let bulletBlackHole: Laya.Sprite3D = bullet.addChild(res.clone()) as Laya.Sprite3D;
-                        bulletBlackHole.name = "effect";
+                        let bulletLightning: Laya.Sprite3D = bullet.addChild(res.clone()) as Laya.Sprite3D;
+                        bulletLightning.name = "effect";
                         // reset bullet by type
                         let bulletScript: Bullet = bullet.addComponent(Bullet);
                         bulletScript.reset(this.bulletType);

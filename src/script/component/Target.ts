@@ -85,7 +85,9 @@ export default class Target extends Laya.Script3D {
             }
             // target and bullet
             if (inWhiteList) {
-                let velocityOther: Laya.Vector3 = (other.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D).linearVelocity.clone();
+                let velocityOther: Laya.Vector3 = new Laya.Vector3(0, 0, 0);
+                let otherRigid = other.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D;
+                otherRigid && (velocityOther = otherRigid.linearVelocity.clone());
                 let velocityValueSelf: number = Laya.Vector3.distance(this.rigidbody.linearVelocity, new Laya.Vector3(0, 0, 0));
                 let velocityValueOther: number = Laya.Vector3.distance(velocityOther, new Laya.Vector3(0, 0, 0));
                 if (velocityValueSelf >= Const.GlassBrokenVelocity || velocityValueOther >= Const.GlassBrokenVelocity) {

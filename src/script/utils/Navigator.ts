@@ -236,9 +236,9 @@ export default class Navigator {
                 let data = res.data;
                 this.iconData = res.data;
                 // console.log("game icon fetched: ", data)
-                for (let i = 0; i < Math.min(data.length, 10); i++) {
+                for (let i = 0; i < 10; i++) {
                     let iconImg = GameScene.instance.box_gameIcon.getChildAt(i) as Laya.Image;
-                    if (data[i] && iconImg) {
+                    if (i < data.length && data[i] && iconImg) {
                         iconImg.visible = true;
                         //注册点击
                         iconImg.on(Laya.Event.MOUSE_DOWN, this, this.onIconClick, ["default"/** posList[index]*/, data[i]]);
