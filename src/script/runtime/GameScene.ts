@@ -48,6 +48,11 @@ export default class GameScene extends ui.game.GameSceneUI {
 
         // game playing
         if (this.state === Const.GameState.START) {
+            // change bg
+            if (Global.gameData.stageIndex > 2 && this.bgIdx != Global.gameData.stageIndex % 2) {
+                this.bgIdx = Global.gameData.stageIndex % 2;
+                this.newBackground();
+            }
             // change cannon
             if (!this.isRewardCannon && this.cannonType !== Global.gameData.cannonType) {
                 this.setCannon(Global.gameData.cannonType);
@@ -1473,7 +1478,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         CannonSelect.instance && (CannonSelect.instance.isReward = false);
         // update background
         if (Global.gameData.stageIndex > 2) {
-            this.bgIdx = (++this.bgIdx) % 2;
+            this.bgIdx = Global.gameData.stageIndex % 2;
             this.newBackground();
         }
     }

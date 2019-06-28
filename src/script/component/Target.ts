@@ -1,4 +1,5 @@
 import * as Const from "../Const";
+import HomeView from "../runtime/HomeView";
 import GameScene from "../runtime/GameScene";
 import Bullet from "../component/Bullet"
 import Global from "../Global";
@@ -375,7 +376,12 @@ export default class Target extends Laya.Script3D {
     /** platy effect: target broken to pieces */
     private effectPiecesBroken() {
         Laya.Mesh.load(Const.PieceResUrl, Laya.Handler.create(this, (mesh) => {
-            let pieceNum = Const.PiecesNum - Math.round(Math.random());
+            let pieceNum: number;
+            if (HomeView.instance.systemName == "IOS") {
+                pieceNum = 3 - Math.round(Math.random());
+            } else {
+                pieceNum = 5 - Math.round(Math.random() * 3);
+            }
             for (let i = 0; i < pieceNum; i++) {
                 let piece: Laya.MeshSprite3D = new Laya.MeshSprite3D(mesh);
                 piece.name = "piece";

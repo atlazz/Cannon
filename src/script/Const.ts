@@ -1,5 +1,5 @@
 /** version */
-export const VERSION = "1.2.1";
+export const VERSION = "1.2.2";
 
 /************** 后台设置参数 *******************/
 /** 分享位置 */
@@ -86,7 +86,6 @@ export const GlassFallingBrokenVelocity: number = 1;
 
 /** piece of target object */
 export const PieceResUrl: string = "res/cube_piece.lm";
-export const PiecesNum: number = 3;
 export const PiecesBrokenTime: number = 120;
 
 /** cannon */
