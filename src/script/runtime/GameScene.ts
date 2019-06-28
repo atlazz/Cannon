@@ -49,8 +49,8 @@ export default class GameScene extends ui.game.GameSceneUI {
         // game playing
         if (this.state === Const.GameState.START) {
             // change bg
-            if (Global.gameData.stageIndex > 2 && this.bgIdx != Global.gameData.stageIndex % 2) {
-                this.bgIdx = Global.gameData.stageIndex % 2;
+            if (Global.gameData.stageIndex > 2 && this.bgIdx != (Global.gameData.stageIndex - 2) % 4) {
+                this.bgIdx = (Global.gameData.stageIndex - 2) % 4;
                 this.newBackground();
             }
             // change cannon
@@ -164,6 +164,9 @@ export default class GameScene extends ui.game.GameSceneUI {
     /** game state */
     public state: number = 0;
 
+    /** stage invisible ground */
+    public ground: Laya.MeshSprite3D;
+
     private btnAniFrame: number;
 
     // 按钮点击处理函数
@@ -226,6 +229,12 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.camera = this.scene3D.addChild(new Laya.Camera()) as Laya.Camera;
         this.camera.transform.localPosition = Const.CameraInitPos.clone();
         this.camera.transform.localRotationEuler = Const.CameraInitRotEuler.clone();
+
+        this.camera.clearFlag = Laya.BaseCamera.CLEARFLAG_SKY;
+        let mat: Laya.BlinnPhongMaterial = new Laya.BlinnPhongMaterial();
+        mat.renderMode = Laya.BlinnPhongMaterial.RENDERMODE_TRANSPARENT;
+        mat.albedoColor = new Laya.Vector4(1, 1, 1, 0);
+        this.camera.skyRenderer.material = mat;
         // this.camera.clearColor = null;
         // 调整fov，适配屏幕分辨率
         let num = 720 / 1280;
@@ -250,84 +259,104 @@ export default class GameScene extends ui.game.GameSceneUI {
             Laya.timer.clearAll(this.background);
             this.background.destroy();
         }
-        // new
-        Laya.Sprite3D.load(Const.BgResUrl[this.bgIdx], Laya.Handler.create(this, (res) => {
-            this.scene3D.removeChildByName("background");
-            this.background = this.scene3D.addChild(res) as Laya.Sprite3D;
-            this.background.name = "background";
-            // transform
-            this.background.transform.localPosition = Const.StageInitPos.clone();
-            this.background.transform.localRotationEuler = Const.StageInitRot.clone();
-            this.background.transform.localScale = Const.StageInitScale.clone();
+        if (this.bgIdx > 1) {
+            this.bgImg.skin = Const.BgResUrl[this.bgIdx];
+            this.scene3D.addChild(this.ground);
+        }
+        else {
+            // new
+            Laya.Sprite3D.load(Const.BgResUrl[this.bgIdx], Laya.Handler.create(this, (res) => {
+                this.scene3D.removeChildByName("background");
+                this.background = this.scene3D.addChild(res) as Laya.Sprite3D;
+                this.background.name = "background";
+                // transform
+                this.background.transform.localPosition = Const.StageInitPos.clone();
+                this.background.transform.localRotationEuler = Const.StageInitRot.clone();
+                this.background.transform.localScale = Const.StageInitScale.clone();
 
-            // destroy animator component
-            let bgAni = (this.background.getComponent(Laya.Animator) as Laya.Animator);
-            bgAni && bgAni.destroy();
+                // destroy animator component
+                let bgAni = (this.background.getComponent(Laya.Animator) as Laya.Animator);
+                bgAni && bgAni.destroy();
 
-            if (this.bgIdx === 0) {
-                let cloud0 = this.background.getChildByName("Scenes_02").getChildByName("cloud01") as Laya.Sprite3D;
-                let cloud1 = this.background.getChildByName("Scenes_02").getChildByName("cloud03") as Laya.Sprite3D;
-                let plane: Laya.MeshSprite3D = this.background.getChildByName("Scenes_02").getChildByName("Plane").getChildByName("Plane_0") as Laya.MeshSprite3D;
-                plane.name = "ground";
-                let planeCollider: Laya.PhysicsCollider = plane.addComponent(Laya.PhysicsCollider);
-                planeCollider.colliderShape = new Laya.StaticPlaneColliderShape(new Laya.Vector3(0, 1, 0), 0);
+                if (this.bgIdx === 0) {
+                    let cloud0 = this.background.getChildByName("Scenes_02").getChildByName("cloud01") as Laya.Sprite3D;
+                    let cloud1 = this.background.getChildByName("Scenes_02").getChildByName("cloud03") as Laya.Sprite3D;
+                    let plane: Laya.MeshSprite3D = this.background.getChildByName("Scenes_02").getChildByName("Plane").getChildByName("Plane_0") as Laya.MeshSprite3D;
+                    // init invisible ground
+                    if (plane && !this.ground) {
+                        this.ground = plane.clone();
+                        this.scene3D.addChild(this.ground);
+                        this.ground.name = "ground";
+                        let planeCollider: Laya.PhysicsCollider = this.ground.addComponent(Laya.PhysicsCollider);
+                        planeCollider.colliderShape = new Laya.StaticPlaneColliderShape(new Laya.Vector3(0, 1, 0), plane.transform.position.y);
+                    }
+                    else {
+                        this.scene3D.addChild(this.ground);
+                    }
+                    // plane.name = "ground";
+                    // let planeCollider: Laya.PhysicsCollider = plane.addComponent(Laya.PhysicsCollider);
+                    // planeCollider.colliderShape = new Laya.StaticPlaneColliderShape(new Laya.Vector3(0, 1, 0), 0);
 
-                // animation
-                this.background.frameLoop(1, this.background, () => {
-                    if (cloud0) {
-                        if (cloud0.transform.localPositionX > 0.5) { cloud0.transform.localPositionX = -0.5; }
-                        cloud0.transform.localPositionX += 0.0007;
-                    }
-                    if (cloud1) {
-                        if (cloud1.transform.localPositionX < -0.5) { cloud1.transform.localPositionX = 0.5; }
-                        cloud1.transform.localPositionX -= 0.0005;
-                    }
-                });
-            }
-            else if (this.bgIdx === 1) {
-                let island0 = this.background.getChildByName("_0012_Island1_0") as Laya.MeshSprite3D;
-                let island1 = this.background.getChildByName("_0014_Island3_0") as Laya.MeshSprite3D;
-                let island2 = this.background.getChildByName("_0019_Island8_0") as Laya.MeshSprite3D;
-                let plant = this.background.getChildByName("_0006_Plant01_0 1") as Laya.MeshSprite3D;
-                let tmpSky = this.background.getChildByName("_0022_Sky_0") as Laya.MeshSprite3D;
-
-                if (island0) { island0.meshRenderer.castShadow = false; island0.meshRenderer.receiveShadow = false };
-                if (island1) { island1.meshRenderer.castShadow = false; island1.meshRenderer.receiveShadow = false };
-                if (island2) { island2.meshRenderer.castShadow = false; island2.meshRenderer.receiveShadow = false };
-                if (tmpSky) { tmpSky.meshRenderer.castShadow = false; tmpSky.meshRenderer.receiveShadow = false };
-
-                // animation
-                let bgFrameCnt: number = 0;
-                let bgFrameCnt2: number = 0;
-                this.background.frameLoop(1, this.background, () => {
-                    bgFrameCnt++;
-                    bgFrameCnt2++;
-                    if (bgFrameCnt > 180) { bgFrameCnt = 0; }
-                    if (bgFrameCnt2 > 300) { bgFrameCnt2 = 0; }
-                    if (island0) {
-                        if (bgFrameCnt <= 90) { island0.transform.localPositionY += 0.0005; }
-                        else { island0.transform.localPositionY -= 0.0005; }
-                    }
-                    if (island1) {
-                        if (bgFrameCnt2 <= 150) { island1.transform.localPositionY -= 0.0002; }
-                        else { island1.transform.localPositionY += 0.0002; }
-                    }
-                    if (island2) {
-                        if (bgFrameCnt <= 90) { island2.transform.localPositionY += 0.0005; }
-                        else { island2.transform.localPositionY -= 0.0005; }
-                    }
-                    if (plant) {
-                        if (bgFrameCnt <= 90) {
-                            plant.transform.localRotationEulerX -= 0.2;
-                            plant.transform.localPositionX += 0.00018;
-                        } else {
-                            plant.transform.localRotationEulerX += 0.2;
-                            plant.transform.localPositionX -= 0.00018;
+                    // animation
+                    this.background.frameLoop(1, this.background, () => {
+                        if (cloud0) {
+                            if (cloud0.transform.localPositionX > 0.5) { cloud0.transform.localPositionX = -0.5; }
+                            cloud0.transform.localPositionX += 0.0007;
                         }
-                    }
-                });
-            }
-        }));
+                        if (cloud1) {
+                            if (cloud1.transform.localPositionX < -0.5) { cloud1.transform.localPositionX = 0.5; }
+                            cloud1.transform.localPositionX -= 0.0005;
+                        }
+                    });
+                }
+                else if (this.bgIdx === 1) {
+                    // remove ground
+                    this.ground.removeSelf();
+
+                    let island0 = this.background.getChildByName("_0012_Island1_0") as Laya.MeshSprite3D;
+                    let island1 = this.background.getChildByName("_0014_Island3_0") as Laya.MeshSprite3D;
+                    let island2 = this.background.getChildByName("_0019_Island8_0") as Laya.MeshSprite3D;
+                    let plant = this.background.getChildByName("_0006_Plant01_0 1") as Laya.MeshSprite3D;
+                    let tmpSky = this.background.getChildByName("_0022_Sky_0") as Laya.MeshSprite3D;
+
+                    if (island0) { island0.meshRenderer.castShadow = false; island0.meshRenderer.receiveShadow = false };
+                    if (island1) { island1.meshRenderer.castShadow = false; island1.meshRenderer.receiveShadow = false };
+                    if (island2) { island2.meshRenderer.castShadow = false; island2.meshRenderer.receiveShadow = false };
+                    if (tmpSky) { tmpSky.meshRenderer.castShadow = false; tmpSky.meshRenderer.receiveShadow = false };
+
+                    // animation
+                    let bgFrameCnt: number = 0;
+                    let bgFrameCnt2: number = 0;
+                    this.background.frameLoop(1, this.background, () => {
+                        bgFrameCnt++;
+                        bgFrameCnt2++;
+                        if (bgFrameCnt > 180) { bgFrameCnt = 0; }
+                        if (bgFrameCnt2 > 300) { bgFrameCnt2 = 0; }
+                        if (island0) {
+                            if (bgFrameCnt <= 90) { island0.transform.localPositionY += 0.0005; }
+                            else { island0.transform.localPositionY -= 0.0005; }
+                        }
+                        if (island1) {
+                            if (bgFrameCnt2 <= 150) { island1.transform.localPositionY -= 0.0002; }
+                            else { island1.transform.localPositionY += 0.0002; }
+                        }
+                        if (island2) {
+                            if (bgFrameCnt <= 90) { island2.transform.localPositionY += 0.0005; }
+                            else { island2.transform.localPositionY -= 0.0005; }
+                        }
+                        if (plant) {
+                            if (bgFrameCnt <= 90) {
+                                plant.transform.localRotationEulerX -= 0.2;
+                                plant.transform.localPositionX += 0.00018;
+                            } else {
+                                plant.transform.localRotationEulerX += 0.2;
+                                plant.transform.localPositionX -= 0.00018;
+                            }
+                        }
+                    });
+                }
+            }));
+        }
     }
 
     /** new cannon ball box */
@@ -1478,7 +1507,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         CannonSelect.instance && (CannonSelect.instance.isReward = false);
         // update background
         if (Global.gameData.stageIndex > 2) {
-            this.bgIdx = Global.gameData.stageIndex % 2;
+            this.bgIdx = (Global.gameData.stageIndex - 2) % 4;
             this.newBackground();
         }
     }

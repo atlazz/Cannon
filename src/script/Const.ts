@@ -1,5 +1,5 @@
 /** version */
-export const VERSION = "1.2.2";
+export const VERSION = "1.2.4";
 
 /************** 后台设置参数 *******************/
 /** 分享位置 */
@@ -71,6 +71,8 @@ export const SetKinematicWaitTime: number = 10;
 export const BgResUrl: string[] = [
     "res/scene/1/Scenes_02.lh",
     "res/scene/2/Scenes_04.lh",
+    "res/scene/bg1.jpg",
+    "res/scene/bg2.jpg",
 ]
 
 /** target object */
