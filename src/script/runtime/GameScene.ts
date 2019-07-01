@@ -46,7 +46,7 @@ export default class GameScene extends ui.game.GameSceneUI {
             this.navGame = new Navigator(ws);
         }
 
-        // game playing
+        // game start
         if (this.state === Const.GameState.START) {
             // change bg
             if (Global.gameData.stageIndex > 2 && this.bgIdx != (Global.gameData.stageIndex - 2) % 4) {
@@ -57,6 +57,14 @@ export default class GameScene extends ui.game.GameSceneUI {
             if (!this.isRewardCannon && this.cannonType !== Global.gameData.cannonType) {
                 this.setCannon(Global.gameData.cannonType);
             }
+            // random change target texture
+            let texIdx: number = StageConfig.StageTexture[Global.gameData.stageIndex > Const.StageNum ? Const.StageNum : Global.gameData.stageIndex];
+            if (!texIdx || texIdx < 3 || texIdx > 9) {
+                texIdx = Math.floor(Math.random() * (9 - 3 + 1)) + 3;
+                if (texIdx > 9) { texIdx = 9; }
+            }
+            this.textureIdx = texIdx;
+            // show
             this.showUI();
             // reset
             this.stageIdx = Global.gameData.stageIndex;
@@ -124,6 +132,9 @@ export default class GameScene extends ui.game.GameSceneUI {
     public winCheckCnt: number = 0;
     public flag_missionWin: boolean = false;
 
+    /** target */
+    public textureIdx: number = 3;
+
     /** treasure */
     public treasureHitCnt: number = 0;
     public treasereMaxHitCnt: number = 20;
@@ -173,7 +184,6 @@ export default class GameScene extends ui.game.GameSceneUI {
     public onClick_cannonSelect: Function;
     public onClick_rewardBullet: Function;
     public onClick_rewardCannon: Function;
-    // public onClick_rewardTemplate: Function;
 
     // 测试接口开始 <==========================
     public reTimes: number = 1;
@@ -1499,6 +1509,17 @@ export default class GameScene extends ui.game.GameSceneUI {
             this.missionRawIdxList[i - 1] = 0;
             this["level" + i].sizeGrid = "0, 96, 0, 0";
         }
+        // random pick target texture
+        let texIdx: number = StageConfig.StageTexture[Global.gameData.stageIndex > Const.StageNum ? Const.StageNum : Global.gameData.stageIndex];
+        if (!texIdx || texIdx < 3 || texIdx > 9) {
+            let tryCnt = 0;
+            texIdx = this.textureIdx;
+            while (tryCnt < 20 && texIdx == this.textureIdx) {
+                texIdx = Math.floor(Math.random() * (9 - 3 + 1)) + 3;
+                if (texIdx > 9) { texIdx = 9; }
+            }
+        }
+        this.textureIdx = texIdx;
         // clear reward cannon
         if (this.isRewardCannon) {
             this.setCannon(Global.gameData.cannonType);
@@ -1733,13 +1754,36 @@ export default class GameScene extends ui.game.GameSceneUI {
                 this.createSingleBullet(posOffset, -posOffset);
                 this.createSingleBullet(posOffset, posOffset);
             }
+            // else if (this.cannonType === Const.CannonType.DRAGON) {
+            //     Laya.Sprite3D.load(Const.BulletEffectUrl[1], Laya.Handler.create(this, (res) => {
+            //         Laya.Mesh.load(Const.BulletMeshUrl, Laya.Handler.create(this, (mesh) => {
+            //             let bullet: Laya.MeshSprite3D = new Laya.MeshSprite3D(mesh);
+            //             bullet.name = "bullet";
+            //             let bulletEffect: Laya.Sprite3D = bullet.addChild(res.clone()) as Laya.Sprite3D;
+            //             bulletEffect.name = "effect";
+            //             // reset bullet by type
+            //             let bulletScript: Bullet = bullet.addComponent(Bullet);
+            //             bulletScript.reset(this.bulletType);
+            //             // add to scene
+            //             this.scene3D.addChild(bullet);
+
+            //             let trigger: Laya.MeshSprite3D = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(Const.BulletRadius));
+            //             trigger.name = "bulletTrigger";
+            //             // reset bullet trigger by type
+            //             let triggerScript: Bullet = trigger.addComponent(Bullet);
+            //             triggerScript.reset(this.bulletType);
+            //             // add to scene
+            //             this.scene3D.addChild(trigger);
+            //         }));
+            //     }));
+            // }
             else if (this.cannonType === Const.CannonType.LIGHTNING) {
-                Laya.Sprite3D.load(Const.BulletLightningUrl, Laya.Handler.create(this, (res) => {
+                Laya.Sprite3D.load(Const.BulletEffectUrl[2], Laya.Handler.create(this, (res) => {
                     Laya.Mesh.load(Const.BulletMeshUrl, Laya.Handler.create(this, (mesh) => {
                         let bullet: Laya.MeshSprite3D = new Laya.MeshSprite3D(mesh);
                         bullet.name = "bullet";
-                        let bulletLightning: Laya.Sprite3D = bullet.addChild(res.clone()) as Laya.Sprite3D;
-                        bulletLightning.name = "effect";
+                        let bulletEffect: Laya.Sprite3D = bullet.addChild(res.clone()) as Laya.Sprite3D;
+                        bulletEffect.name = "effect";
                         // reset bullet by type
                         let bulletScript: Bullet = bullet.addComponent(Bullet);
                         bulletScript.reset(this.bulletType);

@@ -56,6 +56,8 @@ export const StageTexUrl: string[] = [
     "res/stage/out/materials/stack_texture2.jpg",
     "res/stage/out/materials/stack_texture3.jpg",
     "res/stage/out/materials/stack_texture4.jpg",
+    "res/stage/out/materials/stack_texture5.jpg",
+    "res/stage/out/materials/stack_texture6.jpg",
 ]
 export const StageResUrl: string = "res/stage/out/";
 export const StageInitPos: Laya.Vector3 = new Laya.Vector3(0, 0, 0);
@@ -102,7 +104,7 @@ export const CannonBallInitPos: Laya.Vector3 = new Laya.Vector3(-0.01, 0.05, -0.
 export const CannonBallInitScale: Laya.Vector3 = new Laya.Vector3(25, 25, 25);
 
 /** cdn */
-export const cdnUrl: string = "https://coolant.miniant.cn/cannon/res_v121.zip";
+export const cdnUrl: string = "https://coolant.miniant.cn/cannon/res_v124.zip";
 
 /** sound */
 export const soundUrl: string = "res/audio/shoot.mp3";
@@ -115,7 +117,11 @@ export const treasureAngleZ: number[] = [0, 0.2, 0.5, 0.6, 0.3, 0.2, 0.1, 0, 0.8
 /******** bullet ********/
 // bullet mesh model res url
 export const BulletMeshUrl = "res/bullet/bullet.lm";
-export const BulletLightningUrl = "res/bullet/lightning/lightning.lh";
+// export const BulletLightningUrl = "res/bullet/lightning/lightning.lh";
+export const BulletEffectUrl = {
+    1: "res/bullet/boom/boomTrail.lh",      // BOOM
+    2: "res/bullet/lightning/lightning.lh", // lightning
+};
 /** reward bullet */
 export const enum BulletRewardType {
     BLACKHOLE = 1,

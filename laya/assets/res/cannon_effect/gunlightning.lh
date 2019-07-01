@@ -3,14 +3,14 @@
 	"data":{
 		"type":"Sprite3D",
 		"props":{
-			"name":"gunlightning",
+			"name":"GameObject",
 			"active":true,
 			"isStatic":false,
 			"layer":0,
 			"position":[
 				0,
-				-0.3,
-				-1.17
+				0,
+				0
 			],
 			"rotation":[
 				0,
@@ -19,9 +19,9 @@
 				-1
 			],
 			"scale":[
-				0.03,
-				0.03,
-				0.03
+				1,
+				1,
+				1
 			]
 		},
 		"components":[],
@@ -29,14 +29,14 @@
 			{
 				"type":"ShuriKenParticle3D",
 				"props":{
-					"name":"Particle System",
+					"name":"lightning",
 					"active":true,
 					"isStatic":false,
 					"layer":0,
 					"position":[
 						0,
-						0,
-						0
+						0.15,
+						-0.2
 					],
 					"rotation":[
 						0,
@@ -45,21 +45,21 @@
 						-1
 					],
 					"scale":[
-						1,
-						1,
-						1
+						0.2,
+						0.2,
+						0.2
 					],
 					"isPerformanceMode":true,
-					"duration":2,
+					"duration":0.6,
 					"looping":true,
 					"prewarm":false,
 					"startDelayType":0,
 					"startDelay":0,
 					"startDelayMin":0,
 					"startDelayMax":0,
-					"startLifetimeType":2,
+					"startLifetimeType":0,
 					"startLifetimeConstant":0.3,
-					"startLifetimeConstantMin":0.15,
+					"startLifetimeConstantMin":0,
 					"startLifetimeConstantMax":0.3,
 					"startLifetimeGradient":{
 						"startLifetimes":[]
@@ -71,16 +71,16 @@
 						"startLifetimes":[]
 					},
 					"startSpeedType":0,
-					"startSpeedConstant":0,
+					"startSpeedConstant":0.2,
 					"startSpeedConstantMin":0,
-					"startSpeedConstantMax":0,
+					"startSpeedConstantMax":0.2,
 					"threeDStartSize":false,
 					"startSizeType":0,
-					"startSizeConstant":1,
+					"startSizeConstant":0.8,
 					"startSizeConstantMin":0,
-					"startSizeConstantMax":1,
+					"startSizeConstantMax":0.8,
 					"startSizeConstantSeparate":[
-						1,
+						0.8,
 						1,
 						1
 					],
@@ -90,29 +90,29 @@
 						0
 					],
 					"startSizeConstantMaxSeparate":[
-						1,
+						0.8,
 						1,
 						1
 					],
-					"threeDStartRotation":false,
-					"startRotationType":2,
-					"startRotationConstant":360,
-					"startRotationConstantMin":-360,
-					"startRotationConstantMax":360,
+					"threeDStartRotation":true,
+					"startRotationType":0,
+					"startRotationConstant":45,
+					"startRotationConstantMin":0,
+					"startRotationConstantMax":45,
 					"startRotationConstantSeparate":[
 						0,
 						0,
-						-360
+						-45
 					],
 					"startRotationConstantMinSeparate":[
 						0,
 						0,
-						360
+						0
 					],
 					"startRotationConstantMaxSeparate":[
 						0,
 						0,
-						-360
+						-45
 					],
 					"randomizeRotationDirection":0,
 					"startColorType":0,
@@ -145,12 +145,35 @@
 					"playOnAwake":true,
 					"maxParticles":1000,
 					"autoRandomSeed":true,
-					"randomSeed":2.804477E+08,
+					"randomSeed":1.064383E+09,
 					"emission":{
 						"enable":true,
-						"emissionRate":10,
+						"emissionRate":13,
 						"emissionRateTip":"Time",
 						"bursts":[]
+					},
+					"shape":{
+						"enable":true,
+						"shapeType":0,
+						"sphereRadius":0.3,
+						"sphereEmitFromShell":false,
+						"sphereRandomDirection":0,
+						"hemiSphereRadius":0.3,
+						"hemiSphereEmitFromShell":false,
+						"hemiSphereRandomDirection":0,
+						"coneAngle":25,
+						"coneRadius":0.3,
+						"coneLength":5,
+						"coneEmitType":0,
+						"coneRandomDirection":0,
+						"boxX":1,
+						"boxY":1,
+						"boxZ":1,
+						"boxRandomDirection":0,
+						"circleRadius":0.3,
+						"circleArc":360,
+						"circleEmitFromEdge":false,
+						"circleRandomDirection":0
 					},
 					"colorOverLifetime":{
 						"enable":true,
@@ -177,24 +200,16 @@
 									{
 										"key":0,
 										"value":[
-											0.6901258,
+											0.4292194,
 											1,
-											0.4858491
-										]
-									},
-									{
-										"key":0.4676432,
-										"value":[
-											1,
-											0.3632075,
-											0.3632075
+											0
 										]
 									},
 									{
 										"key":1,
 										"value":[
-											1,
-											1,
+											0.8909904,
+											0.2877358,
 											1
 										]
 									}
@@ -227,24 +242,16 @@
 									{
 										"key":0,
 										"value":[
-											0.6901258,
+											0.4292194,
 											1,
-											0.4858491
-										]
-									},
-									{
-										"key":0.4676432,
-										"value":[
-											1,
-											0.3632075,
-											0.3632075
+											0
 										]
 									},
 									{
 										"key":1,
 										"value":[
-											1,
-											1,
+											0.8909904,
+											0.2877358,
 											1
 										]
 									}
@@ -257,13 +264,13 @@
 						"angularVelocity":{
 							"type":0,
 							"separateAxes":false,
-							"constant":45,
+							"constant":100,
 							"constantMin":0,
-							"constantMax":45,
+							"constantMax":100,
 							"constantSeparate":[
 								0,
 								0,
-								-45
+								-100
 							],
 							"constantMinSeparate":[
 								0,
@@ -273,7 +280,7 @@
 							"constantMaxSeparate":[
 								0,
 								0,
-								45
+								100
 							],
 							"gradient":{
 								"angularVelocitys":[]
@@ -343,7 +350,11 @@
 								"frames":[
 									{
 										"key":0,
-										"value":2.265261
+										"value":2.106174
+									},
+									{
+										"key":0.5014648,
+										"value":3.9996
 									},
 									{
 										"key":1,
@@ -381,7 +392,7 @@
 					"sortingFudge":0,
 					"material":{
 						"type":"Laya.ShurikenParticleMaterial",
-						"path":"Assets/lightning2.lmat"
+						"path":"Assets/lightning.lmat"
 					}
 				},
 				"components":[],

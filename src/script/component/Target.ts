@@ -279,7 +279,7 @@ export default class Target extends Laya.Script3D {
         }
         // set material by type
         if (this.type === Const.TargetType.DEFAULT) {
-            Laya.Texture2D.load(Const.StageTexUrl[StageConfig.StageTexture[Global.gameData.stageIndex > Const.StageNum ? Const.StageNum : Global.gameData.stageIndex]], Laya.Handler.create(this, (tex) => {
+            Laya.Texture2D.load(Const.StageTexUrl[GameScene.instance.textureIdx], Laya.Handler.create(this, (tex) => {
                 this.material.albedoTexture = tex;
             }));
             this.material.specularColor = new Laya.Vector4(0, 0, 0, 1);
