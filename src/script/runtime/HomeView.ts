@@ -8,6 +8,7 @@ import Global from "../Global";
 import * as Ad from "../utils/Ad";
 import Navigator from "../utils/Navigator";
 import Loader from "../utils/Loader";
+import Reward from "../component/Reward";
 
 export default class HomeView extends ui.home.HomeViewUI {
     static instance: HomeView;
@@ -40,6 +41,8 @@ export default class HomeView extends ui.home.HomeViewUI {
         // refresh diamond
         this.text_diamond.changeText("" + Global.gameData.diamond);
         this.icon_diamond.visible = true;
+        // update trail
+        this.updateTrailUnlock();
     }
 
     /**首页图标列表*/
@@ -220,6 +223,66 @@ export default class HomeView extends ui.home.HomeViewUI {
         });
         // jump to sence: cannon select
         this.btn_cannon.on(Laya.Event.CLICK, this, this.onclick_cannon);
+        // trail select open
+        this.btn_trail.on(Laya.Event.CLICK, this, () => {
+            this.box_trail.visible = true;
+            this.box_UI.visible = false;
+        });
+        // trail selece close
+        this.btn_trailBack.on(Laya.Event.MOUSE_DOWN, this, () => {
+            this.box_trail.visible = false;
+            this.box_UI.visible = true;
+        });
+        // trail unlock
+        for (let i = 1; i <= Object.keys(Const.TrailUnlock).length; i++) {
+            this['btn_trailUnlock' + i].on(Laya.Event.MOUSE_DOWN, this, () => {
+                // 1: video
+                if (Global.config.get_trail == 1) {
+                    // 未超过每天视频观看次数
+                    if (!Reward.instance.isOverVideo()) {
+                        this.mouseEnabled = false;
+                        Reward.instance.video({
+                            pos: Const.RewardPos.Trail,
+                            success: () => {
+                                Global.gameData.trailUnlockState[i]++;
+                                this.updateTrailUnlock();
+                            },
+                            fail: () => {
+                                Reward.instance.share({
+                                    pos: Const.RewardPos.Trail,
+                                    success: () => {
+                                        Global.gameData.trailUnlockState[i]++;
+                                        this.updateTrailUnlock();
+                                    },
+                                });
+                            },
+                            complete: () => {
+                                this.mouseEnabled = true;
+                            }
+                        });
+                    }
+                    else {
+                        Reward.instance.share({
+                            pos: Const.RewardPos.Trail,
+                            success: () => {
+                                Global.gameData.trailUnlockState[i]++;
+                                this.updateTrailUnlock();
+                            },
+                        });
+                    }
+                }
+                // 2: share
+                else if (Global.config.get_trail == 2) {
+                    Reward.instance.share({
+                        pos: Const.RewardPos.Trail,
+                        success: () => {
+                            Global.gameData.trailUnlockState[i]++;
+                            this.updateTrailUnlock();
+                        },
+                    });
+                }
+            });
+        }
 
         // 测试接口开始 <==========================
         this.btn_test.gray = !this.isTest;
@@ -347,6 +410,7 @@ export default class HomeView extends ui.home.HomeViewUI {
             ws.setAllData(Global.gameData, true);
         }
         Global.gameData = (<any>Object).assign(Global.gameData, ws.data);
+        console.log("treasure banner hit from ws", Global.gameData.treasureBannerHit);
         //关闭更新游戏数据
         wx.onHide(() => {
             this.updateGameData(true);
@@ -361,6 +425,14 @@ export default class HomeView extends ui.home.HomeViewUI {
                 Global.gameData.getDiamond = 2;
             }
             this.bindButton_getDiamond();
+
+            // 宝箱暴击页误点banner
+            if (GameScene.instance && GameScene.instance.state == Const.GameState.BANNER_TOUCH) {
+                GameScene.instance.state = Const.GameState.START;
+                Global.gameData.treasureBannerHit++;
+                Global.gameData.lastTreasureBannerHitTimestamp = Date.now();
+                console.log("treasure banner hit", Global.gameData.treasureBannerHit);
+            }
         });
 
         /** init navigation */
@@ -384,6 +456,24 @@ export default class HomeView extends ui.home.HomeViewUI {
 
         /** unlock icon */
         this.refreshUnlock();
+
+        let now = new Date();
+        /** reset trail show flag */
+        let todayBeginTimestamp = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+        console.log('todayBeginTimestamp', todayBeginTimestamp)
+        console.log('lastTrailShowTimestamp', Global.gameData.lastTrailShowTimestamp)
+        if (!Global.gameData.lastTrailShowTimestamp || Global.gameData.lastTrailShowTimestamp < todayBeginTimestamp) {
+            Global.gameData.trailShowToday = false;
+            console.log('reset trail show')
+        }
+        /** reset banner hit cnt */
+        console.log('lastTreasureBannerHitTimestamp', Global.gameData.lastTreasureBannerHitTimestamp)
+        if (!Global.gameData.lastTreasureBannerHitTimestamp || Global.gameData.lastTreasureBannerHitTimestamp < todayBeginTimestamp) {
+            Global.gameData.treasureBannerHit = 0;
+            console.log('reset banner hit')
+        }
+        /** update unlock state */
+        this.updateTrailUnlock();
 
         /** show get diamond btn */
         if (Global.gameData.getDiamond != 3 && Laya.Browser.onMiniGame && wx.getLaunchOptionsSync && wx.getLaunchOptionsSync().scene == "1104") {
@@ -419,7 +509,7 @@ export default class HomeView extends ui.home.HomeViewUI {
     }
 
     private refreshUnlock() {
-        // unlock icon
+        // cannon
         if (Global.gameData.tutorialStep < 6 || (Global.gameData.stageIndex === 1 && Global.gameData.tutorialStep === 6)) {
             Global.gameData.tutorialStep = 0;
             this.lock_cannon.visible = true;
@@ -430,6 +520,66 @@ export default class HomeView extends ui.home.HomeViewUI {
             this.lock_cannon.visible = false;
             this.btn_cannon.visible = true;
             this.btn_cannon.on(Laya.Event.CLICK, this, this.onclick_cannon);
+        }
+        // trail
+        if (Global.gameData.stageIndex < 2) {
+            this.lock_trail.visible = true;
+            this.btn_trail.visible = false;
+            this.btn_trail.offAll(Laya.Event.CLICK);
+        }
+        else {
+            this.lock_trail.visible = false;
+            this.btn_trail.visible = true;
+            this.btn_trail.on(Laya.Event.CLICK, this, () => {
+                this.box_trail.visible = true;
+            });
+        }
+    }
+
+    private updateTrailUnlock() {
+        for (let i = 1; i <= Object.keys(Const.TrailUnlock).length; i++) {
+            // init
+            if (Global.gameData.trailUnlockState[i] == undefined) {
+                Global.gameData.trailUnlockState[i] = 0;
+            }
+            // 敬请期待
+            if (Const.TrailUnlock[i] == -1) {
+                this['btn_trailUnlock' + i].visible = false;
+                this['btn_trailSelect' + i].visible = false;
+                this['trailUsing' + i].visible = false;
+                this['trailWait' + i].visible = true;
+            }
+            // 已解锁
+            else if (Global.gameData.trailUnlockState[i] >= Const.TrailUnlock[i]) {
+                this['btn_trailUnlock' + i].visible = false;
+                this['trailWait' + i].visible = false;
+                if (Global.gameData.trailType == i) {
+                    this['btn_trailSelect' + i].visible = false;
+                    this['trailUsing' + i].visible = true;
+                }
+                else {
+                    this['btn_trailSelect' + i].visible = true;
+                    this['trailUsing' + i].visible = false;
+                }
+            }
+            // 未解锁
+            else {
+                this['label_trailUnlockMsg' + i].changeText("观看视频" + Global.gameData.trailUnlockState[i] + "/" + Const.TrailUnlock[i]);
+                this['btn_trailUnlock' + i].visible = true;
+                this['btn_trailSelect' + i].visible = false;
+                this['trailUsing' + i].visible = false;
+                this['trailWait' + i].visible = false;
+            }
+            // bind btn select
+            this['btn_trailSelect' + i].on(Laya.Event.MOUSE_DOWN, this, () => {
+                this['btn_trailSelect' + Global.gameData.trailType].visible = true;
+                this['trailUsing' + Global.gameData.trailType].visible = false;
+                Global.gameData.trailType = i;
+                this['btn_trailSelect' + i].visible = false;
+                this['trailWait' + i].visible = false;
+                this['trailUsing' + i].visible = true;
+                GameScene.instance && GameScene.instance.newTrail();
+            });
         }
     }
 

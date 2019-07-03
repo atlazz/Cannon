@@ -91,9 +91,14 @@ export module ui.game {
 		public btn_passStage:Laya.Image;
 		public label_winDiamond:Laya.Label;
 		public label_stage:Laya.Label;
-		public backCheck:Laya.Image;
+		public backCheck:Laya.Box;
 		public btn_backReturn:Laya.Image;
 		public btn_backExit:Laya.Image;
+		public box_trailShow:Laya.Box;
+		public btn_trailClose:Laya.Image;
+		public btn_trailUnlock:Laya.Image;
+		public label_trailUnlockMsg:Laya.Label;
+		public btn_trailSelect:Laya.Image;
 		public tutorial_shoot:Laya.Box;
 		public tutorial_bulletTry:Laya.Box;
 		public tutorial_cannonTry:Laya.Box;
@@ -118,8 +123,8 @@ export module ui.home {
 		public box_moreGame:Laya.Box;
 		public lock_background:Laya.Image;
 		public btn_background:Laya.Image;
-		public lock_bullet:Laya.Image;
-		public btn_bullet:Laya.Image;
+		public lock_trail:Laya.Image;
+		public btn_trail:Laya.Image;
 		public lock_cannon:Laya.Image;
 		public btn_cannon:Laya.Image;
 		public btn_sound:Laya.Image;
@@ -137,6 +142,24 @@ export module ui.home {
 		public icon_diamond:Laya.Image;
 		public text_diamond:laya.display.Text;
 		public box_bannar:Laya.Image;
+		public box_trail:Laya.Box;
+		public trailMask:Laya.Image;
+		public btn_trailBack:Laya.Image;
+		public btn_trailSelect1:Laya.Image;
+		public btn_trailUnlock1:Laya.Image;
+		public label_trailUnlockMsg1:Laya.Label;
+		public trailUsing1:Laya.Image;
+		public trailWait1:Laya.Image;
+		public btn_trailSelect2:Laya.Image;
+		public btn_trailUnlock2:Laya.Image;
+		public label_trailUnlockMsg2:Laya.Label;
+		public trailUsing2:Laya.Image;
+		public trailWait2:Laya.Image;
+		public btn_trailSelect3:Laya.Image;
+		public btn_trailUnlock3:Laya.Image;
+		public label_trailUnlockMsg3:Laya.Label;
+		public trailUsing3:Laya.Image;
+		public trailWait3:Laya.Image;
         constructor(){ super()}
         createChildren():void {
             super.createChildren();

@@ -220,8 +220,14 @@ export default class BulletScript extends Laya.Script3D {
             Laya.timer.frameOnce(1, this, () => {
                 // clean physics force
                 this.rigidbody.clearForces();
-                // remove reward effect
+                // remove effect
+                let effect = this.bullet.getChildByName("effect");
+                effect && effect.destroy && effect.destroy();
                 this.bullet.removeChildByName("effect");
+                // remove trail
+                let trail = this.bullet.getChildByName("trail");
+                trail && trail.destroy && trail.destroy();
+                this.bullet.removeChildByName("trail");
                 // recover to pool
                 this.bullet.removeSelf();
                 if (this.bullet.name === "bulletTrigger") {

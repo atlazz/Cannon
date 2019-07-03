@@ -20,6 +20,13 @@ let Global = {
         cannonType: 1,
         //大炮解锁状态
         cannonUnlockState: {},
+        //当前拖尾类型
+        trailType: 1,
+        //拖尾解锁状态
+        trailUnlockState: {},
+        //拖尾游戏内解锁弹窗，是否已弹出
+        trailShowToday: false,
+        lastTrailShowTimestamp: 0,
         //钻石
         diamond: 0,
         //新手引导环节索引
@@ -27,7 +34,9 @@ let Global = {
         videoErr: {},
         //领取钻石状态（1初始默认，2曾经从小程序打开有领取资格，3已领取钻石）
         getDiamond: 1,
-
+        //宝箱暴击页每天误点次数
+        treasureBannerHit: 0,
+        lastTreasureBannerHitTimestamp: 0,
     },
     config: {
         skin_block: false, //是否屏蔽皮肤
@@ -57,6 +66,7 @@ let Global = {
         try_cannon: 1,
         try_ball: 1,
         revive: 1,
+        get_trail: 1,
         reward_triple: 1,
         bulletRewardType: 1, // balckhole
         cannonRewardType: 4, // shotgun x4
@@ -67,6 +77,7 @@ let Global = {
         banner_show_treasure: 1, // 宝箱banner显示概率
         show_number: 2, // banner刷新触发次数 - 首页
         show_number_t: 1, // banner刷新触发次数 - 宝箱页
+        MaxTreasureBannerHit: 2,
     },
     user: {},
     audio: {

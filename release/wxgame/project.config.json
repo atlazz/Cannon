@@ -11,8 +11,6 @@
 	"libVersion": "game",
 	"appid": "wx29f0df8fbf850c7c",
 	"projectname": "cannon",
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,

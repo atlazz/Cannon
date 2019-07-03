@@ -8,9 +8,9 @@
 			"isStatic":false,
 			"layer":0,
 			"position":[
-				-9.5414E-06,
-				0.002950803,
-				0.0009979173
+				0,
+				0,
+				0
 			],
 			"rotation":[
 				0,
@@ -29,7 +29,7 @@
 			{
 				"type":"ShuriKenParticle3D",
 				"props":{
-					"name":"Particle System",
+					"name":"boomtrail",
 					"active":true,
 					"isStatic":false,
 					"layer":0,
@@ -58,9 +58,9 @@
 					"startDelayMin":0,
 					"startDelayMax":0,
 					"startLifetimeType":0,
-					"startLifetimeConstant":0.35,
+					"startLifetimeConstant":0.6,
 					"startLifetimeConstantMin":0,
-					"startLifetimeConstantMax":0.35,
+					"startLifetimeConstantMax":0.6,
 					"startLifetimeGradient":{
 						"startLifetimes":[]
 					},
@@ -71,16 +71,16 @@
 						"startLifetimes":[]
 					},
 					"startSpeedType":0,
-					"startSpeedConstant":0.3,
+					"startSpeedConstant":0.25,
 					"startSpeedConstantMin":0,
-					"startSpeedConstantMax":0.3,
+					"startSpeedConstantMax":0.25,
 					"threeDStartSize":false,
 					"startSizeType":0,
-					"startSizeConstant":0.3,
+					"startSizeConstant":0.15,
 					"startSizeConstantMin":0,
-					"startSizeConstantMax":0.3,
+					"startSizeConstantMax":0.15,
 					"startSizeConstantSeparate":[
-						0.3,
+						0.15,
 						1,
 						1
 					],
@@ -90,7 +90,7 @@
 						0
 					],
 					"startSizeConstantMaxSeparate":[
-						0.3,
+						0.15,
 						1,
 						1
 					],
@@ -145,11 +145,11 @@
 					"playOnAwake":true,
 					"maxParticles":1000,
 					"autoRandomSeed":true,
-					"randomSeed":3.2717E+09,
+					"randomSeed":1.965415E+09,
 					"emission":{
 						"enable":true,
-						"emissionRate":30,
-						"emissionRateTip":"Distance",
+						"emissionRate":40,
+						"emissionRateTip":"Time",
 						"bursts":[]
 					},
 					"shape":{
@@ -178,7 +178,7 @@
 					"colorOverLifetime":{
 						"enable":true,
 						"color":{
-							"type":3,
+							"type":1,
 							"constant":[
 								0,
 								0,
@@ -192,8 +192,12 @@
 										"value":1
 									},
 									{
+										"key":0.5,
+										"value":0.4
+									},
+									{
 										"key":1,
-										"value":1
+										"value":0
 									}
 								],
 								"rgbs":[
@@ -201,20 +205,12 @@
 										"key":0,
 										"value":[
 											1,
-											1,
-											1
-										]
-									},
-									{
-										"key":0.2529488,
-										"value":[
-											1,
 											0.9599932,
 											0.2311321
 										]
 									},
 									{
-										"key":0.5735256,
+										"key":0.4882429,
 										"value":[
 											1,
 											0,
@@ -224,7 +220,7 @@
 									{
 										"key":1,
 										"value":[
-											0.5754717,
+											0.1698113,
 											0,
 											0
 										]
@@ -243,60 +239,6 @@
 								0,
 								0
 							],
-							"gradientMin":{
-								"alphas":[
-									{
-										"key":0,
-										"value":1
-									},
-									{
-										"key":1,
-										"value":1
-									}
-								],
-								"rgbs":[
-									{
-										"key":0,
-										"value":[
-											1,
-											1,
-											1
-										]
-									},
-									{
-										"key":0.06764325,
-										"value":[
-											1,
-											1,
-											1
-										]
-									},
-									{
-										"key":0.3000076,
-										"value":[
-											1,
-											0.8707824,
-											0.1556604
-										]
-									},
-									{
-										"key":0.7323567,
-										"value":[
-											1,
-											0,
-											0
-										]
-									},
-									{
-										"key":1,
-										"value":[
-											0,
-											0,
-											0
-										]
-									}
-								]
-							},
 							"gradientMax":{
 								"alphas":[
 									{
@@ -304,8 +246,12 @@
 										"value":1
 									},
 									{
+										"key":0.5,
+										"value":0.4
+									},
+									{
 										"key":1,
-										"value":1
+										"value":0
 									}
 								],
 								"rgbs":[
@@ -318,15 +264,7 @@
 										]
 									},
 									{
-										"key":0.2529488,
-										"value":[
-											1,
-											0.9599932,
-											0.2311321
-										]
-									},
-									{
-										"key":0.5735256,
+										"key":0.4882429,
 										"value":[
 											1,
 											0,
@@ -336,7 +274,7 @@
 									{
 										"key":1,
 										"value":[
-											0.5754717,
+											0.1698113,
 											0,
 											0
 										]
@@ -358,7 +296,7 @@
 									},
 									{
 										"key":1,
-										"value":0.335103
+										"value":0.08510301
 									}
 								]
 							},
@@ -370,7 +308,7 @@
 									},
 									{
 										"key":1,
-										"value":0.335103
+										"value":0.08510301
 									}
 								]
 							},
@@ -421,7 +359,7 @@
 									},
 									{
 										"key":1,
-										"value":0.335103
+										"value":0.08510301
 									}
 								]
 							},
@@ -436,7 +374,7 @@
 									},
 									{
 										"key":1,
-										"value":0.335103
+										"value":0.08510301
 									}
 								]
 							},

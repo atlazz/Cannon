@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":57,
-    "selecteID":58,
+    "selectedBox":69,
+    "selecteID":96,
     "searchKey":"View",
     "props":{"zOrder":1,"width":720,"top":0,"sceneWidth":720,"sceneHeight":1280,"sceneColor":"#000000","runtime":"script/runtime/HomeView.ts","right":0,"left":0,"height":1280,"bottom":0},
     "nodeParent":-1,
-    "maxID":63,
+    "maxID":100,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -35,14 +35,13 @@
             "props":{"width":720,"var":"box_UI","top":0,"centerX":0,"bottom":0},
             "nodeParent":2,
             "label":"box_UI",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":34,
             "child":[
                 {
-                    "x":30,
                     "type":"Box",
                     "searchKey":"Box,box_homeIcon",
                     "props":{"y":640,"x":360,"width":720,"visible":false,"var":"box_homeIcon","height":1280,"centerY":0,"centerX":0,"anchorY":0.5,"anchorX":0.5},
@@ -56,7 +55,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Box",
                     "searchKey":"Box,box_drawer",
                     "props":{"zOrder":1,"y":0,"x":0,"visible":false,"var":"box_drawer"},
@@ -70,7 +68,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,btn_test",
                     "props":{"visible":false,"var":"btn_test","skin":"res/ui/home/btn_start.png","scaleY":1.3,"scaleX":1.3,"centerY":-300,"centerX":0,"anchorY":0.5,"anchorX":0.5},
@@ -86,7 +83,6 @@
                     "$LOCKED":true
                 },
                 {
-                    "x":30,
                     "type":"Box",
                     "searchKey":"Box,box_moreGame",
                     "props":{"zOrder":1,"y":0,"x":0,"visible":false,"var":"box_moreGame"},
@@ -100,7 +96,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,lock_background",
                     "props":{"y":924,"x":360,"visible":true,"var":"lock_background","skin":"res/ui/home/btn_lock.png","scaleY":1.1,"scaleX":1.1,"centerX":0,"bottom":300,"anchorY":0.5,"anchorX":0.5},
@@ -115,7 +110,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,btn_background",
                     "props":{"visible":false,"var":"btn_background","skin":"res/ui/home/btn.png","scaleY":1.1,"scaleX":1.1,"centerX":0,"bottom":300,"anchorY":0.5,"anchorX":0.5},
@@ -142,12 +136,11 @@
                         }]
                 },
                 {
-                    "x":30,
                     "type":"Image",
-                    "searchKey":"Image,lock_bullet",
-                    "props":{"y":924,"x":521,"visible":true,"var":"lock_bullet","skin":"res/ui/home/btn_lock.png","scaleY":1.1,"scaleX":1.1,"right":150,"bottom":300,"anchorY":0.5,"anchorX":0.5},
+                    "searchKey":"Image,lock_trail",
+                    "props":{"y":924,"x":521,"visible":true,"var":"lock_trail","skin":"res/ui/home/btn_lock.png","scaleY":1.1,"scaleX":1.1,"right":150,"bottom":300,"anchorY":0.5,"anchorX":0.5},
                     "nodeParent":34,
-                    "label":"lock_bullet",
+                    "label":"lock_trail",
                     "isOpen":true,
                     "isDirectory":false,
                     "isAniNode":true,
@@ -157,13 +150,12 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Image",
-                    "searchKey":"Image,btn_bullet",
-                    "props":{"visible":false,"var":"btn_bullet","skin":"res/ui/home/btn.png","scaleY":1.1,"scaleX":1.1,"right":150,"bottom":300,"anchorY":0.5,"anchorX":0.5},
+                    "searchKey":"Image,btn_trail",
+                    "props":{"visible":false,"var":"btn_trail","skin":"res/ui/home/btn.png","scaleY":1.1,"scaleX":1.1,"right":150,"bottom":300,"anchorY":0.5,"anchorX":0.5},
                     "nodeParent":34,
-                    "label":"btn_bullet",
-                    "isOpen":false,
+                    "label":"btn_trail",
+                    "isOpen":true,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
@@ -184,7 +176,6 @@
                         }]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,lock_cannon",
                     "props":{"y":924,"x":200,"visible":true,"var":"lock_cannon","skin":"res/ui/home/btn_lock.png","scaleY":1.1,"scaleX":1.1,"left":150,"bottom":300,"anchorY":0.5,"anchorX":0.5},
@@ -199,7 +190,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,btn_cannon",
                     "props":{"visible":false,"var":"btn_cannon","skin":"res/ui/home/btn.png","scaleY":1.1,"scaleX":1.1,"left":150,"bottom":300,"anchorY":0.5,"anchorX":0.5,"alpha":1},
@@ -226,7 +216,6 @@
                         }]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,btn_sound",
                     "props":{"var":"btn_sound","top":30,"skin":"res/ui/home/btn_sound.png","scaleY":1.3,"scaleX":1.3,"left":20},
@@ -241,7 +230,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,btn_start",
                     "props":{"var":"btn_start","skin":"res/ui/home/btn_start.png","scaleY":1.3,"scaleX":1.3,"centerX":0,"bottom":470,"anchorY":0.5,"anchorX":0.5},
@@ -257,7 +245,6 @@
                     "$LOCKED":true
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,btn_getDiamond",
                     "props":{"width":238,"visible":false,"var":"btn_getDiamond","skin":"res/ui/home/btn.png","sizeGrid":"10,10,10,10","scaleY":1,"scaleX":1,"height":90,"centerX":0,"bottom":630,"anchorY":0.5,"anchorX":0.5},
@@ -270,7 +257,6 @@
                     "compId":55,
                     "child":[
                         {
-                            "x":45,
                             "type":"Image",
                             "searchKey":"Image",
                             "props":{"skin":"res/ui/home/get_diamond.png","scaleY":1,"scaleX":1,"centerY":0,"centerX":0,"anchorY":0.5,"anchorX":0.5},
@@ -286,7 +272,6 @@
                     "$LOCKED":true
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,btn_vibration",
                     "props":{"var":"btn_vibration","top":30,"skin":"res/ui/home/btn_vibration.png","scaleY":1.3,"scaleX":1.3,"left":115},
@@ -300,7 +285,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Label",
                     "searchKey":"Label,label_highScore",
                     "props":{"visible":false,"var":"label_highScore","text":"最高分：0","fontSize":35,"font":"SimHei","color":"#f48916","centerY":-200,"centerX":0,"bold":true},
@@ -315,7 +299,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Label",
                     "searchKey":"Label,label_level",
                     "props":{"visible":false,"var":"label_level","text":"关卡：1","fontSize":42,"font":"SimHei","color":"#ffffff","centerY":-140,"centerX":0,"bold":true},
@@ -330,7 +313,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,icon_gameTitle",
                     "props":{"var":"icon_gameTitle","top":150,"centerX":0},
@@ -344,7 +326,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Label",
                     "searchKey":"Label,label_version",
                     "props":{"visible":true,"var":"label_version","top":0,"text":"v1.0.0","left":0,"fontSize":30,"color":"#ffffff","bold":true},
@@ -358,7 +339,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,box_getDiamond",
                     "props":{"visible":false,"var":"box_getDiamond","skin":"res/ui/home/add_picture.png","centerY":-70,"centerX":0},
@@ -371,7 +351,6 @@
                     "compId":57,
                     "child":[
                         {
-                            "x":45,
                             "type":"Image",
                             "searchKey":"Image,btn_getDiamondYes",
                             "props":{"width":258,"var":"btn_getDiamondYes","skin":"res/ui/home/btn.png","sizeGrid":"10,10,10,10","scaleY":1,"scaleX":1,"height":101,"gray":true,"centerX":0,"bottom":40,"anchorY":0.5,"anchorX":0.5},
@@ -384,7 +363,6 @@
                             "compId":58,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Image",
                                     "searchKey":"Image",
                                     "props":{"skin":"res/ui/home/add_reward.png","scaleY":0.9,"scaleX":0.9,"centerY":0,"centerX":0},
@@ -399,7 +377,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"Image",
                             "searchKey":"Image,btn_getDiamondExit",
                             "props":{"var":"btn_getDiamondExit","top":-30,"skin":"res/ui/home/close.png","scaleY":1.2,"scaleX":1.2,"right":-30},
@@ -414,7 +391,6 @@
                         }]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,finger_getDiamond",
                     "props":{"visible":false,"var":"finger_getDiamond","top":20,"skin":"res/ui/home/hand_right.png","scaleY":1,"scaleX":1,"right":220},
@@ -435,14 +411,13 @@
             "props":{"visible":false,"var":"icon_diamond","top":50,"skin":"res/ui/home/icon_diamond.png","scaleY":0.8,"scaleX":0.8,"centerX":-50},
             "nodeParent":2,
             "label":"icon_diamond",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":21,
             "child":[
                 {
-                    "x":30,
                     "type":"Text",
                     "searchKey":"Text,text_diamond",
                     "props":{"y":4,"x":80,"var":"text_diamond","valign":"middle","text":"0","fontSize":45,"color":"#ffffff","bold":false,"align":"center"},
@@ -469,6 +444,403 @@
             "compId":22,
             "child":[
                 ]
+        },
+        {
+            "x":15,
+            "type":"Box",
+            "searchKey":"Box,box_trail",
+            "props":{"width":720,"visible":false,"var":"box_trail","top":0,"centerX":0,"bottom":0},
+            "nodeParent":2,
+            "label":"box_trail",
+            "isOpen":true,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":63,
+            "child":[
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image,trailMask",
+                    "props":{"visible":true,"var":"trailMask","top":0,"skin":"res/ui/home/blank.png","sizeGrid":"1,1,1,1","right":0,"left":0,"bottom":0},
+                    "nodeParent":63,
+                    "label":"trailMask",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":64,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image,btn_trailBack",
+                    "props":{"y":0,"x":0,"visible":true,"var":"btn_trailBack","top":25,"skin":"res/ui/home/btn_back.png","scaleY":1.3,"scaleX":1.3,"left":25},
+                    "nodeParent":63,
+                    "label":"btn_trailBack",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":65,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Label",
+                            "searchKey":"Label",
+                            "props":{"text":"返回","fontSize":35,"font":"SimHei","color":"#ffffff","centerX":0,"bottom":-40,"align":"center"},
+                            "nodeParent":65,
+                            "label":"Label",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":66,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"skin":"res/ui/home/trail1.png","scaleY":0.9,"scaleX":0.9,"centerY":-300,"centerX":-150},
+                    "nodeParent":63,
+                    "label":"Image",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":69,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "searchKey":"Image,btn_trailSelect1",
+                            "props":{"width":220,"var":"btn_trailSelect1","skin":"res/ui/home/btn.png","sizeGrid":"10,10,10,10","height":80,"centerX":0,"bottom":-120},
+                            "nodeParent":69,
+                            "label":"btn_trailSelect1",
+                            "isOpen":false,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "compId":70,
+                            "child":[
+                                {
+                                    "type":"Image",
+                                    "searchKey":"Image",
+                                    "props":{"skin":"res/ui/home/btnSelect.png","centerY":-5,"centerX":0},
+                                    "nodeParent":70,
+                                    "label":"Image",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":82,
+                                    "child":[
+                                        ]
+                                }]
+                        },
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "searchKey":"Image,btn_trailUnlock1",
+                            "props":{"width":220,"var":"btn_trailUnlock1","skin":"res/ui/home/videoBtn.png","sizeGrid":"10,10,10,10","height":80,"centerX":0,"bottom":-120},
+                            "nodeParent":69,
+                            "label":"btn_trailUnlock1",
+                            "isOpen":false,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "compId":76,
+                            "child":[
+                                {
+                                    "type":"Label",
+                                    "searchKey":"Label,label_trailUnlockMsg1",
+                                    "props":{"var":"label_trailUnlockMsg1","top":-35,"text":"观看视频0/2","fontSize":30,"color":"#ffffff","centerX":0,"bold":false},
+                                    "nodeParent":76,
+                                    "label":"label_trailUnlockMsg1",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":79,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Image",
+                                    "searchKey":"Image",
+                                    "props":{"skin":"res/ui/home/videoUnlock.png","centerY":-5,"centerX":0},
+                                    "nodeParent":76,
+                                    "label":"Image",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":83,
+                                    "child":[
+                                        ]
+                                }]
+                        },
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "searchKey":"Image,trailUsing1",
+                            "props":{"var":"trailUsing1","skin":"res/ui/home/using.png","sizeGrid":"10,10,10,10","centerX":0,"bottom":-105},
+                            "nodeParent":69,
+                            "label":"trailUsing1",
+                            "isOpen":true,
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":90,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "searchKey":"Image,trailWait1",
+                            "props":{"var":"trailWait1","skin":"res/ui/home/pleasewait.png","sizeGrid":"10,10,10,10","scaleY":1.1,"scaleX":1.1,"centerX":0,"bottom":-105},
+                            "nodeParent":69,
+                            "label":"trailWait1",
+                            "isOpen":true,
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":96,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"skin":"res/ui/home/trail2.png","scaleY":0.9,"scaleX":0.9,"centerY":-300,"centerX":150},
+                    "nodeParent":63,
+                    "label":"Image",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":71,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "searchKey":"Image,btn_trailSelect2",
+                            "props":{"width":220,"var":"btn_trailSelect2","skin":"res/ui/home/btn.png","sizeGrid":"10,10,10,10","height":80,"centerX":0,"bottom":-120},
+                            "nodeParent":71,
+                            "label":"btn_trailSelect2",
+                            "isOpen":true,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "compId":72,
+                            "child":[
+                                {
+                                    "x":60,
+                                    "type":"Image",
+                                    "searchKey":"Image",
+                                    "props":{"skin":"res/ui/home/btnSelect.png","centerY":-5,"centerX":0},
+                                    "nodeParent":72,
+                                    "label":"Image",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":84,
+                                    "child":[
+                                        ]
+                                }]
+                        },
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "searchKey":"Image,btn_trailUnlock2",
+                            "props":{"width":220,"var":"btn_trailUnlock2","skin":"res/ui/home/videoBtn.png","sizeGrid":"10,10,10,10","height":80,"centerX":0,"bottom":-120},
+                            "nodeParent":71,
+                            "label":"btn_trailUnlock2",
+                            "isOpen":true,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "compId":77,
+                            "child":[
+                                {
+                                    "x":60,
+                                    "type":"Label",
+                                    "searchKey":"Label,label_trailUnlockMsg2",
+                                    "props":{"x":43,"var":"label_trailUnlockMsg2","top":-35,"text":"观看视频0/2","fontSize":30,"color":"#ffffff","centerX":0,"bold":false},
+                                    "nodeParent":77,
+                                    "label":"label_trailUnlockMsg2",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":86,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "x":60,
+                                    "type":"Image",
+                                    "searchKey":"Image",
+                                    "props":{"skin":"res/ui/home/videoUnlock.png","centerY":-5,"centerX":0},
+                                    "nodeParent":77,
+                                    "label":"Image",
+                                    "isOpen":true,
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":85,
+                                    "child":[
+                                        ]
+                                }]
+                        },
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "searchKey":"Image,trailUsing2",
+                            "props":{"var":"trailUsing2","skin":"res/ui/home/using.png","sizeGrid":"10,10,10,10","centerX":0,"bottom":-105},
+                            "nodeParent":71,
+                            "label":"trailUsing2",
+                            "isOpen":true,
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":94,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "searchKey":"Image,trailWait2",
+                            "props":{"var":"trailWait2","skin":"res/ui/home/pleasewait.png","sizeGrid":"10,10,10,10","scaleY":1.1,"scaleX":1.1,"centerX":0,"bottom":-105},
+                            "nodeParent":71,
+                            "label":"trailWait2",
+                            "isOpen":true,
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":98,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"skin":"res/ui/home/trail3.png","scaleY":0.9,"scaleX":0.9,"centerY":100,"centerX":-150},
+                    "nodeParent":63,
+                    "label":"Image",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":73,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "searchKey":"Image,btn_trailSelect3",
+                            "props":{"width":220,"var":"btn_trailSelect3","skin":"res/ui/home/btn.png","sizeGrid":"10,10,10,10","height":80,"centerX":0,"bottom":-120},
+                            "nodeParent":73,
+                            "label":"btn_trailSelect3",
+                            "isOpen":true,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "compId":74,
+                            "child":[
+                                {
+                                    "x":60,
+                                    "type":"Image",
+                                    "searchKey":"Image",
+                                    "props":{"skin":"res/ui/home/btnSelect.png","centerY":-5,"centerX":0},
+                                    "nodeParent":74,
+                                    "label":"Image",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":88,
+                                    "child":[
+                                        ]
+                                }]
+                        },
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "searchKey":"Image,btn_trailUnlock3",
+                            "props":{"width":220,"var":"btn_trailUnlock3","skin":"res/ui/home/videoBtn.png","sizeGrid":"10,10,10,10","height":80,"centerX":0,"bottom":-120},
+                            "nodeParent":73,
+                            "label":"btn_trailUnlock3",
+                            "isOpen":true,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "compId":78,
+                            "child":[
+                                {
+                                    "x":60,
+                                    "type":"Label",
+                                    "searchKey":"Label,label_trailUnlockMsg3",
+                                    "props":{"var":"label_trailUnlockMsg3","top":-35,"text":"观看视频0/2","fontSize":30,"color":"#ffffff","centerX":0,"bold":false},
+                                    "nodeParent":78,
+                                    "label":"label_trailUnlockMsg3",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":87,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "x":60,
+                                    "type":"Image",
+                                    "searchKey":"Image",
+                                    "props":{"skin":"res/ui/home/videoUnlock.png","centerY":-5,"centerX":0},
+                                    "nodeParent":78,
+                                    "label":"Image",
+                                    "isOpen":true,
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":89,
+                                    "child":[
+                                        ]
+                                }]
+                        },
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "searchKey":"Image,trailUsing3",
+                            "props":{"var":"trailUsing3","skin":"res/ui/home/using.png","sizeGrid":"10,10,10,10","centerX":0,"bottom":-105},
+                            "nodeParent":73,
+                            "label":"trailUsing3",
+                            "isOpen":true,
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":95,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "searchKey":"Image,trailWait3",
+                            "props":{"var":"trailWait3","skin":"res/ui/home/pleasewait.png","sizeGrid":"10,10,10,10","scaleY":1.1,"scaleX":1.1,"centerX":0,"bottom":-105},
+                            "nodeParent":73,
+                            "label":"trailWait3",
+                            "isOpen":true,
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":99,
+                            "child":[
+                                ]
+                        }]
+                }]
         },
         {
             "x":15,

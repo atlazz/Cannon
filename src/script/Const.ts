@@ -1,5 +1,5 @@
 /** version */
-export const VERSION = "1.2.4";
+export const VERSION = "1.2.5";
 
 /************** 后台设置参数 *******************/
 /** 分享位置 */
@@ -8,6 +8,7 @@ export const RewardPos = {
     Bullet: 'try_ball',
     Revive: 'revive',
     Treasure: 'reward_triple',
+    Trail: 'get_trail',
 }
 /** Banner广告位置 */
 export const BannerPos = {
@@ -25,6 +26,8 @@ export enum GameState {
     PAUSE = 2,
     /** 游戏结束 */
     OVER = 3,
+    /** 暴击误点页 */
+    BANNER_TOUCH = 4,
 }
 
 /** pages */
@@ -113,6 +116,17 @@ export const soundUrl: string = "res/audio/shoot.mp3";
 export const treasureUrl: string = "res/treasure/treasure.lh";
 export const treasureAngleX: number[] = [-1.6, -1.4, -0.8, 0.1, 0.6, 1.2, 1, -0.8, -0.45];
 export const treasureAngleZ: number[] = [0, 0.2, 0.5, 0.6, 0.3, 0.2, 0.1, 0, 0.8];
+
+/******** trail ********/
+export const TrailUrl = {
+    1: "res/trail/trail.lh",    // default
+    2: "res/bullet/boom/boomTrail.lh",      // BOOM
+};
+export const TrailUnlock = {
+    1: 0,
+    2: 2,
+    3: -1,
+}
 
 /******** bullet ********/
 // bullet mesh model res url

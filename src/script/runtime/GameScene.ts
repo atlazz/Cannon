@@ -132,6 +132,9 @@ export default class GameScene extends ui.game.GameSceneUI {
     public winCheckCnt: number = 0;
     public flag_missionWin: boolean = false;
 
+    /** trail */
+    public _trail: Laya.TrailSprite3D;
+
     /** target */
     public textureIdx: number = 3;
 
@@ -161,6 +164,7 @@ export default class GameScene extends ui.game.GameSceneUI {
     public ballBox: Laya.Sprite3D;
 
     /** bullet */
+    private _bullet: Laya.MeshSprite3D;
     public bulletType: number = Const.CannonType.DEFAULT;
     public bulletDirection: Laya.Vector3 = new Laya.Vector3();
     public isRewardBullet: boolean = false;
@@ -209,6 +213,10 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.newCannon();
 
         this.newBallBox();
+
+        this.newTrail();
+
+        this.initBullet();
 
         // multiple touch input disable
         this.scene3D.input.multiTouchEnabled = false;
@@ -261,6 +269,57 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.directionLight.transform.localPosition = Const.LightInitPos.clone();
         this.directionLight.transform.localRotationEuler = Const.LightInitRotEuler.clone();
         this.directionLight.color = Const.LightInitColor.clone();
+    }
+
+    /** init bullet */
+    initBullet() {
+        Laya.Mesh.load(Const.BulletMeshUrl, Laya.Handler.create(this, (mesh) => {
+            this._bullet = new Laya.MeshSprite3D(mesh);
+        }));
+    }
+
+    /** new trail */
+    newTrail() {
+        // destroy old
+        this._trail && this._trail.destroy();
+
+        // new by type
+        if (Global.gameData.trailType == 1) {
+            this._trail = new Laya.TrailSprite3D();
+
+            // 设置拖尾过滤器
+            this._trail.trailFilter.time = 0.5;
+            //trail.trailFilter.minVertexDistance = 0.01;
+            this._trail.trailFilter.alignment = Laya.TrailFilter.ALIGNMENT_TRANSFORM_Z;
+
+            // 设置宽度曲线
+            let trailWidthCurve: Array<Laya.FloatKeyframe> = new Array<Laya.FloatKeyframe>();
+            let widthKeyframeNum: number = 10;
+            this._trail.trailFilter.widthMultiplier = 0.4;
+            for (let i: number = 0; i <= widthKeyframeNum; i++) {
+                trailWidthCurve[i] = new Laya.FloatKeyframe();
+                trailWidthCurve[i].time = this._trail.trailFilter.time * i / widthKeyframeNum;
+                trailWidthCurve[i].value = this._trail.trailFilter.widthMultiplier * (1 - i / widthKeyframeNum);
+                trailWidthCurve[i].inTangent = 0;
+                trailWidthCurve[i].outTangent = 0;
+            }
+            this._trail.trailFilter.widthCurve = trailWidthCurve;
+
+            // 设置颜色梯度
+            this._trail.trailFilter.colorGradient.updateColorAlpha(0, 0, 1);
+            this._trail.trailFilter.colorGradient.updateColorAlpha(1, 1, 0);
+
+            // 设置拖尾渲染器
+            let trailMat: Laya.TrailMaterial = new Laya.TrailMaterial();
+            trailMat.color = new Laya.Vector4(1, 1, 1, 0.4);
+            trailMat.renderMode = Laya.TrailMaterial.RENDERMODE_ADDTIVE;
+            this._trail.trailRenderer.material = trailMat;
+        }
+        else if (Global.gameData.trailType == 2) {
+            Laya.Sprite3D.load(Const.BulletEffectUrl[1], Laya.Handler.create(this, (res) => {
+                this._trail = res.clone();
+            }));
+        }
     }
 
     /** new background */
@@ -778,6 +837,27 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.box_countdown.visible = false;
     }
 
+    /** 拖尾弹窗更新 */
+    private updateTrailUnlock() {
+        let trailShowType = 2;
+        if (Global.gameData.trailUnlockState[trailShowType] < Const.TrailUnlock[trailShowType]) {
+            this.label_trailUnlockMsg.changeText("观看视频" + Global.gameData.trailUnlockState[trailShowType] + "/" + Const.TrailUnlock[trailShowType]);
+        }
+        else {
+            this.btn_trailUnlock.visible = false;
+            this.btn_trailSelect.visible = true;
+            this.btn_trailSelect.on(Laya.Event.CLICK, this, () => {
+                Global.gameData.trailType = trailShowType;
+                this.newTrail();
+                // hide
+                this.box_trailShow.visible = false;
+                this.btn_trailClose.offAll(Laya.Event.CLICK);
+                this.btn_trailUnlock.offAll(Laya.Event.CLICK);
+                this.btn_trailSelect.offAll(Laya.Event.CLICK);
+            });
+        }
+    }
+
     /** create new stage by index */
     newStage() {
         // invalid check
@@ -785,6 +865,67 @@ export default class GameScene extends ui.game.GameSceneUI {
             return;
         }
 
+        // show trail unlock
+        let trailShowType = 2;
+        if (Global.gameData.trailUnlockState[trailShowType] < Const.TrailUnlock[trailShowType]) {
+            if (!Global.gameData.trailShowToday && (Global.gameData.stageIndex > 2 || (Global.gameData.stageIndex == 2 && this.missionIdx == 2))) {
+                this.label_trailUnlockMsg.changeText("观看视频" + Global.gameData.trailUnlockState[trailShowType] + "/" + Const.TrailUnlock[trailShowType]);
+                // updata gamedata
+                Global.gameData.trailShowToday = true;
+                Global.gameData.lastTrailShowTimestamp = Date.now();
+                // show
+                this.box_trailShow.visible = true;
+                this.btn_trailUnlock.visible = true;
+                this.btn_trailSelect.visible = false;
+                this.btn_trailUnlock.on(Laya.Event.CLICK, this, this.onClick_rewardTemplate, [Global.config.get_trail, Const.RewardPos.Trail, () => {
+                    Global.gameData.trailUnlockState[trailShowType]++;
+                    this.updateTrailUnlock();
+                }]);
+                // this.btn_trailUnlock.on(Laya.Event.CLICK, this, () => {
+                //     // 未超过每天视频观看次数
+                //     if (!Reward.instance.isOverVideo()) {
+                //         this.mouseEnabled = false;
+                //         Reward.instance.video({
+                //             pos: Const.RewardPos.Trail,
+                //             success: () => {
+                //                 console.log("trail video succeed:");
+                //                 Global.gameData.trailUnlockState[trailShowType]++;
+                //                 this.updateTrailUnlock();
+                //             },
+                //             fail: () => {
+                //                 console.log("trail video failed:");
+                //                 Reward.instance.share({
+                //                     pos: Const.RewardPos.Trail,
+                //                     success: () => {
+                //                         console.log("trail share succeed:");
+                //                         Global.gameData.trailUnlockState[trailShowType]++;
+                //                         this.updateTrailUnlock();
+                //                     },
+                //                 });
+                //             },
+                //             complete: () => {
+                //                 this.mouseEnabled = true;
+                //             }
+                //         });
+                //     }
+                //     else {
+                //         Reward.instance.share({
+                //             pos: Const.RewardPos.Trail,
+                //             success: () => {
+                //                 console.log("trail share succeed:");
+                //                 Global.gameData.trailUnlockState[trailShowType]++;
+                //                 this.updateTrailUnlock();
+                //             },
+                //         });
+                //     }
+                // });
+                this.btn_trailClose.on(Laya.Event.CLICK, this, () => {
+                    this.box_trailShow.visible = false;
+                    this.btn_trailClose.offAll(Laya.Event.CLICK);
+                    this.btn_trailUnlock.offAll(Laya.Event.CLICK);
+                });
+            }
+        }
 
         // 测试接口开始 <========================
         if (!HomeView.instance.isTest) {
@@ -1055,7 +1196,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                                 // 第一次下落最低点显示广告弹窗-宝箱暴击
                                 if (!this.isTreasureAdOpen && !isMoveUp) {
                                     // 宝箱banner是否显示
-                                    if (!Global.config.deny_banner && Math.random() < Global.config.banner_show_treasure) {
+                                    if (Global.gameData.treasureBannerHit < Global.config.MaxTreasureBannerHit && !Global.config.deny_banner && Math.random() < Global.config.banner_show_treasure) {
                                         this.label_extraDiamond.changeText("" + StageConfig.StageReward[this.stageIdx > 39 ? 39 : this.stageIdx]);
                                         this.box_treasureAD.visible = true;
                                         this.isTreasureAdOpen = true;
@@ -1068,6 +1209,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                                         Ad.showBanner(false, top_treasureBanner);
                                         console.log("t_banner_show");
                                         ws.traceEvent("t_banner_show");
+                                        this.state = Const.GameState.BANNER_TOUCH;
                                     }
                                 }
                                 isMoveUp = !isMoveUp;
@@ -1257,7 +1399,7 @@ export default class GameScene extends ui.game.GameSceneUI {
     /** game stage looping */
     private stageLooping() {
         // 游戏中，非停留在大炮选择页
-        if (this.state === Const.GameState.START) {
+        if (this.state === Const.GameState.START || this.state === Const.GameState.BANNER_TOUCH) {
             // 测试接口开始 <==========================
             if (HomeView.instance.isTest) {
                 this.testWinCheck();
@@ -1502,6 +1644,7 @@ export default class GameScene extends ui.game.GameSceneUI {
 
     /** 大关卡过关处理 */
     private passStage() {
+        this.state = Const.GameState.START;
         console.log("pass_stage" + this.stageIdx);
         if (this.stageIdx <= 10) {
             ws.traceEvent("pass_stage" + this.stageIdx);
@@ -1779,8 +1922,8 @@ export default class GameScene extends ui.game.GameSceneUI {
                 this.createSingleBullet(posOffset, -posOffset);
                 this.createSingleBullet(posOffset, posOffset);
             }
-            // else if (this.cannonType === Const.CannonType.DRAGON) {
-            //     Laya.Sprite3D.load(Const.BulletEffectUrl[1], Laya.Handler.create(this, (res) => {
+            // else if (this.cannonType === Const.CannonType.LIGHTNING) {
+            //     Laya.Sprite3D.load(Const.BulletEffectUrl[2], Laya.Handler.create(this, (res) => {
             //         Laya.Mesh.load(Const.BulletMeshUrl, Laya.Handler.create(this, (mesh) => {
             //             let bullet: Laya.MeshSprite3D = new Laya.MeshSprite3D(mesh);
             //             bullet.name = "bullet";
@@ -1802,29 +1945,6 @@ export default class GameScene extends ui.game.GameSceneUI {
             //         }));
             //     }));
             // }
-            else if (this.cannonType === Const.CannonType.LIGHTNING) {
-                Laya.Sprite3D.load(Const.BulletEffectUrl[2], Laya.Handler.create(this, (res) => {
-                    Laya.Mesh.load(Const.BulletMeshUrl, Laya.Handler.create(this, (mesh) => {
-                        let bullet: Laya.MeshSprite3D = new Laya.MeshSprite3D(mesh);
-                        bullet.name = "bullet";
-                        let bulletEffect: Laya.Sprite3D = bullet.addChild(res.clone()) as Laya.Sprite3D;
-                        bulletEffect.name = "effect";
-                        // reset bullet by type
-                        let bulletScript: Bullet = bullet.addComponent(Bullet);
-                        bulletScript.reset(this.bulletType);
-                        // add to scene
-                        this.scene3D.addChild(bullet);
-
-                        let trigger: Laya.MeshSprite3D = new Laya.MeshSprite3D(Laya.PrimitiveMesh.createSphere(Const.BulletRadius));
-                        trigger.name = "bulletTrigger";
-                        // reset bullet trigger by type
-                        let triggerScript: Bullet = trigger.addComponent(Bullet);
-                        triggerScript.reset(this.bulletType);
-                        // add to scene
-                        this.scene3D.addChild(trigger);
-                    }));
-                }));
-            }
             else {
                 this.createSingleBullet();
             }
@@ -1854,18 +1974,52 @@ export default class GameScene extends ui.game.GameSceneUI {
         }
         // new bullet
         else {
-            Laya.Mesh.load(Const.BulletMeshUrl, Laya.Handler.create(this, (mesh) => {
-                bullet = new Laya.MeshSprite3D(mesh);
-                bullet.name = "bullet";
-                // add script
-                let bulletScript: Bullet = bullet.addComponent(Bullet);
-                bulletScript.reset(this.bulletType);
-                // set position offset
-                bullet.transform.localPositionX += offsetX;
-                bullet.transform.localPositionY += offsetY;
-                // add to scene
-                this.scene3D.addChild(bullet);
-            }));
+            bullet = this._bullet.clone();
+            bullet.name = "bullet";
+            // add script
+            let bulletScript: Bullet = bullet.addComponent(Bullet);
+            bulletScript.reset(this.bulletType);
+            // set position offset
+            bullet.transform.localPositionX += offsetX;
+            bullet.transform.localPositionY += offsetY;
+            // add to scene
+            this.scene3D.addChild(bullet);
+            // Laya.Mesh.load(Const.BulletMeshUrl, Laya.Handler.create(this, (mesh) => {
+            //     bullet = new Laya.MeshSprite3D(mesh);
+            //     bullet.name = "bullet";
+            //     // add script
+            //     let bulletScript: Bullet = bullet.addComponent(Bullet);
+            //     bulletScript.reset(this.bulletType);
+            //     // set position offset
+            //     bullet.transform.localPositionX += offsetX;
+            //     bullet.transform.localPositionY += offsetY;
+            //     // add to scene
+            //     this.scene3D.addChild(bullet);
+            // }));
+        }
+
+        if (bullet) {
+            // remove old
+            bullet.removeChildByName("effect");
+            bullet.removeChildByName("trail");
+
+            // add trail
+            if (this._trail) {
+                let trail = this._trail.clone();
+                trail.name = "trail";
+                bullet.addChild(trail);
+            }
+            else {
+                this.newTrail();
+            }
+
+            // add bullet effect
+            if (this.cannonType === Const.CannonType.LIGHTNING) {
+                Laya.Sprite3D.load(Const.BulletEffectUrl[2], Laya.Handler.create(this, (res) => {
+                    let bulletEffect: Laya.Sprite3D = bullet.addChild(res.clone()) as Laya.Sprite3D;
+                    bulletEffect.name = "effect";
+                }));
+            }
         }
 
         /******************* hidden bullet trigger: 防止快速移动碰撞检测丢失（ccd半径越小越精准） *****************/
@@ -1902,9 +2056,5 @@ export default class GameScene extends ui.game.GameSceneUI {
                 this.scene3D.addChild(trigger);
             }));
         }
-    }
-
-    /** background moving effect */
-    private bgMoving() {
     }
 }
