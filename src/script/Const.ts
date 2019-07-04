@@ -22,7 +22,7 @@ export const BannerPos = {
 export enum GameState {
     /** 游戏开始 */
     START = 1,
-    /** 暂停 */
+    /** 暂停 */ 
     PAUSE = 2,
     /** 游戏结束 */
     OVER = 3,
@@ -107,7 +107,7 @@ export const CannonBallInitPos: Laya.Vector3 = new Laya.Vector3(-0.01, 0.05, -0.
 export const CannonBallInitScale: Laya.Vector3 = new Laya.Vector3(25, 25, 25);
 
 /** cdn */
-export const cdnUrl: string = "https://coolant.miniant.cn/cannon/res_v124.zip";
+export const cdnUrl: string = "https://coolant.miniant.cn/cannon/res_v125.zip";
 
 /** sound */
 export const soundUrl: string = "res/audio/shoot.mp3";
@@ -118,14 +118,15 @@ export const treasureAngleX: number[] = [-1.6, -1.4, -0.8, 0.1, 0.6, 1.2, 1, -0.
 export const treasureAngleZ: number[] = [0, 0.2, 0.5, 0.6, 0.3, 0.2, 0.1, 0, 0.8];
 
 /******** trail ********/
-export const TrailUrl = {
-    1: "res/trail/trail.lh",    // default
-    2: "res/bullet/boom/boomTrail.lh",      // BOOM
-};
+// export const TrailUrl = {
+//     2: "res/trail/trail.lh",    // default
+//     3: "res/bullet/boom/boomTrail.lh",      // BOOM
+// };
 export const TrailUnlock = {
     1: 0,
-    2: 2,
+    2: 1,
     3: -1,
+    4: -1,
 }
 
 /******** bullet ********/
