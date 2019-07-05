@@ -312,11 +312,11 @@ export default class Target extends Laya.Script3D {
     /** set rigidbody */
     private setRigidbody() {
         // get size of bounding box
-        let boundingBox: Laya.BoundBox = this.target.meshFilter.sharedMesh.boundingBox.clone();
+        const _bounds: Laya.Bounds = this.target.meshFilter.sharedMesh.bounds;
         // 往下取小一点，避免位置坐标偏差交叠导致物理引擎内存爆炸
-        this.sizeX = (boundingBox.max.x - boundingBox.min.x)// * 0.99;
-        this.sizeY = (boundingBox.max.y - boundingBox.min.y)// * 0.99;
-        this.sizeZ = (boundingBox.max.z - boundingBox.min.z)// * 0.99;
+        this.sizeX = (_bounds.getMax().x - _bounds.getMin().x)// * 0.99;
+        this.sizeY = (_bounds.getMax().y - _bounds.getMin().y)// * 0.99;
+        this.sizeZ = (_bounds.getMax().z - _bounds.getMin().z)// * 0.99;
         // add rigidbody
         this.rigidbody = this.target.addComponent(Laya.Rigidbody3D);
         if (this.target.name.search("Cube") >= 0) {

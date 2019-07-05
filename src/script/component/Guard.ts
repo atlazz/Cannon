@@ -23,10 +23,10 @@ export default class Guard extends Laya.Script3D {
         // get sprite
         this.guard = this.owner as Laya.MeshSprite3D;
         // get size
-        let boundingBox: Laya.BoundBox = this.guard.meshFilter.sharedMesh.boundingBox.clone();
-        this.sizeX = boundingBox.max.x - boundingBox.min.x;
-        this.sizeY = boundingBox.max.y - boundingBox.min.y;
-        this.sizeZ = boundingBox.max.z - boundingBox.min.z;
+        const _bounds: Laya.Bounds = this.guard.meshFilter.sharedMesh.bounds;
+        this.sizeX = _bounds.getMax().x - _bounds.getMin().x;
+        this.sizeY = _bounds.getMax().y - _bounds.getMin().y;
+        this.sizeZ = _bounds.getMax().z - _bounds.getMin().z;
         // add collider
         let collider: Laya.PhysicsCollider = this.guard.addComponent(Laya.PhysicsCollider);
         collider.colliderShape = new Laya.BoxColliderShape(this.sizeX, this.sizeY, this.sizeZ);

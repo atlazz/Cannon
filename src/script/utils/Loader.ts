@@ -104,7 +104,7 @@ class Loader {
         //zip文件路径
         let zipFilePath = zipBaseDir + fileName;
         //zip解压路径
-        let unzipFileDir = Laya.MiniFileMgr.getFileNativePath("");
+        let unzipFileDir = Laya['MiniFileMgr'].getFileNativePath("");
 
         //解压
         wx.getFileSystemManager().unzip({
@@ -142,8 +142,8 @@ class Loader {
                     return;
                 }
 
-                if (!Laya.MiniFileMgr.filesListObj['fileUsedSize']) {
-                    Laya.MiniFileMgr.filesListObj['fileUsedSize'] = 0;
+                if (!Laya['MiniFileMgr'].filesListObj['fileUsedSize']) {
+                    Laya['MiniFileMgr'].filesListObj['fileUsedSize'] = 0;
                 }
                 //将所有解压的文件写入filesListObj
                 for (let i = 0; i < fileUrlArrays.length; i++) {
@@ -153,13 +153,13 @@ class Loader {
                     let fileSize: number = statMap[unzipFilePath].size || 0;
                     let encoding = this.getEncoding(readyUrl);
 
-                    if (Laya.MiniFileMgr.filesListObj[readyUrl]) {
-                        let size = parseInt(Laya.MiniFileMgr.filesListObj[readyUrl].size) || 0;
-                        Laya.MiniFileMgr.filesListObj['fileUsedSize'] = parseInt(Laya.MiniFileMgr.filesListObj['fileUsedSize']) + fileSize - size;
+                    if (Laya['MiniFileMgr'].filesListObj[readyUrl]) {
+                        let size = parseInt(Laya['MiniFileMgr'].filesListObj[readyUrl].size) || 0;
+                        Laya['MiniFileMgr'].filesListObj['fileUsedSize'] = parseInt(Laya['MiniFileMgr'].filesListObj['fileUsedSize']) + fileSize - size;
                     } else {
-                        Laya.MiniFileMgr.filesListObj['fileUsedSize'] = parseInt(Laya.MiniFileMgr.filesListObj['fileUsedSize']) + fileSize;
+                        Laya['MiniFileMgr'].filesListObj['fileUsedSize'] = parseInt(Laya['MiniFileMgr'].filesListObj['fileUsedSize']) + fileSize;
                     }
-                    Laya.MiniFileMgr.filesListObj[readyUrl] = { md5: readyUrl, readyUrl: readyUrl, size: fileSize, times: Laya.Browser.now(), encoding: encoding };
+                    Laya['MiniFileMgr'].filesListObj[readyUrl] = { md5: readyUrl, readyUrl: readyUrl, size: fileSize, times: Laya.Browser.now(), encoding: encoding };
                 }
                 this.saveFileListObj();
                 complete && complete.runWith(true);
@@ -233,17 +233,17 @@ class Loader {
             });
         }
         //如果文件夹路径是laya本地缓存路径，从文件列表filesListObj里删除
-        if ((dirPath + "/").indexOf(Laya.MiniFileMgr.getFileNativePath("")) === 0) {
+        if ((dirPath + "/").indexOf(Laya['MiniFileMgr'].getFileNativePath("")) === 0) {
             let fileListChangeFlag = false;
             //相对文件夹
-            let dir = (dirPath + "/").replace(Laya.MiniFileMgr.getFileNativePath(""), "");
+            let dir = (dirPath + "/").replace(Laya['MiniFileMgr'].getFileNativePath(""), "");
             this.log("cleanDir: ", dir);
-            for (let readyUrl in Laya.MiniFileMgr.filesListObj) {
+            for (let readyUrl in Laya['MiniFileMgr'].filesListObj) {
                 if (readyUrl.indexOf(dir) === 0) {
                     fileListChangeFlag = true;
-                    let fileInfo = Laya.MiniFileMgr.filesListObj[readyUrl];
-                    Laya.MiniFileMgr.filesListObj['fileUsedSize'] = parseInt(Laya.MiniFileMgr.filesListObj['fileUsedSize']) - (parseInt(fileInfo.size) || 0);
-                    delete Laya.MiniFileMgr.filesListObj[readyUrl];
+                    let fileInfo = Laya['MiniFileMgr'].filesListObj[readyUrl];
+                    Laya['MiniFileMgr'].filesListObj['fileUsedSize'] = parseInt(Laya['MiniFileMgr'].filesListObj['fileUsedSize']) - (parseInt(fileInfo.size) || 0);
+                    delete Laya['MiniFileMgr'].filesListObj[readyUrl];
                 }
             }
             if (fileListChangeFlag && dir) {
@@ -255,11 +255,11 @@ class Loader {
     /**文件信息列表写入文件系统*/
     private saveFileListObj() {
         wx.getFileSystemManager().writeFile({
-            filePath: Laya.MiniFileMgr.fileNativeDir + "/" + Laya.MiniFileMgr.fileListName,
+            filePath: Laya['MiniFileMgr'].fileNativeDir + "/" + Laya['MiniFileMgr'].fileListName,
             encoding: 'utf8',
-            data: JSON.stringify(Laya.MiniFileMgr.filesListObj),
+            data: JSON.stringify(Laya['MiniFileMgr'].filesListObj),
         });
-        this.log("filesListObj", Laya.MiniFileMgr.filesListObj);
+        this.log("filesListObj", Laya['MiniFileMgr'].filesListObj);
     }
 
     /**从url解析出文件的字符编码*/

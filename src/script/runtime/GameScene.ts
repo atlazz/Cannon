@@ -296,9 +296,9 @@ export default class GameScene extends ui.game.GameSceneUI {
             this._trail = new Laya.TrailSprite3D();
 
             // 设置拖尾过滤器
-            this._trail.trailFilter.time = 0.5;
+            this._trail.trailFilter.time = 0.8;
             //trail.trailFilter.minVertexDistance = 0.01;
-            this._trail.trailFilter.alignment = Laya.TrailFilter.ALIGNMENT_TRANSFORM_Z;
+            this._trail.trailFilter.alignment = Laya.TrailFilter.ALIGNMENT_VIEW;
 
             // 设置宽度曲线
             let trailWidthCurve: Array<Laya.FloatKeyframe> = new Array<Laya.FloatKeyframe>();
@@ -859,7 +859,7 @@ export default class GameScene extends ui.game.GameSceneUI {
 
     /** 拖尾弹窗更新 */
     private updateTrailUnlock() {
-        let trailShowType = 2;
+        let trailShowType = 3;
         if (Global.gameData.trailUnlockState[trailShowType] < Const.TrailUnlock[trailShowType]) {
             this.label_trailUnlockMsg.changeText("观看视频" + Global.gameData.trailUnlockState[trailShowType] + "/" + Const.TrailUnlock[trailShowType]);
         }
@@ -886,7 +886,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         }
 
         // show trail unlock
-        let trailShowType = 2;
+        let trailShowType = 3;
         if (Global.gameData.trailUnlockState[trailShowType] < Const.TrailUnlock[trailShowType]) {
             if (!Global.gameData.trailShowToday && (Global.gameData.stageIndex > 2 || (Global.gameData.stageIndex == 2 && this.missionIdx == 2))) {
                 this.label_trailUnlockMsg.changeText("观看视频" + Global.gameData.trailUnlockState[trailShowType] + "/" + Const.TrailUnlock[trailShowType]);
@@ -1137,10 +1137,10 @@ export default class GameScene extends ui.game.GameSceneUI {
                             child.name = "stand";
                             // add collider
                             let collider: Laya.PhysicsCollider = child.addComponent(Laya.PhysicsCollider);
-                            let boundingBox: Laya.BoundBox = child.meshFilter.sharedMesh.boundingBox.clone();
-                            let sizeX: number = boundingBox.max.x - boundingBox.min.x;
-                            let sizeY: number = boundingBox.max.y - boundingBox.min.y;
-                            let sizeZ: number = boundingBox.max.z - boundingBox.min.z;
+                            const _bounds: Laya.Bounds = child.meshFilter.sharedMesh.bounds;
+                            let sizeX: number = _bounds.getMax().x - _bounds.getMin().x;
+                            let sizeY: number = _bounds.getMax().y - _bounds.getMin().y;
+                            let sizeZ: number = _bounds.getMax().z - _bounds.getMin().z;
                             collider.colliderShape = new Laya.BoxColliderShape(sizeX, sizeY, sizeZ);
                             // set material
                             Laya.Texture2D.load(Const.StageTexUrl[0], Laya.Handler.create(this, (tex) => {
@@ -1997,7 +1997,7 @@ export default class GameScene extends ui.game.GameSceneUI {
             if (!this._bullet) {
                 this.initBullet();
             }
-            bullet = this._bullet.clone();
+            bullet = this._bullet.clone() as Laya.MeshSprite3D;
             bullet.name = "bullet";
             // add script
             let bulletScript: Bullet = bullet.addComponent(Bullet);

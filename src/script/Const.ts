@@ -1,5 +1,5 @@
 /** version */
-export const VERSION = "1.2.5";
+export const VERSION = "1.2.6";
 
 /************** 后台设置参数 *******************/
 /** 分享位置 */
@@ -107,7 +107,7 @@ export const CannonBallInitPos: Laya.Vector3 = new Laya.Vector3(-0.01, 0.05, -0.
 export const CannonBallInitScale: Laya.Vector3 = new Laya.Vector3(25, 25, 25);
 
 /** cdn */
-export const cdnUrl: string = "https://coolant.miniant.cn/cannon/res_v125.zip";
+export const cdnUrl: string = "https://coolant.miniant.cn/cannon/res_v126.zip";
 
 /** sound */
 export const soundUrl: string = "res/audio/shoot.mp3";
@@ -124,8 +124,8 @@ export const treasureAngleZ: number[] = [0, 0.2, 0.5, 0.6, 0.3, 0.2, 0.1, 0, 0.8
 // };
 export const TrailUnlock = {
     1: 0,
-    2: 1,
-    3: -1,
+    2: 0,
+    3: 2,
     4: -1,
 }
 
