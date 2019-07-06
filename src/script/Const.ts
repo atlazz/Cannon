@@ -1,5 +1,5 @@
 /** version */
-export const VERSION = "1.2.6";
+export const VERSION = "1.2.7";
 
 /************** 后台设置参数 *******************/
 /** 分享位置 */

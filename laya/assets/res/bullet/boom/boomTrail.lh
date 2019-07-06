@@ -149,7 +149,7 @@
 					"emission":{
 						"enable":true,
 						"emissionRate":40,
-						"emissionRateTip":"Time",
+						"emissionRateTip":"Distance",
 						"bursts":[]
 					},
 					"shape":{
