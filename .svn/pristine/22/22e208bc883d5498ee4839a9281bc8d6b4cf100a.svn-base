@@ -1,0 +1,3729 @@
+{
+	"version":"LAYAHIERARCHY:01",
+	"data":{
+		"type":"Sprite3D",
+		"props":{
+			"name":"Boss1",
+			"active":true,
+			"isStatic":false,
+			"layer":0,
+			"position":[
+				0,
+				0,
+				0
+			],
+			"rotation":[
+				0,
+				0,
+				0,
+				-1
+			],
+			"scale":[
+				1,
+				1,
+				1
+			]
+		},
+		"components":[
+			{
+				"type":"Animator",
+				"avatar":{
+					"path":"Assets/models/Boss1/Boss1-Boss1-Boss1Avatar.lav",
+					"linkSprites":{
+						"Cube_0":[
+							"Cube_0"
+						],
+						"Obstacles-Cube_0":[
+							"Obstacles-Cube_0"
+						],
+						"Obstacles-Cube (1)_0":[
+							"Obstacles-Cube (1)_0"
+						],
+						"Obstacles-Cube (6)_0":[
+							"Obstacles-Cube (6)_0"
+						],
+						"Obstacles-Cube (7)_0":[
+							"Obstacles-Cube (7)_0"
+						],
+						"Obstacles-Cube (8)_0":[
+							"Obstacles-Cube (8)_0"
+						],
+						"Obstacles-Cube (9)_0":[
+							"Obstacles-Cube (9)_0"
+						],
+						"Obstacles-Cube (14)_0":[
+							"Obstacles-Cube (14)_0"
+						],
+						"Obstacles-Cube (15)_0":[
+							"Obstacles-Cube (15)_0"
+						],
+						"Obstacles-Cube (16)_0":[
+							"Obstacles-Cube (16)_0"
+						],
+						"Obstacles-Cube (17)_0":[
+							"Obstacles-Cube (17)_0"
+						],
+						"Obstacles-Cube (22)_0":[
+							"Obstacles-Cube (22)_0"
+						],
+						"Obstacles-Cube (23)_0":[
+							"Obstacles-Cube (23)_0"
+						],
+						"Obstacles-Cube (32)_0":[
+							"Obstacles-Cube (32)_0"
+						],
+						"Obstacles-Cube (33)_0":[
+							"Obstacles-Cube (33)_0"
+						],
+						"Obstacles-Cube (38)_0":[
+							"Obstacles-Cube (38)_0"
+						],
+						"Obstacles-Cube (39)_0":[
+							"Obstacles-Cube (39)_0"
+						],
+						"Obstacles-Cube (40)_0":[
+							"Obstacles-Cube (40)_0"
+						],
+						"Obstacles-Cube (41)_0":[
+							"Obstacles-Cube (41)_0"
+						],
+						"Obstacles-Cube (46)_0":[
+							"Obstacles-Cube (46)_0"
+						],
+						"Obstacles-Cube (47)_0":[
+							"Obstacles-Cube (47)_0"
+						],
+						"Obstacles-Cube (48)_0":[
+							"Obstacles-Cube (48)_0"
+						],
+						"Obstacles-Cube (49)_0":[
+							"Obstacles-Cube (49)_0"
+						],
+						"Obstacles-Cube (54)_0":[
+							"Obstacles-Cube (54)_0"
+						],
+						"Obstacles-Cube (55)_0":[
+							"Obstacles-Cube (55)_0"
+						],
+						"Obstacles-Cube (56)_0":[
+							"Obstacles-Cube (56)_0"
+						],
+						"Obstacles-Cube (57)_0":[
+							"Obstacles-Cube (57)_0"
+						],
+						"Obstacles-Cube (62)_0":[
+							"Obstacles-Cube (62)_0"
+						],
+						"Obstacles-Cube (63)_0":[
+							"Obstacles-Cube (63)_0"
+						],
+						"Obstacles-CubeGlass (420)_0":[
+							"Obstacles-CubeGlass (420)_0"
+						],
+						"Obstacles-CubeGlass (421)_0":[
+							"Obstacles-CubeGlass (421)_0"
+						],
+						"Obstacles-CubeGlass (426)_0":[
+							"Obstacles-CubeGlass (426)_0"
+						],
+						"Obstacles-CubeGlass (427)_0":[
+							"Obstacles-CubeGlass (427)_0"
+						],
+						"Obstacles-CubeGlass (428)_0":[
+							"Obstacles-CubeGlass (428)_0"
+						],
+						"Obstacles-CubeGlass (429)_0":[
+							"Obstacles-CubeGlass (429)_0"
+						],
+						"Obstacles-CubeGlass (434)_0":[
+							"Obstacles-CubeGlass (434)_0"
+						],
+						"Obstacles-CubeGlass (435)_0":[
+							"Obstacles-CubeGlass (435)_0"
+						],
+						"Obstacles-CubeGlass (436)_0":[
+							"Obstacles-CubeGlass (436)_0"
+						],
+						"Obstacles-CubeGlass (437)_0":[
+							"Obstacles-CubeGlass (437)_0"
+						],
+						"Obstacles-CubeGlass (442)_0":[
+							"Obstacles-CubeGlass (442)_0"
+						],
+						"Obstacles-CubeGlass (443)_0":[
+							"Obstacles-CubeGlass (443)_0"
+						],
+						"Obstacles-CubeGlass (522)_0":[
+							"Obstacles-CubeGlass (522)_0"
+						],
+						"Obstacles-CubeGlass (523)_0":[
+							"Obstacles-CubeGlass (523)_0"
+						],
+						"Obstacles-CubeGlass (528)_0":[
+							"Obstacles-CubeGlass (528)_0"
+						],
+						"Obstacles-CubeGlass (529)_0":[
+							"Obstacles-CubeGlass (529)_0"
+						],
+						"Obstacles-CubeGlass (530)_0":[
+							"Obstacles-CubeGlass (530)_0"
+						],
+						"Obstacles-CubeGlass (531)_0":[
+							"Obstacles-CubeGlass (531)_0"
+						],
+						"Obstacles-CubeGlass (536)_0":[
+							"Obstacles-CubeGlass (536)_0"
+						],
+						"Obstacles-CubeGlass (537)_0":[
+							"Obstacles-CubeGlass (537)_0"
+						],
+						"Obstacles-CubeGlass (538)_0":[
+							"Obstacles-CubeGlass (538)_0"
+						],
+						"Obstacles-CubeGlass (539)_0":[
+							"Obstacles-CubeGlass (539)_0"
+						],
+						"Obstacles-CubeGlass (544)_0":[
+							"Obstacles-CubeGlass (544)_0"
+						],
+						"Obstacles-CubeGlass (545)_0":[
+							"Obstacles-CubeGlass (545)_0"
+						],
+						"Obstacles-CubeGlass (546)_0":[
+							"Obstacles-CubeGlass (546)_0"
+						],
+						"Obstacles-CubeGlass (547)_0":[
+							"Obstacles-CubeGlass (547)_0"
+						],
+						"Obstacles-CubeGlass (564)_0":[
+							"Obstacles-CubeGlass (564)_0"
+						],
+						"Obstacles-CubeGlass (565)_0":[
+							"Obstacles-CubeGlass (565)_0"
+						],
+						"Obstacles-CubeGlass (650)_0":[
+							"Obstacles-CubeGlass (650)_0"
+						],
+						"Obstacles-CubeGlass (651)_0":[
+							"Obstacles-CubeGlass (651)_0"
+						],
+						"Obstacles-CubeGlass (652)_0":[
+							"Obstacles-CubeGlass (652)_0"
+						],
+						"Obstacles-CubeGlass (653)_0":[
+							"Obstacles-CubeGlass (653)_0"
+						],
+						"Obstacles-CubeGlass (658)_0":[
+							"Obstacles-CubeGlass (658)_0"
+						],
+						"Obstacles-CubeGlass (659)_0":[
+							"Obstacles-CubeGlass (659)_0"
+						],
+						"Obstacles-CubeGlass (662)_0":[
+							"Obstacles-CubeGlass (662)_0"
+						],
+						"Obstacles-CubeGlass (663)_0":[
+							"Obstacles-CubeGlass (663)_0"
+						],
+						"Obstacles-CubeGlass (664)_0":[
+							"Obstacles-CubeGlass (664)_0"
+						],
+						"Obstacles-CubeGlass (665)_0":[
+							"Obstacles-CubeGlass (665)_0"
+						],
+						"Obstacles-CubeGlass (672)_0":[
+							"Obstacles-CubeGlass (672)_0"
+						],
+						"Obstacles-CubeGlass (673)_0":[
+							"Obstacles-CubeGlass (673)_0"
+						],
+						"Obstacles-CubeGlass (674)_0":[
+							"Obstacles-CubeGlass (674)_0"
+						],
+						"Obstacles-CubeGlass (675)_0":[
+							"Obstacles-CubeGlass (675)_0"
+						],
+						"Obstacles-CubeGlass (680)_0":[
+							"Obstacles-CubeGlass (680)_0"
+						],
+						"Obstacles-CubeGlass (681)_0":[
+							"Obstacles-CubeGlass (681)_0"
+						],
+						"Obstacles-CubeGlass (710)_0":[
+							"Obstacles-CubeGlass (710)_0"
+						],
+						"Obstacles-CubeGlass (713)_0":[
+							"Obstacles-CubeGlass (713)_0"
+						],
+						"Obstacles-CubeGlass (714)_0":[
+							"Obstacles-CubeGlass (714)_0"
+						],
+						"Obstacles-CubeGlass (717)_0":[
+							"Obstacles-CubeGlass (717)_0"
+						],
+						"Obstacles-CubeGlass (718)_0":[
+							"Obstacles-CubeGlass (718)_0"
+						],
+						"Obstacles-CubeGlass (721)_0":[
+							"Obstacles-CubeGlass (721)_0"
+						],
+						"Obstacles-CubeGlass (722)_0":[
+							"Obstacles-CubeGlass (722)_0"
+						],
+						"Obstacles-CubeGlass (725)_0":[
+							"Obstacles-CubeGlass (725)_0"
+						],
+						"Obstacles-CubeGlass (726)_0":[
+							"Obstacles-CubeGlass (726)_0"
+						],
+						"Obstacles-CubeGlass (728)_0":[
+							"Obstacles-CubeGlass (728)_0"
+						],
+						"Obstacles-CubeGlass (731)_0":[
+							"Obstacles-CubeGlass (731)_0"
+						],
+						"Obstacles-CubeGlass (732)_0":[
+							"Obstacles-CubeGlass (732)_0"
+						],
+						"Obstacles-CubeGlass (735)_0":[
+							"Obstacles-CubeGlass (735)_0"
+						],
+						"Obstacles-CubeGlass (736)_0":[
+							"Obstacles-CubeGlass (736)_0"
+						],
+						"Obstacles-CubeGlass (739)_0":[
+							"Obstacles-CubeGlass (739)_0"
+						],
+						"Obstacles-CubeGlass (741)_0":[
+							"Obstacles-CubeGlass (741)_0"
+						],
+						"Obstacles-CubeGlass (742)_0":[
+							"Obstacles-CubeGlass (742)_0"
+						],
+						"Obstacles-CubeGlass (745)_0":[
+							"Obstacles-CubeGlass (745)_0"
+						],
+						"Obstacles-CubeGlass (746)_0":[
+							"Obstacles-CubeGlass (746)_0"
+						],
+						"Obstacles-CubeGlass (749)_0":[
+							"Obstacles-CubeGlass (749)_0"
+						],
+						"Obstacles-CubeGlass (750)_0":[
+							"Obstacles-CubeGlass (750)_0"
+						],
+						"Obstacles-CubeGlass (753)_0":[
+							"Obstacles-CubeGlass (753)_0"
+						],
+						"Obstacles-CubeGlass (754)_0":[
+							"Obstacles-CubeGlass (754)_0"
+						],
+						"Obstacles-CubeGlass (757)_0":[
+							"Obstacles-CubeGlass (757)_0"
+						]
+					}
+				},
+				"layers":[],
+				"cullingMode":0,
+				"playOnWake":true
+			}
+		],
+		"child":[
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Cube_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.0007999986,
+						-0.0693,
+						0.3848
+					],
+					"rotation":[
+						0,
+						0,
+						0,
+						-1
+					],
+					"scale":[
+						12,
+						0.589,
+						1.6
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Cube_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.02340002,
+						-0.0434,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-Cube_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube (1)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.03840002,
+						-0.0434,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-Cube (1)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube (6)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.03840002,
+						-0.0284,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-Cube (6)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube (7)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.02340002,
+						-0.0284,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-Cube (7)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube (8)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.006599985,
+						-0.0284,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-Cube (8)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube (9)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.008400016,
+						-0.0284,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-Cube (9)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube (14)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.008400016,
+						-0.0434,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-Cube (14)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube (15)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.006599985,
+						-0.0434,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-Cube (15)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube (16)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.03659999,
+						-0.0434,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-Cube (16)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube (17)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.02159999,
+						-0.0434,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-Cube (17)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube (22)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.02159999,
+						-0.0284,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-Cube (22)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube (23)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.03659999,
+						-0.0284,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-Cube (23)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube (32)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.02340002,
+						0.001600003,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-Cube (32)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube (33)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.03840002,
+						0.001600003,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-Cube (33)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube (38)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.03840002,
+						-0.0134,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-Cube (38)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube (39)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.02340002,
+						-0.0134,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-Cube (39)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube (40)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.02340002,
+						0.0166,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-Cube (40)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube (41)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.03840002,
+						0.0166,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-Cube (41)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube (46)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.03840002,
+						0.0316,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-Cube (46)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube (47)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.02340002,
+						0.0316,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-Cube (47)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube (48)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.02340002,
+						0.06160001,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-Cube (48)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube (49)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.03840002,
+						0.06160001,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-Cube (49)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube (54)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.03840002,
+						0.0466,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-Cube (54)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube (55)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.02340002,
+						0.0466,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-Cube (55)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube (56)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.02340002,
+						0.07659999,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-Cube (56)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube (57)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.03840002,
+						0.07659999,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-Cube (57)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube (62)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.03840002,
+						0.09160002,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-Cube (62)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-Cube (63)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.02340002,
+						0.09160002,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-Cube (63)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (420)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.008400016,
+						0.001600003,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (420)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (421)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.00659997,
+						0.001600003,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (421)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (426)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.00659997,
+						-0.0134,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (426)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (427)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.008400016,
+						-0.0134,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (427)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (428)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.008400016,
+						0.0166,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (428)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (429)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.00659997,
+						0.0166,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (429)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (434)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.00659997,
+						0.0316,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (434)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (435)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.008400016,
+						0.0316,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (435)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (436)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.008400016,
+						0.06160001,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (436)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (437)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.00659997,
+						0.06160001,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (437)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (442)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.00659997,
+						0.0466,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (442)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (443)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.008400016,
+						0.0466,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (443)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (522)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.008400016,
+						0.07659999,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (522)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (523)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.00659997,
+						0.07659999,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (523)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (528)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.00659997,
+						0.09159999,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (528)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (529)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.008400016,
+						0.09159999,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (529)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (530)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.02159999,
+						0.09159999,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (530)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (531)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.03659999,
+						0.09159999,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (531)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (536)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.03659999,
+						0.07659999,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (536)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (537)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.02159999,
+						0.07659999,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (537)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (538)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.02159999,
+						0.0466,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (538)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (539)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.03659999,
+						0.0466,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (539)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (544)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.03659999,
+						0.06160001,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (544)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (545)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.02159999,
+						0.06160001,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (545)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (546)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.02159999,
+						0.0316,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (546)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (547)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.03659999,
+						0.0316,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (547)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (564)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.03840002,
+						0.1066,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (564)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (565)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.02340002,
+						0.1066,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (565)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (650)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.03659991,
+						-0.05839999,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (650)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (651)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.02159988,
+						-0.05839999,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (651)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (652)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.008400016,
+						-0.05839999,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (652)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (653)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.006599881,
+						-0.05839999,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (653)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (658)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.02340008,
+						-0.05839999,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (658)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (659)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.03840002,
+						-0.05839999,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (659)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (662)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.006599955,
+						0.1066,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (662)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (663)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.008400016,
+						0.1066,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (663)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (664)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.02159999,
+						0.1066,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (664)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (665)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.03659997,
+						0.1066,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (665)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (672)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.03659999,
+						0.0166,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (672)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (673)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.02159999,
+						0.0166,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (673)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (674)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.02159999,
+						-0.0134,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (674)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (675)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.03659999,
+						-0.0134,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (675)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (680)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.03659999,
+						0.001600003,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (680)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (681)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.02159999,
+						0.001600003,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (681)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (710)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.05340001,
+						0.09159999,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (710)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (713)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.05340001,
+						0.07659999,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (713)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (714)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.05340001,
+						0.0466,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (714)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (717)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.05340001,
+						0.06160001,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (717)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (718)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.05340001,
+						0.0316,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (718)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (721)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.05340001,
+						0.0166,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (721)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (722)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.05340001,
+						-0.0134,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (722)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (725)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.05340001,
+						0.001600003,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (725)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (726)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.05340003,
+						0.1066,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (726)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (728)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.05340001,
+						-0.0284,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (728)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (731)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.05340001,
+						-0.0434,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (731)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (732)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						0.05340001,
+						-0.0584,
+						0.3848999
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (732)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (735)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.05159999,
+						-0.0584,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (735)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (736)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.05159999,
+						-0.0434,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (736)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (739)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.05159999,
+						-0.0284,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (739)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (741)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.05159999,
+						0.1066,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (741)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (742)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.05159999,
+						0.001600003,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (742)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (745)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.05159999,
+						-0.0134,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (745)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (746)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.05159999,
+						0.0166,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (746)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (749)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.05159999,
+						0.0316,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (749)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (750)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.05159999,
+						0.06160001,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (750)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (753)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.05159999,
+						0.0466,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (753)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (754)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.05159999,
+						0.07659999,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (754)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			},
+			{
+				"type":"MeshSprite3D",
+				"props":{
+					"name":"Obstacles-CubeGlass (757)_0",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-0.05159999,
+						0.09159999,
+						0.3849
+					],
+					"rotation":[
+						6.123231E-17,
+						1,
+						-6.123231E-17,
+						-4.470348E-07
+					],
+					"scale":[
+						1.5,
+						1.5,
+						1.5
+					],
+					"meshPath":"Assets/models/Boss1/Boss1-Obstacles-CubeGlass (757)_0.lm",
+					"enableRender":true,
+					"materials":[
+						{
+							"type":"Laya.BlinnPhongMaterial",
+							"path":"Assets/models/Boss1/Boss1.lmat"
+						}
+					]
+				},
+				"components":[],
+				"child":[]
+			}
+		]
+	}
+}

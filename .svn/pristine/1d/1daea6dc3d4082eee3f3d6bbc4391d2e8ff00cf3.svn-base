@@ -1,0 +1,22 @@
+{
+	"deviceOrientation": "portrait",
+	"showStatusBar": false,
+	"networkTimeout": {
+		"request": 10000,
+		"connectSocket": 10000,
+		"uploadFile": 10000,
+		"downloadFile": 10000
+	},
+	"navigateToMiniProgramAppIdList": [
+		"wx9a2836d31e08c4e0",
+		"wx70815194bf8e20f4",
+		"wxc55ee85e33c061fc",
+		"wx0ebd6f9fd62f9ddf",
+		"wx72b3922b76cf8ae2",
+		"wx2bc8f5450bef6000",
+		"wxcd446d29c5fecac2",
+		"wxf141cb1d964fa5a3",
+		"wxcbdd0351de5ad718",
+		"wxa4c783816cc04fb8"
+	]
+}
