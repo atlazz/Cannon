@@ -228,6 +228,7 @@ export default class GameScene extends ui.game.GameSceneUI {
 
         // multiple touch input disable
         this.scene3D.input.multiTouchEnabled = false;
+        Laya.MouseManager.multiTouchEnabled = false;
 
         this.scene3D.physicsSimulation.fixedTimeStep = 0.5 / 60;
         // Laya.timer.scale = 0.5;
@@ -905,44 +906,6 @@ export default class GameScene extends ui.game.GameSceneUI {
                     Global.gameData.trailUnlockState[trailShowType]++;
                     this.updateTrailUnlock();
                 }]);
-                // this.btn_trailUnlock.on(Laya.Event.CLICK, this, () => {
-                //     // 未超过每天视频观看次数
-                //     if (!Reward.instance.isOverVideo()) {
-                //         this.mouseEnabled = false;
-                //         Reward.instance.video({
-                //             pos: Const.RewardPos.Trail,
-                //             success: () => {
-                //                 console.log("trail video succeed:");
-                //                 Global.gameData.trailUnlockState[trailShowType]++;
-                //                 this.updateTrailUnlock();
-                //             },
-                //             fail: () => {
-                //                 console.log("trail video failed:");
-                //                 Reward.instance.share({
-                //                     pos: Const.RewardPos.Trail,
-                //                     success: () => {
-                //                         console.log("trail share succeed:");
-                //                         Global.gameData.trailUnlockState[trailShowType]++;
-                //                         this.updateTrailUnlock();
-                //                     },
-                //                 });
-                //             },
-                //             complete: () => {
-                //                 this.mouseEnabled = true;
-                //             }
-                //         });
-                //     }
-                //     else {
-                //         Reward.instance.share({
-                //             pos: Const.RewardPos.Trail,
-                //             success: () => {
-                //                 console.log("trail share succeed:");
-                //                 Global.gameData.trailUnlockState[trailShowType]++;
-                //                 this.updateTrailUnlock();
-                //             },
-                //         });
-                //     }
-                // });
                 this.btn_trailClose.on(Laya.Event.CLICK, this, () => {
                     this.box_trailShow.visible = false;
                     this.btn_trailClose.offAll(Laya.Event.CLICK);
@@ -961,6 +924,8 @@ export default class GameScene extends ui.game.GameSceneUI {
                 Ad.randomlyGetBanner("treasure");
                 // this.box_gameIcon.visible = false;
                 this.box_gameIcon.visible = true;
+                // create interstitialAd 插屏广告预创建
+                Global.config.allow_interstitial && Ad.wxCreatInterstitialAd(Global.config.uid_interstitial);
             }
             // 常规关卡icon广告
             else if (this.missionIdx >= 1 && this.missionIdx <= 5) {
@@ -1690,6 +1655,8 @@ export default class GameScene extends ui.game.GameSceneUI {
         // hide
         this.missionWin.visible = false;
         this.box_gameIcon.visible = false;
+        // show interstitialAd
+        Global.config.allow_interstitial && Ad.showInterstitialAd();
         // show
         this.label_stage.changeText("" + this.stageIdx);
         this.label_winDiamond.changeText("" + StageConfig.StageReward[this.stageIdx > 39 ? 39 : this.stageIdx]);

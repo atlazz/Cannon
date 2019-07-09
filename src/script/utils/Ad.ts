@@ -121,6 +121,21 @@ export const hideBanner = () => {
     // banners[currBannerIdx] && banners[currBannerIdx].hide();
 }
 
+let interstitialAd: any = null;
+
+export const wxCreatInterstitialAd = (uid: string): any => {
+    if (wx.createInterstitialAd) {
+        interstitialAd = wx.createInterstitialAd({ adUnitId: uid });
+    }
+}
+
+export const showInterstitialAd = () => {
+    if (interstitialAd) {
+        interstitialAd.show();
+        console.log(interstitialAd);
+    }
+}
+
 
 export const refreshCurrentBanner = () => {
     clickBannerCount++;

@@ -78,6 +78,8 @@ let Global = {
         show_number: 2, // banner刷新触发次数 - 首页
         show_number_t: 1, // banner刷新触发次数 - 宝箱页
         MaxTreasureBannerHit: 2,
+        allow_interstitial: true, // 插屏广告开关
+        uid_interstitial: "adunit-1b8d841eedb67978",  // 插屏广告uid
     },
     user: {},
     audio: {
