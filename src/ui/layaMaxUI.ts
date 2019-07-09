@@ -87,9 +87,11 @@ export module ui.game {
 		public label_extraDiamond:Laya.Label;
 		public box_passStage:Laya.Box;
 		public box_winIcon:Laya.Box;
+		public passTitle:Laya.Image;
 		public btn_passStagex3:Laya.Image;
 		public btn_passStage:Laya.Image;
 		public label_winDiamond:Laya.Label;
+		public passLabel:Laya.Image;
 		public label_stage:Laya.Label;
 		public backCheck:Laya.Box;
 		public btn_backReturn:Laya.Image;

@@ -46,8 +46,7 @@ R FD38B217 bullet.lh
 R C33056AD cube_piece.lm
 D res/audio
 R 7F8C5913 blackhole.mp3
-R CF1B000B lucky.mp3
-R ED05D4DC safe.mp3
+R 570420D6 broken.mp3
 R 6355FE9B shoot.mp3
 R 6CF63167 winner.mp3
 D res/ball_box

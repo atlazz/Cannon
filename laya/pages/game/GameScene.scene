@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":236,
-    "selecteID":244,
+    "selectedBox":168,
+    "selecteID":170,
     "searchKey":"View",
     "props":{"width":720,"top":0,"sceneWidth":720,"sceneHeight":1280,"sceneColor":"#000000","runtime":"script/runtime/GameScene.ts","right":0,"left":0,"height":1280,"bottom":0},
     "nodeParent":-1,
@@ -1218,13 +1218,14 @@
             "props":{"width":720,"visible":false,"var":"box_passStage","top":0,"centerX":0,"bottom":0},
             "nodeParent":2,
             "label":"box_passStage",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":168,
             "child":[
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image",
                     "props":{"width":720,"top":0,"skin":"res/ui/game/blank.png","sizeGrid":"1,1,1,1","centerX":0,"bottom":0},
@@ -1238,6 +1239,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Box",
                     "searchKey":"Box,box_winIcon",
                     "props":{"var":"box_winIcon","centerY":0,"centerX":0},
@@ -1251,11 +1253,12 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
-                    "searchKey":"Image",
-                    "props":{"top":100,"skin":"res/ui/game/ggongratulation.png","centerX":0},
+                    "searchKey":"Image,passTitle",
+                    "props":{"var":"passTitle","top":100,"skin":"res/ui/game/ggongratulation.png","centerX":0},
                     "nodeParent":168,
-                    "label":"Image",
+                    "label":"passTitle",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
@@ -1264,6 +1267,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,btn_passStagex3",
                     "props":{"width":270,"var":"btn_passStagex3","skin":"res/ui/game/btn.png","sizeGrid":"0,10,0,10","centerX":0,"bottom":400},
@@ -1276,6 +1280,7 @@
                     "compId":171,
                     "child":[
                         {
+                            "x":45,
                             "type":"Image",
                             "searchKey":"Image",
                             "props":{"skin":"res/ui/game/tecxt_getprice.png","centerY":0,"centerX":0},
@@ -1290,6 +1295,7 @@
                         }]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,btn_passStage",
                     "props":{"var":"btn_passStage","skin":"res/ui/game/normal_reward.png","centerX":0,"bottom":300},
@@ -1303,6 +1309,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image",
                     "props":{"skin":"res/ui/game/text_diamond.png","centerY":0,"centerX":0},
@@ -1316,6 +1323,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image",
                     "props":{"skin":"res/ui/game/icon_diamond.png","centerY":80,"centerX":-80},
@@ -1329,6 +1337,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image",
                     "props":{"skin":"res/ui/game/x.png","centerY":80,"centerX":-10},
@@ -1341,6 +1350,7 @@
                     "compId":175,
                     "child":[
                         {
+                            "x":45,
                             "type":"Label",
                             "searchKey":"Label,label_winDiamond",
                             "props":{"width":200,"var":"label_winDiamond","valign":"middle","text":"0","fontSize":60,"color":"#ffffff","centerY":-2,"centerX":130,"bold":true,"align":"left"},
@@ -1355,11 +1365,12 @@
                         }]
                 },
                 {
+                    "x":30,
                     "type":"Image",
-                    "searchKey":"Image",
-                    "props":{"skin":"res/ui/game/stage.png","centerY":-250,"centerX":0},
+                    "searchKey":"Image,passLabel",
+                    "props":{"var":"passLabel","skin":"res/ui/game/stage.png","centerY":-250,"centerX":0},
                     "nodeParent":168,
-                    "label":"Image",
+                    "label":"passLabel",
                     "isOpen":true,
                     "isDirectory":true,
                     "isAniNode":true,
@@ -1367,6 +1378,7 @@
                     "compId":177,
                     "child":[
                         {
+                            "x":45,
                             "type":"Label",
                             "searchKey":"Label,label_stage",
                             "props":{"width":200,"var":"label_stage","valign":"middle","text":"1","fontSize":80,"color":"#ffffff","centerY":0,"centerX":0,"bold":true,"align":"center"},

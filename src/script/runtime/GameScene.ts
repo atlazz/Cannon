@@ -156,6 +156,9 @@ export default class GameScene extends ui.game.GameSceneUI {
     public isTreasureMoveStart: boolean = false;
     public isTreasureAdOpen: boolean = false;
 
+    /** diamond */
+    private missionDiamondAdd: number = 0;
+
     /** cannon */
     public cannonType: number = Const.CannonType.DEFAULT;
     public cannon: Laya.MeshSprite3D;
@@ -730,7 +733,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         // next stage
         this.btn_passStage.on(Laya.Event.CLICK, this, () => {
             // add diamond
-            Global.gameData.diamond += StageConfig.StageReward[(this.stageIdx - 1) > 39 ? 39 : (this.stageIdx - 1)];
+            Global.gameData.diamond += this.missionDiamondAdd;
             this.text_diamond.changeText("" + Global.gameData.diamond);
             // hide
             Ad.hideBanner();
@@ -742,7 +745,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         // reward next stage: diamond x3
         this.btn_passStagex3.on(Laya.Event.MOUSE_DOWN, this, this.onClick_rewardTemplate, [Global.config.reward_triple, Const.RewardPos.Treasure, () => {
             // add diamond
-            Global.gameData.diamond += StageConfig.StageReward[(this.stageIdx - 1) > 39 ? 39 : (this.stageIdx - 1)] * 3;
+            Global.gameData.diamond += this.missionDiamondAdd * 3;
             this.text_diamond.changeText("" + Global.gameData.diamond);
             // hide
             Ad.hideBanner();
@@ -925,7 +928,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                 // this.box_gameIcon.visible = false;
                 this.box_gameIcon.visible = true;
                 // create interstitialAd 插屏广告预创建
-                Global.config.allow_interstitial && Ad.wxCreatInterstitialAd(Global.config.uid_interstitial);
+                Laya.Browser.onMiniGame && Global.config.allow_interstitial && Ad.wxCreatInterstitialAd(Global.config.uid_interstitial);
             }
             // 常规关卡icon广告
             else if (this.missionIdx >= 1 && this.missionIdx <= 5) {
@@ -1501,15 +1504,16 @@ export default class GameScene extends ui.game.GameSceneUI {
                 else {
                     // clear mission win animation
                     Laya.timer.clearAll(this.missionWin);
-                    // add diamond
-                    var diamondAdd: number = StageConfig.Stage[HomeView.instance.systemName][this.stageIdx > Const.StageNum ? Const.StageNum : this.stageIdx][this.missionIdx].reward;
-                    diamondAdd -= Math.round(diamondAdd / 2 / 4 * idx);
-                    Global.gameData.diamond += diamondAdd;
-                    this.text_diamond.changeText("" + Global.gameData.diamond);
+                    // set diamondAdd
+                    this.missionDiamondAdd = StageConfig.Stage[HomeView.instance.systemName][this.stageIdx > Const.StageNum ? Const.StageNum : this.stageIdx][this.missionIdx].reward;
+                    this.missionDiamondAdd -= Math.round(this.missionDiamondAdd / 2 / 4 * idx);
+                    // Global.gameData.diamond += diamondAdd;
+                    // this.text_diamond.changeText("" + Global.gameData.diamond);
                 }
             });
             // open next stage
-            Laya.timer.frameOnce(90, this, this.nextStage);
+            // Laya.timer.frameOnce(90, this, this.nextStage);
+            Laya.timer.frameOnce(90, this, this.passMission);
         }
     }
 
@@ -1635,6 +1639,18 @@ export default class GameScene extends ui.game.GameSceneUI {
         }
     }
 
+    /** 小关卡过关 */
+    private passMission() {
+        this.state = Const.GameState.START;
+        // show
+        this.passLabel.visible = false;
+        this.passTitle.visible = false;
+        this.label_winDiamond.changeText("" + this.missionDiamondAdd);
+        this.box_passStage.visible = true;
+        this.showBanner(this.btn_passStage, 0, true);
+        // this.navWin && this.navWin.loadHomeIconInfoList();
+    }
+
     /** 大关卡过关处理 */
     private passStage() {
         this.state = Const.GameState.START;
@@ -1646,20 +1662,30 @@ export default class GameScene extends ui.game.GameSceneUI {
             ws.traceEvent("pass_stage10");
         }
         // clean all bullets
-        for (let i = 0; i < this.scene3D.numChildren; i++) {
-            var tmpSceneChild = this.scene3D.getChildAt(i);
-            if (tmpSceneChild.name === "bullet" || tmpSceneChild.name === "bulletTrigger") {
-                tmpSceneChild.destroy();
+        for (let idx = 0; idx < this.scene3D.numChildren; idx++) {
+            var tmpChild = this.scene3D.getChildAt(idx);
+            if (tmpChild && tmpChild.name == "bullet") {
+                if (tmpChild.getComponent(Bullet)) {
+                    tmpChild.getComponent(Bullet).recover();
+                }
+                else {
+                    tmpChild.destroy();
+                }
             }
         }
+        // set diamond add
+        this.missionDiamondAdd = StageConfig.StageReward[this.stageIdx > 39 ? 39 : this.stageIdx];
         // hide
         this.missionWin.visible = false;
         this.box_gameIcon.visible = false;
         // show interstitialAd
-        Global.config.allow_interstitial && Ad.showInterstitialAd();
+        Laya.Browser.onMiniGame && Global.config.allow_interstitial && Ad.showInterstitialAd();
         // show
+        this.passLabel.visible = true;
+        this.passTitle.visible = true;
+        this.label_stage.visible = true;
         this.label_stage.changeText("" + this.stageIdx);
-        this.label_winDiamond.changeText("" + StageConfig.StageReward[this.stageIdx > 39 ? 39 : this.stageIdx]);
+        this.label_winDiamond.changeText("" + this.missionDiamondAdd);
         this.box_passStage.visible = true;
         this.showBanner(this.btn_passStage, Global.config.banner_delay_pass, true);
         this.navWin && this.navWin.loadHomeIconInfoList();
