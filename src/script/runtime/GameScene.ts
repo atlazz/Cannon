@@ -917,6 +917,11 @@ export default class GameScene extends ui.game.GameSceneUI {
             }
         }
 
+        // recreate interstitial, 插屏广告预创建
+        if (this.missionIdx == 1) {
+            Ad.wxCreatInterstitialAd(Global.config.uid_interstitial);
+        }
+
         // 测试接口开始 <========================
         if (!HomeView.instance.isTest) {
             // 测试接口结束 <========================
@@ -1742,6 +1747,10 @@ export default class GameScene extends ui.game.GameSceneUI {
                 this.navRevive && this.navRevive.loadHomeIconInfoList();
                 // 1秒后显示banner，上跳误点
                 this.showBanner(this.btn_retry, Global.config.banner_delay_ratio, true);
+                // show interstitialAd
+                if (Laya.Browser.onMiniGame && Global.config.allow_interstitial) {
+                    Ad.showInterstitialAd();
+                }
             }
             this.label_failTimer.changeText("" + Math.floor(4 - (this.countdown / 60) % 4));
             // 死亡提示显示
