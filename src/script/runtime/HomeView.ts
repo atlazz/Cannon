@@ -367,6 +367,7 @@ export default class HomeView extends ui.home.HomeViewUI {
             console.log('ws.conf', ws.conf); // 通用配置
             console.log('ws.user', ws.user); // 用户信息
             console.log('ws.data', ws.data); // 本地保存的游戏数据
+            wx.getSystemInfoSync && console.log('wx.getSystemInfoSync()', wx.getSystemInfoSync());
             this.loadConfig();
             this.loadGameData(gameData);
             // 判断接入阿拉丁sdk

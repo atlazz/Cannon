@@ -125,14 +125,26 @@ let interstitialAd: any = null;
 
 export const wxCreatInterstitialAd = (uid: string): any => {
     if (wx.createInterstitialAd) {
-        interstitialAd = wx.createInterstitialAd({ adUnitId: uid });
+        try {
+            interstitialAd = wx.createInterstitialAd({ adUnitId: uid });
+            console.log('interstitialAd', interstitialAd)
+        }
+        catch (err) {
+            console.log(err)
+        }
     }
 }
 
 export const showInterstitialAd = () => {
-    if (interstitialAd) {
-        interstitialAd.show();
-        console.log(interstitialAd);
+    if (interstitialAd && interstitialAd.show) {
+        try {
+            interstitialAd.show().catch((err) => {
+                console.log('showInterstitialAd error:', err)
+            });
+        }
+        catch (err) {
+            console.log(err)
+        }
     }
 }
 
