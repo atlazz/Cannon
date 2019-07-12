@@ -69,6 +69,8 @@ export module ui.game {
 		public label_failTimer:Laya.Label;
 		public icon_diamond:Laya.Image;
 		public text_diamond:laya.display.Text;
+		public box_moreGame:Laya.Box;
+		public btn_moreGameBack:Laya.Box;
 		public box_revive:Laya.Box;
 		public mask_revive:Laya.Image;
 		public box_reviveIcon:Laya.Box;

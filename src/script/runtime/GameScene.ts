@@ -88,11 +88,11 @@ export default class GameScene extends ui.game.GameSceneUI {
                 // win icon
                 this.navWin = new Navigator(ws);
                 this.box_winIcon.visible = true;
-                this.navWin.createHomeIcons(this.box_winIcon, this.box_winIcon, ["home_icon_1", "home_icon_2", "home_icon_3", "home_icon_4", "home_icon_5", "home_icon_6", "home_icon_7", "home_icon_8", "home_icon_9", "home_icon_10"]);
+                this.navWin.createIcons(this.box_winIcon, this.box_winIcon);
                 // revive icon
                 this.navRevive = new Navigator(ws);
                 this.box_reviveIcon.visible = true;
-                this.navRevive.createHomeIcons(this.box_reviveIcon, this.box_reviveIcon, ["home_icon_1", "home_icon_2", "home_icon_3", "home_icon_4", "home_icon_5", "home_icon_6", "home_icon_7", "home_icon_8", "home_icon_9", "home_icon_10"]);
+                this.navRevive.createIcons(this.box_reviveIcon, this.box_reviveIcon);
             }
         }
         // game pause: 大炮选择页面跳转回来
@@ -234,12 +234,6 @@ export default class GameScene extends ui.game.GameSceneUI {
         Laya.MouseManager.multiTouchEnabled = false;
 
         this.scene3D.physicsSimulation.fixedTimeStep = 0.5 / 60;
-        // Laya.timer.scale = 0.5;
-        // Laya.stage.frameRate = "slow";
-
-        // if (Laya.Browser.onMiniGame) {
-        //     wx.setPreferredFramesPerSecond(30);
-        // }
     }
 
     onEnable() {
@@ -632,6 +626,16 @@ export default class GameScene extends ui.game.GameSceneUI {
                     }
                 })
             }
+            // 4: open moregame, 展示二跳
+            else if (rewardType == 4) {
+                if (!this.flag_missionWin && !this.box_revive.visible) {
+                    this.box_moreGame.visible = true;
+                    this.btn_moreGameBack.visible = false;
+                    Laya.timer.frameOnce(60, this, () => {
+                        this.btn_moreGameBack.visible = true;
+                    })
+                }
+            }
         }
     }
 
@@ -802,6 +806,12 @@ export default class GameScene extends ui.game.GameSceneUI {
             Ad.hideBanner();
             this.box_treasureAD.visible = false;
         });
+
+        // moregame back
+        this.btn_moreGameBack.on(Laya.Event.CLICK, this, () => {
+            this.box_moreGame.visible = false;
+            this.onClick_rewardTemplate(1, Const.RewardPos.Bullet, this.onClick_rewardBullet);
+        });
     }
 
     /** reward btn ani */
@@ -939,6 +949,7 @@ export default class GameScene extends ui.game.GameSceneUI {
             else if (this.missionIdx >= 1 && this.missionIdx <= 5) {
                 this.navGame && this.navGame.createGameIcons();
                 this.box_gameIcon.visible = true;
+                this.navGame && this.navGame.createMoreGame(this.box_moreGame);
             }
 
             // 测试接口开始 <========================
@@ -1475,6 +1486,7 @@ export default class GameScene extends ui.game.GameSceneUI {
             // hide
             this.box_countdown.visible = false;
             this.hideReviveUI();
+            this.box_moreGame.visible = false;
 
             // show
             this["level" + this.missionIdx].sizeGrid = "0,32,0,0";
@@ -1653,7 +1665,6 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.label_winDiamond.changeText("" + this.missionDiamondAdd);
         this.box_passStage.visible = true;
         this.showBanner(this.btn_passStage, 0, true);
-        // this.navWin && this.navWin.loadHomeIconInfoList();
     }
 
     /** 大关卡过关处理 */
@@ -1693,7 +1704,7 @@ export default class GameScene extends ui.game.GameSceneUI {
         this.label_winDiamond.changeText("" + this.missionDiamondAdd);
         this.box_passStage.visible = true;
         this.showBanner(this.btn_passStage, Global.config.banner_delay_pass, true);
-        this.navWin && this.navWin.loadHomeIconInfoList();
+        this.navWin && this.navWin.loadIconInfoList(false);
         // update
         this.stageIdx++;
         // update to user data
@@ -1736,6 +1747,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                 // 死亡处理
                 this.clearStageTimer();
                 this.box_countdown.visible = false;
+                this.box_moreGame.visible = false;
                 this.btn_retry.bottom = 150;
                 if (!Global.config.online) {
                     this.btn_retry.bottom = 260;
@@ -1744,7 +1756,7 @@ export default class GameScene extends ui.game.GameSceneUI {
                     this.btn_retry.bottom += Global.config.distance_iphonex || 0;
                 }
                 this.box_revive.visible = true;
-                this.navRevive && this.navRevive.loadHomeIconInfoList();
+                this.navRevive && this.navRevive.loadIconInfoList(false);
                 // 1秒后显示banner，上跳误点
                 this.showBanner(this.btn_retry, Global.config.banner_delay_ratio, true);
                 // show interstitialAd

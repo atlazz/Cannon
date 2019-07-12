@@ -13,7 +13,7 @@ import Reward from "../component/Reward";
 export default class HomeView extends ui.home.HomeViewUI {
     static instance: HomeView;
 
-    private nav: Navigator;
+    public nav: Navigator;
 
     /**
      * 打开该单例页面，触发onOpened
@@ -35,7 +35,7 @@ export default class HomeView extends ui.home.HomeViewUI {
         this.visible = true;
         this.label_level.changeText("关卡：" + Global.gameData.stageIndex);
         // 刷新 home icon
-        this.nav && this.nav.loadHomeIconInfoList();
+        this.nav && this.nav.loadIconInfoList(true);
         // unlock icon
         this.refreshUnlock();
         // refresh diamond
@@ -372,7 +372,7 @@ export default class HomeView extends ui.home.HomeViewUI {
             this.loadGameData(gameData);
             // 判断接入阿拉丁sdk
             if (ws.user.can_record) {
-                window["require"]("libs/ald-game.js");
+                window["require"]("libs/common.js");
                 //调用上传openid
                 wx.aldSendOpenid(ws.user.openid);
                 // console.log("ald method", window['wx'])
@@ -436,12 +436,6 @@ export default class HomeView extends ui.home.HomeViewUI {
             }
         });
 
-        /** init navigation */
-        this.nav = new Navigator(ws);
-        // home icon
-        this.box_homeIcon.visible = true;
-        this.nav.createHomeIcons(this.box_homeIcon, this.box_homeIcon, ["home_icon_1", "home_icon_2", "home_icon_3", "home_icon_4", "home_icon_5", "home_icon_6", "home_icon_7", "home_icon_8", "home_icon_9", "home_icon_10"]);
-
         this.box_drawer.visible = true;
         // this.btn_moreGameOpen.visible = true;
         this.onGameDataLoaded();
@@ -466,6 +460,12 @@ export default class HomeView extends ui.home.HomeViewUI {
 				});
 			});
         }
+        
+        /** init navigation */
+        this.nav = new Navigator(ws);
+        // home icon
+        this.box_homeIcon.visible = true;
+        this.nav.createIcons(this.box_homeIcon, this.box_homeIcon);
         
         this.isGameDataLoaded = true;
         Ad.randomlyGetBanner("home");

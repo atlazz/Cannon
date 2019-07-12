@@ -1,4 +1,5 @@
 import GameScene from "../runtime/GameScene";
+import Global from "../Global";
 
 /**
  * 使用例子：
@@ -21,38 +22,36 @@ export default class Navigator {
         this.SCALE = Laya.stage.width / 720;
     }
 
-    public loadHomeIconInfoList: Function;
-
-    public loadGameIconInfoList: Function;
-
-    public loadOverIconInfoList: Function;
+    public loadIconInfoList: Function;
 
     public loadGuessLikeIconInfoList: Function;
 
-    private iconData: any[] = [];
+    /** 广告位置 */
+    private IconPos = [
+        'first_step',
+        'mid_step'
+    ]
+
+    /**对联图标信息列表*/
+    private iconList: any[] = [];
+    /**更多图标信息列表*/
+    private moregameIconList: any[] = [];
 
     /**
-     * 创建首页图标列（左右各5个）
+     * 创建对联图标列（左右各5个）
      * 
      * @param parentBox 父节点
      * @param visibleSprite 该节点可以为父节点或者父节点所在的场景/页面。当该节点属性visible为true的时候，图标才会自动刷新。
      * @param posList 位置列表
      * 
-     * @return 返回首页图标根节点
+     * @return 返回对联图标根节点
      */
-    public createHomeIcons(parentBox: Laya.Box, visibleSprite: Laya.Sprite, posList: string[]): Laya.Box {
+    public createIcons(parentBox: Laya.Box, visibleSprite: Laya.Sprite): Laya.Box {
         if (!Laya.Browser.onMiniGame) {
             console.log("Laya.Browser.onMiniGame is false!");
             return;
         }
 
-        if (!posList || !posList.length) {
-            console.log("posList is empty!");
-            return;
-        }
-
-        /**首页图标信息列表*/
-        let homeIconInfosList: any[] = [];
         /**当前显示首页图标*/
         let currentHomeIconInfoList: any[] = [];
 
@@ -133,16 +132,17 @@ export default class Navigator {
         //渲染处理
         homeIconList.renderHandler = Laya.Handler.create(this, (cell: Laya.Box, index: number) => {
             let iconInfo = homeIconList.array[index];
-            if (iconInfo) {
+            if (iconInfo.data && iconInfo.pos) {
                 cell.visible = true;
                 //注册点击
-                cell.on(Laya.Event.MOUSE_DOWN, this, this.onIconClick, ["default"/** posList[index]*/, iconInfo]);
+                cell.on(Laya.Event.MOUSE_DOWN, this, this.onIconClick, [iconInfo.pos/** posList[index]*/, iconInfo.data]);
                 //图片
                 let iconImage = cell.getChildByName("iconImage") as Laya.Sprite;
-                iconImage && iconImage.loadImage(iconInfo.icon);
+                iconImage && iconImage.loadImage(iconInfo.data.icon);
                 //名称
                 let titleLabel = cell.getChildByName("titleLabel") as Laya.Label;
-                titleLabel && titleLabel.changeText(iconInfo.title);
+                titleLabel && titleLabel.changeText(iconInfo.data.title);
+                titleLabel && (titleLabel.visible = false);
                 //抖动
                 this.shakeOnce(Math.random() * 1000, cell);
             } else {
@@ -150,65 +150,69 @@ export default class Navigator {
             }
         }, [], false);
 
-        /**刷新首页图标*/
-        let refreshHomeIcons = () => {
-            if (homeIconBox && homeIconBox.activeInHierarchy && visibleSprite && visibleSprite.visible) {
-                for (let i = 0; i < homeIconInfosList.length; i++) {
-                    let iconInfos = homeIconInfosList[i];
-                    let iconInfo = this.getRandom(iconInfos);
-                    currentHomeIconInfoList[i] = iconInfo;
-                }
-                homeIconList.array = currentHomeIconInfoList;
+        //后台获取图标信息
+        this.loadIconInfoList = (force: boolean = false) => {
+            /** 后台重新拉取 */
+            if (force || !this.iconList.length) {
+                this.iconList = [];
+                this.ws.fetchGameAd({
+                    data: [{ pos: this.IconPos[0], count: Global.config.first_step_count }, { pos: this.IconPos[1], count: (10 - Global.config.first_step_count) * 10 }],
+                    success: (res: any) => {
+                        let data = res.data;
+                        console.log('fetch icon', data)
+                        this.iconList = [];
+                        this.moregameIconList = [];
+                        // save data list
+                        for (let i = 0; data[this.IconPos[1]] && i < data[this.IconPos[1]].length; i++) {
+                            let info = {};
+                            info['data'] = data[this.IconPos[1]][i];
+                            info['pos'] = this.IconPos[1];
+                            this.moregameIconList.push(info);
+                        }
+                        for (let i = 0; data[this.IconPos[0]] && i < data[this.IconPos[0]].length; i++) {
+                            let info = {};
+                            info['data'] = data[this.IconPos[0]][i];
+                            info['pos'] = this.IconPos[0];
+                            this.moregameIconList.push(info);
+                            // 对联icon数据列表，直跳
+                            if (i < 10) {
+                                this.iconList.push(info);
+                            }
+                        }
+                        // 对联icon数据列表，二跳
+                        let cnt = 0;
+                        for (let i = this.iconList.length; i < 10; i++) {
+                            this.moregameIconList[cnt] && this.iconList.push(this.moregameIconList[cnt++]);
+                        }
+                        //当前显示图标
+                        homeIconList.array = this.iconList;
+                        homeIconList.refresh();
+                    }
+                })
+            }
+            /** 不重新拉取 */
+            else {
+                homeIconList.array = this.iconList;
                 homeIconList.refresh();
             }
+
+            // this.ws.getPromoGameAd({
+            //     count: posList.length,
+            //     success: (res: any) => {
+            //         let data = res.data;
+            //         this.iconList = [];
+            //         for (let i = 0; i < Math.min(data.length, posList.length); i++) {
+            //             let info = data[i];
+            //             this.iconList.push([info]);
+            //         }
+            //         //当前显示图标
+            //         currentHomeIconInfoList = [];
+            //         scheduleRefreshHomeIcons();
+            //     },
+            // });
         }
 
-        /**每隔三秒刷新一次*/
-        let scheduleRefreshHomeIcons = () => {
-            homeIconBox.clearTimer(this, refreshHomeIcons);
-            refreshHomeIcons();
-            homeIconBox.timer.frameLoop(180, this, refreshHomeIcons);
-        }
-
-        //后台获取图标信息
-
-        // let fetchParams = [];
-        // for (let pos of posList) {
-        //     let list = this.ws.conf.games[pos];
-        //     let count = list && list.length ? list.length : 1;
-        //     fetchParams.push({ pos, count });
-        // }
-        // this.ws.fetchGameAd({
-        //     data: fetchParams,
-        //     success: (res: any) => {
-        //         let data = res.data;
-        //         homeIconInfosList = [];
-        //         for (let pos of posList) {
-        //             homeIconInfosList.push(data[pos]);
-        //         }
-        //         //当前显示图标
-        //         currentHomeIconInfoList = [];
-        //         scheduleRefreshHomeIcons();
-        //     },
-        // });
-        this.loadHomeIconInfoList = () => {
-            this.ws.getPromoGameAd({
-                count: posList.length,
-                success: (res: any) => {
-                    let data = res.data;
-                    homeIconInfosList = [];
-                    for (let i = 0; i < Math.min(data.length, posList.length); i++) {
-                        let info = data[i];
-                        homeIconInfosList.push([info]);
-                    }
-                    //当前显示图标
-                    currentHomeIconInfoList = [];
-                    scheduleRefreshHomeIcons();
-                },
-            });
-        }
-
-        this.loadHomeIconInfoList();
+        this.loadIconInfoList(true);
         return homeIconBox;
     }
 
@@ -229,32 +233,107 @@ export default class Navigator {
             return;
         }
 
-        //后台获取图标信息
-        this.ws.getPromoGameAd({
-            count: 10,
-            success: (res: any) => {
-                let data = res.data;
-                this.iconData = res.data;
-                // console.log("game icon fetched: ", data)
-                for (let i = 0; i < 10; i++) {
-                    let iconImg = GameScene.instance.box_gameIcon.getChildAt(i) as Laya.Image;
-                    if (i < data.length && data[i] && iconImg) {
-                        iconImg.visible = true;
-                        //注册点击
-                        iconImg.on(Laya.Event.MOUSE_DOWN, this, this.onIconClick, ["default"/** posList[index]*/, data[i]]);
-                        //图片
-                        iconImg.loadImage(data[i].icon);
-                        //名称
-                        let titleLabel = iconImg.getChildByName("iconTitle") as Laya.Label;
-                        titleLabel && titleLabel.changeText(data[i].title);
-                        //抖动
-                        this.shakeOnce(Math.random() * 1000, iconImg);
-                    } else {
-                        iconImg.visible = false;
+        /** 已有icon数据 */
+        if (this.iconList.length) {
+            console.log('show gameIcon')
+            for (let i = 0; i < Math.min(this.iconList.length, 10); i++) {
+                let iconImg = GameScene.instance.box_gameIcon.getChildAt(i) as Laya.Image;
+                if (this.iconList[i] && this.iconList[i].data && this.iconList[i].pos && iconImg) {
+                    iconImg.visible = true;
+                    //注册点击
+                    iconImg.on(Laya.Event.MOUSE_DOWN, this, this.onIconClick, [this.iconList[i].pos/** posList[index]*/, this.iconList[i].data]);
+                    //图片
+                    iconImg.loadImage(this.iconList[i].data.icon);
+                    //名称
+                    let titleLabel = iconImg.getChildByName("iconTitle") as Laya.Label;
+                    titleLabel && titleLabel.changeText(this.iconList[i].data.title);
+                    titleLabel && (titleLabel.visible = false);
+                    //抖动
+                    this.shakeOnce(Math.random() * 1000, iconImg);
+                } else {
+                    iconImg.visible = false;
+                }
+            }
+        }
+        /** 重新从后台拉取 */
+        else {
+            this.ws.fetchGameAd({
+                data: [{ pos: this.IconPos[0], count: Global.config.first_step_count }, { pos: this.IconPos[1], count: (10 - Global.config.first_step_count) * 10 }],
+                success: (res: any) => {
+                    let data = res.data;
+                    console.log('fetch icon in game', data)
+                    this.iconList = [];
+                    this.moregameIconList = [];
+                    // save data list
+                    for (let i = 0; data[this.IconPos[1]] && i < data[this.IconPos[1]].length; i++) {
+                        let info = {};
+                        info['data'] = data[this.IconPos[1]][i];
+                        info['pos'] = this.IconPos[1];
+                        this.moregameIconList.push(info);
+                    }
+                    for (let i = 0; data[this.IconPos[0]] && i < data[this.IconPos[0]].length; i++) {
+                        let info = {};
+                        info['data'] = data[this.IconPos[0]][i];
+                        info['pos'] = this.IconPos[0];
+                        this.moregameIconList.push(info);
+                        // 对联icon数据列表，直跳
+                        if (i < 10) {
+                            this.iconList.push(info);
+                        }
+                    }
+                    // 对联icon数据列表，二跳
+                    let cnt = 0;
+                    for (let i = this.iconList.length; i < 10; i++) {
+                        this.moregameIconList[cnt] && this.iconList.push(this.moregameIconList[cnt++]);
+                    }
+                    // render and listen
+                    for (let i = 0; i < 10; i++) {
+                        let iconImg = GameScene.instance.box_gameIcon.getChildAt(i) as Laya.Image;
+                        if (this.iconList[i] && this.iconList[i].data && this.iconList[i].pos && iconImg) {
+                            iconImg.visible = true;
+                            //注册点击
+                            iconImg.on(Laya.Event.MOUSE_DOWN, this, this.onIconClick, [this.iconList[i].pos/** posList[index]*/, this.iconList[i].data]);
+                            //图片
+                            iconImg.loadImage(this.iconList[i].data.icon);
+                            //名称
+                            let titleLabel = iconImg.getChildByName("iconTitle") as Laya.Label;
+                            titleLabel && titleLabel.changeText(this.iconList[i].data.title);
+                            titleLabel && (titleLabel.visible = false);
+                            //抖动
+                            this.shakeOnce(Math.random() * 1000, iconImg);
+                        } else {
+                            iconImg.visible = false;
+                        }
                     }
                 }
-            },
-        });
+            })
+        }
+
+        // this.ws.getPromoGameAd({
+        //     count: 10,
+        //     success: (res: any) => {
+        //         let data = res.data;
+        //         this.iconData = res.data;
+        //         // console.log("game icon fetched: ", data)
+        //         for (let i = 0; i < 10; i++) {
+        //             let iconImg = GameScene.instance.box_gameIcon.getChildAt(i) as Laya.Image;
+        //             if (i < data.length && data[i] && iconImg) {
+        //                 iconImg.visible = true;
+        //                 //注册点击
+        //                 iconImg.on(Laya.Event.MOUSE_DOWN, this, this.onIconClick, ["default"/** posList[index]*/, data[i]]);
+        //                 //图片
+        //                 iconImg.loadImage(data[i].icon);
+        //                 //名称
+        //                 let titleLabel = iconImg.getChildByName("iconTitle") as Laya.Label;
+        //                 titleLabel && titleLabel.changeText(data[i].title);
+        //                 //抖动
+        //                 this.shakeOnce(Math.random() * 1000, iconImg);
+        //             } else {
+        //                 iconImg.visible = false;
+        //             }
+        //         }
+        //     },
+        // });
     }
 
     /**
@@ -265,10 +344,11 @@ export default class Navigator {
      */
     public randomIconTap(pos: string, success: Function, fail: Function) {
         // 已有icon数据
-        if (this.iconData && this.iconData.length != 0) { 
+        if (this.iconList && this.iconList.length) {
+            let idx = Math.floor(Math.random() * this.iconList.length);
             this.ws.tapGameAd({
-                pos: pos,
-                ad: this.iconData[Math.floor(Math.random() * this.iconData.length)],
+                pos: this.iconList[idx].pos,
+                ad: this.iconList[idx].data,
                 redirect: true,
                 success: success,
                 fail: fail
@@ -276,260 +356,8 @@ export default class Navigator {
         }
         // 没有数据，重新后台抓取
         else {
-            this.ws.getPromoGameAd({
-                count: 10,
-                success: (res: any) => {
-                    this.iconData = res.data;
-                    this.ws.tapGameAd({
-                        pos: pos,
-                        ad: this.iconData[Math.floor(Math.random() * this.iconData.length)],
-                        redirect: true,
-                        success: success,
-                        fail: fail
-                    });
-                },
-            });
+            fail && fail();
         }
-    }
-
-    /**
-     * 创建抽屉图标列表
-     * 
-     * @param parentBox 父节点
-     * @param pos 位置
-     * 
-     * @return 返回抽屉根节点
-     */
-    public createDrawer(parentBox: Laya.Box, pos: string): Laya.Box {
-        if (!Laya.Browser.onMiniGame) {
-            console.log("Laya.Browser.onMiniGame is false!");
-            return;
-        }
-
-        //抽屉根盒子
-        let drawerBox = new Laya.Box();
-        drawerBox.width = 720 * this.SCALE;
-        drawerBox.height = 1280 * this.SCALE;
-        drawerBox.centerX = 0;
-        drawerBox.centerY = 0;
-        drawerBox.mouseThrough = true;
-        parentBox.addChild(drawerBox);
-
-        //抽屉背景
-        let background = new Laya.Image();
-        background.width = 720 * this.SCALE;
-        background.height = 1600 * this.SCALE;
-        background.centerX = 0;
-        background.centerY = 0;
-        background.mouseThrough = false;
-        background.mouseEnabled = true;
-        background.visible = false;
-        background.skin = "res/texture/navigator/blank.png";
-        background.sizeGrid = "1,1,1,1";
-        drawerBox.addChild(background);
-
-        //抽屉面板盒子
-        let panelBox = new Laya.Box();
-        panelBox.width = 720 * this.SCALE;
-        panelBox.height = 1280 * this.SCALE;
-        panelBox.centerX = -480 * this.SCALE;
-        panelBox.centerY = 0;
-        panelBox.mouseThrough = true;
-        drawerBox.addChild(panelBox);
-
-        //抽屉面板图片
-        let panel = new Laya.Sprite();
-        panel.width = 480 * this.SCALE;
-        panel.height = 665 * this.SCALE;
-        panel.x = 0;
-        panel.y = 120 * this.SCALE;
-        panel.loadImage("res/texture/navigator/drawer_panel.png");
-        panelBox.addChild(panel);
-
-        //抽屉图标列表
-        let drawerList = new Laya.List();
-        drawerList.width = 380 * this.SCALE;
-        drawerList.height = 540 * this.SCALE;
-        drawerList.x = 40 * this.SCALE;
-        drawerList.y = 85 * this.SCALE;
-        drawerList.mouseThrough = true;
-        drawerList.spaceY = 40 * this.SCALE;
-        drawerList.spaceX = 30 * this.SCALE;
-        drawerList.repeatX = 3;
-        panel.addChild(drawerList);
-
-        let SCALE = this.SCALE;
-        //列表内容模板
-        class Item extends Laya.Box {
-            constructor() {
-                super();
-                this.width = 106 * SCALE;
-                this.height = 106 * SCALE;
-                this.x = 0;
-                this.y = 0;
-                this.visible = false;
-
-                //图标
-                let iconImage = new Laya.Sprite();
-                iconImage.name = "iconImage";
-                iconImage.width = 106 * SCALE;
-                iconImage.height = 106 * SCALE;
-                iconImage.x = 0;
-                iconImage.y = 0;
-                this.addChild(iconImage);
-
-                //提示
-                let tips = new Laya.Sprite();
-                tips.name = "tips";
-                tips.width = 59 * SCALE;
-                tips.height = 32 * SCALE;
-                tips.x = 60 * SCALE;
-                tips.y = -10 * SCALE;
-                tips.loadImage("res/texture/navigator/tips.png");
-                this.addChild(tips);
-                //提示文字
-                let tipsLabel = new Laya.Label();
-                tipsLabel.name = "tipsLabel";
-                tipsLabel.width = 42 * SCALE;
-                tipsLabel.height = 18 * SCALE;
-                tipsLabel.valign = "middle";
-                tipsLabel.align = "center";
-                tipsLabel.fontSize = Math.round(18 * SCALE);
-                tipsLabel.font = "Arial";
-                tipsLabel.color = "#ffffff";
-                tipsLabel.x = 9 * SCALE;
-                tipsLabel.y = 6 * SCALE;
-                tips.addChild(tipsLabel);
-
-                //图标名称
-                let titleLabel = new Laya.Label();
-                titleLabel.name = "titleLabel";
-                titleLabel.width = 106 * SCALE;
-                titleLabel.overflow = "visible";
-                titleLabel.valign = "middle";
-                titleLabel.align = "center";
-                titleLabel.fontSize = Math.round(18 * SCALE);
-                titleLabel.font = "Arial";
-                titleLabel.color = "#1d3b63";
-                titleLabel.anchorY = 0;
-                titleLabel.anchorX = 0.5;
-                titleLabel.x = 53 * SCALE;
-                titleLabel.y = 110 * SCALE;
-                this.addChild(titleLabel);
-            }
-        }
-        drawerList.itemRender = Item;
-
-        drawerList.renderHandler = Laya.Handler.create(this, (cell: Laya.Box, index: number) => {
-            let iconInfo = drawerList.array[index];
-            if (iconInfo) {
-                cell.visible = true;
-                //注册点击
-                cell.on(Laya.Event.MOUSE_DOWN, this, this.onIconClick, [/**"default"*/pos, iconInfo]);
-                //图片
-                let iconImage = cell.getChildByName("iconImage") as Laya.Sprite;
-                iconImage && iconImage.loadImage(iconInfo.icon);
-                //名称
-                let titleLabel = cell.getChildByName("titleLabel") as Laya.Label;
-                titleLabel && titleLabel.changeText(iconInfo.title);
-                //提示
-                let tips = cell.getChildByName("tips");
-                if (tips) {
-                    let tipsLabel = tips.getChildByName("tipsLabel") as Laya.Label;
-                    tipsLabel && tipsLabel.changeText(Math.random() > 0.5 ? "热门" : "NEW");
-                }
-            } else {
-                cell.visible = false;
-            }
-        }, [], false);
-
-        //抽屉关闭按钮
-        let drawerCloseButton = new Laya.Sprite();
-        drawerCloseButton.width = 88 * this.SCALE;
-        drawerCloseButton.height = 74 * this.SCALE;
-        drawerCloseButton.x = 480 * this.SCALE;
-        drawerCloseButton.y = 40 * this.SCALE;
-        drawerCloseButton.loadImage("res/texture/navigator/drawer_button.png");
-        drawerCloseButton.visible = false;
-        panel.addChild(drawerCloseButton);
-        //抽屉关闭箭头
-        let closeArrow = new Laya.Sprite();
-        closeArrow.width = 39 * this.SCALE;
-        closeArrow.height = 49 * this.SCALE;
-        closeArrow.scaleX = -1;
-        closeArrow.x = 55 * this.SCALE;
-        closeArrow.y = 12 * this.SCALE;
-        closeArrow.loadImage("res/texture/navigator/arrow.png");
-        drawerCloseButton.addChild(closeArrow);
-
-        //抽屉打开按钮
-        let drawerOpenButton = new Laya.Sprite();
-        drawerOpenButton.width = 88 * this.SCALE;
-        drawerOpenButton.height = 74 * this.SCALE;
-        drawerOpenButton.x = 480 * this.SCALE;
-        drawerOpenButton.y = 40 * this.SCALE;
-        drawerOpenButton.loadImage("res/texture/navigator/drawer_button.png");
-        drawerOpenButton.visible = true;
-        panel.addChild(drawerOpenButton);
-        //抽屉打开箭头
-        let openArrow = new Laya.Sprite();
-        openArrow.width = 39 * this.SCALE;
-        openArrow.height = 49 * this.SCALE;
-        openArrow.x = 23 * this.SCALE;
-        openArrow.y = 12 * this.SCALE;
-        openArrow.loadImage("res/texture/navigator/arrow.png");
-        drawerOpenButton.addChild(openArrow);
-
-        //抽屉打开
-        drawerOpenButton.on(Laya.Event.MOUSE_DOWN, this, () => {
-            // this.ws.getPromoGameAd({
-            //     count: 9,
-            //     success: (res: any) => {
-            //         drawerList.array = res.data;
-            //         drawerList.refresh();
-            //     },
-            // });
-            this.ws.getGameAd({
-                pos: pos,
-                count: this.ws.conf.games[pos].length,
-                success: (res: any) => {
-                    let iconInfoList = res.data;
-                    drawerList.array = iconInfoList;
-                    drawerList.refresh();
-                }
-            });
-            background.visible = true;
-            Laya.Tween.to(panelBox, { centerX: 0 }, 300, Laya.Ease.linearNone, Laya.Handler.create(this, () => {
-                drawerOpenButton.visible = false;
-                drawerCloseButton.visible = true;
-            }));
-        });
-
-        //抽屉关闭
-        drawerCloseButton.on(Laya.Event.MOUSE_DOWN, this, () => {
-            this.ws.hideGameAd(pos);
-            Laya.Tween.to(panelBox, { centerX: -480 * SCALE }, 300, Laya.Ease.linearNone, Laya.Handler.create(this, () => {
-                drawerOpenButton.visible = true;
-                drawerCloseButton.visible = false;
-                background.visible = false;
-            }));
-        });
-
-        //箭头不停的动
-        let leftX = Math.round(13 * this.SCALE);
-        let rightX = Math.round(28 * this.SCALE);
-        let isLeft = false;
-        drawerBox.timerLoop(500, this, () => {
-            if (isLeft) {
-                openArrow.x = rightX;
-                isLeft = false;
-            } else {
-                openArrow.x = leftX;
-                isLeft = true;
-            }
-        });
-
-        return drawerBox;
     }
 
     /** 初始化更多游戏图标列表
@@ -538,7 +366,7 @@ export default class Navigator {
     * @param pos 位置
     * @return 更多游戏根盒子
     */
-    public createMoreGame(parentBox: Laya.Box, openButtonParentBox: Laya.Sprite, pos: string): Laya.Box {
+    public createMoreGame(parentBox: Laya.Box): Laya.Box {
         if (!Laya.Browser.onMiniGame) {
             console.log("Laya.Browser.onMiniGame is false!");
             return;
@@ -554,18 +382,6 @@ export default class Navigator {
         moreGameBox.visible = false;
         parentBox.addChild(moreGameBox);
 
-        //更多游戏背景
-        let background = new Laya.Image();
-        background.width = 720 * this.SCALE;
-        background.height = 1600 * this.SCALE;
-        background.centerX = 0;
-        background.centerY = 0;
-        background.mouseThrough = false;
-        background.mouseEnabled = true;
-        background.skin = "res/texture/navigator/blank.png";
-        background.sizeGrid = "1,1,1,1";
-        moreGameBox.addChild(background);
-
         //更多游戏面板盒子
         let panelBox = new Laya.Box();
         panelBox.width = 720 * this.SCALE;
@@ -576,50 +392,22 @@ export default class Navigator {
         moreGameBox.addChild(panelBox);
 
         //更多游戏面板图片
-        let panel = new Laya.Sprite();
-        panel.width = 586 * this.SCALE;
-        panel.height = 806 * this.SCALE;
-        panel.loadImage("res/texture/navigator/moregame_panel.png");
-        panel.x = 67 * this.SCALE;
-        panel.y = 137 * this.SCALE;
+        let panel = new Laya.Box();
+        panel.width = 690 * this.SCALE;
+        panel.height = 900 * this.SCALE;
+        panel.x = 15 * this.SCALE;
+        panel.top = 220 * this.SCALE;
         panelBox.addChild(panel);
-
-        //关闭按钮
-        let closeButton = new Laya.Sprite();
-        closeButton.x = 538 * this.SCALE;
-        closeButton.y = -12 * this.SCALE;
-        closeButton.width = 59 * this.SCALE;
-        closeButton.height = 62 * this.SCALE;
-        closeButton.loadImage("res/texture/navigator/close_button.png");
-        panel.addChild(closeButton);
-
-        //打开按钮
-        let openButton = new Laya.Image();
-        openButton.width = 110 * this.SCALE;
-        openButton.height = 110 * this.SCALE;
-        openButton.pivotY = 55 * this.SCALE;
-        openButton.pivotX = 55 * this.SCALE;
-        openButton.centerX = 285 * this.SCALE;
-        openButton.centerY = -465 * this.SCALE;
-        openButton.loadImage("res/texture/navigator/more_game_button.png", Laya.Handler.create(this, () => {
-            //缩放
-            moreGameBox.timerLoop(1005, this, () => {
-                Laya.Tween.to(openButton, { scaleX: 0.9 * SCALE, scaleY: 0.9 * SCALE }, 500, Laya.Ease.linearNone, Laya.Handler.create(this, () => {
-                    Laya.Tween.to(openButton, { scaleX: SCALE, scaleY: SCALE }, 500, Laya.Ease.linearNone);
-                }));
-            });
-        }));
-        openButtonParentBox.addChild(openButton);
 
         //更多游戏图标列表
         let moreGameList = new Laya.List();
-        moreGameList.width = 500 * this.SCALE;
-        moreGameList.height = 640 * this.SCALE;
-        moreGameList.centerX = 10 * this.SCALE;
-        moreGameList.centerY = 5 * this.SCALE;
-        moreGameList.spaceY = 50 * this.SCALE;
-        moreGameList.spaceX = 40 * this.SCALE;
-        moreGameList.repeatX = 3;
+        moreGameList.width = 690 * this.SCALE;
+        moreGameList.height = 1000 * this.SCALE;
+        // moreGameList.centerX = 10 * this.SCALE;
+        // moreGameList.centerY = 5 * this.SCALE;
+        moreGameList.spaceX = 10 * this.SCALE;
+        moreGameList.spaceY = 80 * this.SCALE;
+        moreGameList.repeatX = 4;
         panel.addChild(moreGameList);
 
         let SCALE = this.SCALE;
@@ -627,8 +415,8 @@ export default class Navigator {
         class Item extends Laya.Box {
             constructor() {
                 super();
-                this.width = 132 * SCALE;
-                this.height = 132 * SCALE;
+                this.width = 165 * SCALE;
+                this.height = 165 * SCALE;
                 this.x = 0;
                 this.y = 0;
                 this.visible = false;
@@ -636,8 +424,8 @@ export default class Navigator {
                 //图标
                 let iconImage = new Laya.Sprite();
                 iconImage.name = "iconImage";
-                iconImage.width = 132 * SCALE;
-                iconImage.height = 132 * SCALE;
+                iconImage.width = 165 * SCALE;
+                iconImage.height = 165 * SCALE;
                 iconImage.x = 0;
                 iconImage.y = -2 * SCALE;
                 this.addChild(iconImage);
@@ -647,7 +435,7 @@ export default class Navigator {
                 tips.name = "tips";
                 tips.width = 59 * SCALE;
                 tips.height = 32 * SCALE;
-                tips.x = 90 * SCALE;
+                tips.x = 110 * SCALE;
                 tips.y = -10 * SCALE;
                 tips.loadImage("res/texture/navigator/tips.png");
                 this.addChild(tips);
@@ -668,7 +456,7 @@ export default class Navigator {
                 //图标名称
                 let titleLabel = new Laya.Label();
                 titleLabel.name = "titleLabel";
-                titleLabel.width = 132 * SCALE;
+                titleLabel.width = 165 * SCALE;
                 titleLabel.overflow = "visible";
                 titleLabel.valign = "middle";
                 titleLabel.align = "center";
@@ -678,7 +466,7 @@ export default class Navigator {
                 titleLabel.anchorY = 0;
                 titleLabel.anchorX = 0.5;
                 titleLabel.x = 66 * SCALE;
-                titleLabel.y = 138 * SCALE;
+                titleLabel.y = 170 * SCALE;
                 this.addChild(titleLabel);
             }
         }
@@ -686,16 +474,16 @@ export default class Navigator {
 
         moreGameList.renderHandler = Laya.Handler.create(this, (cell: Laya.Box, index: number) => {
             let iconInfo = moreGameList.array[index];
-            if (iconInfo) {
+            if (iconInfo && iconInfo.data && iconInfo.pos) {
                 cell.visible = true;
                 //注册点击
-                cell.on(Laya.Event.MOUSE_DOWN, this, this.onIconClick, [/**"default"*/pos, iconInfo]);
+                cell.on(Laya.Event.CLICK, this, this.onIconClick, [iconInfo.pos/**"default"*/, iconInfo.data]);
                 //图片
                 let iconImage = cell.getChildByName("iconImage") as Laya.Sprite;
-                iconImage && iconImage.loadImage(iconInfo.icon);
+                iconImage && iconImage.loadImage(iconInfo.data.icon);
                 //名称
                 let titleLabel = cell.getChildByName("titleLabel") as Laya.Label;
-                titleLabel && titleLabel.changeText(iconInfo.title);
+                titleLabel && titleLabel.changeText(iconInfo.data.title);
                 //提示
                 let tips = cell.getChildByName("tips");
                 if (tips) {
@@ -707,216 +495,16 @@ export default class Navigator {
             }
         }, [], false);
 
-        //更多游戏面板打开
-        openButton.on(Laya.Event.MOUSE_DOWN, this, () => {
-            // this.ws.getPromoGameAd({
-            //     count: 9,
-            //     success: (res: any) => {
-            //         moreGameList.array = res.data;
-            //         moreGameList.refresh();
-            //     },
-            // });
-            this.ws.getGameAd({
-                pos: pos,
-                count: this.ws.conf.games[pos].length,
-                success: (res: any) => {
-                    let iconInfoList = res.data;
-                    moreGameList.array = iconInfoList;
-                    moreGameList.refresh();
-                }
-            });
-            moreGameBox.visible = true;
-            openButton.visible = false;
-        });
-
-        //更多游戏面板关闭
-        closeButton.on(Laya.Event.MOUSE_DOWN, this, () => {
-            this.ws.hideGameAd(pos);
-            openButton.visible = true;
-            moreGameBox.visible = false;
-        });
+        if (this.moregameIconList.length) {
+            console.log('moregameIconList', this.moregameIconList)
+            moreGameList.array = this.moregameIconList;
+            moreGameList.refresh();
+        }
+        // show
+        moreGameList.vScrollBarSkin = '';
+        moreGameBox.visible = true;
 
         return moreGameBox;
-    }
-
-
-    /**
-     * 创建结束页图标列（左右各3个）
-     * 
-     * @param parentBox 父节点
-     * @param visibleSprite 该节点可以为父节点或者父节点所在的场景/页面。当该节点属性visible为true的时候，图标才会自动刷新。
-     * @param posList 位置列表
-     * 
-     * @return 返回结束页图标根节点
-     */
-    public createOverIcons(parentBox: Laya.Box, visibleSprite: Laya.Sprite, posList: string[]): Laya.Box {
-        if (!Laya.Browser.onMiniGame) {
-            console.log("Laya.Browser.onMiniGame is false!");
-            return;
-        }
-
-        if (!posList || !posList.length) {
-            console.log("posList is empty!");
-            return;
-        }
-
-        /**结束页图标信息列表*/
-        let overIconInfosList: any[] = [];
-        /**当前显示结束页图标*/
-        let currentOverIconInfoList: any[] = [];
-
-        //结束页图标列根盒子
-        let overIconBox = new Laya.Box();
-        overIconBox.width = 720 * this.SCALE;
-        overIconBox.height = 1280 * this.SCALE;
-        overIconBox.centerX = 0;
-        overIconBox.centerY = 0;
-        overIconBox.mouseThrough = true;
-        parentBox.addChild(overIconBox);
-
-        //结束页图标列表
-        let overIconList = new Laya.List();
-        overIconList.width = 720 * this.SCALE;
-        overIconList.height = 470 * this.SCALE;
-        overIconList.x = 0;
-        overIconList.y = 180 * this.SCALE;
-        overIconList.mouseThrough = true;
-        overIconList.spaceY = 45 * this.SCALE;
-        overIconList.spaceX = 468 * this.SCALE;
-        overIconList.repeatY = 3;
-        overIconList.repeatX = 2;
-        overIconBox.addChild(overIconList);
-
-        let SCALE = this.SCALE;
-        //列表内容模板
-        class Item extends Laya.Box {
-            constructor() {
-                super();
-                this.width = 106 * SCALE;
-                this.height = 106 * SCALE;
-                this.pivotX = 53 * SCALE;
-                this.pivotY = 53 * SCALE;
-                this.x = 73 * SCALE;
-                this.y = 73 * SCALE;
-                this.visible = false;
-
-                //图标
-                let iconImage = new Laya.Sprite();
-                iconImage.name = "iconImage";
-                iconImage.width = 106 * SCALE;
-                iconImage.height = 106 * SCALE;
-                iconImage.x = 0;
-                iconImage.y = 0;
-                this.addChild(iconImage);
-
-                //提示
-                let tips = new Laya.Sprite();
-                tips.name = "tips";
-                tips.scaleX = -1;
-                tips.width = 36 * SCALE;
-                tips.height = 36 * SCALE;
-                tips.x = 116 * SCALE;
-                tips.y = -10 * SCALE;
-                tips.loadImage("res/texture/navigator/tips2.png");
-                this.addChild(tips);
-
-                //图标名称
-                let titleLabel = new Laya.Label();
-                titleLabel.name = "titleLabel";
-                titleLabel.width = 106 * SCALE;
-                titleLabel.overflow = "visible";
-                titleLabel.valign = "middle";
-                titleLabel.align = "center";
-                titleLabel.fontSize = Math.round(18 * SCALE);
-                titleLabel.font = "Arial";
-                titleLabel.color = "#1d3b63";
-                titleLabel.anchorY = 0;
-                titleLabel.anchorX = 0.5;
-                titleLabel.y = 110 * SCALE;
-                titleLabel.x = 53 * SCALE;
-                this.addChild(titleLabel);
-            }
-        }
-        overIconList.itemRender = Item;
-
-        //渲染处理
-        overIconList.renderHandler = Laya.Handler.create(this, (cell: Laya.Box, index: number) => {
-            let iconInfo = overIconList.array[index];
-            if (iconInfo) {
-                cell.visible = true;
-                //注册点击
-                cell.on(Laya.Event.MOUSE_DOWN, this, this.onIconClick, ["default"/**posList[index]*/, iconInfo]);
-                //图片
-                let iconImage = cell.getChildByName("iconImage") as Laya.Sprite;
-                iconImage && iconImage.loadImage(iconInfo.icon);
-                //名称
-                let titleLabel = cell.getChildByName("titleLabel") as Laya.Label;
-                titleLabel && titleLabel.changeText(iconInfo.title);
-                //抖动
-                this.shakeOnce(Math.random() * 1000, cell);
-            } else {
-                cell.visible = false;
-            }
-        }, [], false);
-
-        /**刷新结束页图标*/
-        let refreshOverIcons = () => {
-            if (overIconBox && overIconBox.activeInHierarchy && visibleSprite && visibleSprite.visible) {
-                for (let i = 0; i < overIconInfosList.length; i++) {
-                    let iconInfos = overIconInfosList[i];
-                    let iconInfo = this.getRandom(iconInfos);
-                    currentOverIconInfoList[i] = iconInfo;
-                }
-                overIconList.array = currentOverIconInfoList;
-                overIconList.refresh();
-            }
-        }
-        /**每隔三秒刷新一次*/
-        let scheduleRefreshOverIcons = () => {
-            overIconBox.clearTimer(this, refreshOverIcons);
-            refreshOverIcons();
-            overIconBox.timerLoop(3000, this, refreshOverIcons);
-        }
-
-        //后台获取图标信息
-        // let fetchParams = [];
-        // for (let pos of posList) {
-        //     let list = this.ws.conf.games[pos];
-        //     let count = list && list.length ? list.length : 1;
-        //     fetchParams.push({ pos, count });
-        // }
-        // this.ws.fetchGameAd({
-        //     data: fetchParams,
-        //     success: (res: any) => {
-        //         let data = res.data;
-        //         overIconInfosList = [];
-        //         for (let pos of posList) {
-        //             overIconInfosList.push(data[pos]);
-        //         }
-        //         //当前显示图标
-        //         currentOverIconInfoList = [];
-        //         scheduleRefreshOverIcons();
-        //     },
-        // });
-        this.loadOverIconInfoList = () => {
-            this.ws.getPromoGameAd({
-                count: posList.length,
-                success: (res: any) => {
-                    let data = res.data;
-                    overIconInfosList = [];
-                    for (let i = 0; i < Math.min(data.length, posList.length); i++) {
-                        let info = data[i];
-                        overIconInfosList.push([info]);
-                    }
-                    //当前显示图标
-                    currentOverIconInfoList = [];
-                    scheduleRefreshOverIcons();
-                },
-            });
-        }
-
-        this.loadOverIconInfoList();
-        return overIconBox;
     }
 
     /**

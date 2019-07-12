@@ -80,6 +80,7 @@ let Global = {
         MaxTreasureBannerHit: 2,
         allow_interstitial: true, // 插屏广告开关
         uid_interstitial: "adunit-1b8d841eedb67978",  // 插屏广告uid
+        first_step_count: 10,
     },
     user: {},
     audio: {
