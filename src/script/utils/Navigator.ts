@@ -24,6 +24,8 @@ export default class Navigator {
 
     public loadIconInfoList: Function;
 
+    public loadMoregameInfoList: Function;
+
     public loadGuessLikeIconInfoList: Function;
 
     /** 广告位置 */
@@ -224,7 +226,7 @@ export default class Navigator {
      * 
      * @return 返回首页图标根节点
      */
-    public createGameIcons() {
+    public createGameIcons(force: boolean = false) {
         if (!Laya.Browser.onMiniGame) {
             return;
         }
@@ -234,7 +236,7 @@ export default class Navigator {
         }
 
         /** 已有icon数据 */
-        if (this.iconList.length) {
+        if (this.iconList.length && !force) {
             console.log('show gameIcon')
             for (let i = 0; i < Math.min(this.iconList.length, 10); i++) {
                 let iconImg = GameScene.instance.box_gameIcon.getChildAt(i) as Laya.Image;
@@ -495,11 +497,21 @@ export default class Navigator {
             }
         }, [], false);
 
-        if (this.moregameIconList.length) {
-            console.log('moregameIconList', this.moregameIconList)
-            moreGameList.array = this.moregameIconList;
-            moreGameList.refresh();
+        //后台获取图标信息
+        this.loadMoregameInfoList = () => {
+            if (!moreGameList) {
+                GameScene.instance && GameScene.instance.box_moreGame && this.createMoreGame(GameScene.instance.box_moreGame);
+                return;
+            }
+            if (this.moregameIconList.length && moreGameList) {
+                console.log('moregameIconList', this.moregameIconList)
+                moreGameList.array = this.moregameIconList;
+                moreGameList.refresh();
+            }
         }
+
+        this.loadMoregameInfoList();
+
         // show
         moreGameList.vScrollBarSkin = '';
         moreGameBox.visible = true;

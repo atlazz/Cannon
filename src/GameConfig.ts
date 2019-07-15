@@ -9,7 +9,7 @@ import Reward from "./script/component/Reward"
 export default class GameConfig{
     static width:number=720;
     static height:number=1280;
-    static scaleMode:string="showall";
+    static scaleMode:string="fixedwidth";
     static screenMode:string="vertical";
     static alignV:string="middle";
     static alignH:string="center";

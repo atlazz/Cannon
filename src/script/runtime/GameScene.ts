@@ -43,7 +43,6 @@ export default class GameScene extends ui.game.GameSceneUI {
 
         /** init navigation game icon: 第一次打开时 */
         if (Laya.Browser.onMiniGame && !this.navGame) {
-            this.navGame = new Navigator(ws);
         }
 
         // game start
@@ -93,6 +92,11 @@ export default class GameScene extends ui.game.GameSceneUI {
                 this.navRevive = new Navigator(ws);
                 this.box_reviveIcon.visible = true;
                 this.navRevive.createIcons(this.box_reviveIcon, this.box_reviveIcon);
+                // game icon
+                this.navGame = new Navigator(ws);
+                this.box_gameIcon.visible = true;
+                this.navGame.createGameIcons(true);
+                this.navGame.createMoreGame(this.box_moreGame);
             }
         }
         // game pause: 大炮选择页面跳转回来
@@ -945,11 +949,11 @@ export default class GameScene extends ui.game.GameSceneUI {
                 // create interstitialAd 插屏广告预创建
                 Laya.Browser.onMiniGame && Global.config.allow_interstitial && Ad.wxCreatInterstitialAd(Global.config.uid_interstitial);
             }
-            // 常规关卡icon广告
-            else if (this.missionIdx >= 1 && this.missionIdx <= 5) {
-                this.navGame && this.navGame.createGameIcons();
+            // 第一小关刷新拉取icon广告
+            else if (this.missionIdx === 1) {
+                this.navGame && this.navGame.createGameIcons(true);
                 this.box_gameIcon.visible = true;
-                this.navGame && this.navGame.createMoreGame(this.box_moreGame);
+                this.navGame && this.navGame.loadMoregameInfoList();
             }
 
             // 测试接口开始 <========================
@@ -1135,6 +1139,9 @@ export default class GameScene extends ui.game.GameSceneUI {
                                 let mat: Laya.PBRSpecularMaterial = new Laya.PBRSpecularMaterial();
                                 // 刷新渲染模式，不然其上设置成透明渲染的物体会被遮盖
                                 mat.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
+                                // let mat: Laya.BlinnPhongMaterial = new Laya.BlinnPhongMaterial();
+                                // // 刷新渲染模式，不然其上设置成透明渲染的物体会被遮盖
+                                // mat.renderMode = Laya.BlinnPhongMaterial.RENDERMODE_OPAQUE;
                                 mat.albedoTexture = tex;
                                 child.meshRenderer.material = mat;
                             }));
@@ -1153,6 +1160,9 @@ export default class GameScene extends ui.game.GameSceneUI {
                                 let mat: Laya.PBRSpecularMaterial = new Laya.PBRSpecularMaterial();
                                 // 刷新渲染模式，不然其上设置成透明渲染的物体会被遮盖
                                 mat.renderMode = Laya.PBRSpecularMaterial.RENDERMODE_OPAQUE;
+                                // let mat: Laya.BlinnPhongMaterial = new Laya.BlinnPhongMaterial();
+                                // // 刷新渲染模式，不然其上设置成透明渲染的物体会被遮盖
+                                // mat.renderMode = Laya.BlinnPhongMaterial.RENDERMODE_OPAQUE;
                                 mat.albedoTexture = tex;
                                 child.meshRenderer.material = mat;
                             }));
