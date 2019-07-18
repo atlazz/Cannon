@@ -17,6 +17,7 @@ export default class GameScene extends ui.game.GameSceneUI {
     static instance: GameScene;
 
     private navGame: Navigator;
+    private navMore: Navigator;
     private navWin: Navigator;
     private navRevive: Navigator;
 
@@ -96,7 +97,9 @@ export default class GameScene extends ui.game.GameSceneUI {
                 this.navGame = new Navigator(ws);
                 this.box_gameIcon.visible = true;
                 this.navGame.createGameIcons(true);
-                this.navGame.createMoreGame(this.box_moreGame);
+                // moregame icon
+                this.navMore = new Navigator(ws);
+                this.navMore.createMoreGame(this.box_moreGame);
             }
         }
         // game pause: 大炮选择页面跳转回来
@@ -953,7 +956,7 @@ export default class GameScene extends ui.game.GameSceneUI {
             else if (this.missionIdx === 1) {
                 this.navGame && this.navGame.createGameIcons(true);
                 this.box_gameIcon.visible = true;
-                this.navGame && this.navGame.loadMoregameInfoList();
+                this.navMore && this.navMore.loadMoregameInfoList(true);
             }
 
             // 测试接口开始 <========================

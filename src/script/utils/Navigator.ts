@@ -498,12 +498,50 @@ export default class Navigator {
         }, [], false);
 
         //后台获取图标信息
-        this.loadMoregameInfoList = () => {
+        this.loadMoregameInfoList = (force: boolean = false) => {
             if (!moreGameList) {
                 GameScene.instance && GameScene.instance.box_moreGame && this.createMoreGame(GameScene.instance.box_moreGame);
                 return;
             }
-            if (this.moregameIconList.length && moreGameList) {
+            // 重新拉取
+            if (!this.moregameIconList.length || force) {
+                this.ws.fetchGameAd({
+                    data: [{ pos: this.IconPos[0], count: Global.config.first_step_count }, { pos: this.IconPos[1], count: (10 - Global.config.first_step_count) * 10 }],
+                    success: (res: any) => {
+                        let data = res.data;
+                        console.log('fetch icon', data)
+                        this.iconList = [];
+                        this.moregameIconList = [];
+                        // save data list
+                        for (let i = 0; data[this.IconPos[1]] && i < data[this.IconPos[1]].length; i++) {
+                            let info = {};
+                            info['data'] = data[this.IconPos[1]][i];
+                            info['pos'] = this.IconPos[1];
+                            this.moregameIconList.push(info);
+                        }
+                        for (let i = 0; data[this.IconPos[0]] && i < data[this.IconPos[0]].length; i++) {
+                            let info = {};
+                            info['data'] = data[this.IconPos[0]][i];
+                            info['pos'] = this.IconPos[0];
+                            this.moregameIconList.push(info);
+                            // 对联icon数据列表，直跳
+                            if (i < 10) {
+                                this.iconList.push(info);
+                            }
+                        }
+                        // 对联icon数据列表，二跳
+                        let cnt = 0;
+                        for (let i = this.iconList.length; i < 10; i++) {
+                            this.moregameIconList[cnt] && this.iconList.push(this.moregameIconList[cnt++]);
+                        }
+                        //当前显示图标
+                        console.log('moregameIconList', this.moregameIconList)
+                        moreGameList.array = this.moregameIconList;
+                        moreGameList.refresh();
+                    }
+                })
+            }
+            else {
                 console.log('moregameIconList', this.moregameIconList)
                 moreGameList.array = this.moregameIconList;
                 moreGameList.refresh();
